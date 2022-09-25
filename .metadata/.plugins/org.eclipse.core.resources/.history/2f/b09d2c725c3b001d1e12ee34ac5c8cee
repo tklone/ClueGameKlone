@@ -1,0 +1,42 @@
+
+/**
+ * Collections SetDemo code
+ */
+import java.util.*;
+
+public class MapDemo {
+	private Map<String, String> mapCourses;
+
+	public MapDemo() {
+		mapCourses = new TreeMap<String, String>();
+	}
+
+	public void GetName() {
+		Scanner in = new Scanner(System.in);
+		String name = "";
+		String favoriteCourse = "";
+		do {
+			System.out.print("Enter your NAME or Q to quit: ");
+			name = in.next();
+
+			if (!(name.equalsIgnoreCase("Q"))) {
+				System.out.println("Enter your FAVORITE COURSE: ");
+				favoriteCourse = in.next();
+				mapCourses.put(name, favoriteCourse);
+			}
+		} while (!(name.equalsIgnoreCase("Q")));
+	}
+
+	public void PrintMap() {
+		for (String key : mapCourses.keySet()) {
+			System.out.println(key + " likes " + mapCourses.get(key));
+		}
+	}
+
+	public static void main(String[] args) {
+		MapDemo sd = new MapDemo();
+		sd.GetName();
+		sd.PrintMap();
+	}
+
+}

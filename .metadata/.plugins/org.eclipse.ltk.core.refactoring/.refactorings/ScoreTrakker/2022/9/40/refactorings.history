@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;ScoreTrakker/test.txt&apos; to &apos;scores.txt&apos;" description="Rename resource &apos;test.txt&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="test.txt" name="scores.txt" stamp="1664120486162" updateReferences="true"/>
+</session>

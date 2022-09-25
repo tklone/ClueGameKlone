@@ -1,0 +1,38 @@
+/**
+ * Collections SetDemo code
+ */
+import java.util.*;
+
+public class SetDemo {
+	private Map<String, String> mapCourses;
+	public SetDemo() {
+		mapCourses = new HashMap<String, String>();
+	}
+
+	public void GetName() {
+		Scanner in = new Scanner(System.in);
+		String name = "";
+		String favoriteCourse = "";
+		do 
+		{
+			System.out.print("Enter your NAME or Q to quit: ");
+			name = in.next();
+			System.out.println("Enter your FAVORITE COURSE or Q to quit: ");
+			favoriteCourse = in.next();
+			if (!(name.equalsIgnoreCase("Q") && !(favoriteCourse.equals("Q"))))
+				mapCourses.put(name, favoriteCourse);							
+		} while (!(name.equalsIgnoreCase("Q") && !(favoriteCourse.equals("Q"))));
+	}
+
+	public void PrintAnimals() {
+		for (String animal : setAnimals)
+			System.out.println(animal);
+	}	
+	
+	public static void main(String[] args) {
+		SetDemo sd = new SetDemo();
+		sd.GetAnimals();
+		sd.PrintAnimals();
+	}
+
+}
