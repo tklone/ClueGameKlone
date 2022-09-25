@@ -1,3 +1,4 @@
+package scoreTrakker;
 import java.util.Comparator;
 
 public class Student {
