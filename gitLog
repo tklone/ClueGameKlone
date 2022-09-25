@@ -1,0 +1,17 @@
+commit ef88a5b80a920679cb2eeebf497ae7d738cdcdfd (HEAD -> master, origin/master)
+Author: HenryJohnson26 <108373639+HenryJohnson26@users.noreply.github.com>
+Date:   Sun Sep 25 14:52:19 2022 -0600
+
+    Finished exception handling
+
+commit 34e32e5a5fdd05e599e5827fbd6e6b897362b638
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Sun Sep 25 10:06:34 2022 -0600
+
+    adding sorting by score
+
+commit a637666ac89f483a82a9904f0caef8b122aa6cc1
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Thu Sep 22 13:41:40 2022 -0600
+
+    I ate soup in class
