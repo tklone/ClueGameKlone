@@ -1,9 +1,9 @@
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Collections;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-import java.util.Set;
+
 
 public class ScoreTrakker {
 
@@ -33,26 +33,26 @@ public class ScoreTrakker {
 			System.out.println("Error opening file.");
 			e.printStackTrace();
 		}
-
-//		System.out.println(studentArray);
-
-		for (int i = 0; i < studentArray.size(); i++) {
-			Student currentStudent2 = new Student();
-			currentStudent2 = studentArray.get(i);
-			System.out.println(currentStudent2.name);
-			System.out.println(currentStudent2.score);
-		}
 	}
 
-	public ArrayList<Student> printInOrder(ArrayList<Student> studentArray) {
-		Set<Student> sort = new HashSet<>(studentArray);
-		studentArray.clear();
-		studentArray.addAll(sort);
+	public static ArrayList<Student> printInOrder() {
+		
+		Collections.sort(studentArray, Student.CompareByScore);
+		for (Student s : studentArray) {
+			System.out.print(s.name);
+			System.out.print(s.score);
+			System.out.println();
+		}
 
 		return studentArray;
 	}
+	
+	public static void processFiles() {
+		loadDataFile("scores.txt");
+		printInOrder();
+	}
 
 	public static void main(String[] args) {
-		loadDataFile("test.txt");
+		processFiles();
 	}
 }
