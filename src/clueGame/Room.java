@@ -2,8 +2,9 @@ package clueGame;
 
 public class Room {
 
-	public Room() {
-		// TODO Auto-generated constructor stub
+	private String name;
+	
+	public String getName() {
+		return name;
 	}
-
 }
