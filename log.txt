@@ -1,0 +1,41 @@
+commit 4d45b37bdb6f5b7060c8d131667eb6cbce898d93
+Author: smithqd <qsmith@mines.edu>
+Date:   Tue Oct 11 23:53:23 2022 -0600
+
+    added Tests.txt
+
+commit 09e20581446f4567a2d0afeb232995fc2232d448
+Author: smithqd <qsmith@mines.edu>
+Date:   Tue Oct 11 23:45:24 2022 -0600
+
+    3/5 tests to pass
+
+commit 4ede4662e8630e210951f29c0c9e0accb2e539a0
+Author: smithqd <qsmith@mines.edu>
+Date:   Tue Oct 11 22:42:06 2022 -0600
+
+    copied code from fileinittests306 into ours
+
+commit a6435a2de987658b41905635bc72f2ddca0cc242
+Author: smithqd <qsmith@mines.edu>
+Date:   Tue Oct 11 21:31:43 2022 -0600
+
+    started adding clueGame classes
+
+commit d2d0c93dbb7422199cabf0a539969307fe680874
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Tue Oct 11 18:04:21 2022 -0600
+
+    can't figure out findAllTargets
+
+commit fe7474826784afaf95bb68b204704a87523f1f1a
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Tue Oct 11 17:56:40 2022 -0600
+
+    Making progress on targetslist
+
+commit e5f6531ee193454d64ad58cc822d19408750ec0f
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Tue Oct 11 17:17:03 2022 -0600
+
+    Made new repo to hopefully get Quincy's to work
