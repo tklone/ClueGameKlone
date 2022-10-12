@@ -7,7 +7,8 @@ import java.util.Set;
 public class TestBoardCell {
 
 	public int row, column;
-	public Boolean isRoom, isOccupied;
+	public boolean isRoom;
+	public boolean isOccupied = true;
 	private Set<TestBoardCell> AdjacencyList = new HashSet<TestBoardCell>();
 
 	// A constructor that has passed into it the row and column for that cell.
@@ -29,23 +30,22 @@ public class TestBoardCell {
 
 	// A setter for indicating a cell is part of a room
 	public void setRoom(boolean cellInRoom) {
-
+		
 	}
 
 	// getter for indicating a cell is part of a room
 	public boolean isRoom() {
-
 		return true;
 	}
 
 	// A setter for indicating a cell is occupied by another player
 	public void setOccupied(boolean occupied) {
-
+		isOccupied = occupied;
 	}
 
 	// a getter for indicating a cell is occupied by another player
 	public boolean getOccupied() {
-		return true;
+		return isOccupied;
 	}
 
 }

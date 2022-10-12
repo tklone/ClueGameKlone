@@ -1,8 +1,10 @@
 package experiment;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class TestBoard {
@@ -11,9 +13,9 @@ public class TestBoard {
 	final static int COLS = 4;
 
 	private Set<TestBoardCell> targets = new HashSet<TestBoardCell>();
+	private Set <TestBoardCell> visited = new HashSet<TestBoardCell>();
 	private TestBoardCell[][] matrix = new TestBoardCell[ROWS][COLS];
-//	private Set <TestBoardCell> visited;
-//	public Set<TestBoardCell> AdjacencyList = new HashSet<TestBoardCell>();
+	private Map<TestBoardCell, Set<TestBoardCell>> AdjacencyMatrix = new HashMap<TestBoardCell, Set<TestBoardCell>>();
 
 	// A constructor that sets up the board.
 	public TestBoard() {
@@ -89,51 +91,50 @@ public class TestBoard {
 			}
 		}
 	}
-
-	public void findAllTargets(TestBoardCell thisCell, int numSteps) {		
-		List <TestBoardCell> targets = new ArrayList<>();
-		List <TestBoardCell> visited = new ArrayList<>();
-		//Base Case
-		if (visited.isEmpty()) {
-			visited.add(thisCell);
-		}
-		
-		Boolean isPresent = false;
-
-		for (TestBoardCell c : visited) {
-			if (thisCell == c) {
-				isPresent = true;
-				break;
+	
+	public Map<TestBoardCell, Set<TestBoardCell>> getAdjMatx(){
+		for(int i = 0; i < ROWS; i++) {
+			for(int j = 0; j < COLS; j++) {
+				TestBoardCell c = getCell(i,j);
+				AdjacencyMatrix.put(c, c.getAdjList());
 			}
 		}
-		
-		if (!isPresent) {
-			visited.add(thisCell);
+		return AdjacencyMatrix;
+	}
+
+	public void findAllTargets(TestBoardCell thisCell, int numSteps) {		
+//		List <TestBoardCell> targets = new ArrayList<>();
+//		List <TestBoardCell> visited = new ArrayList<>();
+	
+		//for each adjCell in adjacentCells
+		for(TestBoardCell c : thisCell.getAdjList()) {
+				
+			//if already in visited list, skip rest of code
+			if(visited.contains(c)) {
+				continue;
+			}
+			//else add adjCell to visited list
+			visited.add(c);
+			
+			//if numSteps==1, add adjCell to targets
+			if(numSteps == 1) {
+				if(c.getOccupied() == false) {
+					targets.add(c);
+				}
+			}
+			//else call findAllTargets with adjCell and numSteps-1
+			else {
+				findAllTargets(c, numSteps - 1);
+			}
+			//remove adjCell from visited
+			visited.remove(c);
 		}
-		
-//		thisCell.getAdjList();
-		if (numSteps == 1) {
-//			targets.add(thisCell.getAdjList());
-		}
-		else {
-//			findAllTargets(thisCell, numSteps - 1);
-		}
-//		
-//		for (TestBoardCell c : visited) {
-//			if (thisCell == c) {
-//				visited.remove(c);
-//			}
-		}
-		
-//	}
+	}
 
 	// calculates legal targets for a move from startCell of length pathlength.
-	public void calcTargets(TestBoardCell startCell, int pathlength) {
-//		List<TestBoardCell> visited = new ArrayList<>();
-//		List<TestBoardCell> targets = new ArrayList<>();
-//		
-		findAllTargets(startCell, pathlength);
-		
+	public void calcTargets(TestBoardCell startCell, int pathlength) {	
+		visited.add(startCell);
+		findAllTargets(startCell, pathlength);	
 	}
 
 	// We think?
