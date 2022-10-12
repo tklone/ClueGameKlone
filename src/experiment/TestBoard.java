@@ -113,16 +113,27 @@ public class TestBoard {
 		
 //		thisCell.getAdjList();
 		if (numSteps == 1) {
-			targets.add((TestBoardCell) thisCell.getAdjList());
+//			targets.add(thisCell.getAdjList());
+		}
+		else {
+//			findAllTargets(thisCell, numSteps - 1);
+		}
+//		
+//		for (TestBoardCell c : visited) {
+//			if (thisCell == c) {
+//				visited.remove(c);
+//			}
 		}
 		
-	}
+//	}
 
 	// calculates legal targets for a move from startCell of length pathlength.
 	public void calcTargets(TestBoardCell startCell, int pathlength) {
-		List<TestBoardCell> visited = new ArrayList<>();
-		List<TestBoardCell> targets = new ArrayList<>();
-		visited.add(startCell);
+//		List<TestBoardCell> visited = new ArrayList<>();
+//		List<TestBoardCell> targets = new ArrayList<>();
+//		
+		findAllTargets(startCell, pathlength);
+		
 	}
 
 	// We think?
