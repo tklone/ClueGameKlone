@@ -1,0 +1,13 @@
+// Rooms and room cards
+Room, Cookie Room, C
+Room, Reindeer Barn, R
+Room, Elve's Workshop, E
+Room, Santa's Lair, L
+Room, Bathroom, B
+Room, Toy Room, T
+Room, Christmas Tree Factory, F
+Room, Gift Wrapping Station, G
+Room, Sleigh Storage, S
+// other spaces on board
+Space, Unused, C
+Space, Walkway, W
