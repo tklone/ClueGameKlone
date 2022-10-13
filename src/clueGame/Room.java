@@ -13,6 +13,10 @@ public class Room {
 	public String getName() {
 		return name;
 	}
+	
+	public void setName(String roomName) {
+		name = roomName;
+	}
 
 	public BoardCell getLabelCell() {
 		return labelCell;

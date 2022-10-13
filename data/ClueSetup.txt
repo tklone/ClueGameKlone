@@ -9,5 +9,5 @@ Room, Christmas Tree Factory, F
 Room, Gift Wrapping Station, G
 Room, Sleigh Storage, S
 // other spaces on board
-Space, Unused, C
+Space, Unused, X
 Space, Walkway, W
