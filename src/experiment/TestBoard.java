@@ -85,7 +85,7 @@ public class TestBoard {
 			if(numSteps == 1) {
 //				System.out.println("we are here");
 				if(c.getOccupied() == false) {
-					System.out.println("we are here");
+					//System.out.println("we are here");
 					targets.add(c);
 				}
 			}
