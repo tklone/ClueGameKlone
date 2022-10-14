@@ -31,7 +31,7 @@ public class BoardCell {
 	}
 
 
-	public Object getDoorDirection() {
+	public DoorDirection getDoorDirection() {
 		// TODO Auto-generated method stub
 		return null;
 	}

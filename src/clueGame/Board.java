@@ -1,6 +1,8 @@
 package clueGame;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -50,13 +52,41 @@ public class Board {
 				}
 			}
 		} 
-		catch (FileNotFoudException e) {
-			System.out.println("Can't open file");
+		catch (FileNotFoundException e) {
+			System.out.println("Can't open file SETUP");
 		}
 	}
+	
 	public void loadLayoutConfig() {
-		
+		try {
+			File layoutFile = new File("ClueLayout.csv");
+			Scanner layoutReader = new Scanner (layoutFile);
+			
+			ArrayList<String> csvCharacterStrings = new ArrayList<>();
+			while (layoutReader.hasNext()) {
+				String currentLine = layoutReader.nextLine();
+				csvCharacterStrings.add(currentLine);
+			}
+			
+			ArrayList<ArrayList<Character>> csvVals = new ArrayList<>();
+			for (int i = 0; i < csvCharacterStrings.size(); i++) {
+				String currentString = csvCharacterStrings.get(i);
+				ArrayList <Character> characters = new ArrayList<>();
+				for (int j = 0; j < currentString.length(); j++) {
+					Character currentChar = currentString.charAt(j);
+					if (currentChar != ',') {
+						characters.add(currentChar);
+					}
+				}
+				csvVals.add(characters);
+			}
+		}
+		catch (FileNotFoundException e) {
+			System.out.println("Can't open file LAYOUT");
+
+		}
 	}
+	
 	public void setConfigFiles(String layoutConfig, String setupConfig) {
 		this.layoutConfigFile = layoutConfig;
 		this.setupConfigFile = setupConfig;
