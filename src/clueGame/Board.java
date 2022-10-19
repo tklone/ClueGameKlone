@@ -39,7 +39,7 @@ public class Board {
 	
 	public void loadSetupConfig() {
 		try {
-			File setupFile = new File("ClueSetup.txt");
+			File setupFile = new File("data/ClueSetup.txt");
 			Scanner setupReader = new Scanner(setupFile);
 			
 			String info = setupReader.nextLine();
@@ -55,7 +55,6 @@ public class Board {
 					roomMap.put(c, newRoom);
 				}
 			}
-			System.out.println("fuck");
 			setupReader.close();
 		} 
 		catch (FileNotFoundException e) {
@@ -68,7 +67,7 @@ public class Board {
 	//Maybe this will work, just not for the size of the board actually
 	public void loadLayoutConfig() {
 		try {
-			File layoutFile = new File("ClueLayout.csv");
+			File layoutFile = new File("data/ClueLayout.csv");
 			Scanner layoutReader = new Scanner (layoutFile);
 			
 			ArrayList<String> csvCharacterStrings = new ArrayList<>();
@@ -95,14 +94,14 @@ public class Board {
 
 		}
 		
-//		for (int i = 0; i < cells.size(); i++) {
-//			ArrayList <Character> currentRow = new ArrayList<>();
-//			currentRow = cells.get(i);
-//			for (int j = 0; j < currentRow.size(); j++) {
-//				System.out.print(currentRow.get(j));
-//			}
-//			System.out.println();
-//		}
+		for (int i = 0; i < cells.size(); i++) {
+			ArrayList <Character> currentRow = new ArrayList<>();
+			currentRow = cells.get(i);
+			for (int j = 0; j < currentRow.size(); j++) {
+				System.out.print(currentRow.get(j));
+			}
+			System.out.println();
+		}
 	}
 	
 	public void setConfigFiles(String layoutConfig, String setupConfig) {
@@ -148,20 +147,20 @@ public class Board {
 	
 	//Only getNumRows will work
 	public int getNumRows() {
-//		numRows = cells.size();
-//		System.out.println("num rows: " + numRows);
+		numRows = cells.size();
+		System.out.println("num rows: " + numRows);
 		return numRows;
 	}
 	
 	//See note above the layoutConfig function for why this won't work v
 	//Actually I think this will work because it's using only the first row which has no extra characters
 	public int getNumColumns() {
-//		for (int i = 0; i < cells.size(); i++) {
-//			ArrayList <Character> singleRow = new ArrayList<>();
-//			singleRow = cells.get(i);
-//			numCols = singleRow.size();
-//		}
-//		System.out.println("num cols: " + numCols);
+		for (int i = 0; i < cells.size(); i++) {
+			ArrayList <Character> singleRow = new ArrayList<>();
+			singleRow = cells.get(i);
+			numCols = singleRow.size();
+		}
+		System.out.println("num cols: " + numCols);
 		return numCols;
 	}
 	
