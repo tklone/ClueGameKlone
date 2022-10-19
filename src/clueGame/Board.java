@@ -148,18 +148,19 @@ public class Board {
 	
 	//Only getNumRows will work
 	public int getNumRows() {
-		numRows = cells.size();
+//		numRows = cells.size();
 //		System.out.println("num rows: " + numRows);
 		return numRows;
 	}
 	
 	//See note above the layoutConfig function for why this won't work v
+	//Actually I think this will work because it's using only the first row which has no extra characters
 	public int getNumColumns() {
-		for (int i = 0; i < cells.size(); i++) {
-			ArrayList <Character> singleRow = new ArrayList<>();
-			singleRow = cells.get(i);
-			numCols = singleRow.size();
-		}
+//		for (int i = 0; i < cells.size(); i++) {
+//			ArrayList <Character> singleRow = new ArrayList<>();
+//			singleRow = cells.get(i);
+//			numCols = singleRow.size();
+//		}
 //		System.out.println("num cols: " + numCols);
 		return numCols;
 	}
