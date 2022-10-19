@@ -34,7 +34,16 @@ public class BoardCell {
 
 
 	public DoorDirection getDoorDirection() {
-		// TODO Auto-generated method stub
+		char c = initial;
+		if (c == '<') {
+			return doorDirection.LEFT;
+		} else if (c == '>') {
+			return doorDirection.RIGHT;
+		} else if (c == 'v') {
+			return doorDirection.DOWN;
+		} else if (c == '^') {
+			return doorDirection.UP;
+		}
 		return null;
 	}
 
