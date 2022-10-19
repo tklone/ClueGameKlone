@@ -33,6 +33,8 @@ public class FileInitTest {
 		board = Board.getInstance();
 		// set the file names to use my config files
 		board.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
+//		board.loadSetupConfig();
+//		board.loadLayoutConfig();
 		// Initialize will load BOTH config files
 		board.initialize();
 	}

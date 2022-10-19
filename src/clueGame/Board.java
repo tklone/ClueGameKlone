@@ -16,6 +16,7 @@ public class Board {
 	private String layoutConfigFile;
 	private String setupConfigFile;
 	private Map<Character, Room> roomMap;
+	private ArrayList<ArrayList<Character>> cells = new ArrayList<>();
 	
 	//variable and methods used for singleton pattern
 	private static Board theInstance = new Board();
@@ -31,8 +32,11 @@ public class Board {
 	
 	//initialize the board(since we are using singleton pattern
 	public void initialize() {
-		
+		theInstance.loadSetupConfig();
+		theInstance.loadLayoutConfig();
 	}
+	
+	
 	public void loadSetupConfig() {
 		try {
 			File setupFile = new File("ClueSetup.txt");
@@ -51,6 +55,8 @@ public class Board {
 					roomMap.put(c, newRoom);
 				}
 			}
+			System.out.println("fuck");
+			setupReader.close();
 		} 
 		catch (FileNotFoundException e) {
 			System.out.println("Can't open file SETUP");
@@ -68,7 +74,6 @@ public class Board {
 				csvCharacterStrings.add(currentLine);
 			}
 			
-			ArrayList<ArrayList<Character>> csvVals = new ArrayList<>();
 			for (int i = 0; i < csvCharacterStrings.size(); i++) {
 				String currentString = csvCharacterStrings.get(i);
 				ArrayList <Character> characters = new ArrayList<>();
@@ -78,22 +83,33 @@ public class Board {
 						characters.add(currentChar);
 					}
 				}
-				csvVals.add(characters);
+				cells.add(characters);
 			}
+			layoutReader.close();
 		}
 		catch (FileNotFoundException e) {
 			System.out.println("Can't open file LAYOUT");
 
 		}
+		
+//		for (int i = 0; i < cells.size(); i++) {
+//			ArrayList <Character> currentRow = new ArrayList<>();
+//			currentRow = cells.get(i);
+//			for (int j = 0; j < currentRow.size(); j++) {
+//				System.out.print(currentRow.get(j));
+//			}
+//			System.out.println();
+//		}
 	}
 	
 	public void setConfigFiles(String layoutConfig, String setupConfig) {
-		this.layoutConfigFile = layoutConfig;
-		this.setupConfigFile = setupConfig;
+//		this.layoutConfigFile = layoutConfig;
+//		this.setupConfigFile = setupConfig;
 	}
+	
+	
 	public Room getRoom(char c) {
 		Room room = new Room();
-//		String roomName = room.getName();
 		if (c == 'C') {
 			room.setName("Cookie Room");
 		} else if (c == 'R') {
@@ -121,16 +137,26 @@ public class Board {
 	}
 	
 	public BoardCell getCell(int row, int col) {
-		//return matrix[row][col];
+		
+//		return matrix[row][col];
 		return null;
 	}
 	
 	public int getNumRows() {
-		return 0;
+		int numRows = cells.size();
+//		System.out.println("num rows: " + numRows);
+		return numRows;
 	}
 	
 	public int getNumColumns() {
-		return 0;
+		int numColumns = 0;
+		for (int i = 0; i < cells.size(); i++) {
+			ArrayList <Character> singleRow = new ArrayList<>();
+			singleRow = cells.get(i);
+			numColumns = singleRow.size();
+		}
+//		System.out.println("num cols: " + numColumns);
+		return numColumns;
 	}
 	
 	public Room getRoom(BoardCell cell) {
