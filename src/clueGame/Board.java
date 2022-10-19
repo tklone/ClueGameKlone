@@ -63,6 +63,9 @@ public class Board {
 		}
 	}
 	
+	//This isn't going to work because it does not account for the *, # or any other characters
+	//I was going to use this for the size of the board but that's not going to work either
+	//Maybe this will work, just not for the size of the board actually
 	public void loadLayoutConfig() {
 		try {
 			File layoutFile = new File("ClueLayout.csv");
@@ -142,21 +145,23 @@ public class Board {
 		return null;
 	}
 	
+	
+	//Only getNumRows will work
 	public int getNumRows() {
-		int numRows = cells.size();
+		numRows = cells.size();
 //		System.out.println("num rows: " + numRows);
 		return numRows;
 	}
 	
+	//See note above the layoutConfig function for why this won't work v
 	public int getNumColumns() {
-		int numColumns = 0;
 		for (int i = 0; i < cells.size(); i++) {
 			ArrayList <Character> singleRow = new ArrayList<>();
 			singleRow = cells.get(i);
-			numColumns = singleRow.size();
+			numCols = singleRow.size();
 		}
-//		System.out.println("num cols: " + numColumns);
-		return numColumns;
+//		System.out.println("num cols: " + numCols);
+		return numCols;
 	}
 	
 	public Room getRoom(BoardCell cell) {
