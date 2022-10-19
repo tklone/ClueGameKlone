@@ -20,8 +20,10 @@ public class BoardCell {
 
 	public boolean isDoorway() {
 		// TODO Auto-generated method stub
-		
-		return true;
+		if (initial == '<' || initial == '>' || initial == 'v' || initial == '^') {
+			return true;
+		}
+		return false;
 	}
 
 
@@ -46,6 +48,12 @@ public class BoardCell {
 	public char getSecretPassage() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+
+	public char getInitial() {
+		return initial;
+		
 	}
 	
 	//+addAdj (adj:BoardCell):void

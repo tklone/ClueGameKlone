@@ -9,39 +9,39 @@ import java.util.Scanner;
 import experiment.TestBoardCell;
 
 public class Board {
-	
+
 	private BoardCell[][] matrix;
 	private int numRows;
 	private int numCols;
 	private String layoutConfigFile;
 	private String setupConfigFile;
 	private Map<Character, Room> roomMap;
-	private ArrayList<ArrayList<Character>> cells = new ArrayList<>();
-	
-	//variable and methods used for singleton pattern
+	public ArrayList<ArrayList<Character>> cells = new ArrayList<>();
+
+	// variable and methods used for singleton pattern
 	private static Board theInstance = new Board();
 
-	//constructor is private to ensure only one can be created
+	// constructor is private to ensure only one can be created
 	private Board() {
 		super();
 	}
-	//this method returns the only Board
+
+	// this method returns the only Board
 	public static Board getInstance() {
 		return theInstance;
 	}
-	
-	//initialize the board(since we are using singleton pattern
+
+	// initialize the board(since we are using singleton pattern
 	public void initialize() {
 		theInstance.loadSetupConfig();
 		theInstance.loadLayoutConfig();
 	}
-	
-	
+
 	public void loadSetupConfig() {
 		try {
 			File setupFile = new File("data/ClueSetup.txt");
 			Scanner setupReader = new Scanner(setupFile);
-			
+
 			String info = setupReader.nextLine();
 			while (setupReader.hasNext()) {
 				String wholeLine = setupReader.nextLine();
@@ -56,29 +56,25 @@ public class Board {
 				}
 			}
 			setupReader.close();
-		} 
-		catch (FileNotFoundException e) {
+		} catch (FileNotFoundException e) {
 			System.out.println("Can't open file SETUP");
 		}
 	}
-	
-	//This isn't going to work because it does not account for the *, # or any other characters
-	//I was going to use this for the size of the board but that's not going to work either
-	//Maybe this will work, just not for the size of the board actually
+
 	public void loadLayoutConfig() {
 		try {
 			File layoutFile = new File("data/ClueLayout.csv");
-			Scanner layoutReader = new Scanner (layoutFile);
-			
+			Scanner layoutReader = new Scanner(layoutFile);
+
 			ArrayList<String> csvCharacterStrings = new ArrayList<>();
 			while (layoutReader.hasNext()) {
 				String currentLine = layoutReader.nextLine();
 				csvCharacterStrings.add(currentLine);
 			}
-			
+
 			for (int i = 0; i < csvCharacterStrings.size(); i++) {
 				String currentString = csvCharacterStrings.get(i);
-				ArrayList <Character> characters = new ArrayList<>();
+				ArrayList<Character> characters = new ArrayList<>();
 				for (int j = 0; j < currentString.length(); j++) {
 					Character currentChar = currentString.charAt(j);
 					if (currentChar != ',') {
@@ -88,14 +84,13 @@ public class Board {
 				cells.add(characters);
 			}
 			layoutReader.close();
-		}
-		catch (FileNotFoundException e) {
+		} catch (FileNotFoundException e) {
 			System.out.println("Can't open file LAYOUT");
 
 		}
-		
+
 		for (int i = 0; i < cells.size(); i++) {
-			ArrayList <Character> currentRow = new ArrayList<>();
+			ArrayList<Character> currentRow = new ArrayList<>();
 			currentRow = cells.get(i);
 			for (int j = 0; j < currentRow.size(); j++) {
 				System.out.print(currentRow.get(j));
@@ -103,71 +98,89 @@ public class Board {
 			System.out.println();
 		}
 	}
-	
+
 	public void setConfigFiles(String layoutConfig, String setupConfig) {
 //		this.layoutConfigFile = layoutConfig;
 //		this.setupConfigFile = setupConfig;
 	}
-	
-	
+
 	public Room getRoom(char c) {
 		Room room = new Room();
 		if (c == 'C') {
 			room.setName("Cookie Room");
 		} else if (c == 'R') {
 			room.setName("Reindeer Barn");
-		}else if (c == 'E') {
+		} else if (c == 'E') {
 			room.setName("Elve's Workshop");
-		}else if (c == 'L') {
+		} else if (c == 'L') {
 			room.setName("Santa's Lair");
-		}else if (c == 'B') {
+		} else if (c == 'B') {
 			room.setName("Bathroom");
-		}else if (c == 'T') {
+		} else if (c == 'T') {
 			room.setName("Toy Room");
-		}else if (c == 'F') {
+		} else if (c == 'F') {
 			room.setName("Christmas Tree Factory");
-		}else if (c == 'G') {
+		} else if (c == 'G') {
 			room.setName("Gift Wrapping Station");
-		}else if (c == 'S') {
+		} else if (c == 'S') {
 			room.setName("Sleigh Storage");
-		}else if (c == 'X') {
+		} else if (c == 'X') {
 			room.setName("Unused");
-		}else if (c == 'W') {
+		} else if (c == 'W') {
 			room.setName("Walkway");
 		}
 		return room;
 	}
-	
+
 	public BoardCell getCell(int row, int col) {
-		
-//		return matrix[row][col];
-		return null;
+		BoardCell currentCell = new BoardCell();
+		return currentCell;
+//		return null;
 	}
-	
-	
-	//Only getNumRows will work
+
 	public int getNumRows() {
 		numRows = cells.size();
-		System.out.println("num rows: " + numRows);
 		return numRows;
 	}
-	
-	//See note above the layoutConfig function for why this won't work v
-	//Actually I think this will work because it's using only the first row which has no extra characters
+
 	public int getNumColumns() {
 		for (int i = 0; i < cells.size(); i++) {
-			ArrayList <Character> singleRow = new ArrayList<>();
+			ArrayList<Character> singleRow = new ArrayList<>();
 			singleRow = cells.get(i);
 			numCols = singleRow.size();
 		}
-		System.out.println("num cols: " + numCols);
 		return numCols;
 	}
-	
-	public Room getRoom(BoardCell cell) {
-		
-		return null;
-	}
 
+	
+	//We already did this but passed in a character instead of a cell
+	public Room getRoom(BoardCell cell) {
+		char c = cell.getInitial();
+		Room room = new Room();
+		if (c == 'C') {
+			room.setName("Cookie Room");
+		} else if (c == 'R') {
+			room.setName("Reindeer Barn");
+		} else if (c == 'E') {
+			room.setName("Elve's Workshop");
+		} else if (c == 'L') {
+			room.setName("Santa's Lair");
+		} else if (c == 'B') {
+			room.setName("Bathroom");
+		} else if (c == 'T') {
+			room.setName("Toy Room");
+		} else if (c == 'F') {
+			room.setName("Christmas Tree Factory");
+		} else if (c == 'G') {
+			room.setName("Gift Wrapping Station");
+		} else if (c == 'S') {
+			room.setName("Sleigh Storage");
+		} else if (c == 'X') {
+			room.setName("Unused");
+		} else if (c == 'W') {
+			room.setName("Walkway");
+		}
+		return room;
+	}
 
 }
