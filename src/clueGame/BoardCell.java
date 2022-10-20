@@ -47,7 +47,13 @@ public class BoardCell {
 		return col;
 	}
 
-	
+	public boolean isDoorway() {
+		if ((label.length() > 1) && (label.charAt(1) == '>' || label.charAt(1) == '<' || label.charAt(1) == '^' || label.charAt(1) == 'v')) {
+			doorway = true;
+			return doorway;
+		}
+		return doorway;
+	}
 
 	public boolean isRoomCenter() {
 		if (label.charAt(1) == '*') {
@@ -64,25 +70,25 @@ public class BoardCell {
 
 			if (label.charAt(1) == '<') {
 				doorway = true;
-				dir = DoorDirection.RIGHT;
-				System.out.println(doorway + " " + dir);
-				return dir;
+//				dir = DoorDirection.RIGHT;
+//				System.out.println(doorway + " " + dir);
+				return DoorDirection.LEFT;
 			} else if (label.charAt(1) == '>') {
-				doorway = true;
-				dir = DoorDirection.LEFT;
-				System.out.println(doorway + " " + dir);
+//				doorway = true;
+				dir = DoorDirection.RIGHT;
+//				System.out.println(doorway + " " + dir);
 
-				return dir;
+				return DoorDirection.RIGHT;
 			} else if (label.charAt(1) == 'v') {
-				doorway = true;
+//				doorway = true;
 				dir = DoorDirection.DOWN;
-				System.out.println(doorway + " " + dir);
+//				System.out.println(doorway + " " + dir);
 
 				return dir;
 			} else if (label.charAt(1) == '^') {
-				doorway = true;
+//				doorway = true;
 				dir = DoorDirection.UP;
-				System.out.println(doorway + " " + dir);
+//				System.out.println(doorway + " " + dir);
 
 				return dir;
 			}
@@ -90,9 +96,7 @@ public class BoardCell {
 		return null;
 	}
 	
-	public boolean isDoorway() {
-		return doorway;
-	}
+
 
 	public boolean isLabel() {
 		// TODO Auto-generated method stub

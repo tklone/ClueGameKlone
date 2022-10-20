@@ -68,16 +68,14 @@ public class FileInitTest {
 	public void FourDoorDirections() {
 		BoardCell cell = board.getCell(20, 9);
 		cell.getDoorDirection();
-
 		assertTrue(cell.isDoorway());
-		
-		assertEquals(DoorDirection.LEFT, cell.getDoorDirection());
+		assertEquals(DoorDirection.RIGHT, cell.getDoorDirection());
 		cell = board.getCell(10, 5);
 		assertTrue(cell.isDoorway());
 		assertEquals(DoorDirection.UP, cell.getDoorDirection());
-		cell = board.getCell(5, 17);
+		cell = board.getCell(19, 8);
 		assertTrue(cell.isDoorway());
-		assertEquals(DoorDirection.RIGHT, cell.getDoorDirection());
+		assertEquals(DoorDirection.LEFT, cell.getDoorDirection());
 		cell = board.getCell(16, 5);
 		assertTrue(cell.isDoorway());
 		assertEquals(DoorDirection.DOWN, cell.getDoorDirection());
