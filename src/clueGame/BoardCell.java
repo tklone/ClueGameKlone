@@ -27,8 +27,12 @@ public class BoardCell {
 		return label;
 	}
 
-	public void setInitial(char c) {
-		initial = c;
+	public void setInitial(String str) {
+//		System.out.println("!!" + str);
+		if (str.length() == 1) {
+//			System.out.println("dis one: " + str);
+			initial = str.charAt(0);
+		}
 	}
 
 	public void setRow(int r) {
@@ -56,14 +60,14 @@ public class BoardCell {
 	}
 
 	public boolean isRoomCenter() {
-		if (label.charAt(1) == '*') {
+		if (label.length() != 1 && label.charAt(1) == '*') {
 			return true;
 		}
 		return false;
 	}
 
 	public DoorDirection getDoorDirection() {
-		System.out.println(label);
+//		System.out.println(label);
 		if (label.length() > 1) {
 //			System.out.println(label.charAt(1));
 			DoorDirection dir;
@@ -99,7 +103,9 @@ public class BoardCell {
 
 
 	public boolean isLabel() {
-		// TODO Auto-generated method stub
+		if (label.length() != 1 && label.charAt(1) == '#') {
+			return true;
+		}
 		return false;
 	}
 

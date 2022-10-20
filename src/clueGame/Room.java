@@ -8,10 +8,11 @@ public class Room {
 	private BoardCell labelCell;
 
 	public Room() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 
 	public String getName() {
+		System.out.println(name);
 		return name;
 	}
 	
@@ -20,7 +21,6 @@ public class Room {
 	}
 
 	public BoardCell getLabelCell() {
-		
 		return labelCell;
 	}
 
@@ -29,7 +29,6 @@ public class Room {
 	}
 
 	public void setChar(char character) {
-		// TODO Auto-generated method stub
 		c = character;
 	}
 

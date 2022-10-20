@@ -3,6 +3,7 @@ package clueGame;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -15,7 +16,7 @@ public class Board {
 	private int numCols;
 	private String layoutConfigFile = "data/ClueLayout.csv";
 	private String setupConfigFile = "data/ClueSetup.txt";
-	private Map<Character, Room> roomMap;
+	private Map<Character, Room> roomMap = new HashMap<>();
 	
 
 	// variable and methods used for singleton pattern
@@ -43,13 +44,15 @@ public class Board {
 			Scanner setupReader = new Scanner(setupFile);
 
 			String info = setupReader.nextLine();
+//			System.out.println(info);
 			while (setupReader.hasNext()) {
 				String wholeLine = setupReader.nextLine();
-				String[] arrOfStr = wholeLine.split(", ", 3);
-				if (arrOfStr[0] == "Room") {
+				String[] arrOfStr = wholeLine.split(", ");
+				if (arrOfStr[0].equals("Room")) {
 					String current = arrOfStr[2];
-					char c = current.charAt(0);
+					Character c = current.charAt(0);
 					Room newRoom = new Room();
+//					System.out.println(arrOfStr[1]);
 					newRoom.setName(arrOfStr[1]);
 					newRoom.setChar(c);
 					roomMap.put(c, newRoom);
@@ -96,12 +99,11 @@ public class Board {
 //					System.out.print(currentString[j] + " ");
 					newCell.setCol(i);
 					newCell.setRow(j);
+					newCell.setInitial(newCell.getLabel());
 				}
 //				System.out.println();
 			}
 
-			
-			
 
 			layoutReader.close();
 		} catch (FileNotFoundException e) {
@@ -115,29 +117,29 @@ public class Board {
 //		this.setupConfigFile = setupConfig;
 	}
 
-	public Room getRoom(char c) {
+	public Room getRoom(Character c) {
 		Room room = new Room();
-		if (c == 'C') {
+		if (c.equals('C')) {
 			room.setName("Cookie Room");
-		} else if (c == 'R') {
+		} else if (c.equals('R')) {
 			room.setName("Reindeer Barn");
-		} else if (c == 'E') {
+		} else if (c.equals('E')) {
 			room.setName("Elve's Workshop");
-		} else if (c == 'L') {
+		} else if (c.equals('L')) {
 			room.setName("Santa's Lair");
-		} else if (c == 'B') {
+		} else if (c.equals('B')) {
 			room.setName("Bathroom");
-		} else if (c == 'T') {
+		} else if (c.equals('T')) {
 			room.setName("Toy Room");
-		} else if (c == 'F') {
+		} else if (c.equals('F')) {
 			room.setName("Christmas Tree Factory");
-		} else if (c == 'G') {
+		} else if (c.equals('G')) {
 			room.setName("Gift Wrapping Station");
-		} else if (c == 'S') {
+		} else if (c.equals('S')) {
 			room.setName("Sleigh Storage");
-		} else if (c == 'X') {
+		} else if (c.equals('X')) {
 			room.setName("Unused");
-		} else if (c == 'W') {
+		} else if (c.equals('W')) {
 			room.setName("Walkway");
 		}
 		return room;
@@ -156,29 +158,29 @@ public class Board {
 	}
 
 	public Room getRoom(BoardCell cell) {
-		char c = cell.getInitial();
+		Character c = cell.getInitial();
 		Room room = new Room();
-		if (c == 'C') {
+		if (c.equals('C')) {
 			room.setName("Cookie Room");
-		} else if (c == 'R') {
+		} else if (c.equals('R')) {
 			room.setName("Reindeer Barn");
-		} else if (c == 'E') {
+		} else if (c.equals('E')) {
 			room.setName("Elve's Workshop");
-		} else if (c == 'L') {
+		} else if (c.equals('L')) {
 			room.setName("Santa's Lair");
-		} else if (c == 'B') {
+		} else if (c.equals('B')) {
 			room.setName("Bathroom");
-		} else if (c == 'T') {
+		} else if (c.equals('T')) {
 			room.setName("Toy Room");
-		} else if (c == 'F') {
+		} else if (c.equals('F')) {
 			room.setName("Christmas Tree Factory");
-		} else if (c == 'G') {
+		} else if (c.equals('G')) {
 			room.setName("Gift Wrapping Station");
-		} else if (c == 'S') {
+		} else if (c.equals('S')) {
 			room.setName("Sleigh Storage");
-		} else if (c == 'X') {
+		} else if (c.equals('X')) {
 			room.setName("Unused");
-		} else if (c == 'W') {
+		} else if (c.equals('W')) {
 			room.setName("Walkway");
 		}
 		return room;
