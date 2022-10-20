@@ -67,34 +67,15 @@ public class BoardCell {
 	}
 
 	public DoorDirection getDoorDirection() {
-//		System.out.println(label);
 		if (label.length() > 1) {
-//			System.out.println(label.charAt(1));
-			DoorDirection dir;
-
 			if (label.charAt(1) == '<') {
-				doorway = true;
-//				dir = DoorDirection.RIGHT;
-//				System.out.println(doorway + " " + dir);
 				return DoorDirection.LEFT;
 			} else if (label.charAt(1) == '>') {
-//				doorway = true;
-				dir = DoorDirection.RIGHT;
-//				System.out.println(doorway + " " + dir);
-
 				return DoorDirection.RIGHT;
 			} else if (label.charAt(1) == 'v') {
-//				doorway = true;
-				dir = DoorDirection.DOWN;
-//				System.out.println(doorway + " " + dir);
-
-				return dir;
+				return DoorDirection.DOWN;
 			} else if (label.charAt(1) == '^') {
-//				doorway = true;
-				dir = DoorDirection.UP;
-//				System.out.println(doorway + " " + dir);
-
-				return dir;
+				return DoorDirection.UP;
 			}
 		}
 		return null;
