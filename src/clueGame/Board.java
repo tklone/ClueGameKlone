@@ -16,7 +16,7 @@ public class Board {
 	private String layoutConfigFile;
 	private String setupConfigFile;
 	private Map<Character, Room> roomMap;
-	public ArrayList<ArrayList<Character>> cells = new ArrayList<>();
+//	public ArrayList<ArrayList<String>> cells = new ArrayList<>();
 
 	// variable and methods used for singleton pattern
 	private static Board theInstance = new Board();
@@ -61,41 +61,40 @@ public class Board {
 		}
 	}
 
+	
 	public void loadLayoutConfig() {
 		try {
 			File layoutFile = new File("data/ClueLayout.csv");
 			Scanner layoutReader = new Scanner(layoutFile);
 
-			ArrayList<String> csvCharacterStrings = new ArrayList<>();
+			ArrayList<String> eachRow = new ArrayList<>();
 			while (layoutReader.hasNext()) {
 				String currentLine = layoutReader.nextLine();
-				csvCharacterStrings.add(currentLine);
+				eachRow.add(currentLine);
 			}
+			
 
-			for (int i = 0; i < csvCharacterStrings.size(); i++) {
-				String currentString = csvCharacterStrings.get(i);
-				ArrayList<Character> characters = new ArrayList<>();
-				for (int j = 0; j < currentString.length(); j++) {
-					Character currentChar = currentString.charAt(j);
-					if (currentChar != ',') {
-						characters.add(currentChar);
-					}
+			String[] currentString;
+			
+			for (int i = 0; i < eachRow.size(); i++) {
+				String rowStrings = eachRow.get(i);
+				currentString = rowStrings.split(",");
+				numCols = currentString.length;
+				for (int j = 0; j < currentString.length; j++) {
+					BoardCell newCell = new BoardCell();
+					newCell.setLabel(rowStrings);
+					newCell.setCol(i);
+					newCell.setRow(j);
 				}
-				cells.add(characters);
 			}
+			
+			numRows = eachRow.size();
+			
+			
 			layoutReader.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("Can't open file LAYOUT");
 
-		}
-
-		for (int i = 0; i < cells.size(); i++) {
-			ArrayList<Character> currentRow = new ArrayList<>();
-			currentRow = cells.get(i);
-			for (int j = 0; j < currentRow.size(); j++) {
-				System.out.print(currentRow.get(j));
-			}
-			System.out.println();
 		}
 	}
 
@@ -135,25 +134,17 @@ public class Board {
 	public BoardCell getCell(int row, int col) {
 		BoardCell currentCell = new BoardCell();
 		return currentCell;
-//		return null;
 	}
 
 	public int getNumRows() {
-		numRows = cells.size();
 		return numRows;
 	}
 
 	public int getNumColumns() {
-		for (int i = 0; i < cells.size(); i++) {
-			ArrayList<Character> singleRow = new ArrayList<>();
-			singleRow = cells.get(i);
-			numCols = singleRow.size();
-		}
 		return numCols;
 	}
 
 	
-	//We already did this but passed in a character instead of a cell
 	public Room getRoom(BoardCell cell) {
 		char c = cell.getInitial();
 		Room room = new Room();

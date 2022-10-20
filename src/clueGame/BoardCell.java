@@ -6,6 +6,7 @@ public class BoardCell {
 	
 	private int row, col;
 	private char initial;
+	private String label;
 	private DoorDirection doorDirection;
 	private boolean roomLabel;
 	private boolean roomCenter;
@@ -17,7 +18,30 @@ public class BoardCell {
 		// TODO Auto-generated constructor stub
 	}
 
+	public void setLabel(String str) {
+		
+	}
+	
+	public void setInitial(char c) {
+		initial = c;
+	}
+	
+	public void setRow(int r) {
+		row = r;
+	}
 
+	public void setCol(int c) {
+		col = c;
+	}
+	
+	public int getRow() {
+		return row;
+	}
+	
+	public int getCol() {
+		return col;
+	}
+	
 	public boolean isDoorway() {
 		// TODO Auto-generated method stub
 		if (initial == '<' || initial == '>' || initial == 'v' || initial == '^') {
@@ -28,20 +52,21 @@ public class BoardCell {
 
 
 	public boolean isRoomCenter() {
-		// TODO Auto-generated method stub
+		if (initial == '*') {
+			return true;
+		}
 		return false;
 	}
 
 
 	public DoorDirection getDoorDirection() {
-		char c = initial;
-		if (c == '<') {
+		if (initial == '<') {
 			return doorDirection.LEFT;
-		} else if (c == '>') {
+		} else if (initial == '>') {
 			return doorDirection.RIGHT;
-		} else if (c == 'v') {
+		} else if (initial == 'v') {
 			return doorDirection.DOWN;
-		} else if (c == '^') {
+		} else if (initial == '^') {
 			return doorDirection.UP;
 		}
 		return null;

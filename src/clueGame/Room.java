@@ -31,7 +31,6 @@ public class Room {
 	public void setChar(char character) {
 		// TODO Auto-generated method stub
 		c = character;
-		
 	}
 
 }
