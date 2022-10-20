@@ -91,13 +91,21 @@ public class BoardCell {
 	}
 
 	public char getSecretPassage() {
-		// TODO Auto-generated method stub
+		Character c = label.charAt(0);
+		if (label.length() != 1 && (c != '<' && c != '>' && c != '^' && c != 'v' && c != '#' && c != '*')) {
+			return 1;
+		}
 		return 0;
 	}
 
 	public char getInitial() {
 		return initial;
 
+	}
+
+	public void setOccupied(boolean b) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	// +addAdj (adj:BoardCell):void

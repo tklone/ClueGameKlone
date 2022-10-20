@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 import experiment.TestBoardCell;
 
@@ -44,7 +45,6 @@ public class Board {
 			Scanner setupReader = new Scanner(setupFile);
 
 			String info = setupReader.nextLine();
-//			System.out.println(info);
 			while (setupReader.hasNext()) {
 				String wholeLine = setupReader.nextLine();
 				String[] arrOfStr = wholeLine.split(", ");
@@ -52,7 +52,6 @@ public class Board {
 					String current = arrOfStr[2];
 					Character c = current.charAt(0);
 					Room newRoom = new Room();
-//					System.out.println(arrOfStr[1]);
 					newRoom.setName(arrOfStr[1]);
 					newRoom.setChar(c);
 					roomMap.put(c, newRoom);
@@ -96,12 +95,10 @@ public class Board {
 					BoardCell newCell = new BoardCell();
 					matrix[i][j] = newCell;
 					newCell.setLabel(currentString[j]);
-//					System.out.print(currentString[j] + " ");
 					newCell.setCol(i);
 					newCell.setRow(j);
 					newCell.setInitial(newCell.getLabel());
 				}
-//				System.out.println();
 			}
 
 
@@ -113,8 +110,7 @@ public class Board {
 	}
 
 	public void setConfigFiles(String layoutConfig, String setupConfig) {
-//		this.layoutConfigFile = layoutConfig;
-//		this.setupConfigFile = setupConfig;
+
 	}
 
 	public Room getRoom(Character c) {
@@ -184,6 +180,21 @@ public class Board {
 			room.setName("Walkway");
 		}
 		return room;
+	}
+
+	public Set<BoardCell> getAdjList(int i, int j) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Set<BoardCell> getTargets() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void calcTargets(BoardCell cell, int i) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
