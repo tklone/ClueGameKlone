@@ -13,10 +13,10 @@ public class Board {
 	private BoardCell[][] matrix;
 	private int numRows;
 	private int numCols;
-	private String layoutConfigFile;
-	private String setupConfigFile;
+	private String layoutConfigFile = "data/ClueLayout.csv";
+	private String setupConfigFile = "data/ClueSetup.txt";
 	private Map<Character, Room> roomMap;
-//	public ArrayList<ArrayList<String>> cells = new ArrayList<>();
+	
 
 	// variable and methods used for singleton pattern
 	private static Board theInstance = new Board();
@@ -39,7 +39,7 @@ public class Board {
 
 	public void loadSetupConfig() {
 		try {
-			File setupFile = new File("data/ClueSetup.txt");
+			File setupFile = new File(setupConfigFile);
 			Scanner setupReader = new Scanner(setupFile);
 
 			String info = setupReader.nextLine();
@@ -61,10 +61,9 @@ public class Board {
 		}
 	}
 
-	
 	public void loadLayoutConfig() {
 		try {
-			File layoutFile = new File("data/ClueLayout.csv");
+			File layoutFile = new File(layoutConfigFile);
 			Scanner layoutReader = new Scanner(layoutFile);
 
 			ArrayList<String> eachRow = new ArrayList<>();
@@ -73,24 +72,37 @@ public class Board {
 				eachRow.add(currentLine);
 			}
 			
-
+			matrix = new BoardCell[numRows][numCols];
 			String[] currentString;
-			
+
 			for (int i = 0; i < eachRow.size(); i++) {
 				String rowStrings = eachRow.get(i);
 				currentString = rowStrings.split(",");
 				numCols = currentString.length;
-				for (int j = 0; j < currentString.length; j++) {
-					BoardCell newCell = new BoardCell();
-					newCell.setLabel(rowStrings);
-					newCell.setCol(i);
-					newCell.setRow(j);
-				}
 			}
 			
 			numRows = eachRow.size();
+
+			matrix = new BoardCell[numRows][numCols];
+			
+			for (int i = 0; i < eachRow.size(); i++) {
+				String rowStrings = eachRow.get(i);
+				currentString = rowStrings.split(",");
+//				numCols = currentString.length;
+				for (int j = 0; j < currentString.length; j++) {
+					BoardCell newCell = new BoardCell();
+					matrix[i][j] = newCell;
+					newCell.setLabel(currentString[j]);
+//					System.out.print(currentString[j] + " ");
+					newCell.setCol(i);
+					newCell.setRow(j);
+				}
+//				System.out.println();
+			}
+
 			
 			
+
 			layoutReader.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("Can't open file LAYOUT");
@@ -132,8 +144,7 @@ public class Board {
 	}
 
 	public BoardCell getCell(int row, int col) {
-		BoardCell currentCell = new BoardCell();
-		return currentCell;
+		return matrix[row][col];
 	}
 
 	public int getNumRows() {
@@ -144,7 +155,6 @@ public class Board {
 		return numCols;
 	}
 
-	
 	public Room getRoom(BoardCell cell) {
 		char c = cell.getInitial();
 		Room room = new Room();
