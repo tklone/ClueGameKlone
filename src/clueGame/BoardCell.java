@@ -34,6 +34,13 @@ public class BoardCell {
 			initial = str.charAt(0);
 		}
 	}
+	
+	public Boolean isRoom(BoardCell cell) {
+		if (!cell.isDoorway() && cell.initial != 'X') {
+			return true;
+		}
+		return false;
+	}
 
 	public void setRow(int r) {
 		row = r;

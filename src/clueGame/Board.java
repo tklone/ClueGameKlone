@@ -21,7 +21,6 @@ public class Board {
 	private String setupConfigFile = "data/ClueSetup.txt";
 	private Map<Character, Room> roomMap = new HashMap<>();
 	private Set<BoardCell> targets = new HashSet<>();
-	
 
 	// variable and methods used for singleton pattern
 	private static Board theInstance = new Board();
@@ -76,7 +75,7 @@ public class Board {
 				String currentLine = layoutReader.nextLine();
 				eachRow.add(currentLine);
 			}
-			
+
 			matrix = new BoardCell[numRows][numCols];
 			String[] currentString;
 
@@ -85,11 +84,11 @@ public class Board {
 				currentString = rowStrings.split(",");
 				numCols = currentString.length;
 			}
-			
+
 			numRows = eachRow.size();
 
 			matrix = new BoardCell[numRows][numCols];
-			
+
 			for (int i = 0; i < eachRow.size(); i++) {
 				String rowStrings = eachRow.get(i);
 				currentString = rowStrings.split(",");
@@ -103,7 +102,6 @@ public class Board {
 					newCell.setInitial(newCell.getLabel());
 				}
 			}
-
 
 			layoutReader.close();
 		} catch (FileNotFoundException e) {
@@ -186,83 +184,97 @@ public class Board {
 	}
 
 	public Set<BoardCell> getAdjList(int i, int j) {
-		
-		Set <BoardCell> adjList = new HashSet<>();
-		//I think we need to only add to the adjacecy list if it is a walkwa
-		//Or a room.  So if it's a door or a wall or something, don't add it
-		
-//		if (i + 1 < numRows) {
+
+		Set<BoardCell> adjList = new HashSet<>();
+		// I think we need to only add to the adjacency list if it is a walkway
+		// Or a room. So if it's a door or a wall or something, don't add it
+
+		BoardCell theCell = new BoardCell();
+		if (i + 1 < numRows) {
+			theCell = theInstance.getCell(i + 1, j);
+			if (!theCell.isDoorway() && theCell.getInitial() != 'X') {
+//				System.out.println("gets here");
+				adjList.add(theCell);
+			}
+		}
+		if (j + 1 < numCols) {
+			theCell = theInstance.getCell(i, j + 1);
+			if (!theCell.isDoorway() && theCell.getInitial() != 'X') {
+				adjList.add(theCell);
+			}
+		}
+		if (i - 1 >= 0) {
+			theCell = theInstance.getCell(i - 1, j);
+			if (!theCell.isDoorway() && theCell.getInitial() != 'X') {
+				adjList.add(theCell);
+			}
+		}
+		if (j - 1 >= 0) {
+			theCell = theInstance.getCell(i, j - 1);
+			if (!theCell.isDoorway() && theCell.getInitial() != 'X') {
+				adjList.add(theCell);
+			}
+		}
+		// Middle numRows and columns
+
+//		if (i != 0 && j != 0 && i != numRows - 1 && j != numCols - 1) {
+//			adjList.add(theInstance.getCell(i - 1, j));
+//			adjList.add(theInstance.getCell(i, j - 1));
+//			adjList.add(theInstance.getCell(i, j + 1));
 //			adjList.add(theInstance.getCell(i + 1, j));
 //		}
-//		if (j + 1 < numCols) {
+//
+//		// Top left corner
+//		if (i == 0 && j == 0) {
+//			adjList.add(theInstance.getCell(i + 1, j));
 //			adjList.add(theInstance.getCell(i, j + 1));
 //		}
-//		if (i - 1 >= 0 ) {
+//
+//		// Bottom right corner
+//		if (i == numRows - 1 && j == numCols - 1) {
 //			adjList.add(theInstance.getCell(i - 1, j));
-//		}
-//		if (j - 1 >= 0) {
 //			adjList.add(theInstance.getCell(i, j - 1));
 //		}
-		// Middle numRows and columns
-		
-		if (i != 0 && j != 0 && i != numRows - 1 && j != numCols - 1) {
-			adjList.add(theInstance.getCell(i - 1, j));
-			adjList.add(theInstance.getCell(i, j - 1));
-			adjList.add(theInstance.getCell(i, j + 1));
-			adjList.add(theInstance.getCell(i + 1, j));
-		}
-
-		// Top left corner
-		if (i == 0 && j == 0) {
-			adjList.add(theInstance.getCell(i + 1, j));
-			adjList.add(theInstance.getCell(i, j + 1));
-		}
-
-		// Bottom right corner
-		if (i == numRows - 1 && j == numCols - 1) {
-			adjList.add(theInstance.getCell(i - 1, j));
-			adjList.add(theInstance.getCell(i, j - 1));
-		}
-
-		// Top right corner
-		if (i == numRows - 1 && j == 0) {
-			adjList.add(theInstance.getCell(i - 1, j));
-			adjList.add(theInstance.getCell(i, j + 1));
-		}
-
-		// Bottom left corner
-		if (i == numRows && j == 0) {
-			adjList.add(theInstance.getCell(i, j - 1));
-			adjList.add(theInstance.getCell(i + 1, j));
-		}
-
-		// Anywhere on the top edge
-		if (i == 0 && j != 0 && j != numCols - 1) {
-			adjList.add(theInstance.getCell(i, j - 1));
-			adjList.add(theInstance.getCell(i, j + 1));
-			adjList.add(theInstance.getCell(i + 1, j));
-		}
-
-		// Anywhere on the bottom edge
-		if (i == numRows - 1 && j != 0 && j != numCols - 1) {
-			adjList.add(theInstance.getCell(i, j - 1));
-			adjList.add(theInstance.getCell(i, j + 1));
-			adjList.add(theInstance.getCell(i - 1, j));
-		}
-
-		// Anywhere on the left edge
-		if (j == 0 && i != 0 && i != numRows - 1) {
-			adjList.add(theInstance.getCell(i + 1, j));
-			adjList.add(theInstance.getCell(i - 1, j));
-			adjList.add(theInstance.getCell(i, j + 1));
-		}
-
-		// Anywhere on the right edge
-		if (j == numCols - 1 && i != 0 && i != numRows - 1) {
-			adjList.add(theInstance.getCell(i + 1, j));
-			adjList.add(theInstance.getCell(i - 1, j));
-			adjList.add(theInstance.getCell(i, j - 1));
-		}
+//
+//		// Top right corner
+//		if (i == numRows - 1 && j == 0) {
+//			adjList.add(theInstance.getCell(i - 1, j));
+//			adjList.add(theInstance.getCell(i, j + 1));
+//		}
+//
+//		// Bottom left corner
+//		if (i == numRows && j == 0) {
+//			adjList.add(theInstance.getCell(i, j - 1));
+//			adjList.add(theInstance.getCell(i + 1, j));
+//		}
+//
+//		// Anywhere on the top edge
+//		if (i == 0 && j != 0 && j != numCols - 1) {
+//			adjList.add(theInstance.getCell(i, j - 1));
+//			adjList.add(theInstance.getCell(i, j + 1));
+//			adjList.add(theInstance.getCell(i + 1, j));
+//		}
+//
+//		// Anywhere on the bottom edge
+//		if (i == numRows - 1 && j != 0 && j != numCols - 1) {
+//			adjList.add(theInstance.getCell(i, j - 1));
+//			adjList.add(theInstance.getCell(i, j + 1));
+//			adjList.add(theInstance.getCell(i - 1, j));
+//		}
+//
+//		// Anywhere on the left edge
+//		if (j == 0 && i != 0 && i != numRows - 1) {
+//			adjList.add(theInstance.getCell(i + 1, j));
+//			adjList.add(theInstance.getCell(i - 1, j));
+//			adjList.add(theInstance.getCell(i, j + 1));
+//		}
+//
+//		// Anywhere on the right edge
+//		if (j == numCols - 1 && i != 0 && i != numRows - 1) {
+//			adjList.add(theInstance.getCell(i + 1, j));
+//			adjList.add(theInstance.getCell(i - 1, j));
+//			adjList.add(theInstance.getCell(i, j - 1));
+//		}
 		return adjList;
 	}
 
@@ -273,7 +285,7 @@ public class Board {
 
 	public void calcTargets(BoardCell cell, int i) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
