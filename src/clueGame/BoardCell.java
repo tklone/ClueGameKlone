@@ -28,15 +28,20 @@ public class BoardCell {
 	}
 
 	public void setInitial(String str) {
-//		System.out.println("!!" + str);
 		if (str.length() == 1) {
-//			System.out.println("dis one: " + str);
 			initial = str.charAt(0);
 		}
 	}
 	
 	public Boolean isRoom(BoardCell cell) {
 		if (!cell.isDoorway() && cell.initial != 'X') {
+			return true;
+		}
+		return false;
+	}
+	
+	public Boolean isWalkway(BoardCell cell) {
+		if (cell.initial == 'W') {
 			return true;
 		}
 		return false;

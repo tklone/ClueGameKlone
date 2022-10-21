@@ -116,29 +116,32 @@ public class Board {
 
 	public Room getRoom(Character c) {
 		Room room = new Room();
-		if (c.equals('C')) {
-			room.setName("Cookie Room");
-		} else if (c.equals('R')) {
-			room.setName("Reindeer Barn");
-		} else if (c.equals('E')) {
-			room.setName("Elve's Workshop");
-		} else if (c.equals('L')) {
-			room.setName("Santa's Lair");
-		} else if (c.equals('B')) {
-			room.setName("Bathroom");
-		} else if (c.equals('T')) {
-			room.setName("Toy Room");
-		} else if (c.equals('F')) {
-			room.setName("Christmas Tree Factory");
-		} else if (c.equals('G')) {
-			room.setName("Gift Wrapping Station");
-		} else if (c.equals('S')) {
-			room.setName("Sleigh Storage");
-		} else if (c.equals('X')) {
-			room.setName("Unused");
-		} else if (c.equals('W')) {
-			room.setName("Walkway");
-		}
+//		if (c.equals('C')) {
+//			room.setName("Cookie Room");
+//		} else if (c.equals('R')) {
+//			room.setName("Reindeer Barn");
+//		} else if (c.equals('E')) {
+//			room.setName("Elve's Workshop");
+//		} else if (c.equals('L')) {
+//			room.setName("Santa's Lair");
+//		} else if (c.equals('B')) {
+//			room.setName("Bathroom");
+//		} else if (c.equals('T')) {
+//			room.setName("Toy Room");
+//		} else if (c.equals('F')) {
+//			room.setName("Christmas Tree Factory");
+//		} else if (c.equals('G')) {
+//			room.setName("Gift Wrapping Station");
+//		} else if (c.equals('S')) {
+//			room.setName("Sleigh Storage");
+//		} else if (c.equals('X')) {
+//			room.setName("Unused");
+//		} else if (c.equals('W')) {
+//			room.setName("Walkway");
+//		}
+		
+		room = roomMap.get(c);
+		
 		return room;
 	}
 
@@ -157,29 +160,32 @@ public class Board {
 	public Room getRoom(BoardCell cell) {
 		Character c = cell.getInitial();
 		Room room = new Room();
-		if (c.equals('C')) {
-			room.setName("Cookie Room");
-		} else if (c.equals('R')) {
-			room.setName("Reindeer Barn");
-		} else if (c.equals('E')) {
-			room.setName("Elve's Workshop");
-		} else if (c.equals('L')) {
-			room.setName("Santa's Lair");
-		} else if (c.equals('B')) {
-			room.setName("Bathroom");
-		} else if (c.equals('T')) {
-			room.setName("Toy Room");
-		} else if (c.equals('F')) {
-			room.setName("Christmas Tree Factory");
-		} else if (c.equals('G')) {
-			room.setName("Gift Wrapping Station");
-		} else if (c.equals('S')) {
-			room.setName("Sleigh Storage");
-		} else if (c.equals('X')) {
-			room.setName("Unused");
-		} else if (c.equals('W')) {
-			room.setName("Walkway");
-		}
+//		if (c.equals('C')) {
+//			room.setName("Cookie Room");
+//		} else if (c.equals('R')) {
+//			room.setName("Reindeer Barn");
+//		} else if (c.equals('E')) {
+//			room.setName("Elve's Workshop");
+//		} else if (c.equals('L')) {
+//			room.setName("Santa's Lair");
+//		} else if (c.equals('B')) {
+//			room.setName("Bathroom");
+//		} else if (c.equals('T')) {
+//			room.setName("Toy Room");
+//		} else if (c.equals('F')) {
+//			room.setName("Christmas Tree Factory");
+//		} else if (c.equals('G')) {
+//			room.setName("Gift Wrapping Station");
+//		} else if (c.equals('S')) {
+//			room.setName("Sleigh Storage");
+//		} else if (c.equals('X')) {
+//			room.setName("Unused");
+//		} else if (c.equals('W')) {
+//			room.setName("Walkway");
+//		}
+		
+		room = roomMap.get(c);
+		
 		return room;
 	}
 
