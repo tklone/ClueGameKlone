@@ -201,6 +201,7 @@ public class Board {
 //			adjList.add(theInstance.getCell(i, j - 1));
 //		}
 		// Middle numRows and columns
+		
 		if (i != 0 && j != 0 && i != numRows - 1 && j != numCols - 1) {
 			adjList.add(theInstance.getCell(i - 1, j));
 			adjList.add(theInstance.getCell(i, j - 1));

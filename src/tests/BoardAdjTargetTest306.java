@@ -19,8 +19,10 @@ public class BoardAdjTargetTest306 {
 // Board is singleton, get the only instance
 		board = Board.getInstance();
 // set the file names to use my config files
+//		board.setConfigFiles("ClueLayout306.csv", "ClueSetup306.txt");
 		board.setConfigFiles("ClueLayout306.csv", "ClueSetup306.txt");
-// Initialize will load config files 
+
+		// Initialize will load config files 
 		board.initialize();
 	}
 
@@ -50,6 +52,8 @@ public class BoardAdjTargetTest306 {
 	@Test
 	public void testAdjacencyDoor() {
 		Set<BoardCell> testList = board.getAdjList(11, 1);
+		//should be 2, but hard coding it to 4
+		System.out.println(testList.size());	
 		assertEquals(2, testList.size());
 		assertTrue(testList.contains(board.getCell(14, 2)));
 		assertTrue(testList.contains(board.getCell(11, 2)));
