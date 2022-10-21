@@ -188,6 +188,9 @@ public class Board {
 	public Set<BoardCell> getAdjList(int i, int j) {
 		
 		Set <BoardCell> adjList = new HashSet<>();
+		//I think we need to only add to the adjacecy list if it is a walkwa
+		//Or a room.  So if it's a door or a wall or something, don't add it
+		
 //		if (i + 1 < numRows) {
 //			adjList.add(theInstance.getCell(i + 1, j));
 //		}
