@@ -21,6 +21,7 @@ public class Board {
 	private String setupConfigFile = "data/ClueSetup.txt";
 	private Map<Character, Room> roomMap = new HashMap<>();
 	private Set<BoardCell> targets = new HashSet<>();
+	private Set<BoardCell> adjList = new HashSet<>();
 
 	// variable and methods used for singleton pattern
 	private static Board theInstance = new Board();
@@ -46,11 +47,12 @@ public class Board {
 			File setupFile = new File(setupConfigFile);
 			Scanner setupReader = new Scanner(setupFile);
 
-			String info = setupReader.nextLine();
+			// This just picks up that first line of the file that has only the information
+//			String info = setupReader.nextLine();
 			while (setupReader.hasNext()) {
 				String wholeLine = setupReader.nextLine();
 				String[] arrOfStr = wholeLine.split(", ");
-				if (arrOfStr[0].equals("Room")) {
+				if (arrOfStr[0].equals("Room") || arrOfStr[0].equals("Space")) {
 					String current = arrOfStr[2];
 					Character c = current.charAt(0);
 					Room newRoom = new Room();
@@ -100,6 +102,7 @@ public class Board {
 					newCell.setCol(i);
 					newCell.setRow(j);
 					newCell.setInitial(newCell.getLabel());
+
 				}
 			}
 
@@ -116,32 +119,7 @@ public class Board {
 
 	public Room getRoom(Character c) {
 		Room room = new Room();
-//		if (c.equals('C')) {
-//			room.setName("Cookie Room");
-//		} else if (c.equals('R')) {
-//			room.setName("Reindeer Barn");
-//		} else if (c.equals('E')) {
-//			room.setName("Elve's Workshop");
-//		} else if (c.equals('L')) {
-//			room.setName("Santa's Lair");
-//		} else if (c.equals('B')) {
-//			room.setName("Bathroom");
-//		} else if (c.equals('T')) {
-//			room.setName("Toy Room");
-//		} else if (c.equals('F')) {
-//			room.setName("Christmas Tree Factory");
-//		} else if (c.equals('G')) {
-//			room.setName("Gift Wrapping Station");
-//		} else if (c.equals('S')) {
-//			room.setName("Sleigh Storage");
-//		} else if (c.equals('X')) {
-//			room.setName("Unused");
-//		} else if (c.equals('W')) {
-//			room.setName("Walkway");
-//		}
-		
 		room = roomMap.get(c);
-		
 		return room;
 	}
 
@@ -160,42 +138,18 @@ public class Board {
 	public Room getRoom(BoardCell cell) {
 		Character c = cell.getInitial();
 		Room room = new Room();
-//		if (c.equals('C')) {
-//			room.setName("Cookie Room");
-//		} else if (c.equals('R')) {
-//			room.setName("Reindeer Barn");
-//		} else if (c.equals('E')) {
-//			room.setName("Elve's Workshop");
-//		} else if (c.equals('L')) {
-//			room.setName("Santa's Lair");
-//		} else if (c.equals('B')) {
-//			room.setName("Bathroom");
-//		} else if (c.equals('T')) {
-//			room.setName("Toy Room");
-//		} else if (c.equals('F')) {
-//			room.setName("Christmas Tree Factory");
-//		} else if (c.equals('G')) {
-//			room.setName("Gift Wrapping Station");
-//		} else if (c.equals('S')) {
-//			room.setName("Sleigh Storage");
-//		} else if (c.equals('X')) {
-//			room.setName("Unused");
-//		} else if (c.equals('W')) {
-//			room.setName("Walkway");
-//		}
-		
 		room = roomMap.get(c);
-		
 		return room;
 	}
 
 	public Set<BoardCell> getAdjList(int i, int j) {
 
-		Set<BoardCell> adjList = new HashSet<>();
+//		Set<BoardCell> adjList = new HashSet<>();
 		// I think we need to only add to the adjacency list if it is a walkway
 		// Or a room. So if it's a door or a wall or something, don't add it
 
 		BoardCell theCell = new BoardCell();
+
 		if (i + 1 < numRows) {
 			theCell = theInstance.getCell(i + 1, j);
 			if (!theCell.isDoorway() && theCell.getInitial() != 'X') {
@@ -294,4 +248,71 @@ public class Board {
 
 	}
 
+	public void getDoorways() {
+		int rowDoor;
+		int colDoor;
+		DoorDirection dir;		
+		BoardCell doorCell = new BoardCell();
+		BoardCell roomNearest = new BoardCell();
+		Room currentRoom = new Room();
+		
+		for (int i = 0; i < numRows; i++) {
+			for (int j = 0; j < numCols; j++) {
+				if (doorCell.isDoorway()) {
+					dir = doorCell.getDoorDirection();
+					rowDoor = i;
+					colDoor = j;
+					switch (dir) {
+					case LEFT:
+						roomNearest = matrix[rowDoor][colDoor - 1];
+						currentRoom = getRoom(roomNearest);
+						currentRoom.setDoorway(doorCell);
+					case RIGHT:
+						roomNearest = matrix[rowDoor][colDoor + 1];
+						currentRoom = getRoom(roomNearest);
+						currentRoom.setDoorway(doorCell);
+					case UP:
+						roomNearest = matrix[rowDoor + 1][colDoor];
+						currentRoom = getRoom(roomNearest);
+						currentRoom.setDoorway(doorCell);
+					case DOWN:
+						roomNearest = matrix[rowDoor - 1][colDoor];
+						currentRoom = getRoom(roomNearest);
+						currentRoom.setDoorway(doorCell);
+					default:
+						break;
+					}
+				}
+			}
+		}
+
+	}
+	
+	public void secretPassages() {
+		BoardCell spCell = new BoardCell();
+		BoardCell spEndCell = new BoardCell();
+		Room room = new Room();
+
+		for (int i = 0; i < numRows; i++) {
+			for (int j = 0; j < numCols; j++) {
+				spCell = matrix[i][j];
+				String newLabel = spCell.getLabel();
+				char endRoomChar = newLabel.charAt(1);
+				char startRoomChar = newLabel.charAt(0);
+				if (spCell.isSecretPassage()) {
+					room = getRoom(startRoomChar);
+				}
+				
+//				endRoomChar.toString();
+//				startRoomChar.toString();
+				String newString = "";
+				newString = newString + endRoomChar + startRoomChar;				
+				if (spCell.getLabel() == newString) {
+					
+				}
+			}
+		}
+		room.setSP(spCell, spEndCell);
+
+	}
 }

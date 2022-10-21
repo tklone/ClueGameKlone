@@ -11,7 +11,6 @@ public class BoardCell {
 	private boolean roomLabel;
 	private boolean roomCenter;
 	private char secretPassage;
-	private Set<BoardCell> adjList;
 	public Boolean doorway = false;
 
 	public BoardCell() {
@@ -33,8 +32,8 @@ public class BoardCell {
 		}
 	}
 	
-	public Boolean isRoom(BoardCell cell) {
-		if (!cell.isDoorway() && cell.initial != 'X') {
+	public Boolean isRoom() {
+		if (!this.isDoorway() && this.initial != 'X' && this.initial != 'W') {
 			return true;
 		}
 		return false;
@@ -64,11 +63,10 @@ public class BoardCell {
 	}
 
 	public boolean isDoorway() {
-		if ((label.length() > 1) && (label.charAt(1) == '>' || label.charAt(1) == '<' || label.charAt(1) == '^' || label.charAt(1) == 'v')) {
-			doorway = true;
-			return doorway;
+		if ((label.length() > 1) && (label.charAt(0) == 'W') && (label.charAt(1) == '>' || label.charAt(1) == '<' || label.charAt(1) == '^' || label.charAt(1) == 'v')) {
+			return true;
 		}
-		return doorway;
+		return false;
 	}
 
 	public boolean isRoomCenter() {
@@ -79,7 +77,7 @@ public class BoardCell {
 	}
 
 	public DoorDirection getDoorDirection() {
-		if (label.length() > 1) {
+		if (label.length() > 1  && label.charAt(0) == 'W') {
 			if (label.charAt(1) == '<') {
 				return DoorDirection.LEFT;
 			} else if (label.charAt(1) == '>') {

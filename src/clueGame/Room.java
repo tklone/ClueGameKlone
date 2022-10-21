@@ -6,13 +6,31 @@ public class Room {
 	private char c;
 	private BoardCell centerCell;
 	private BoardCell labelCell;
+	private BoardCell sp;
+	private BoardCell doorway;
 
 	public Room() {
 		super();
 	}
+	
+	public void setSP(BoardCell cell) {
+		sp = cell;
+	}
+	
+	public BoardCell getSP() {
+		return sp;
+	}
+	
+	public void setDoorway(BoardCell cell) {
+		doorway = cell;
+	}
+	
+	public BoardCell getDoorway() {
+		return doorway;
+	}
 
 	public String getName() {
-		System.out.println(name);
+//		System.out.println(name);
 		return name;
 	}
 	
