@@ -4,10 +4,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
+import experiment.TestBoard;
 import experiment.TestBoardCell;
 
 public class Board {
@@ -18,6 +20,7 @@ public class Board {
 	private String layoutConfigFile = "data/ClueLayout.csv";
 	private String setupConfigFile = "data/ClueSetup.txt";
 	private Map<Character, Room> roomMap = new HashMap<>();
+	private Set<BoardCell> targets = new HashSet<>();
 	
 
 	// variable and methods used for singleton pattern
@@ -183,13 +186,85 @@ public class Board {
 	}
 
 	public Set<BoardCell> getAdjList(int i, int j) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Set <BoardCell> adjList = new HashSet<>();
+//		if (i + 1 < numRows) {
+//			adjList.add(theInstance.getCell(i + 1, j));
+//		}
+//		if (j + 1 < numCols) {
+//			adjList.add(theInstance.getCell(i, j + 1));
+//		}
+//		if (i - 1 >= 0 ) {
+//			adjList.add(theInstance.getCell(i - 1, j));
+//		}
+//		if (j - 1 >= 0) {
+//			adjList.add(theInstance.getCell(i, j - 1));
+//		}
+		// Middle numRows and columns
+		if (i != 0 && j != 0 && i != numRows - 1 && j != numCols - 1) {
+			adjList.add(theInstance.getCell(i - 1, j));
+			adjList.add(theInstance.getCell(i, j - 1));
+			adjList.add(theInstance.getCell(i, j + 1));
+			adjList.add(theInstance.getCell(i + 1, j));
+		}
+
+		// Top left corner
+		if (i == 0 && j == 0) {
+			adjList.add(theInstance.getCell(i + 1, j));
+			adjList.add(theInstance.getCell(i, j + 1));
+		}
+
+		// Bottom right corner
+		if (i == numRows - 1 && j == numCols - 1) {
+			adjList.add(theInstance.getCell(i - 1, j));
+			adjList.add(theInstance.getCell(i, j - 1));
+		}
+
+		// Top right corner
+		if (i == numRows - 1 && j == 0) {
+			adjList.add(theInstance.getCell(i - 1, j));
+			adjList.add(theInstance.getCell(i, j + 1));
+		}
+
+		// Bottom left corner
+		if (i == numRows && j == 0) {
+			adjList.add(theInstance.getCell(i, j - 1));
+			adjList.add(theInstance.getCell(i + 1, j));
+		}
+
+		// Anywhere on the top edge
+		if (i == 0 && j != 0 && j != numCols - 1) {
+			adjList.add(theInstance.getCell(i, j - 1));
+			adjList.add(theInstance.getCell(i, j + 1));
+			adjList.add(theInstance.getCell(i + 1, j));
+		}
+
+		// Anywhere on the bottom edge
+		if (i == numRows - 1 && j != 0 && j != numCols - 1) {
+			adjList.add(theInstance.getCell(i, j - 1));
+			adjList.add(theInstance.getCell(i, j + 1));
+			adjList.add(theInstance.getCell(i - 1, j));
+		}
+
+		// Anywhere on the left edge
+		if (j == 0 && i != 0 && i != numRows - 1) {
+			adjList.add(theInstance.getCell(i + 1, j));
+			adjList.add(theInstance.getCell(i - 1, j));
+			adjList.add(theInstance.getCell(i, j + 1));
+		}
+
+		// Anywhere on the right edge
+		if (j == numCols - 1 && i != 0 && i != numRows - 1) {
+			adjList.add(theInstance.getCell(i + 1, j));
+			adjList.add(theInstance.getCell(i - 1, j));
+			adjList.add(theInstance.getCell(i, j - 1));
+		}
+		return adjList;
 	}
 
 	public Set<BoardCell> getTargets() {
 		// TODO Auto-generated method stub
-		return null;
+		return targets;
 	}
 
 	public void calcTargets(BoardCell cell, int i) {

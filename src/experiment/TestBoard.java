@@ -64,10 +64,6 @@ public class TestBoard {
 				continue;
 			}
 			
-			
-				
-//			System.out.println(c.getColumn());
-//			System.out.println(c.getRow());
 			//if already in visited list, skip rest of code
 			if(visited.contains(c)) {
 				//System.out.println("contains");
