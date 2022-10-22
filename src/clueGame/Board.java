@@ -17,8 +17,8 @@ public class Board {
 	private BoardCell[][] matrix;
 	private int numRows;
 	private int numCols;
-	private String layoutConfigFile = "data/ClueLayout.csv";
-	private String setupConfigFile = "data/ClueSetup.txt";
+//	private String layoutConfigFile = "data/ClueLayout.csv";
+//	private String setupConfigFile = "data/ClueSetup.txt";
 	private Map<Character, Room> roomMap = new HashMap<>();
 	private Set<BoardCell> targets = new HashSet<>();
 	private Set<BoardCell> adjList = new HashSet<>();
@@ -38,27 +38,20 @@ public class Board {
 
 	// initialize the board(since we are using singleton pattern
 	public void initialize() {
-		theInstance.loadSetupConfig();
-		theInstance.loadLayoutConfig();
+//		theInstance.loadSetupConfig();
+//		theInstance.loadLayoutConfig();
 	}
 
-	public void loadSetupConfig() {
+	public void loadSetupConfig(String setupConfig) {
 		try {
-			File setupFile = new File(setupConfigFile);
+			File setupFile = new File("data/" + setupConfig);
 			Scanner setupReader = new Scanner(setupFile);
-
-			// This just picks up that first line of the file that has only the information
-//			String info = setupReader.nextLine();
 			while (setupReader.hasNext()) {
 				String wholeLine = setupReader.nextLine();
 				String[] arrOfStr = wholeLine.split(", ");
 				if (arrOfStr[0].equals("Room") || arrOfStr[0].equals("Space")) {
 					String current = arrOfStr[2];
 					Character c = current.charAt(0);
-					
-//					System.out.println(arrOfStr[0] + " " + arrOfStr[1] + " " + arrOfStr[2]);
-//					System.out.println(c);
-					
 					Room newRoom = new Room();
 					newRoom.setName(arrOfStr[1]);
 					newRoom.setChar(c);
@@ -71,9 +64,9 @@ public class Board {
 		}
 	}
 
-	public void loadLayoutConfig() {
+	public void loadLayoutConfig(String layoutConfig) {
 		try {
-			File layoutFile = new File(layoutConfigFile);
+			File layoutFile = new File("data/" + layoutConfig);
 			Scanner layoutReader = new Scanner(layoutFile);
 
 			ArrayList<String> eachRow = new ArrayList<>();
@@ -118,7 +111,8 @@ public class Board {
 	}
 
 	public void setConfigFiles(String layoutConfig, String setupConfig) {
-
+		loadSetupConfig(setupConfig);
+		loadLayoutConfig(layoutConfig);
 	}
 
 	public Room getRoom(Character c) {
@@ -199,6 +193,7 @@ public class Board {
 		BoardCell doorCell = new BoardCell();
 		BoardCell roomNearest = new BoardCell();
 		Room currentRoom = new Room();
+		secretPassages();
 		
 		for (int i = 0; i < numRows; i++) {
 			for (int j = 0; j < numCols; j++) {
@@ -233,21 +228,23 @@ public class Board {
 	}
 	
 	public void secretPassages() {
-		Boolean secretPassagePresent = false;
+//		Boolean secretPassagePresent = false;
 		BoardCell spCell = new BoardCell();
 		BoardCell spEndCell = new BoardCell();
 		Room room = new Room();
+		Room endRoom = new Room();
 
 		for (int i = 0; i < numRows; i++) {
 			for (int j = 0; j < numCols; j++) {
+				System.out.println("gets here");
 				spCell = matrix[i][j];
 				String newLabel = spCell.getLabel();
 				char endRoomChar = newLabel.charAt(1);
 				char startRoomChar = newLabel.charAt(0);
 				if (spCell.isSecretPassage()) {
-					secretPassagePresent = true;
+//					secretPassagePresent = true;
 					room = getRoom(startRoomChar);
-					room.setHasSP(secretPassagePresent);
+					room.setHasSP(true);
 
 				}
 
@@ -255,6 +252,7 @@ public class Board {
 				spCellLabel = spCellLabel + endRoomChar + startRoomChar;				
 				if (matrix[i][j].getLabel().equals(spCellLabel)) {
 					spEndCell = matrix[i][j];
+					endRoom.setHasSP(true);
 				}
 			}
 		}

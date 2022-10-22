@@ -109,8 +109,14 @@ public class BoardCell {
 		return false;
 	}
 	
-	public void setSecretPassag() {
+	public void setSecretPassage() {
 		
+	}
+	
+	public char getSecretPassage() {
+		char c;
+		c = 'K';
+		return c;
 	}
 
 	public char getInitial() {
