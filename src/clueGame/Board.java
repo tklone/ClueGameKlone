@@ -20,6 +20,7 @@ public class Board {
 	private Map<Character, Room> roomMap = new HashMap<>();
 	private Set<BoardCell> targets = new HashSet<>();
 	private Set<BoardCell> adjList = new HashSet<>();
+	private BoardCell labelCell1 = new BoardCell();
 
 	// variable and methods used for singleton pattern
 	private static Board theInstance = new Board();
@@ -80,15 +81,14 @@ public class Board {
 				currentString = rowStrings.split(",");
 				numCols = currentString.length;
 			}
-
 			numRows = eachRow.size();
 
+			
 			matrix = new BoardCell[numRows][numCols];
-
+			Room room = new Room();
 			for (int i = 0; i < eachRow.size(); i++) {
 				String rowStrings = eachRow.get(i);
 				currentString = rowStrings.split(",");
-//				numCols = currentString.length;
 				for (int j = 0; j < currentString.length; j++) {
 					BoardCell newCell = new BoardCell();
 					matrix[i][j] = newCell;
@@ -96,7 +96,13 @@ public class Board {
 					newCell.setCol(i);
 					newCell.setRow(j);
 					newCell.setInitial(newCell.getLabel());
-					
+					room = getRoom(newCell);
+					if (newCell.isLabel()) {
+						room.setLabelCell(newCell);
+					}
+					if (newCell.isRoomCenter()) {
+						room.setCenterCell(newCell);
+					}
 				}
 			}
 

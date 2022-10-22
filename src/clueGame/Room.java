@@ -64,6 +64,10 @@ public class Room {
 		return labelCell;
 	}
 
+	public void setCenterCell(BoardCell cell) {
+		centerCell = cell;
+	}
+	
 	public BoardCell getCenterCell() {
 		return centerCell;
 	}

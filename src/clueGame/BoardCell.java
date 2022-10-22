@@ -111,12 +111,13 @@ public class BoardCell {
 		return false;
 	}
 	
-	public void setSecretPassage() {
-		String label = this.getLabel();
-		secretPassage = label.charAt(1);
-	}
+//	public void setSecretPassage() {
+//	
+//	}
 	
 	public char getSecretPassage() {
+		String label = this.getLabel();
+		secretPassage = label.charAt(1);
 		return secretPassage;
 	}
 
