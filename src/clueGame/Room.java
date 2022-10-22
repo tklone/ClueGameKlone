@@ -5,14 +5,21 @@ public class Room {
 	private String name;
 	private BoardCell centerCell;
 	private BoardCell labelCell;
-	private BoardCell spStart;
-	private BoardCell spEnd;
+	private BoardCell secretPassageCell;
 	private BoardCell doorway;
 	private Boolean hasSP;
 	private char c;
 
 	public Room() {
 		super();
+	}
+	
+	public void setSecretPassageCell(BoardCell cell) {
+		secretPassageCell = cell;
+	}
+	
+	public BoardCell getSecretPassageCell() {
+		return secretPassageCell;
 	}
 	
 	public void setHasSP(Boolean hasSecretPassage) {
@@ -23,21 +30,21 @@ public class Room {
 		return hasSP;
 	}
 	
-	public void setSPStart(BoardCell startCell) {
-		spStart = startCell;
-	}
-	
-	public BoardCell getSPStart() {
-		return spStart;
-	}
-	
-	public void setSPEnd(BoardCell endCell) {
-		spEnd = endCell;
-	}
-	
-	public BoardCell getSPEnd() {
-		return spEnd;
-	}
+//	public void setSPStart(BoardCell startCell) {
+//		spStart = startCell;
+//	}
+//	
+//	public BoardCell getSPStart() {
+//		return spStart;
+//	}
+//	
+//	public void setSPEnd(BoardCell endCell) {
+//		spEnd = endCell;
+//	}
+//	
+//	public BoardCell getSPEnd() {
+//		return spEnd;
+//	}
 	
 	public void setDoorway(BoardCell cell) {
 		doorway = cell;

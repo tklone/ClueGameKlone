@@ -127,6 +127,4 @@ public class BoardCell {
 		
 	}
 
-	// +addAdj (adj:BoardCell):void
-
 }
