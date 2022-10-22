@@ -111,10 +111,6 @@ public class BoardCell {
 		return false;
 	}
 	
-//	public void setSecretPassage() {
-//	
-//	}
-	
 	public char getSecretPassage() {
 		String label = this.getLabel();
 		secretPassage = label.charAt(1);
@@ -122,7 +118,6 @@ public class BoardCell {
 	}
 
 	public char getInitial() {
-//		System.out.println(initial);
 		return initial;
 
 	}
