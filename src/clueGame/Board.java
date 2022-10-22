@@ -17,8 +17,6 @@ public class Board {
 	private BoardCell[][] matrix;
 	private int numRows;
 	private int numCols;
-//	private String layoutConfigFile = "data/ClueLayout.csv";
-//	private String setupConfigFile = "data/ClueSetup.txt";
 	private Map<Character, Room> roomMap = new HashMap<>();
 	private Set<BoardCell> targets = new HashSet<>();
 	private Set<BoardCell> adjList = new HashSet<>();
@@ -38,8 +36,7 @@ public class Board {
 
 	// initialize the board(since we are using singleton pattern
 	public void initialize() {
-//		theInstance.loadSetupConfig();
-//		theInstance.loadLayoutConfig();
+
 	}
 
 	public void loadSetupConfig(String setupConfig) {
@@ -99,7 +96,7 @@ public class Board {
 					newCell.setCol(i);
 					newCell.setRow(j);
 					newCell.setInitial(newCell.getLabel());
-
+					
 				}
 			}
 
@@ -132,10 +129,10 @@ public class Board {
 	public int getNumColumns() {
 		return numCols;
 	}
+	
 
 	public Room getRoom(BoardCell cell) {
 		Character c = cell.getInitial();
-//		System.out.println(c);
 		Room room = new Room();
 		room = roomMap.get(c);
 		return room;
@@ -147,6 +144,8 @@ public class Board {
 		theCell = matrix[i][j];
 		Room room = new Room();
 		room = getRoom(theCell);
+		secretPassages();
+		
 		
 		if (theCell.isRoom()) {
 			room = getRoom(theCell);
@@ -154,6 +153,7 @@ public class Board {
 //			System.out.println(theCell.getInitial());
 			
 			adjList.add(room.getDoorway());
+			
 			if (room.getHasSP()) {
 				adjList.add(room.getSPEnd());
 			}

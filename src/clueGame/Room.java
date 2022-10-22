@@ -3,13 +3,13 @@ package clueGame;
 public class Room {
 	
 	private String name;
-	private char c;
 	private BoardCell centerCell;
 	private BoardCell labelCell;
 	private BoardCell spStart;
 	private BoardCell spEnd;
 	private BoardCell doorway;
 	private Boolean hasSP;
+	private char c;
 
 	public Room() {
 		super();
@@ -56,6 +56,10 @@ public class Room {
 		name = roomName;
 	}
 
+	public void setLabelCell(BoardCell cell) {
+		labelCell = cell;
+	}
+	
 	public BoardCell getLabelCell() {
 		return labelCell;
 	}

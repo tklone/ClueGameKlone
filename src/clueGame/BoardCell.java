@@ -8,29 +8,40 @@ public class BoardCell {
 	private char initial;
 	private String label;
 	private DoorDirection doorDirection;
-	private boolean roomLabel;
+	private boolean roomLabel = false;
 	private boolean roomCenter;
 	private char secretPassage;
 	public Boolean doorway = false;
 
 	public BoardCell() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 
 	public void setLabel(String str) {
 		label = str;
-//		System.out.println("!!" + label);
+	}
+	
+	public Boolean roomLabel() {
+		if (this.label.length() >= 1 && label.charAt(1) == '#') {
+			roomLabel = true;
+		}
+		return roomLabel;
 	}
 	
 	public String getLabel() {
 		return label;
 	}
+	
 
+	public boolean isRoomCenter() {
+		if (label.length() != 1 && label.charAt(1) == '*') {
+			roomCenter = true;
+		}
+		return roomCenter;
+	}
+	
 	public void setInitial(String str) {
-//		if (str.length() == 1) {
 			initial = str.charAt(0);
-//			System.out.println();
-//		}
 	}
 	
 	public Boolean isRoom() {
@@ -70,13 +81,6 @@ public class BoardCell {
 		return false;
 	}
 
-	public boolean isRoomCenter() {
-		if (label.length() != 1 && label.charAt(1) == '*') {
-			return true;
-		}
-		return false;
-	}
-
 	public DoorDirection getDoorDirection() {
 		if (label.length() > 1  && label.charAt(0) == 'W') {
 			if (label.charAt(1) == '<') {
@@ -92,8 +96,6 @@ public class BoardCell {
 		return null;
 	}
 	
-
-
 	public boolean isLabel() {
 		if (label.length() != 1 && label.charAt(1) == '#') {
 			return true;
@@ -110,13 +112,12 @@ public class BoardCell {
 	}
 	
 	public void setSecretPassage() {
-		
+		String label = this.getLabel();
+		secretPassage = label.charAt(1);
 	}
 	
 	public char getSecretPassage() {
-		char c;
-		c = 'K';
-		return c;
+		return secretPassage;
 	}
 
 	public char getInitial() {
