@@ -152,44 +152,44 @@ public class Board {
 		return room;
 	}
 
-	public Set<BoardCell> getAdjList(int i, int j) {
-
-		BoardCell theCell = new BoardCell();
-		theCell = matrix[i][j];
-		Room room = new Room();
-		room = getRoom(theCell);
-		System.out.println("start room: " + room.getName());
-		
-		if (theCell.isRoom()) {
-			getNearestDoor();
-			adjList.addAll(room.getDoorway());
-			System.out.println(adjList.size());
-			if (room.getHasSP()) {
-				theCell = room.getSecretPassageCell();
-				char c = theCell.getSecretPassage();
-				room = getRoom(c);
-				adjList.add(room.getCenterCell());
-					System.out.println(room.getName());
-			}
-		}
-
-		else if (theCell.isWalkway()) {
-			if (i + 1 < numRows && matrix[i + 1][j].getInitial() != 'X') {
-				adjList.add(matrix[i + 1][j]);
-			}
-			if (j + 1 < numCols && matrix[i][j + 1].getInitial() != 'X') {
-				adjList.add(matrix[i][j + 1]);
-			}
-			if (i - 1 >= 0 && matrix[i - 1][j].getInitial() != 'X') {
-				adjList.add(matrix[i - 1][j]);
-			}
-			if (j - 1 >= 0 && matrix[i][j - 1].getInitial() != 'X') {
-				adjList.add(matrix[i][j - 1]);
-			}
-		}
-
-		return adjList;
-	}
+//	public Set<BoardCell> getAdjList(int i, int j) {
+//
+//		BoardCell theCell = new BoardCell();
+//		theCell = matrix[i][j];
+//		Room room = new Room();
+//		room = getRoom(theCell);
+//		System.out.println("start room: " + room.getName());
+//		
+//		if (theCell.isRoom()) {
+//			getNearestDoor();
+//			adjList.addAll(room.getDoorway());
+//			System.out.println(adjList.size());
+//			if (room.getHasSP()) {
+//				theCell = room.getSecretPassageCell();
+//				char c = theCell.getSecretPassage();
+//				room = getRoom(c);
+//				adjList.add(room.getCenterCell());
+//					System.out.println(room.getName());
+//			}
+//		}
+//
+//		else if (theCell.isWalkway()) {
+//			if (i + 1 < numRows && matrix[i + 1][j].getInitial() != 'X') {
+//				adjList.add(matrix[i + 1][j]);
+//			}
+//			if (j + 1 < numCols && matrix[i][j + 1].getInitial() != 'X') {
+//				adjList.add(matrix[i][j + 1]);
+//			}
+//			if (i - 1 >= 0 && matrix[i - 1][j].getInitial() != 'X') {
+//				adjList.add(matrix[i - 1][j]);
+//			}
+//			if (j - 1 >= 0 && matrix[i][j - 1].getInitial() != 'X') {
+//				adjList.add(matrix[i][j - 1]);
+//			}
+//		}
+//
+//		return adjList;
+//	}
 
 	public Set<BoardCell> getTargets() {
 		// TODO Auto-generated method stub
@@ -201,7 +201,7 @@ public class Board {
 
 	}
 
-	public BoardCell getNearestDoor() {
+	public void getNearestDoor() {
 		int rowDoor;
 		int colDoor;
 		DoorDirection dir;
@@ -241,7 +241,7 @@ public class Board {
 				}
 			}
 		}
-		return roomNearestCell;
+//		return roomNearestCell;
 	}
 
 }
