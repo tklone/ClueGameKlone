@@ -155,16 +155,18 @@ public class Board {
 		theCell = matrix[i][j];
 		Room room = new Room();
 		room = getRoom(theCell);
-
-		getNearestDoor();
+		System.out.println("start room: " + room.getName());
 		
 		if (theCell.isRoom()) {
+			getNearestDoor();
 			adjList.add(room.getDoorway());
+				System.out.println(getRoom(room.getDoorway()).getName());
 			if (room.getHasSP()) {
 				theCell = room.getSecretPassageCell();
 				char c = theCell.getSecretPassage();
 				room = getRoom(c);
 				adjList.add(room.getCenterCell());
+					System.out.println(room.getName());
 			}
 		}
 
@@ -200,7 +202,6 @@ public class Board {
 		int rowDoor;
 		int colDoor;
 		DoorDirection dir;
-//		BoardCell doorCell = ma;
 		BoardCell roomNearestCell = new BoardCell();
 		Room currentRoom = new Room();
 

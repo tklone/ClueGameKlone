@@ -7,7 +7,7 @@ public class Room {
 	private BoardCell labelCell;
 	private BoardCell secretPassageCell;
 	private BoardCell doorway;
-	private Boolean hasSP;
+	private Boolean hasSP = false;
 	private char c;
 
 	public Room() {
