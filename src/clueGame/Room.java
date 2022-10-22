@@ -6,19 +6,37 @@ public class Room {
 	private char c;
 	private BoardCell centerCell;
 	private BoardCell labelCell;
-	private BoardCell sp;
+	private BoardCell spStart;
+	private BoardCell spEnd;
 	private BoardCell doorway;
+	private Boolean hasSP;
 
 	public Room() {
 		super();
 	}
 	
-	public void setSP(BoardCell cell) {
-		sp = cell;
+	public void setHasSP(Boolean hasSecretPassage) {
+		hasSP = hasSecretPassage;
 	}
 	
-	public BoardCell getSP() {
-		return sp;
+	public Boolean getHasSP() {
+		return hasSP;
+	}
+	
+	public void setSPStart(BoardCell startCell) {
+		spStart = startCell;
+	}
+	
+	public BoardCell getSPStart() {
+		return spStart;
+	}
+	
+	public void setSPEnd(BoardCell endCell) {
+		spEnd = endCell;
+	}
+	
+	public BoardCell getSPEnd() {
+		return spEnd;
 	}
 	
 	public void setDoorway(BoardCell cell) {

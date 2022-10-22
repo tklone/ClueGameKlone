@@ -27,9 +27,10 @@ public class BoardCell {
 	}
 
 	public void setInitial(String str) {
-		if (str.length() == 1) {
+//		if (str.length() == 1) {
 			initial = str.charAt(0);
-		}
+//			System.out.println();
+//		}
 	}
 	
 	public Boolean isRoom() {
@@ -39,8 +40,8 @@ public class BoardCell {
 		return false;
 	}
 	
-	public Boolean isWalkway(BoardCell cell) {
-		if (cell.initial == 'W') {
+	public Boolean isWalkway() {
+		if (this.initial == 'W') {
 			return true;
 		}
 		return false;
@@ -100,15 +101,20 @@ public class BoardCell {
 		return false;
 	}
 
-	public char getSecretPassage() {
+	public Boolean isSecretPassage() {
 		Character c = label.charAt(0);
 		if (label.length() != 1 && (c != '<' && c != '>' && c != '^' && c != 'v' && c != '#' && c != '*')) {
-			return 1;
+			return true;
 		}
-		return 0;
+		return false;
+	}
+	
+	public void setSecretPassag() {
+		
 	}
 
 	public char getInitial() {
+//		System.out.println(initial);
 		return initial;
 
 	}

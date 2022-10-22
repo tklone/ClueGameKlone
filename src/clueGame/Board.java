@@ -55,6 +55,10 @@ public class Board {
 				if (arrOfStr[0].equals("Room") || arrOfStr[0].equals("Space")) {
 					String current = arrOfStr[2];
 					Character c = current.charAt(0);
+					
+//					System.out.println(arrOfStr[0] + " " + arrOfStr[1] + " " + arrOfStr[2]);
+//					System.out.println(c);
+					
 					Room newRoom = new Room();
 					newRoom.setName(arrOfStr[1]);
 					newRoom.setChar(c);
@@ -137,104 +141,44 @@ public class Board {
 
 	public Room getRoom(BoardCell cell) {
 		Character c = cell.getInitial();
+//		System.out.println(c);
 		Room room = new Room();
 		room = roomMap.get(c);
 		return room;
 	}
 
 	public Set<BoardCell> getAdjList(int i, int j) {
-
-//		Set<BoardCell> adjList = new HashSet<>();
-		// I think we need to only add to the adjacency list if it is a walkway
-		// Or a room. So if it's a door or a wall or something, don't add it
-
+		
 		BoardCell theCell = new BoardCell();
-
-		if (i + 1 < numRows) {
-			theCell = theInstance.getCell(i + 1, j);
-			if (!theCell.isDoorway() && theCell.getInitial() != 'X') {
-//				System.out.println("gets here");
-				adjList.add(theCell);
+		theCell = matrix[i][j];
+		Room room = new Room();
+		room = getRoom(theCell);
+		
+		if (theCell.isRoom()) {
+			room = getRoom(theCell);
+			
+//			System.out.println(theCell.getInitial());
+			
+			adjList.add(room.getDoorway());
+			if (room.getHasSP()) {
+				adjList.add(room.getSPEnd());
 			}
 		}
-		if (j + 1 < numCols) {
-			theCell = theInstance.getCell(i, j + 1);
-			if (!theCell.isDoorway() && theCell.getInitial() != 'X') {
-				adjList.add(theCell);
+		else if (theCell.isWalkway()) {
+			if (i + 1 < numRows && matrix[i+1][j].getInitial() != 'X') {
+				adjList.add(matrix[i + 1][j]);
+			}
+			if ( j + 1 < numCols && matrix[i][j + 1].getInitial() != 'X') {
+				adjList.add(matrix[i][j + 1]);
+			}
+			if (i - 1 >= 0 && matrix[i - 1][j].getInitial() != 'X') {
+				adjList.add(matrix[i - 1][j]);
+			}
+			if (j - 1 >= 0 && matrix[i][j - 1].getInitial() != 'X') {
+				adjList.add(matrix[i][j - 1]);
 			}
 		}
-		if (i - 1 >= 0) {
-			theCell = theInstance.getCell(i - 1, j);
-			if (!theCell.isDoorway() && theCell.getInitial() != 'X') {
-				adjList.add(theCell);
-			}
-		}
-		if (j - 1 >= 0) {
-			theCell = theInstance.getCell(i, j - 1);
-			if (!theCell.isDoorway() && theCell.getInitial() != 'X') {
-				adjList.add(theCell);
-			}
-		}
-		// Middle numRows and columns
-
-//		if (i != 0 && j != 0 && i != numRows - 1 && j != numCols - 1) {
-//			adjList.add(theInstance.getCell(i - 1, j));
-//			adjList.add(theInstance.getCell(i, j - 1));
-//			adjList.add(theInstance.getCell(i, j + 1));
-//			adjList.add(theInstance.getCell(i + 1, j));
-//		}
-//
-//		// Top left corner
-//		if (i == 0 && j == 0) {
-//			adjList.add(theInstance.getCell(i + 1, j));
-//			adjList.add(theInstance.getCell(i, j + 1));
-//		}
-//
-//		// Bottom right corner
-//		if (i == numRows - 1 && j == numCols - 1) {
-//			adjList.add(theInstance.getCell(i - 1, j));
-//			adjList.add(theInstance.getCell(i, j - 1));
-//		}
-//
-//		// Top right corner
-//		if (i == numRows - 1 && j == 0) {
-//			adjList.add(theInstance.getCell(i - 1, j));
-//			adjList.add(theInstance.getCell(i, j + 1));
-//		}
-//
-//		// Bottom left corner
-//		if (i == numRows && j == 0) {
-//			adjList.add(theInstance.getCell(i, j - 1));
-//			adjList.add(theInstance.getCell(i + 1, j));
-//		}
-//
-//		// Anywhere on the top edge
-//		if (i == 0 && j != 0 && j != numCols - 1) {
-//			adjList.add(theInstance.getCell(i, j - 1));
-//			adjList.add(theInstance.getCell(i, j + 1));
-//			adjList.add(theInstance.getCell(i + 1, j));
-//		}
-//
-//		// Anywhere on the bottom edge
-//		if (i == numRows - 1 && j != 0 && j != numCols - 1) {
-//			adjList.add(theInstance.getCell(i, j - 1));
-//			adjList.add(theInstance.getCell(i, j + 1));
-//			adjList.add(theInstance.getCell(i - 1, j));
-//		}
-//
-//		// Anywhere on the left edge
-//		if (j == 0 && i != 0 && i != numRows - 1) {
-//			adjList.add(theInstance.getCell(i + 1, j));
-//			adjList.add(theInstance.getCell(i - 1, j));
-//			adjList.add(theInstance.getCell(i, j + 1));
-//		}
-//
-//		// Anywhere on the right edge
-//		if (j == numCols - 1 && i != 0 && i != numRows - 1) {
-//			adjList.add(theInstance.getCell(i + 1, j));
-//			adjList.add(theInstance.getCell(i - 1, j));
-//			adjList.add(theInstance.getCell(i, j - 1));
-//		}
+	
 		return adjList;
 	}
 
@@ -289,6 +233,7 @@ public class Board {
 	}
 	
 	public void secretPassages() {
+		Boolean secretPassagePresent = false;
 		BoardCell spCell = new BoardCell();
 		BoardCell spEndCell = new BoardCell();
 		Room room = new Room();
@@ -300,19 +245,20 @@ public class Board {
 				char endRoomChar = newLabel.charAt(1);
 				char startRoomChar = newLabel.charAt(0);
 				if (spCell.isSecretPassage()) {
+					secretPassagePresent = true;
 					room = getRoom(startRoomChar);
+					room.setHasSP(secretPassagePresent);
+
 				}
-				
-//				endRoomChar.toString();
-//				startRoomChar.toString();
-				String newString = "";
-				newString = newString + endRoomChar + startRoomChar;				
-				if (spCell.getLabel() == newString) {
-					
+
+				String spCellLabel = "";
+				spCellLabel = spCellLabel + endRoomChar + startRoomChar;				
+				if (matrix[i][j].getLabel().equals(spCellLabel)) {
+					spEndCell = matrix[i][j];
 				}
 			}
 		}
-		room.setSP(spCell, spEndCell);
-
+		room.setSPStart(spCell);
+		room.setSPEnd(spEndCell);
 	}
 }
