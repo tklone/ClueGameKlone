@@ -40,7 +40,7 @@ public class Board {
 
 	}
 
-	public void loadSetupConfig(String setupConfig) {
+	public void loadSetupConfig(String setupConfig) throws BadConfigFormatException{
 		try {
 			File setupFile = new File("data/" + setupConfig);
 			Scanner setupReader = new Scanner(setupFile);
@@ -54,6 +54,9 @@ public class Board {
 					newRoom.setName(arrOfStr[1]);
 					newRoom.setChar(c);
 					roomMap.put(c, newRoom);
+				}
+				else {
+					throw new BadConfigFormatException();
 				}
 			}
 			setupReader.close();
