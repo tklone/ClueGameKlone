@@ -1,5 +1,6 @@
 package clueGame;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class BoardCell {
@@ -127,4 +128,16 @@ public class BoardCell {
 		
 	}
 
+	
+	public Set<BoardCell> getAdjList(int i, int j) {
+		Set <BoardCell> adjList = new HashSet<>();
+		BoardCell cell = new BoardCell();
+		Room room = new Room();
+		
+		if (Board.getCell(i, j).isRoomCenter()) {
+			
+		}
+		
+		return adjList;
+	}
 }

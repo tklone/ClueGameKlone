@@ -14,7 +14,7 @@ import experiment.TestBoardCell;
 
 public class Board {
 
-	private BoardCell[][] matrix;
+	private static BoardCell[][] matrix;
 	private int numRows;
 	private int numCols;
 	private Map<Character, Room> roomMap = new HashMap<>();
@@ -109,6 +109,9 @@ public class Board {
 						room.setHasSP(true);
 						room.setSecretPassageCell(newCell);
 					}
+//					if (newCell.getLabel().length() > 1 && (newCell.getLabel().charAt(1) != '^' || newCell.getLabel().charAt(1) != 'v' || newCell.getLabel().charAt(1) != '<' || newCell.getLabel().charAt(1) != '>')) {
+//						room.addDoorway(newCell);
+//					}
 				}
 			}
 
@@ -130,7 +133,7 @@ public class Board {
 		return room;
 	}
 
-	public BoardCell getCell(int row, int col) {
+	public static BoardCell getCell(int row, int col) {
 		return matrix[row][col];
 	}
 
@@ -159,8 +162,8 @@ public class Board {
 		
 		if (theCell.isRoom()) {
 			getNearestDoor();
-			adjList.add(room.getDoorway());
-				System.out.println(getRoom(room.getDoorway()).getName());
+			adjList.addAll(room.getDoorway());
+			System.out.println(adjList.size());
 			if (room.getHasSP()) {
 				theCell = room.getSecretPassageCell();
 				char c = theCell.getSecretPassage();
@@ -216,21 +219,21 @@ public class Board {
 					case LEFT:
 						roomNearestCell = matrix[rowDoor][colDoor - 1];
 						currentRoom = getRoom(roomNearestCell);
-						currentRoom.setDoorway(doorCell);
+						currentRoom.addDoorway(doorCell);
 
 					case RIGHT:
 						roomNearestCell = matrix[rowDoor][colDoor + 1];
 						currentRoom = getRoom(roomNearestCell);
-						currentRoom.setDoorway(doorCell);
+						currentRoom.addDoorway(doorCell);
 
 					case UP:
 						roomNearestCell = matrix[rowDoor + 1][colDoor];
 						currentRoom = getRoom(roomNearestCell);
-						currentRoom.setDoorway(doorCell);
+						currentRoom.addDoorway(doorCell);
 					case DOWN:
 						roomNearestCell = matrix[rowDoor - 1][colDoor];
 						currentRoom = getRoom(roomNearestCell);
-						currentRoom.setDoorway(doorCell);
+						currentRoom.addDoorway(doorCell);
 
 					default:
 						break;

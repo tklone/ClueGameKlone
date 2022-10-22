@@ -1,12 +1,14 @@
 package clueGame;
 
+import java.util.Set;
+
 public class Room {
 	
 	private String name;
 	private BoardCell centerCell;
 	private BoardCell labelCell;
 	private BoardCell secretPassageCell;
-	private BoardCell doorway;
+	private Set<BoardCell> doorway;
 	private Boolean hasSP = false;
 	private char c;
 
@@ -46,11 +48,11 @@ public class Room {
 //		return spEnd;
 //	}
 	
-	public void setDoorway(BoardCell cell) {
-		doorway = cell;
+	public void addDoorway(BoardCell cell) {
+		doorway.add(cell);
 	}
 	
-	public BoardCell getDoorway() {
+	public Set<BoardCell> getDoorway() {
 		return doorway;
 	}
 
