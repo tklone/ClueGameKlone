@@ -159,7 +159,7 @@ public class Board {
 		Room room = new Room();
 		room = getRoom(theCell);
 		System.out.println("start room: " + room.getName());
-		
+
 		if (theCell.isRoom()) {
 			getNearestDoor();
 			adjList.addAll(room.getDoorway());
@@ -173,6 +173,7 @@ public class Board {
 			}
 		}
 
+		//This is for seeing if cell is a walkway, then adding adj cells to adjList
 		else if (theCell.isWalkway()) {
 			if (i + 1 < numRows && matrix[i + 1][j].getInitial() != 'X') {
 				adjList.add(matrix[i + 1][j]);
