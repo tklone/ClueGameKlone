@@ -109,41 +109,6 @@ public class Board {
 						room.setHasSP(true);
 						room.setSecretPassageCell(newCell);
 					}
-					
-					DoorDirection dir;
-					int rowDoor;
-					int colDoor;
-					BoardCell roomNearestCell = new BoardCell();
-					if (newCell.isDoorway()) {
-						dir = newCell.getDoorDirection();
-						rowDoor = i;
-						colDoor = j;
-						switch (dir) {
-						case LEFT:
-							roomNearestCell = matrix[rowDoor][colDoor - 1];
-							room = getRoom(roomNearestCell);
-							room.setDoorway(newCell);
-
-						case RIGHT:
-							roomNearestCell = matrix[rowDoor][colDoor + 1];
-							room = getRoom(roomNearestCell);
-							room.setDoorway(newCell);
-
-						case UP:
-							System.out.println(matrix[i][j].getLabel());
-							roomNearestCell = matrix[i + 1][j];
-							System.out.println(roomNearestCell);
-							room = getRoom(roomNearestCell);
-							room.setDoorway(newCell);
-						case DOWN:
-							roomNearestCell = matrix[rowDoor - 1][colDoor];
-							room = getRoom(roomNearestCell);
-							room.setDoorway(newCell);
-
-						default:
-							break;
-						}
-					}
 				}
 			}
 
@@ -191,10 +156,10 @@ public class Board {
 		Room room = new Room();
 		room = getRoom(theCell);
 
+		getNearestDoor();
+		
 		if (theCell.isRoom()) {
 			adjList.add(room.getDoorway());
-			System.out.println(room.getName());
-
 			if (room.getHasSP()) {
 				theCell = room.getSecretPassageCell();
 				char c = theCell.getSecretPassage();
@@ -231,48 +196,48 @@ public class Board {
 
 	}
 
-//	public BoardCell getNearestDoor() {
-//		int rowDoor;
-//		int colDoor;
-//		DoorDirection dir;
-//		BoardCell doorCell = new BoardCell();
-//		BoardCell roomNearestCell = new BoardCell();
-//		Room currentRoom = new Room();
-//
-//		for (int i = 0; i < numRows; i++) {
-//			for (int j = 0; j < numCols; j++) {
-//				if (doorCell.isDoorway()) {
-//					System.out.println("gets here");
-//					dir = doorCell.getDoorDirection();
-//					rowDoor = i;
-//					colDoor = j;
-//					switch (dir) {
-//					case LEFT:
-//						roomNearestCell = matrix[rowDoor][colDoor - 1];
-//						currentRoom = getRoom(roomNearestCell);
-//						currentRoom.setDoorway(doorCell);
-//
-//					case RIGHT:
-//						roomNearestCell = matrix[rowDoor][colDoor + 1];
-//						currentRoom = getRoom(roomNearestCell);
-//						currentRoom.setDoorway(doorCell);
-//
-//					case UP:
-//						roomNearestCell = matrix[rowDoor + 1][colDoor];
-//						currentRoom = getRoom(roomNearestCell);
-//						currentRoom.setDoorway(doorCell);
-//					case DOWN:
-//						roomNearestCell = matrix[rowDoor - 1][colDoor];
-//						currentRoom = getRoom(roomNearestCell);
-//						currentRoom.setDoorway(doorCell);
-//
-//					default:
-//						break;
-//					}
-//				}
-//			}
-//		}
-//		return roomNearestCell;
-//	}
+	public BoardCell getNearestDoor() {
+		int rowDoor;
+		int colDoor;
+		DoorDirection dir;
+//		BoardCell doorCell = ma;
+		BoardCell roomNearestCell = new BoardCell();
+		Room currentRoom = new Room();
+
+		for (int i = 0; i < numRows; i++) {
+			for (int j = 0; j < numCols; j++) {
+				BoardCell doorCell = matrix[i][j];
+				if (doorCell.isDoorway()) {
+					dir = doorCell.getDoorDirection();
+					rowDoor = i;
+					colDoor = j;
+					switch (dir) {
+					case LEFT:
+						roomNearestCell = matrix[rowDoor][colDoor - 1];
+						currentRoom = getRoom(roomNearestCell);
+						currentRoom.setDoorway(doorCell);
+
+					case RIGHT:
+						roomNearestCell = matrix[rowDoor][colDoor + 1];
+						currentRoom = getRoom(roomNearestCell);
+						currentRoom.setDoorway(doorCell);
+
+					case UP:
+						roomNearestCell = matrix[rowDoor + 1][colDoor];
+						currentRoom = getRoom(roomNearestCell);
+						currentRoom.setDoorway(doorCell);
+					case DOWN:
+						roomNearestCell = matrix[rowDoor - 1][colDoor];
+						currentRoom = getRoom(roomNearestCell);
+						currentRoom.setDoorway(doorCell);
+
+					default:
+						break;
+					}
+				}
+			}
+		}
+		return roomNearestCell;
+	}
 
 }
