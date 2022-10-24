@@ -20,7 +20,6 @@ public class BoardAdjTargetTest {
 		board = Board.getInstance();
 // set the file names to use my config files
 		board.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
-//		board.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
 
 		// Initialize will load config files 
 		board.initialize();
@@ -31,30 +30,23 @@ public class BoardAdjTargetTest {
 	@Test
 	public void testAdjacenciesRooms() {
 // we want to test a couple of different rooms.
-// First, the study that only has a single door but a secret room
+// Gift Wrapping Station only has a single door but a secret room
 		Set<BoardCell> testList = board.getAdjList(2, 2);
 		assertEquals(2, testList.size());
-		assertTrue(testList.contains(board.getCell(4, 6)));
-		assertTrue(testList.contains(board.getCell(20, 19)));
-
-		System.out.println("PASSED STUDY");
+		assertTrue(testList.contains(board.getCell(5, 2)));
+		assertTrue(testList.contains(board.getCell(22, 25)));
 		
-// now test the ballroom (note not marked since multiple test here)
-		testList = board.getAdjList(20, 11);
-		assertEquals(4, testList.size());
-		assertTrue(testList.contains(board.getCell(16, 9)));
-		
-		
-		System.out.println("PASSED BALLROOM");
-		
-		// one more room, the kitchen
-		testList = board.getAdjList(20, 19);
+// now test the Christmas Tree Factory
+		testList = board.getAdjList(20, 12);
 		assertEquals(2, testList.size());
-		assertTrue(testList.contains(board.getCell(17, 18)));
-		assertTrue(testList.contains(board.getCell(2, 2)));
-		
-		System.out.println("PASSED KITCHEN");
-		
+		assertTrue(testList.contains(board.getCell(20, 9)));
+				
+		// one more room, the Toy room
+		testList = board.getAdjList(21, 20);
+		assertEquals(2, testList.size());
+		assertTrue(testList.contains(board.getCell(16, 20)));
+		assertTrue(testList.contains(board.getCell(24, 23)));
+				
 	}
 
 // Ensure door locations include their rooms and also additional walkways
