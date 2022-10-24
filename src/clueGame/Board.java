@@ -54,6 +54,7 @@ public class Board {
 		}
 	}
 
+	//reading in the text file
 	public void loadSetupConfig() throws FileNotFoundException, BadConfigFormatException {
 		try {
 			File setupFile = new File("data/" + setupConfig);
@@ -80,6 +81,7 @@ public class Board {
 		}
 	}
 
+	//reading in the csv file
 	public void loadLayoutConfig() {
 		try {
 			File layoutFile = new File("data/" + layoutConfig);
