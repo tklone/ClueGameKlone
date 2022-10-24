@@ -21,7 +21,7 @@ public class Board {
 	private String layoutConfig;
 	private Map<Character, Room> roomMap = new HashMap<>();
 	private Set<BoardCell> targets = new HashSet<BoardCell>();
-//	private Set<BoardCell> adjList = new HashSet<>();
+	// private Set<BoardCell> adjList = new HashSet<>();
 	private BoardCell labelCell1 = new BoardCell();
 	private Set<BoardCell> visited = new HashSet<BoardCell>();
 
@@ -60,16 +60,18 @@ public class Board {
 			Scanner setupReader = new Scanner(setupFile);
 			while (setupReader.hasNext()) {
 				String wholeLine = setupReader.nextLine();
-				String[] arrOfStr = wholeLine.split(", ");
-				if (arrOfStr[0].equals("Room") || arrOfStr[0].equals("Space")) {
-					String current = arrOfStr[2];
-					Character c = current.charAt(0);
-					Room newRoom = new Room();
-					newRoom.setName(arrOfStr[1]);
-					newRoom.setChar(c);
-					roomMap.put(c, newRoom);
-				} else {
-//					throw new BadConfigFormatException();
+				if (wholeLine.charAt(0) != '/') {
+					String[] arrOfStr = wholeLine.split(", ");
+					if (arrOfStr[0].equals("Room") || arrOfStr[0].equals("Space")) {
+						String current = arrOfStr[2];
+						Character c = current.charAt(0);
+						Room newRoom = new Room();
+						newRoom.setName(arrOfStr[1]);
+						newRoom.setChar(c);
+						roomMap.put(c, newRoom);
+					} else {
+						throw new BadConfigFormatException();
+					}
 				}
 			}
 			setupReader.close();
@@ -89,7 +91,6 @@ public class Board {
 				eachRow.add(currentLine);
 			}
 
-			matrix = new BoardCell[numRows][numCols];
 			String[] currentString;
 
 			for (int i = 0; i < eachRow.size(); i++) {
@@ -98,6 +99,7 @@ public class Board {
 				numCols = currentString.length;
 			}
 			numRows = eachRow.size();
+			System.out.println(numRows + " " + numCols);
 
 			matrix = new BoardCell[numRows][numCols];
 			Room room = new Room();
@@ -108,8 +110,8 @@ public class Board {
 					BoardCell newCell = new BoardCell();
 					matrix[i][j] = newCell;
 					newCell.setLabel(currentString[j]);
-					newCell.setCol(i);
-					newCell.setRow(j);
+					newCell.setCol(j);
+					newCell.setRow(i);
 					newCell.setInitial(newCell.getLabel());
 					room = getRoom(newCell);
 					if (newCell.isLabel()) {
@@ -123,9 +125,6 @@ public class Board {
 						room.setHasSP(true);
 						room.setSecretPassageCell(newCell);
 					}
-//					if (newCell.getLabel().length() > 1 && (newCell.getLabel().charAt(1) != '^' || newCell.getLabel().charAt(1) != 'v' || newCell.getLabel().charAt(1) != '<' || newCell.getLabel().charAt(1) != '>')) {
-//						room.addDoorway(newCell);
-//					}
 				}
 			}
 
@@ -179,12 +178,12 @@ public class Board {
 
 		if (theCell.isRoom()) {
 			room = getRoom(theCell);
-			getNearestDoor();
+			// getNearestDoor();
 
 			// Never runs this because there are apparently no doorways in the study
-			for (BoardCell c : room.getDoorway()) {
-				theCell.addAdjacency(c);
-			}
+			// for (BoardCell c : room.getDoorway()) {
+			// theCell.addAdjacency(c);
+			// }
 
 			if (room.getHasSP()) {
 				newCell = room.getSecretPassageCell();
@@ -197,30 +196,34 @@ public class Board {
 		// This is for seeing if cell is a walkway, then adding adj cells to adjList
 		else if (theCell.isWalkway()) {
 			if (i + 1 < numRows && matrix[i + 1][j].getInitial() != 'X') {
-				if (matrix[i + 1][j].isRoom()) {
+				if (theCell.getDoorDirection() == DoorDirection.DOWN) {
 					theCell.addAdjacency(getRoom(matrix[i + 1][j]).getCenterCell());
-				} else {
+					getRoom(matrix[i + 1][j]).getCenterCell().addAdjacency(theCell);
+				} else if (!matrix[i + 1][j].isRoom()) {
 					theCell.addAdjacency(matrix[i + 1][j]);
 				}
 			}
 			if (j + 1 < numCols && matrix[i][j + 1].getInitial() != 'X') {
-				if (matrix[i][j + 1].isRoom()) {
+				if (theCell.getDoorDirection() == DoorDirection.RIGHT) {
 					theCell.addAdjacency(getRoom(matrix[i][j + 1]).getCenterCell());
-				} else {
+					getRoom(matrix[i][j + 1]).getCenterCell().addAdjacency(theCell);
+				} else if (!matrix[i][j + 1].isRoom()) {
 					theCell.addAdjacency(matrix[i][j + 1]);
 				}
 			}
 			if (i - 1 >= 0 && matrix[i - 1][j].getInitial() != 'X') {
-				if (matrix[i - 1][j].isRoom()) {
+				if (theCell.getDoorDirection() == DoorDirection.UP) {
 					theCell.addAdjacency(getRoom(matrix[i - 1][j]).getCenterCell());
-				} else {
+					getRoom(matrix[i - 1][j]).getCenterCell().addAdjacency(theCell);
+				} else if (!matrix[i - 1][j].isRoom()) {
 					theCell.addAdjacency(matrix[i - 1][j]);
 				}
 			}
 			if (j - 1 >= 0 && matrix[i][j - 1].getInitial() != 'X') {
-				if (matrix[i][j - 1].isRoom()) {
+				if (theCell.getDoorDirection() == DoorDirection.LEFT) {
 					theCell.addAdjacency(getRoom(matrix[i][j - 1]).getCenterCell());
-				} else {
+					getRoom(matrix[i][j - 1]).getCenterCell().addAdjacency(theCell);
+				} else if (!matrix[i][j - 1].isRoom()) {
 					theCell.addAdjacency(matrix[i][j - 1]);
 				}
 			}
@@ -249,7 +252,7 @@ public class Board {
 		for (BoardCell c : thisCell.getAdjListCell()) {
 
 			// need this if numSteps >1
-			if (c.getOccupied() == true) {
+			if (c.getOccupied() && !c.isRoom()) {
 				continue;
 			}
 
@@ -284,7 +287,7 @@ public class Board {
 	public void getNearestDoor() {
 		DoorDirection dir;
 		BoardCell roomNearestCell = new BoardCell();
-		Room room = new Room();
+		Room room;
 
 		for (int i = 0; i < numRows; i++) {
 			for (int j = 0; j < numCols; j++) {
@@ -292,6 +295,7 @@ public class Board {
 				if (cell.isDoorway()) {
 					dir = cell.getDoorDirection();
 					switch (dir) {
+
 					case LEFT:
 						roomNearestCell = matrix[i][j - 1];
 						room = getRoom(roomNearestCell);
@@ -299,17 +303,19 @@ public class Board {
 					case RIGHT:
 						roomNearestCell = matrix[i][j + 1];
 						room = getRoom(roomNearestCell);
+						System.out.println("row: " + i + " col: " + j);
+						System.out.println("INCORRECT: " + cell.getRow() + " " + cell.getCol());
 						room.addDoorway(cell);
 					case UP:
-						roomNearestCell = matrix[i + 1][j];
-						room = getRoom(roomNearestCell);
-						room.addDoorway(cell);
-					case DOWN:
 						roomNearestCell = matrix[i - 1][j];
 						room = getRoom(roomNearestCell);
 						room.addDoorway(cell);
+					case DOWN:
+						roomNearestCell = matrix[i + 1][j];
+						room = getRoom(roomNearestCell);
+						room.addDoorway(cell);
 					default:
-//						room.addDoorway(cell);
+						// room.addDoorway(cell);
 						break;
 					}
 				}

@@ -36,7 +36,7 @@ public class FileInitTest {
 //		board.loadSetupConfig();
 //		board.loadLayoutConfig();
 		// Initialize will load BOTH config files
-//		board.initialize();
+		board.initialize();
 	}
 
 	@Test

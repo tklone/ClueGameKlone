@@ -72,11 +72,11 @@ public class BoardCell {
 	}
 
 	public void setRow(int r) {
-		row = r;
+		this.row = r;
 	}
 
 	public void setCol(int c) {
-		col = c;
+		this.col = c;
 	}
 
 	public int getRow() {
@@ -100,7 +100,7 @@ public class BoardCell {
 				return DoorDirection.LEFT;
 			} else if (label.charAt(1) == '>') {
 				return DoorDirection.RIGHT;
-			} else if (label.charAt(1) == 'v') {
+			} else if (label.charAt(1) == 'V' || label.charAt(1) == 'v') {
 				return DoorDirection.DOWN;
 			} else if (label.charAt(1) == '^') {
 				return DoorDirection.UP;
