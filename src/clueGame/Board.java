@@ -14,7 +14,7 @@ import experiment.TestBoardCell;
 
 public class Board {
 
-	private static BoardCell[][] matrix;
+	private static BoardCell[][] grid;
 	private int numRows;
 	private int numCols;
 	private String setupConfig;
@@ -101,14 +101,14 @@ public class Board {
 			numRows = eachRow.size();
 			System.out.println(numRows + " " + numCols);
 
-			matrix = new BoardCell[numRows][numCols];
+			grid = new BoardCell[numRows][numCols];
 			Room room = new Room();
 			for (int i = 0; i < eachRow.size(); i++) {
 				String rowStrings = eachRow.get(i);
 				currentString = rowStrings.split(",");
 				for (int j = 0; j < currentString.length; j++) {
 					BoardCell newCell = new BoardCell();
-					matrix[i][j] = newCell;
+					grid[i][j] = newCell;
 					newCell.setLabel(currentString[j]);
 					newCell.setCol(j);
 					newCell.setRow(i);
@@ -147,7 +147,7 @@ public class Board {
 	}
 
 	public static BoardCell getCell(int row, int col) {
-		return matrix[row][col];
+		return grid[row][col];
 	}
 
 	public int getNumRows() {
@@ -166,13 +166,13 @@ public class Board {
 	}
 
 	public Set<BoardCell> getAdjList(int i, int j) {
-		return matrix[i][j].getAdjListCell();
+		return grid[i][j].getAdjListCell();
 	}
 
 	public Set<BoardCell> calcAdjList(int i, int j) {
 
 		BoardCell theCell = new BoardCell();
-		theCell = matrix[i][j];
+		theCell = grid[i][j];
 		BoardCell newCell = new BoardCell();
 		Room room = new Room();
 
@@ -195,36 +195,36 @@ public class Board {
 		}
 		// This is for seeing if cell is a walkway, then adding adj cells to adjList
 		else if (theCell.isWalkway()) {
-			if (i + 1 < numRows && matrix[i + 1][j].getInitial() != 'X') {
+			if (i + 1 < numRows && grid[i + 1][j].getInitial() != 'X') {
 				if (theCell.getDoorDirection() == DoorDirection.DOWN) {
-					theCell.addAdjacency(getRoom(matrix[i + 1][j]).getCenterCell());
-					getRoom(matrix[i + 1][j]).getCenterCell().addAdjacency(theCell);
-				} else if (!matrix[i + 1][j].isRoom()) {
-					theCell.addAdjacency(matrix[i + 1][j]);
+					theCell.addAdjacency(getRoom(grid[i + 1][j]).getCenterCell());
+					getRoom(grid[i + 1][j]).getCenterCell().addAdjacency(theCell);
+				} else if (!grid[i + 1][j].isRoom()) {
+					theCell.addAdjacency(grid[i + 1][j]);
 				}
 			}
-			if (j + 1 < numCols && matrix[i][j + 1].getInitial() != 'X') {
+			if (j + 1 < numCols && grid[i][j + 1].getInitial() != 'X') {
 				if (theCell.getDoorDirection() == DoorDirection.RIGHT) {
-					theCell.addAdjacency(getRoom(matrix[i][j + 1]).getCenterCell());
-					getRoom(matrix[i][j + 1]).getCenterCell().addAdjacency(theCell);
-				} else if (!matrix[i][j + 1].isRoom()) {
-					theCell.addAdjacency(matrix[i][j + 1]);
+					theCell.addAdjacency(getRoom(grid[i][j + 1]).getCenterCell());
+					getRoom(grid[i][j + 1]).getCenterCell().addAdjacency(theCell);
+				} else if (!grid[i][j + 1].isRoom()) {
+					theCell.addAdjacency(grid[i][j + 1]);
 				}
 			}
-			if (i - 1 >= 0 && matrix[i - 1][j].getInitial() != 'X') {
+			if (i - 1 >= 0 && grid[i - 1][j].getInitial() != 'X') {
 				if (theCell.getDoorDirection() == DoorDirection.UP) {
-					theCell.addAdjacency(getRoom(matrix[i - 1][j]).getCenterCell());
-					getRoom(matrix[i - 1][j]).getCenterCell().addAdjacency(theCell);
-				} else if (!matrix[i - 1][j].isRoom()) {
-					theCell.addAdjacency(matrix[i - 1][j]);
+					theCell.addAdjacency(getRoom(grid[i - 1][j]).getCenterCell());
+					getRoom(grid[i - 1][j]).getCenterCell().addAdjacency(theCell);
+				} else if (!grid[i - 1][j].isRoom()) {
+					theCell.addAdjacency(grid[i - 1][j]);
 				}
 			}
-			if (j - 1 >= 0 && matrix[i][j - 1].getInitial() != 'X') {
+			if (j - 1 >= 0 && grid[i][j - 1].getInitial() != 'X') {
 				if (theCell.getDoorDirection() == DoorDirection.LEFT) {
-					theCell.addAdjacency(getRoom(matrix[i][j - 1]).getCenterCell());
-					getRoom(matrix[i][j - 1]).getCenterCell().addAdjacency(theCell);
-				} else if (!matrix[i][j - 1].isRoom()) {
-					theCell.addAdjacency(matrix[i][j - 1]);
+					theCell.addAdjacency(getRoom(grid[i][j - 1]).getCenterCell());
+					getRoom(grid[i][j - 1]).getCenterCell().addAdjacency(theCell);
+				} else if (!grid[i][j - 1].isRoom()) {
+					theCell.addAdjacency(grid[i][j - 1]);
 				}
 			}
 		}
@@ -291,27 +291,27 @@ public class Board {
 
 		for (int i = 0; i < numRows; i++) {
 			for (int j = 0; j < numCols; j++) {
-				BoardCell cell = matrix[i][j];
+				BoardCell cell = grid[i][j];
 				if (cell.isDoorway()) {
 					dir = cell.getDoorDirection();
 					switch (dir) {
 
 					case LEFT:
-						roomNearestCell = matrix[i][j - 1];
+						roomNearestCell = grid[i][j - 1];
 						room = getRoom(roomNearestCell);
 						room.addDoorway(cell);
 					case RIGHT:
-						roomNearestCell = matrix[i][j + 1];
+						roomNearestCell = grid[i][j + 1];
 						room = getRoom(roomNearestCell);
 						System.out.println("row: " + i + " col: " + j);
 						System.out.println("INCORRECT: " + cell.getRow() + " " + cell.getCol());
 						room.addDoorway(cell);
 					case UP:
-						roomNearestCell = matrix[i - 1][j];
+						roomNearestCell = grid[i - 1][j];
 						room = getRoom(roomNearestCell);
 						room.addDoorway(cell);
 					case DOWN:
-						roomNearestCell = matrix[i + 1][j];
+						roomNearestCell = grid[i + 1][j];
 						room = getRoom(roomNearestCell);
 						room.addDoorway(cell);
 					default:
