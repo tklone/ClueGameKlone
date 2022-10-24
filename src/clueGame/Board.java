@@ -101,7 +101,6 @@ public class Board {
 				numCols = currentString.length;
 			}
 			numRows = eachRow.size();
-			System.out.println(numRows + " " + numCols);
 
 			grid = new BoardCell[numRows][numCols];
 			Room room = new Room();
@@ -236,7 +235,7 @@ public class Board {
 	public void calcTargets(BoardCell startCell, int pathlength) {
 		visited.clear();
 		targets.clear();
-
+		
 		visited.add(startCell);
 		findAllTargets(startCell, pathlength);
 	}

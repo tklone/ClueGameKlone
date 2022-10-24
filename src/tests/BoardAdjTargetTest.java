@@ -247,13 +247,18 @@ public class BoardAdjTargetTest {
 		assertEquals(3, targets.size());
 		assertTrue(targets.contains(board.getCell(11, 23)));
 		assertTrue(targets.contains(board.getCell(11, 25)));
-// check leaving a room with a blocked doorway
+	}
+	
+	@Test
+	public void testOccupiedDoorway() {
+		// check leaving a room with a blocked doorway
 		board.getCell(11, 24).setOccupied(true);
-		board.calcTargets(board.getCell(11, 25), 3);
+		board.calcTargets(board.getCell(11, 25), 5);
 		board.getCell(11, 24).setOccupied(false);
+		Set<BoardCell> targets = board.getTargets();
 		targets = board.getTargets();
 		assertEquals(3, targets.size());
-		assertTrue(targets.contains(board.getCell(8, 24)));
-		assertTrue(targets.contains(board.getCell(11, 21)));
+		assertTrue(targets.contains(board.getCell(12, 24)));
+		assertTrue(targets.contains(board.getCell(11, 23)));
 	}
 }
