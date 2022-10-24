@@ -1,5 +1,6 @@
 package clueGame;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class Room {
@@ -8,7 +9,7 @@ public class Room {
 	private BoardCell centerCell;
 	private BoardCell labelCell;
 	private BoardCell secretPassageCell;
-	private Set<BoardCell> doorway;
+	private Set<BoardCell> doorway = new HashSet<>();
 	private Boolean hasSP = false;
 	private char c;
 
@@ -32,21 +33,6 @@ public class Room {
 		return hasSP;
 	}
 	
-//	public void setSPStart(BoardCell startCell) {
-//		spStart = startCell;
-//	}
-//	
-//	public BoardCell getSPStart() {
-//		return spStart;
-//	}
-//	
-//	public void setSPEnd(BoardCell endCell) {
-//		spEnd = endCell;
-//	}
-//	
-//	public BoardCell getSPEnd() {
-//		return spEnd;
-//	}
 	
 	public void addDoorway(BoardCell cell) {
 		doorway.add(cell);

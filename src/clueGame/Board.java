@@ -153,97 +153,55 @@ public class Board {
 		return room;
 	}
 
-
-//	public Set<BoardCell> getAdjList(int i, int j) {
-//
-//		BoardCell theCell = new BoardCell();
-//		theCell = matrix[i][j];
-//		Room room = new Room();
-//		room = getRoom(theCell);
-//		System.out.println("start room: " + room.getName());
-//		
-//		if (theCell.isRoom()) {
-//			getNearestDoor();
-//			adjList.addAll(room.getDoorway());
-//			System.out.println(adjList.size());
-//			if (room.getHasSP()) {
-//				theCell = room.getSecretPassageCell();
-//				char c = theCell.getSecretPassage();
-//				room = getRoom(c);
-//				adjList.add(room.getCenterCell());
-//					System.out.println(room.getName());
-//			}
-//		}
-//
-//		else if (theCell.isWalkway()) {
-//			if (i + 1 < numRows && matrix[i + 1][j].getInitial() != 'X') {
-//				adjList.add(matrix[i + 1][j]);
-//			}
-//			if (j + 1 < numCols && matrix[i][j + 1].getInitial() != 'X') {
-//				adjList.add(matrix[i][j + 1]);
-//			}
-//			if (i - 1 >= 0 && matrix[i - 1][j].getInitial() != 'X') {
-//				adjList.add(matrix[i - 1][j]);
-//			}
-//			if (j - 1 >= 0 && matrix[i][j - 1].getInitial() != 'X') {
-//				adjList.add(matrix[i][j - 1]);
-//			}
-//		}
-//
-//		return adjList;
-//	}
-
+	
 	public Set<BoardCell> getAdjList(int i, int j) {
 
 		BoardCell theCell = new BoardCell();
 		theCell = matrix[i][j];
 		Room room = new Room();
 		room = getRoom(theCell);
-		System.out.println("start room: " + room.getName());
+		
+//		System.out.println("start room: " + room.getName());
 
 		if (theCell.isRoom()) {
 			getNearestDoor();
 			adjList.addAll(room.getDoorway());
-			System.out.println(adjList.size());
 			if (room.getHasSP()) {
 				theCell = room.getSecretPassageCell();
 				char c = theCell.getSecretPassage();
 				room = getRoom(c);
+				System.out.println(room.getName());
 				adjList.add(room.getCenterCell());
-					System.out.println(room.getName());
 			}
 		}
 
-		//This is for seeing if cell is a walkway, then adding adj cells to adjList
+		// This is for seeing if cell is a walkway, then adding adj cells to adjList
 		else if (theCell.isWalkway()) {
 			if (i + 1 < numRows && matrix[i + 1][j].getInitial() != 'X') {
-				if (matrix[i+1][j].isRoom()) {
-					adjList.add(getRoom(matrix[i+1][j]).getCenterCell());
+				if (matrix[i + 1][j].isRoom()) {
+					adjList.add(getRoom(matrix[i + 1][j]).getCenterCell());
 				}
 				adjList.add(matrix[i + 1][j]);
 			}
 			if (j + 1 < numCols && matrix[i][j + 1].getInitial() != 'X') {
-				if (matrix[i][j+1].isRoom()) {
-					adjList.add(getRoom(matrix[i][j+1]).getCenterCell());
-				}
-				else {
-				adjList.add(matrix[i][j + 1]);
+				if (matrix[i][j + 1].isRoom()) {
+					adjList.add(getRoom(matrix[i][j + 1]).getCenterCell());
+				} else {
+					adjList.add(matrix[i][j + 1]);
 				}
 			}
 			if (i - 1 >= 0 && matrix[i - 1][j].getInitial() != 'X') {
-				if (matrix[i-1][j].isRoom()) {
-					adjList.add(getRoom(matrix[i-1][j]).getCenterCell());
-				}
-				else {
-				adjList.add(matrix[i - 1][j]);
+				if (matrix[i - 1][j].isRoom()) {
+					adjList.add(getRoom(matrix[i - 1][j]).getCenterCell());
+				} else {
+					adjList.add(matrix[i - 1][j]);
 				}
 			}
 			if (j - 1 >= 0 && matrix[i][j - 1].getInitial() != 'X') {
-				if (matrix[i][j-1].isRoom()) {
-					adjList.add(getRoom(matrix[i][j-1]).getCenterCell());
-				}
-				else {
-				adjList.add(matrix[i][j - 1]);
+				if (matrix[i][j - 1].isRoom()) {
+					adjList.add(getRoom(matrix[i][j - 1]).getCenterCell());
+				} else {
+					adjList.add(matrix[i][j - 1]);
 				}
 			}
 		}
@@ -332,6 +290,7 @@ public class Board {
 						roomNearestCell = matrix[rowDoor + 1][colDoor];
 						currentRoom = getRoom(roomNearestCell);
 						currentRoom.addDoorway(doorCell);
+										
 					case DOWN:
 						roomNearestCell = matrix[rowDoor - 1][colDoor];
 						currentRoom = getRoom(roomNearestCell);
@@ -342,6 +301,10 @@ public class Board {
 					}
 				}
 			}
+		}
+		
+		for (BoardCell c : currentRoom.getDoorway()) {
+			System.out.println(c.getInitial() + ": " + c.getRow() + " " + c.getCol());
 		}
 //		return roomNearestCell;
 	}
