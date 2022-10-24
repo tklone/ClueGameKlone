@@ -158,22 +158,26 @@ public class Board {
 		BoardCell theCell = new BoardCell();
 		theCell = matrix[i][j];
 		Room room = new Room();
-		room = getRoom(theCell);
-
-//		System.out.println("start room: " + room.getName());
 
 		if (theCell.isRoom()) {
+			room = getRoom(theCell);
 			getNearestDoor(i, j);
-//			theCell.addAdjacencyAll(room.getDoorway());
+		
+			System.out.println("there are " + room.getDoorway().size() + " doorways in the " + room.getName());
+			
+			//Never runs this because there are apparently no doorways in the study
 			for (BoardCell c : room.getDoorway()) {
 				theCell.addAdjacency(c);
+				System.out.println("here first");
 			}
+			
+			
 			if (room.getHasSP()) {
 				theCell = room.getSecretPassageCell();
 				char c = theCell.getSecretPassage();
 				room = getRoom(c);
-//				System.out.println(room.getName());
 				theCell.addAdjacency(room.getCenterCell());
+				System.out.println("gets here");
 			}
 		}
 
@@ -267,34 +271,39 @@ public class Board {
 	public void getNearestDoor(int x, int y) {
 		DoorDirection dir;
 		BoardCell roomNearestCell = new BoardCell();
-		Room currentRoom = new Room();
+		Room room = new Room();
 
-		for (int i = x; i < numRows; i++) {
-			for (int j = y; j < numCols; j++) {
+		for (int i = 0; i < numRows; i++) {
+			for (int j = 0; j < numCols; j++) {
 				BoardCell cell = matrix[i][j];
 				if (cell.isDoorway()) {
 					dir = cell.getDoorDirection();
 					switch (dir) {
 					case LEFT:
+//						System.out.println("left");
 						roomNearestCell = matrix[i][j - 1];
-						currentRoom = getRoom(roomNearestCell);
-						currentRoom.addDoorway(cell);
-						break;
+						room = getRoom(roomNearestCell);
+						room.addDoorway(cell);
+//						break;
 					case RIGHT:
+//						System.out.println("right");
 						roomNearestCell = matrix[i][j + 1];
-						currentRoom = getRoom(roomNearestCell);
-						currentRoom.addDoorway(cell);
-						break;
+						room = getRoom(roomNearestCell);
+						room.addDoorway(cell);
+//						break;
 					case UP:
+//						System.out.println("up");
 						roomNearestCell = matrix[i + 1][j];
-						currentRoom = getRoom(roomNearestCell);
-						currentRoom.addDoorway(cell);
-						break;
+						room = getRoom(roomNearestCell);
+						System.out.println(room.getName());
+						room.addDoorway(cell);
+//						break;
 					case DOWN:
+//						System.out.println("down");
 						roomNearestCell = matrix[i - 1][j];
-						currentRoom = getRoom(roomNearestCell);
-						currentRoom.addDoorway(cell);
-						break;
+						room = getRoom(roomNearestCell);
+						room.addDoorway(cell);
+//						break;
 					default:
 						break;
 					}
