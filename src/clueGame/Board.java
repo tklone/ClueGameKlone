@@ -217,25 +217,25 @@ public class Board {
 		//This is for seeing if cell is a walkway, then adding adj cells to adjList
 		else if (theCell.isWalkway()) {
 			if (i + 1 < numRows && matrix[i + 1][j].getInitial() != 'X') {
-				if (matrix[i+1][j].getInitial() != 'X' && matrix[i+1][j].getInitial() != 'W') {
+				if (matrix[i+1][j].isRoom()) {
 					adjList.add(getRoom(matrix[i+1][j]).getCenterCell());
 				}
 				adjList.add(matrix[i + 1][j]);
 			}
 			if (j + 1 < numCols && matrix[i][j + 1].getInitial() != 'X') {
-				if (matrix[i][j+1].getInitial() != 'X' && matrix[i][j+1].getInitial() != 'W') {
+				if (matrix[i][j+1].isRoom()) {
 					adjList.add(getRoom(matrix[i][j+1]).getCenterCell());
 				}
 				adjList.add(matrix[i][j + 1]);
 			}
 			if (i - 1 >= 0 && matrix[i - 1][j].getInitial() != 'X') {
-				if (matrix[i-1][j].getInitial() != 'X' && matrix[i-1][j].getInitial() != 'W') {
+				if (matrix[i-1][j].isRoom()) {
 					adjList.add(getRoom(matrix[i-1][j]).getCenterCell());
 				}
 				adjList.add(matrix[i - 1][j]);
 			}
 			if (j - 1 >= 0 && matrix[i][j - 1].getInitial() != 'X') {
-				if (matrix[i][j-1].getInitial() != 'X' && matrix[i][j-1].getInitial() != 'W') {
+				if (matrix[i][j-1].isRoom()) {
 					adjList.add(getRoom(matrix[i][j-1]).getCenterCell());
 				}
 				adjList.add(matrix[i][j - 1]);
