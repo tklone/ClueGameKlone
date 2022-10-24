@@ -17,6 +17,8 @@ public class Board {
 	private static BoardCell[][] matrix;
 	private int numRows;
 	private int numCols;
+	private String setupConfig;
+	private String layoutConfig;
 	private Map<Character, Room> roomMap = new HashMap<>();
 	private Set<BoardCell> targets = new HashSet<BoardCell>();
 //	private Set<BoardCell> adjList = new HashSet<>();
@@ -38,10 +40,21 @@ public class Board {
 
 	// initialize the board(since we are using singleton pattern
 	public void initialize() {
-
+		try {
+			loadSetupConfig();
+			loadLayoutConfig();
+		} catch (FileNotFoundException | BadConfigFormatException e) {
+			e.printStackTrace();
+		}
+		
+		for (int i = 0; i < numRows; i++) {
+			for (int j = 0; j < numCols; j++) {
+				calcAdjList(i, j);
+			}
+		}
 	}
 
-	public void loadSetupConfig(String setupConfig) throws BadConfigFormatException {
+	public void loadSetupConfig() throws FileNotFoundException, BadConfigFormatException {
 		try {
 			File setupFile = new File("data/" + setupConfig);
 			Scanner setupReader = new Scanner(setupFile);
@@ -65,7 +78,7 @@ public class Board {
 		}
 	}
 
-	public void loadLayoutConfig(String layoutConfig) {
+	public void loadLayoutConfig() {
 		try {
 			File layoutFile = new File("data/" + layoutConfig);
 			Scanner layoutReader = new Scanner(layoutFile);
@@ -124,8 +137,8 @@ public class Board {
 	}
 
 	public void setConfigFiles(String layoutConfig, String setupConfig) {
-		loadSetupConfig(setupConfig);
-		loadLayoutConfig(layoutConfig);
+		this.layoutConfig = layoutConfig;
+		this.setupConfig = setupConfig;
 	}
 
 	public Room getRoom(Character c) {
@@ -153,34 +166,39 @@ public class Board {
 		return room;
 	}
 
+	
 	public Set<BoardCell> getAdjList(int i, int j) {
+		return matrix[i][j].getAdjList();
+	}
+	
+	
+	public Set<BoardCell> calcAdjList(int i, int j) {
 
 		BoardCell theCell = new BoardCell();
 		theCell = matrix[i][j];
+		BoardCell newCell = new BoardCell();
 		Room room = new Room();
 
 		if (theCell.isRoom()) {
 			room = getRoom(theCell);
-			getNearestDoor(i, j);
+			getNearestDoor();
 		
-			System.out.println("there are " + room.getDoorway().size() + " doorways in the " + room.getName());
-			
 			//Never runs this because there are apparently no doorways in the study
 			for (BoardCell c : room.getDoorway()) {
 				theCell.addAdjacency(c);
-				System.out.println("here first");
 			}
-			
 			
 			if (room.getHasSP()) {
-				theCell = room.getSecretPassageCell();
-				char c = theCell.getSecretPassage();
+				if (theCell == matrix[2][2]) {
+				newCell = room.getSecretPassageCell();
+				char c = newCell.getSecretPassage();
 				room = getRoom(c);
 				theCell.addAdjacency(room.getCenterCell());
-				System.out.println("gets here");
+				}
 			}
-		}
+			
 
+		}
 		// This is for seeing if cell is a walkway, then adding adj cells to adjList
 		else if (theCell.isWalkway()) {
 			if (i + 1 < numRows && matrix[i + 1][j].getInitial() != 'X') {
@@ -268,7 +286,7 @@ public class Board {
 		}
 	}
 
-	public void getNearestDoor(int x, int y) {
+	public void getNearestDoor() {
 		DoorDirection dir;
 		BoardCell roomNearestCell = new BoardCell();
 		Room room = new Room();
@@ -284,26 +302,25 @@ public class Board {
 						roomNearestCell = matrix[i][j - 1];
 						room = getRoom(roomNearestCell);
 						room.addDoorway(cell);
-//						break;
+//						continue;
 					case RIGHT:
 //						System.out.println("right");
 						roomNearestCell = matrix[i][j + 1];
 						room = getRoom(roomNearestCell);
 						room.addDoorway(cell);
-//						break;
+//						continue;
 					case UP:
 //						System.out.println("up");
 						roomNearestCell = matrix[i + 1][j];
 						room = getRoom(roomNearestCell);
-						System.out.println(room.getName());
 						room.addDoorway(cell);
-//						break;
+//						continue;
 					case DOWN:
 //						System.out.println("down");
 						roomNearestCell = matrix[i - 1][j];
 						room = getRoom(roomNearestCell);
 						room.addDoorway(cell);
-//						break;
+//						continue;
 					default:
 						break;
 					}
