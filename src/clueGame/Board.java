@@ -153,14 +153,13 @@ public class Board {
 		return room;
 	}
 
-	
 	public Set<BoardCell> getAdjList(int i, int j) {
 
 		BoardCell theCell = new BoardCell();
 		theCell = matrix[i][j];
 		Room room = new Room();
 		room = getRoom(theCell);
-		
+
 //		System.out.println("start room: " + room.getName());
 
 		if (theCell.isRoom()) {
@@ -262,39 +261,35 @@ public class Board {
 	}
 
 	public void getNearestDoor() {
-		int rowDoor;
-		int colDoor;
 		DoorDirection dir;
 		BoardCell roomNearestCell = new BoardCell();
 		Room currentRoom = new Room();
 
 		for (int i = 0; i < numRows; i++) {
 			for (int j = 0; j < numCols; j++) {
-				BoardCell doorCell = matrix[i][j];
-				if (doorCell.isDoorway()) {
-					dir = doorCell.getDoorDirection();
-					rowDoor = i;
-					colDoor = j;
+				BoardCell cell = matrix[i][j];
+				if (cell.isDoorway()) {
+					dir = cell.getDoorDirection();
 					switch (dir) {
 					case LEFT:
-						roomNearestCell = matrix[rowDoor][colDoor - 1];
+						roomNearestCell = matrix[i][j - 1];
 						currentRoom = getRoom(roomNearestCell);
-						currentRoom.addDoorway(doorCell);
+						currentRoom.addDoorway(cell);
 
 					case RIGHT:
-						roomNearestCell = matrix[rowDoor][colDoor + 1];
+						roomNearestCell = matrix[i][j + 1];
 						currentRoom = getRoom(roomNearestCell);
-						currentRoom.addDoorway(doorCell);
+						currentRoom.addDoorway(cell);
 
 					case UP:
-						roomNearestCell = matrix[rowDoor + 1][colDoor];
+						roomNearestCell = matrix[i + 1][j];
 						currentRoom = getRoom(roomNearestCell);
-						currentRoom.addDoorway(doorCell);
-										
+						currentRoom.addDoorway(cell);
+
 					case DOWN:
-						roomNearestCell = matrix[rowDoor - 1][colDoor];
+						roomNearestCell = matrix[i - 1][j];
 						currentRoom = getRoom(roomNearestCell);
-						currentRoom.addDoorway(doorCell);
+						currentRoom.addDoorway(cell);
 
 					default:
 						break;
@@ -302,11 +297,6 @@ public class Board {
 				}
 			}
 		}
-		
-		for (BoardCell c : currentRoom.getDoorway()) {
-			System.out.println(c.getInitial() + ": " + c.getRow() + " " + c.getCol());
-		}
-//		return roomNearestCell;
 	}
 
 }
