@@ -1,3 +1,350 @@
+commit c62e6051b7aea5d03ddbca9938b8b6b6b322193b
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Oct 24 15:52:24 2022 -0600
+
+    changed name matrix to grid
+
+commit cb1f3e80162961ae43da4a445374933f79c7d36c
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Oct 24 15:51:13 2022 -0600
+
+    GOT ALL THE TESTS TO PASS
+
+commit 6272dede85bf8c73e0a70eb7016c435b80c532db
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Oct 24 14:07:42 2022 -0600
+
+    the adjacency list row & cols are switched
+
+commit 11ef0a217a54d4de3fce0f398eb5d284ecd28b39
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Oct 24 13:59:13 2022 -0600
+
+    got a single test to pass
+
+commit 67b91cc660a3ec746ae27a62ebe02a6d7a2f398b
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Oct 24 11:45:43 2022 -0600
+
+    getting closer with adjacany list
+
+commit afba251c44b65b8b33bb6ea1f4a19177dcb167a9
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Oct 24 11:11:25 2022 -0600
+
+    making small progress on adj list
+
+commit d1d9ea45b79747f3b370fcbd3a63e74da0cd4ea1
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Oct 24 10:52:28 2022 -0600
+
+    fixing adjacency list
+
+commit b8f242720ab0fe2a9b10a32f01d1252a3a8dcd00
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Oct 24 10:10:42 2022 -0600
+
+    debugging still
+
+commit bef12c8d5ad83e3a0922d0157133813e2fcfc7c3
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Oct 24 10:02:43 2022 -0600
+
+    trying to debug the adjacency list
+
+commit ddeb20225cd59c770d16eb9f7f743bbe90c8504a
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Oct 24 09:33:24 2022 -0600
+
+    modified adjacancy list
+
+commit 5f7bdee90eaf2842a3c6f8cd42ac159bfb994679
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Oct 24 09:32:02 2022 -0600
+
+    took out redundant code
+
+commit eac2f5eae2533273deed88c05bcf42f9c96de136
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Oct 24 09:29:31 2022 -0600
+
+    added some things that I think we'll need to the adjacency list
+
+commit d08a1709568677476985380f661815cabd163d18
+Merge: e22393c 1bc23aa
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Oct 24 09:20:46 2022 -0600
+
+    Merge branch 'master' of https://github.com/tklone/ClueGameKlone
+
+commit e22393cbaaa74586fadf7cf12c44741ab0488a8c
+Merge: 5ffcf63 4aa6db7
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Oct 24 09:20:36 2022 -0600
+
+    commiting to pull
+
+commit 1bc23aa6675a94766008bb908872c8d57ed0216f
+Author: smithqd <qsmith@mines.edu>
+Date:   Sun Oct 23 19:51:59 2022 -0600
+
+    added findAllTargets and calcTargets method to Board class
+
+commit 5ffcf6374e671ba5fd42922206b7f9edab4580c0
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Sat Oct 22 15:34:27 2022 -0600
+
+    merging
+
+commit 4aa6db7675fef0f2ad41a114fb8e35d9843aaa2d
+Author: smithqd <qsmith@mines.edu>
+Date:   Sat Oct 22 15:33:16 2022 -0600
+
+    walkway adj
+
+commit 563948062fdaffff9b006439debab5060702a8fc
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Sat Oct 22 15:19:03 2022 -0600
+
+    taylor needs a brain break
+
+commit 563a923e8e79af602307c78ea5490ba0a9083d6e
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Sat Oct 22 14:55:24 2022 -0600
+
+    we don't know what we're doinng
+
+commit ab2f77a2646e68b8c62e13c414bd9fa187ea28b0
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Sat Oct 22 14:39:34 2022 -0600
+
+    Doors to work
+
+commit 360609eed0887c3d394b30a5890769e7982eb8f3
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Sat Oct 22 14:15:30 2022 -0600
+
+    working on getting tests to pass
+
+commit 60a1efa0e1c6620a3a6fcfbe2cf2b8158deb530b
+Merge: 9eb6e37 6a08a0a
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Sat Oct 22 13:02:53 2022 -0600
+
+    Taylor's exception tests to pass
+
+commit 9eb6e3734a39d635f55fb644c6c4e9f0e6495b3c
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Sat Oct 22 13:01:19 2022 -0600
+
+    pushing to pull
+
+commit 6a08a0af43d3e12bbd925d09e0f9c38b747596f4
+Author: smithqd <qsmith@mines.edu>
+Date:   Sat Oct 22 13:00:51 2022 -0600
+
+    exception tests to pass
+
+commit 7337a3df244a4381f497ea85d2affd9897367bf9
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Sat Oct 22 12:45:09 2022 -0600
+
+    FINALLY GOT ALL 5 FILEINIT TESTS TO PASS
+
+commit 86ca25448c4f74a120bb3736f275c94d18325300
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Sat Oct 22 12:37:38 2022 -0600
+
+    making some progress?
+
+commit 9ddccd5fe86bb585a1b522210b599b7700b400ab
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Sat Oct 22 11:57:07 2022 -0600
+
+    changed hard codin the file names in
+
+commit 1cb33c1ecd5e1cb77315782c99e8a553aa5436b9
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Fri Oct 21 18:42:09 2022 -0600
+
+    breaking some things, fixing others
+
+commit 2fb18cfff2e23cbb3ba4ca5ac199c7b693000957
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Fri Oct 21 17:46:38 2022 -0600
+
+    doors an passages
+
+commit 2e2a499067807eec10513d2bf1e5ab8d97e42051
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Fri Oct 21 16:25:50 2022 -0600
+
+    fixed peer review things
+
+commit cb077a3d42e6b3ac81a2e007732fde977b4df1d1
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Fri Oct 21 16:16:37 2022 -0600
+
+    making some progress on getting tests to pass
+
+commit b4c07c2fb5ea3caeb4904a0a6faad82d135054f8
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Fri Oct 21 14:40:29 2022 -0600
+
+    added some comments on what I think we need to do next
+
+commit 1b582c0b2704467eeae75c5d27aacdbf75c30b45
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Fri Oct 21 14:36:49 2022 -0600
+
+    added more for trying to get tests to pass
+
+commit d3d0de1fd3705f66f6d25d8b382bb040a00c06a5
+Merge: 9120886 f0952a1
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Thu Oct 20 18:41:55 2022 -0600
+
+    Merge branch 'master' of https://github.com/tklone/ClueGameKlone
+
+commit 91208869d9b503575047d00599b64f0f5b6de816
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Thu Oct 20 18:41:29 2022 -0600
+
+    Got the tests to fail, no more errors
+
+commit f0952a1a0b479a187e2df0ab015b75a1abc13dd2
+Merge: db50e94 61e74f3
+Author: smithqd <qsmith@mines.edu>
+Date:   Thu Oct 20 10:35:47 2022 -0600
+
+    Merge remote-tracking branch 'refs/remotes/origin/master'
+
+commit db50e9487b307d9999928ec0ac37cd89d27c1976
+Author: smithqd <qsmith@mines.edu>
+Date:   Thu Oct 20 10:35:26 2022 -0600
+
+    edit target test
+
+commit 73d94191f82746cb4cf7c5ec8519fdc539234270
+Author: smithqd <qsmith@mines.edu>
+Date:   Wed Oct 19 21:24:28 2022 -0600
+
+    edited boardadjTargetTest
+
+commit 61e74f34a7be669abee38d2f3d212cd939a11281
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Wed Oct 19 21:23:07 2022 -0600
+
+    changed name
+
+commit 60968c2831ecf5de11435edc6d1a0ad74e83271f
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Wed Oct 19 21:04:51 2022 -0600
+
+    started next task C15A-2
+
+commit de3fff5cbce7055c5142e00528c36f94b59936ec
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Wed Oct 19 20:50:29 2022 -0600
+
+    removed unncessary comments
+
+commit dc9e98bb77649e4aba569589eff885b220140da2
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Wed Oct 19 20:48:38 2022 -0600
+
+    got 4 tests to pass, working on 5th
+
+commit bfaacf5b6eacf6b5cce6bffa3b23b5ba02112b29
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Wed Oct 19 19:55:45 2022 -0600
+
+    got 4/5 tests to pass
+
+commit 71121030443b9589b109b2365ddfdabca6b069bc
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Wed Oct 19 19:47:06 2022 -0600
+
+    still working on getting all tests to pass
+
+commit 95c2e9a346b912fa28a968edc5a846788de91905
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Wed Oct 19 18:41:34 2022 -0600
+
+    redid some things
+
+commit 2b2673bd95b35565d3dba5b8a56556635e39cdf2
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Wed Oct 19 17:49:14 2022 -0600
+
+    added stuff to doorwayDirection
+
+commit d6111a5ea522f2b68b9122fa79ae027a23780888
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Wed Oct 19 17:38:53 2022 -0600
+
+    got two tests to pass, and none to fail
+
+commit 845feb10c64178c14a0dbee1e1bc8faaf05ab128
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Wed Oct 19 17:21:22 2022 -0600
+
+    GOT THE FILES TO OPEN AND ALSOO TEST BOARD DIMENSTIONSTO PASS
+
+commit fe0a8e186416e2f34a8253c8b53264e9b13698a2
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Wed Oct 19 17:14:28 2022 -0600
+
+    adding more comments
+
+commit 668b8cd8d38a3c85b0542103845a12eeceedfd4a
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Wed Oct 19 17:09:03 2022 -0600
+
+    added some comments about why things won't work
+
+commit cd00262a9d4fc2770d57900f77dd2f12185b4bc1
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Wed Oct 19 17:05:40 2022 -0600
+
+    still working on getting the files to open
+
+commit df911e7572bcabbef3a02f09472fdbb361b428fa
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Thu Oct 13 20:58:18 2022 -0600
+
+    I think I got both files to open and add the studd to arraylists and such
+
+commit 58984ebeb918c2c2472dd96d7691efec6550d2fb
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Thu Oct 13 14:13:34 2022 -0600
+
+    opening files
+
+commit 81ec75119d33902560ef7744c4ea8757ad38b3e8
+Author: smithqd <qsmith@mines.edu>
+Date:   Wed Oct 12 21:09:51 2022 -0600
+
+    commented out debug test code
+
+commit 8ce5216321d951c26ea84b07d2b0e714cd0729fd
+Author: smithqd <qsmith@mines.edu>
+Date:   Wed Oct 12 21:08:24 2022 -0600
+
+    got all BoardTestsExp to pass
+
+commit 8376e0a263e0c3c29e23dd2d7257b6c6a28a3b14
+Author: smithqd <qsmith@mines.edu>
+Date:   Wed Oct 12 21:01:35 2022 -0600
+
+    added data folder
+
+commit 97e35cff0462bba81e4e4ccdf486c22713868183
+Author: smithqd <qsmith@mines.edu>
+Date:   Tue Oct 11 23:53:51 2022 -0600
+
+    added gitlog
+
 commit 4d45b37bdb6f5b7060c8d131667eb6cbce898d93
 Author: smithqd <qsmith@mines.edu>
 Date:   Tue Oct 11 23:53:23 2022 -0600
