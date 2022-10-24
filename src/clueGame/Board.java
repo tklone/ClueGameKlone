@@ -309,6 +309,7 @@ public class Board {
 						room = getRoom(roomNearestCell);
 						room.addDoorway(cell);
 					default:
+//						room.addDoorway(cell);
 						break;
 					}
 				}
