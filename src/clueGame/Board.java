@@ -152,6 +152,7 @@ public class Board {
 		return room;
 	}
 
+<<<<<<< HEAD
 //	public Set<BoardCell> getAdjList(int i, int j) {
 //
 //		BoardCell theCell = new BoardCell();
@@ -190,6 +191,47 @@ public class Board {
 //
 //		return adjList;
 //	}
+=======
+	public Set<BoardCell> getAdjList(int i, int j) {
+
+		BoardCell theCell = new BoardCell();
+		theCell = matrix[i][j];
+		Room room = new Room();
+		room = getRoom(theCell);
+		System.out.println("start room: " + room.getName());
+
+		if (theCell.isRoom()) {
+			getNearestDoor();
+			adjList.addAll(room.getDoorway());
+			System.out.println(adjList.size());
+			if (room.getHasSP()) {
+				theCell = room.getSecretPassageCell();
+				char c = theCell.getSecretPassage();
+				room = getRoom(c);
+				adjList.add(room.getCenterCell());
+					System.out.println(room.getName());
+			}
+		}
+
+		//This is for seeing if cell is a walkway, then adding adj cells to adjList
+		else if (theCell.isWalkway()) {
+			if (i + 1 < numRows && matrix[i + 1][j].getInitial() != 'X') {
+				adjList.add(matrix[i + 1][j]);
+			}
+			if (j + 1 < numCols && matrix[i][j + 1].getInitial() != 'X') {
+				adjList.add(matrix[i][j + 1]);
+			}
+			if (i - 1 >= 0 && matrix[i - 1][j].getInitial() != 'X') {
+				adjList.add(matrix[i - 1][j]);
+			}
+			if (j - 1 >= 0 && matrix[i][j - 1].getInitial() != 'X') {
+				adjList.add(matrix[i][j - 1]);
+			}
+		}
+
+		return adjList;
+	}
+>>>>>>> 4aa6db7675fef0f2ad41a114fb8e35d9843aaa2d
 
 	public Set<BoardCell> getTargets() {
 		// TODO Auto-generated method stub
