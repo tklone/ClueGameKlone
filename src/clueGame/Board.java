@@ -226,19 +226,25 @@ public class Board {
 				if (matrix[i][j+1].isRoom()) {
 					adjList.add(getRoom(matrix[i][j+1]).getCenterCell());
 				}
+				else {
 				adjList.add(matrix[i][j + 1]);
+				}
 			}
 			if (i - 1 >= 0 && matrix[i - 1][j].getInitial() != 'X') {
 				if (matrix[i-1][j].isRoom()) {
 					adjList.add(getRoom(matrix[i-1][j]).getCenterCell());
 				}
+				else {
 				adjList.add(matrix[i - 1][j]);
+				}
 			}
 			if (j - 1 >= 0 && matrix[i][j - 1].getInitial() != 'X') {
 				if (matrix[i][j-1].isRoom()) {
 					adjList.add(getRoom(matrix[i][j-1]).getCenterCell());
 				}
+				else {
 				adjList.add(matrix[i][j - 1]);
+				}
 			}
 		}
 
