@@ -19,7 +19,7 @@ public class Board {
 	private int numCols;
 	private Map<Character, Room> roomMap = new HashMap<>();
 	private Set<BoardCell> targets = new HashSet<BoardCell>();
-	private Set<BoardCell> adjList = new HashSet<>();
+//	private Set<BoardCell> adjList = new HashSet<>();
 	private BoardCell labelCell1 = new BoardCell();
 	private Set<BoardCell> visited = new HashSet<BoardCell>();
 
@@ -163,14 +163,17 @@ public class Board {
 //		System.out.println("start room: " + room.getName());
 
 		if (theCell.isRoom()) {
-			getNearestDoor();
-			adjList.addAll(room.getDoorway());
+			getNearestDoor(i, j);
+//			theCell.addAdjacencyAll(room.getDoorway());
+			for (BoardCell c : room.getDoorway()) {
+				theCell.addAdjacency(c);
+			}
 			if (room.getHasSP()) {
 				theCell = room.getSecretPassageCell();
 				char c = theCell.getSecretPassage();
 				room = getRoom(c);
-				System.out.println(room.getName());
-				adjList.add(room.getCenterCell());
+//				System.out.println(room.getName());
+				theCell.addAdjacency(room.getCenterCell());
 			}
 		}
 
@@ -178,34 +181,35 @@ public class Board {
 		else if (theCell.isWalkway()) {
 			if (i + 1 < numRows && matrix[i + 1][j].getInitial() != 'X') {
 				if (matrix[i + 1][j].isRoom()) {
-					adjList.add(getRoom(matrix[i + 1][j]).getCenterCell());
+					theCell.addAdjacency(getRoom(matrix[i + 1][j]).getCenterCell());
+				} else {
+					theCell.addAdjacency(matrix[i + 1][j]);
 				}
-				adjList.add(matrix[i + 1][j]);
 			}
 			if (j + 1 < numCols && matrix[i][j + 1].getInitial() != 'X') {
 				if (matrix[i][j + 1].isRoom()) {
-					adjList.add(getRoom(matrix[i][j + 1]).getCenterCell());
+					theCell.addAdjacency(getRoom(matrix[i][j + 1]).getCenterCell());
 				} else {
-					adjList.add(matrix[i][j + 1]);
+					theCell.addAdjacency(matrix[i][j + 1]);
 				}
 			}
 			if (i - 1 >= 0 && matrix[i - 1][j].getInitial() != 'X') {
 				if (matrix[i - 1][j].isRoom()) {
-					adjList.add(getRoom(matrix[i - 1][j]).getCenterCell());
+					theCell.addAdjacency(getRoom(matrix[i - 1][j]).getCenterCell());
 				} else {
-					adjList.add(matrix[i - 1][j]);
+					theCell.addAdjacency(matrix[i - 1][j]);
 				}
 			}
 			if (j - 1 >= 0 && matrix[i][j - 1].getInitial() != 'X') {
 				if (matrix[i][j - 1].isRoom()) {
-					adjList.add(getRoom(matrix[i][j - 1]).getCenterCell());
+					theCell.addAdjacency(getRoom(matrix[i][j - 1]).getCenterCell());
 				} else {
-					adjList.add(matrix[i][j - 1]);
+					theCell.addAdjacency(matrix[i][j - 1]);
 				}
 			}
 		}
 
-		return adjList;
+		return theCell.getAdjList();
 	}
 
 	public Set<BoardCell> getTargets() {
@@ -260,13 +264,13 @@ public class Board {
 		}
 	}
 
-	public void getNearestDoor() {
+	public void getNearestDoor(int x, int y) {
 		DoorDirection dir;
 		BoardCell roomNearestCell = new BoardCell();
 		Room currentRoom = new Room();
 
-		for (int i = 0; i < numRows; i++) {
-			for (int j = 0; j < numCols; j++) {
+		for (int i = x; i < numRows; i++) {
+			for (int j = y; j < numCols; j++) {
 				BoardCell cell = matrix[i][j];
 				if (cell.isDoorway()) {
 					dir = cell.getDoorDirection();
@@ -275,22 +279,22 @@ public class Board {
 						roomNearestCell = matrix[i][j - 1];
 						currentRoom = getRoom(roomNearestCell);
 						currentRoom.addDoorway(cell);
-
+						break;
 					case RIGHT:
 						roomNearestCell = matrix[i][j + 1];
 						currentRoom = getRoom(roomNearestCell);
 						currentRoom.addDoorway(cell);
-
+						break;
 					case UP:
 						roomNearestCell = matrix[i + 1][j];
 						currentRoom = getRoom(roomNearestCell);
 						currentRoom.addDoorway(cell);
-
+						break;
 					case DOWN:
 						roomNearestCell = matrix[i - 1][j];
 						currentRoom = getRoom(roomNearestCell);
 						currentRoom.addDoorway(cell);
-
+						break;
 					default:
 						break;
 					}

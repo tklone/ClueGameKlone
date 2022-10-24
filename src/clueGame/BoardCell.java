@@ -15,6 +15,16 @@ public class BoardCell {
 	public Boolean doorway = false;
 	public boolean isRoom = false;
 	public boolean isOccupied = false;
+	private Set<BoardCell> adjList = new HashSet<>();
+
+	
+	public void addAdjacency(BoardCell cell) {
+		adjList.add(cell);
+	}
+	
+	public Set<BoardCell> getAdjList() {
+		return adjList;
+	}
 
 	public BoardCell() {
 		super();
