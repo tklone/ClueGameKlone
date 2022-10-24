@@ -13,6 +13,8 @@ public class BoardCell {
 	private boolean roomCenter;
 	private char secretPassage;
 	public Boolean doorway = false;
+	public boolean isRoom = false;
+	public boolean isOccupied = false;
 
 	public BoardCell() {
 		super();
@@ -123,9 +125,14 @@ public class BoardCell {
 
 	}
 
-	public void setOccupied(boolean b) {
-		// TODO Auto-generated method stub
-		
+	// A setter for indicating a cell is occupied by another player
+	public void setOccupied(boolean occupied) {
+		isOccupied = occupied;
+	}
+
+	// a getter for indicating a cell is occupied by another player
+	public boolean getOccupied() {
+		return isOccupied;
 	}
 
 	
@@ -157,7 +164,18 @@ public class BoardCell {
 		
 		//walkways connect to adjacent walkways
 		if(Board.getCell(i, j).isWalkway()) {
-			if(adjList.)
+			if (Board.getCell(i+1, j).getInitial() == 'W') {
+				adjList.add(Board.getCell(i+1, j));
+			}
+			if (Board.getCell(i, j+1).getInitial() == 'W') {
+				adjList.add(Board.getCell(i, j+1));
+			}
+			if (Board.getCell(i-1, j).getInitial() == 'W') {
+				adjList.add(Board.getCell(i-1, j));
+			}
+			if (Board.getCell(i, j-1).getInitial() == 'W') {
+				adjList.add(Board.getCell(i, j-1));
+			}
 		}
 		
 		

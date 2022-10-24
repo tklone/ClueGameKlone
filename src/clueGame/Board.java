@@ -18,9 +18,10 @@ public class Board {
 	private int numRows;
 	private int numCols;
 	private Map<Character, Room> roomMap = new HashMap<>();
-	private Set<BoardCell> targets = new HashSet<>();
+	private Set<BoardCell> targets = new HashSet<BoardCell>();
 	private Set<BoardCell> adjList = new HashSet<>();
 	private BoardCell labelCell1 = new BoardCell();
+	private Set<BoardCell> visited = new HashSet<BoardCell>();
 
 	// variable and methods used for singleton pattern
 	private static Board theInstance = new Board();
@@ -238,9 +239,51 @@ public class Board {
 		return targets;
 	}
 
-	public void calcTargets(BoardCell cell, int i) {
-		// TODO Auto-generated method stub
+	// calculates legal targets for a move from startCell of length pathlength.
+	public void calcTargets(BoardCell startCell, int pathlength) {
+		visited.clear();
+		targets.clear();
 
+		visited.add(startCell);
+		findAllTargets(startCell, pathlength);
+	}
+
+	public void findAllTargets(BoardCell thisCell, int numSteps) {
+
+		// for each adjCell in adjacentCells
+		for (BoardCell c : thisCell.getAdjList(0, 0)) {
+
+			// need this if numSteps >1
+			if (c.getOccupied() == true) {
+				continue;
+			}
+
+			// if already in visited list, skip rest of code
+			if (visited.contains(c)) {
+				continue;
+			}
+			// else add adjCell to visited list
+			visited.add(c);
+
+			if (c.isRoom()) {
+				targets.add(c);
+				continue;
+			}
+
+			// if numSteps==1, add adjCell to targets
+			if (numSteps == 1) {
+				if (c.getOccupied() == false) {
+					targets.add(c);
+				}
+			}
+
+			// else call findAllTargets with adjCell and numSteps-1
+			else {
+				findAllTargets(c, numSteps - 1);
+			}
+			// remove adjCell from visited
+			visited.remove(c);
+		}
 	}
 
 	public void getNearestDoor() {
