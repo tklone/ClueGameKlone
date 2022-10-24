@@ -22,7 +22,7 @@ public class BoardCell {
 		adjList.add(cell);
 	}
 	
-	public Set<BoardCell> getAdjList() {
+	public Set<BoardCell> getAdjListCell() {
 		return adjList;
 	}
 
@@ -145,54 +145,4 @@ public class BoardCell {
 		return isOccupied;
 	}
 
-	
-	public Set<BoardCell> getAdjList(int i, int j) {
-		Set <BoardCell> adjList = new HashSet<>();
-		BoardCell cell = new BoardCell();
-		Room room = new Room();
-		
-		
-		/*
-		Walkways with doors will also connect to the room center the door points to.
-		The cell that represents the Room (i.e. connects to walkway) is the cell with a 
-		second character of ‘*’ (no other cells in a room should have adjacencies).
-		Room center cells ONLY connect to 1) door walkways that enter the room and 
-		2) another room center cell if there is a secret passage connecting.*/
-		
-		//walkways connect to adjacent walkways
-		/*
-		 * 
-		 * if(Board.getCell(row, col).getInitial() == 'W') {
-				if(adjCell.getInitial() == 'W') {
-					if(!adjCell.isOccupied()) {
-						adjList.add(adjCell);
-					}
-				}
-			}
-		 * 
-		 */
-		
-		//walkways connect to adjacent walkways
-		if(Board.getCell(i, j).isWalkway()) {
-			if (Board.getCell(i+1, j).getInitial() == 'W') {
-				adjList.add(Board.getCell(i+1, j));
-			}
-			if (Board.getCell(i, j+1).getInitial() == 'W') {
-				adjList.add(Board.getCell(i, j+1));
-			}
-			if (Board.getCell(i-1, j).getInitial() == 'W') {
-				adjList.add(Board.getCell(i-1, j));
-			}
-			if (Board.getCell(i, j-1).getInitial() == 'W') {
-				adjList.add(Board.getCell(i, j-1));
-			}
-		}
-		
-		
-		if (Board.getCell(i, j).isRoomCenter()) {
-			
-		}
-		
-		return adjList;
-	}
 }

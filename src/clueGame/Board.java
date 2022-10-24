@@ -46,7 +46,7 @@ public class Board {
 		} catch (FileNotFoundException | BadConfigFormatException e) {
 			e.printStackTrace();
 		}
-		
+
 		for (int i = 0; i < numRows; i++) {
 			for (int j = 0; j < numCols; j++) {
 				calcAdjList(i, j);
@@ -166,12 +166,10 @@ public class Board {
 		return room;
 	}
 
-	
 	public Set<BoardCell> getAdjList(int i, int j) {
-		return matrix[i][j].getAdjList();
+		return matrix[i][j].getAdjListCell();
 	}
-	
-	
+
 	public Set<BoardCell> calcAdjList(int i, int j) {
 
 		BoardCell theCell = new BoardCell();
@@ -182,21 +180,18 @@ public class Board {
 		if (theCell.isRoom()) {
 			room = getRoom(theCell);
 			getNearestDoor();
-		
-			//Never runs this because there are apparently no doorways in the study
+
+			// Never runs this because there are apparently no doorways in the study
 			for (BoardCell c : room.getDoorway()) {
 				theCell.addAdjacency(c);
 			}
-			
+
 			if (room.getHasSP()) {
-				if (theCell == matrix[2][2]) {
 				newCell = room.getSecretPassageCell();
 				char c = newCell.getSecretPassage();
 				room = getRoom(c);
 				theCell.addAdjacency(room.getCenterCell());
-				}
 			}
-			
 
 		}
 		// This is for seeing if cell is a walkway, then adding adj cells to adjList
@@ -231,7 +226,7 @@ public class Board {
 			}
 		}
 
-		return theCell.getAdjList();
+		return theCell.getAdjListCell();
 	}
 
 	public Set<BoardCell> getTargets() {
@@ -251,7 +246,7 @@ public class Board {
 	public void findAllTargets(BoardCell thisCell, int numSteps) {
 
 		// for each adjCell in adjacentCells
-		for (BoardCell c : thisCell.getAdjList(0, 0)) {
+		for (BoardCell c : thisCell.getAdjListCell()) {
 
 			// need this if numSteps >1
 			if (c.getOccupied() == true) {
@@ -298,29 +293,21 @@ public class Board {
 					dir = cell.getDoorDirection();
 					switch (dir) {
 					case LEFT:
-//						System.out.println("left");
 						roomNearestCell = matrix[i][j - 1];
 						room = getRoom(roomNearestCell);
 						room.addDoorway(cell);
-//						continue;
 					case RIGHT:
-//						System.out.println("right");
 						roomNearestCell = matrix[i][j + 1];
 						room = getRoom(roomNearestCell);
 						room.addDoorway(cell);
-//						continue;
 					case UP:
-//						System.out.println("up");
 						roomNearestCell = matrix[i + 1][j];
 						room = getRoom(roomNearestCell);
 						room.addDoorway(cell);
-//						continue;
 					case DOWN:
-//						System.out.println("down");
 						roomNearestCell = matrix[i - 1][j];
 						room = getRoom(roomNearestCell);
 						room.addDoorway(cell);
-//						continue;
 					default:
 						break;
 					}
