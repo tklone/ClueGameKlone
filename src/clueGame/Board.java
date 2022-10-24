@@ -180,12 +180,6 @@ public class Board {
 
 		if (theCell.isRoom()) {
 			room = getRoom(theCell);
-			// getNearestDoor();
-
-			// Never runs this because there are apparently no doorways in the study
-			// for (BoardCell c : room.getDoorway()) {
-			// theCell.addAdjacency(c);
-			// }
 
 			if (room.getHasSP()) {
 				newCell = room.getSecretPassageCell();
@@ -235,7 +229,6 @@ public class Board {
 	}
 
 	public Set<BoardCell> getTargets() {
-		// TODO Auto-generated method stub
 		return targets;
 	}
 
@@ -305,8 +298,6 @@ public class Board {
 					case RIGHT:
 						roomNearestCell = grid[i][j + 1];
 						room = getRoom(roomNearestCell);
-						System.out.println("row: " + i + " col: " + j);
-						System.out.println("INCORRECT: " + cell.getRow() + " " + cell.getCol());
 						room.addDoorway(cell);
 					case UP:
 						roomNearestCell = grid[i - 1][j];
@@ -317,7 +308,6 @@ public class Board {
 						room = getRoom(roomNearestCell);
 						room.addDoorway(cell);
 					default:
-						// room.addDoorway(cell);
 						break;
 					}
 				}
