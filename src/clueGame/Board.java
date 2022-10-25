@@ -88,11 +88,11 @@ public class Board {
 	public void loadLayoutConfig() {
 		try {
 			File layoutFile = new File("data/" + layoutConfig);
-			Scanner layoutReader = new Scanner(layoutFile);
+			Scanner in = new Scanner(layoutFile);
 
 			ArrayList<String> eachRow = new ArrayList<>();
-			while (layoutReader.hasNext()) {
-				String currentLine = layoutReader.nextLine();
+			while (in.hasNext()) {
+				String currentLine = in.nextLine();
 				eachRow.add(currentLine);
 			}
 
@@ -132,7 +132,7 @@ public class Board {
 				}
 			}
 
-			layoutReader.close();
+			in.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("Can't open file LAYOUT");
 
