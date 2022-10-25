@@ -8,7 +8,7 @@ public class BoardCell {
 	private int row, col;
 	private char initial;
 	private String label;
-	private DoorDirection doorDirection;
+	//private DoorDirection doorDirection;
 	private boolean roomLabel = false;
 	private boolean roomCenter;
 	private char secretPassage;
