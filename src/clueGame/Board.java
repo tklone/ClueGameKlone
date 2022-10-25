@@ -21,8 +21,6 @@ public class Board {
 	private String layoutConfig;
 	private Map<Character, Room> roomMap = new HashMap<>();
 	private Set<BoardCell> targets = new HashSet<BoardCell>();
-	// private Set<BoardCell> adjList = new HashSet<>();
-	private BoardCell labelCell1 = new BoardCell();
 	private Set<BoardCell> visited = new HashSet<BoardCell>();
 
 	// variable and methods used for singleton pattern
