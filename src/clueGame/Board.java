@@ -35,6 +35,11 @@ public class Board {
 	public static Board getInstance() {
 		return theInstance;
 	}
+	
+	public void setConfigFiles(String layoutConfig, String setupConfig) {
+		this.layoutConfig = layoutConfig;
+		this.setupConfig = setupConfig;
+	}
 
 	// initialize the board(since we are using singleton pattern
 	public void initialize() {
@@ -132,36 +137,6 @@ public class Board {
 			System.out.println("Can't open file LAYOUT");
 
 		}
-	}
-
-	public void setConfigFiles(String layoutConfig, String setupConfig) {
-		this.layoutConfig = layoutConfig;
-		this.setupConfig = setupConfig;
-	}
-
-	public Room getRoom(Character c) {
-		Room room = new Room();
-		room = roomMap.get(c);
-		return room;
-	}
-
-	public static BoardCell getCell(int row, int col) {
-		return grid[row][col];
-	}
-
-	public int getNumRows() {
-		return numRows;
-	}
-
-	public int getNumColumns() {
-		return numCols;
-	}
-
-	public Room getRoom(BoardCell cell) {
-		Character c = cell.getInitial();
-		Room room = new Room();
-		room = roomMap.get(c);
-		return room;
 	}
 
 	public Set<BoardCell> getAdjList(int i, int j) {
@@ -309,6 +284,30 @@ public class Board {
 				}
 			}
 		}
+	}
+	public Room getRoom(Character c) {
+		Room room = new Room();
+		room = roomMap.get(c);
+		return room;
+	}
+
+	public static BoardCell getCell(int row, int col) {
+		return grid[row][col];
+	}
+
+	public int getNumRows() {
+		return numRows;
+	}
+
+	public int getNumColumns() {
+		return numCols;
+	}
+
+	public Room getRoom(BoardCell cell) {
+		Character c = cell.getInitial();
+		Room room = new Room();
+		room = roomMap.get(c);
+		return room;
 	}
 
 }
