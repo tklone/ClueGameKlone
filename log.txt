@@ -1,3 +1,65 @@
+commit 30b2ec0e3ce04e124b5e6964b5acbff89c6f38ab
+Author: smithqd <qsmith@mines.edu>
+Date:   Mon Oct 24 18:02:10 2022 -0600
+
+    passed tests
+
+commit e5e1f84081539db99bcf00a16938af8033ba9b0a
+Author: smithqd <qsmith@mines.edu>
+Date:   Mon Oct 24 17:50:14 2022 -0600
+
+    Trying to get last test case to pass for occupied doorway
+
+commit cd7098de40d1d69dd4f321ecba8e31998ffee13e
+Author: smithqd <qsmith@mines.edu>
+Date:   Mon Oct 24 17:19:42 2022 -0600
+
+    BoardAdjTarget tests pass except test targets occupied
+
+commit ed11159075d34ead403bc9a1c39da3424c612d57
+Author: smithqd <qsmith@mines.edu>
+Date:   Mon Oct 24 16:17:03 2022 -0600
+
+    boadAdjTargetTests test Adjacencies Rooms
+
+commit 0d00c14e635a3f411f584d2dba73470f1c8572ae
+Merge: 45b8e76 73d2229
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Oct 24 16:06:02 2022 -0600
+
+    Merge branch 'master' of https://github.com/tklone/ClueGameKlone
+
+commit 45b8e76cbeb352b2290a98e71b7e549f45c098c9
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Oct 24 16:05:43 2022 -0600
+
+    making our own tests
+
+commit 73d2229b347e8c7be68b1529ebceaa26ce87c906
+Merge: 02c7a7c 972c353
+Author: smithqd <qsmith@mines.edu>
+Date:   Mon Oct 24 16:02:33 2022 -0600
+
+    Merge remote-tracking branch 'refs/remotes/origin/master'
+
+commit 02c7a7c8257c6c34855416b2b428e41347e1535d
+Author: smithqd <qsmith@mines.edu>
+Date:   Mon Oct 24 16:02:22 2022 -0600
+
+    Refractoring- removed unused code and debugging code
+
+commit 972c353d2f53f6c66a4c3cbc7e13a4205c32605f
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Oct 24 16:01:29 2022 -0600
+
+    updated readme
+
+commit b86831e3569d38404fa8dfee4715d2369eb14eb5
+Author: smithqd <qsmith@mines.edu>
+Date:   Mon Oct 24 15:59:17 2022 -0600
+
+    Refractoring- added comments for config files
+
 commit c62e6051b7aea5d03ddbca9938b8b6b6b322193b
 Author: Taylor Klone <tklone@mines.edu>
 Date:   Mon Oct 24 15:52:24 2022 -0600
