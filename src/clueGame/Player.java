@@ -9,8 +9,10 @@ public abstract class Player {
 	private int row, col;
 	private ArrayList <Card> hand = new ArrayList<>();
 	
+	
+	
 	public void updateHand(Card card) {
-		
+		hand.add(card);
 	}
 	
 	public void setName(String name) {
@@ -27,5 +29,13 @@ public abstract class Player {
 	
 	public Color getColor() {
 		return this.color;
+	}
+	
+	public int getRow() {
+		return this.row;
+	}
+	
+	public int getCol() {
+		return this.col;
 	}
 }
