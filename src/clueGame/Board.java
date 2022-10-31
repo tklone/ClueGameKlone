@@ -21,8 +21,6 @@ public class Board {
 	private String layoutConfig;
 	private Map<Character, Room> roomMap = new HashMap<>();
 	private Set<BoardCell> targets = new HashSet<BoardCell>();
-	// private Set<BoardCell> adjList = new HashSet<>();
-	private BoardCell labelCell1 = new BoardCell();
 	private Set<BoardCell> visited = new HashSet<BoardCell>();
 
 	// variable and methods used for singleton pattern
@@ -36,6 +34,11 @@ public class Board {
 	// this method returns the only Board
 	public static Board getInstance() {
 		return theInstance;
+	}
+	
+	public void setConfigFiles(String layoutConfig, String setupConfig) {
+		this.layoutConfig = layoutConfig;
+		this.setupConfig = setupConfig;
 	}
 
 	// initialize the board(since we are using singleton pattern
@@ -85,11 +88,11 @@ public class Board {
 	public void loadLayoutConfig() {
 		try {
 			File layoutFile = new File("data/" + layoutConfig);
-			Scanner layoutReader = new Scanner(layoutFile);
+			Scanner in = new Scanner(layoutFile);
 
 			ArrayList<String> eachRow = new ArrayList<>();
-			while (layoutReader.hasNext()) {
-				String currentLine = layoutReader.nextLine();
+			while (in.hasNext()) {
+				String currentLine = in.nextLine();
 				eachRow.add(currentLine);
 			}
 
@@ -129,41 +132,11 @@ public class Board {
 				}
 			}
 
-			layoutReader.close();
+			in.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("Can't open file LAYOUT");
 
 		}
-	}
-
-	public void setConfigFiles(String layoutConfig, String setupConfig) {
-		this.layoutConfig = layoutConfig;
-		this.setupConfig = setupConfig;
-	}
-
-	public Room getRoom(Character c) {
-		Room room = new Room();
-		room = roomMap.get(c);
-		return room;
-	}
-
-	public static BoardCell getCell(int row, int col) {
-		return grid[row][col];
-	}
-
-	public int getNumRows() {
-		return numRows;
-	}
-
-	public int getNumColumns() {
-		return numCols;
-	}
-
-	public Room getRoom(BoardCell cell) {
-		Character c = cell.getInitial();
-		Room room = new Room();
-		room = roomMap.get(c);
-		return room;
 	}
 
 	public Set<BoardCell> getAdjList(int i, int j) {
@@ -311,6 +284,30 @@ public class Board {
 				}
 			}
 		}
+	}
+	public Room getRoom(Character c) {
+		Room room = new Room();
+		room = roomMap.get(c);
+		return room;
+	}
+
+	public static BoardCell getCell(int row, int col) {
+		return grid[row][col];
+	}
+
+	public int getNumRows() {
+		return numRows;
+	}
+
+	public int getNumColumns() {
+		return numCols;
+	}
+
+	public Room getRoom(BoardCell cell) {
+		Character c = cell.getInitial();
+		Room room = new Room();
+		room = roomMap.get(c);
+		return room;
 	}
 
 }

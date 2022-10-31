@@ -1,3 +1,18 @@
+<<<<<<< HEAD
+=======
+commit e3049b92eaacfe8ce613baf35f1d3052ff35c9b8
+Author: smithqd <qsmith@mines.edu>
+Date:   Mon Oct 24 18:12:20 2022 -0600
+
+    added comments and organized setters and getters in BoardCell for improved readability
+
+commit f028055d686a9c85955d335ab8883487d75a3465
+Author: smithqd <qsmith@mines.edu>
+Date:   Mon Oct 24 18:03:46 2022 -0600
+
+    Removed unused variables declared in Board class
+
+>>>>>>> 7c17fd018b2118e53e64ec4b7286ed55e8a1cc28
 commit 30b2ec0e3ce04e124b5e6964b5acbff89c6f38ab
 Author: smithqd <qsmith@mines.edu>
 Date:   Mon Oct 24 18:02:10 2022 -0600
