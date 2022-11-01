@@ -24,6 +24,4 @@ Player, Mrs. Claus
 Player, The Grinch
 Player, Rudolph
 Player, Olive the Other Reindeer
-Player, Abominable Snowman
 Player, Buddy the Elf
-Player, Narwall
