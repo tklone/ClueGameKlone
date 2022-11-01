@@ -11,3 +11,19 @@ Room, Sleigh Storage, S
 // other spaces on board
 Space, Unused, X
 Space, Walkway, W
+//Weapons
+Weapon, Poisoned Egg Nog
+Weapon, Broken Christmas Ornaments
+Weapon, Nutcracker
+Weapon, Candy Cane Crossbow
+Weapon, Reindeer Antler
+Weapon, String of Lights
+//Players
+Player, Santa Claus
+Player, Mrs. Claus
+Player, The Grinch
+Player, Rudolph
+Player, Olive the Other Reindeer
+Player, Abominable Snowman
+Player, Buddy the Elf
+Player, Narwall
