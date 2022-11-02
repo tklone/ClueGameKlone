@@ -15,6 +15,13 @@ public abstract class Player {
 //		Player computerPlayers[] = new ComputerPlayer[5];
 //	}
 	
+	public Player(String name, Color color, int row, int col) {
+		this.name = name;
+		this.color = color;
+		this.row = row;
+		this.col = col;
+	}
+	
 	
 	public void updateHand(Card card) {
 		hand.add(card);
