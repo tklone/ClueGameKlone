@@ -32,7 +32,11 @@ public class Card {
 	}
 	
 	public Boolean equals(Card target) {
-		//Something should go in here
-		return null;
+		if(target.getName().equals(cardName)){
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 }
