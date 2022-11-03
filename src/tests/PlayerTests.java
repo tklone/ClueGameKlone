@@ -35,11 +35,16 @@ class PlayerTests {
 	}
 
 	@Test
-	void solutionCardTypes() {
+	void testSolutionCardTypes() {
 		board.setTheAnswer();
 		assertTrue(board.hasSolutionRoom());
 		assertTrue(board.hasSolutionPerson());
 		assertTrue(board.hasSolutionWeapon());
 	}
 
+	
+	@Test
+	void testHandSize() {
+		
+	}
 }

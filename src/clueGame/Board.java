@@ -24,7 +24,7 @@ public class Board {
 	private Set<BoardCell> targets = new HashSet<BoardCell>();
 	private Set<BoardCell> visited = new HashSet<BoardCell>();
 	private ArrayList<Card> deck = new ArrayList<Card>();
-//	private ArrayList<Card> solution = new ArrayList<Card>();
+	private ArrayList<Player> players = new ArrayList<Player>();
 	private Solution theAnswer = new Solution();
 	private Boolean roomCheck = false;
 	private Boolean personCheck = false;
@@ -69,10 +69,10 @@ public class Board {
 		try {
 			File setupFile = new File("data/" + setupConfig);
 			Scanner setupReader = new Scanner(setupFile);
+		
 			while (setupReader.hasNext()) {
 				String wholeLine = setupReader.nextLine();
 				Card card = new Card();
-
 				if (wholeLine.charAt(0) != '/') {
 					String[] arrOfStr = wholeLine.split(", ");
 					if (arrOfStr[0].equals("Room") || arrOfStr[0].equals("Space")) {
@@ -92,9 +92,21 @@ public class Board {
 						card.setName(arrOfStr[1]);
 						deck.add(card);
 					} else if (arrOfStr[0].equals("Player")) {
+						String name = arrOfStr[1];
+						String color = arrOfStr[2];
+						String rowS = arrOfStr[3];
+						String colS = arrOfStr[4];
+					
+						int row = Integer.parseInt(rowS);
+						int col = Integer.parseInt(colS);
+						
+						if (arrOfStr[1] == "Santa Claus") {
+							Player human = new HumanPlayer(name, color, row, col);
+						}
 						card.setCardType(CardType.PERSON);
 						card.setName(arrOfStr[1]);
 						deck.add(card);
+						
 					} else {
 //						throw new BadConfigFormatException();
 					}
@@ -161,6 +173,7 @@ public class Board {
 		}
 	}
 
+	
 	public Set<BoardCell> getAdjList(int i, int j) {
 		return grid[i][j].getAdjListCell();
 	}
@@ -336,7 +349,6 @@ public class Board {
 		return deck;
 	}
 	
-//	@SuppressWarnings("unlikely-arg-type")
 	public void setTheAnswer() {
 		//Set the answer cards
 		//Pick a random person, weapon, and room and add it to the solution
@@ -380,9 +392,9 @@ public class Board {
 		
 	}
 	
-//	public Solution getTheAnswer() {
-//		return theAnswer;
-//	}
+	public Solution getTheAnswer() {
+		return theAnswer;
+	}
 	
 	public Boolean hasSolutionRoom() {
 		if (theAnswer.getSolutionRoom().getCardType().equals(CardType.ROOM)) {
