@@ -27,8 +27,9 @@ public abstract class Player {
 		hand.add(card);
 	}
 	
+
 	public ArrayList<Card> getHand() {
-		return this.hand;
+		return hand;
 	}
 	
 	public void setName(String name) {

@@ -3,6 +3,7 @@ package clueGame;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -410,6 +411,7 @@ public class Board {
 		return deckNoSolution;
 	}
 	
+	
 	public Solution getTheAnswer() {
 		return theAnswer;
 	}
@@ -437,8 +439,19 @@ public class Board {
 	
 	
 	public void drawHands() {
-		for (Player p : players) {
+		Collections.shuffle(deckNoSolution);
+		int i = 0;
+		int j = 0;
+		System.out.println(players.size());
+		while (!deckNoSolution.isEmpty()) {
 			
+			if (j == players.size()) {
+				j = 0;
+			}
+			
+			players.get(j).updateHand(deckNoSolution.get(0));
+			deckNoSolution.remove(0);
+			j++;
 		}
 	}
 	

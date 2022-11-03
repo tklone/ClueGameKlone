@@ -56,4 +56,18 @@ class PlayerTests {
 		assertEquals(6, testList.size());
 	}
 	
+	@Test
+	void testHandSize() {
+		ArrayList<Player> testList = new ArrayList<>();
+		testList =  board.getPlayers();
+		board.drawHands();
+		assertEquals(3, testList.get(0).getHand().size());
+		assertEquals(3, testList.get(1).getHand().size());
+		assertEquals(3, testList.get(2).getHand().size());
+		assertEquals(3, testList.get(3).getHand().size());
+		assertEquals(3, testList.get(4).getHand().size());
+		assertEquals(3, testList.get(5).getHand().size());
+
+	}
+	
 }
