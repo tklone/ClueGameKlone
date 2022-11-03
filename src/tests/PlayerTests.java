@@ -32,14 +32,14 @@ class PlayerTests {
 		ArrayList<Card> testDeck = new ArrayList<>();
 		testDeck = board.getDeck();
 		assertEquals(21, testDeck.size());
-//		fail("Not yet implemented");
 	}
-	
+
 	@Test
 	void solutionCardTypes() {
-		Solution testSolution = new Solution();
-		testSolution = board.getTheAnswer();
-//		assertTrue(CardType.ROOM, testSolution.getSolutionRoom());
+		board.setTheAnswer();
+		assertTrue(board.hasSolutionRoom());
+		assertTrue(board.hasSolutionPerson());
+		assertTrue(board.hasSolutionWeapon());
 	}
 
 }

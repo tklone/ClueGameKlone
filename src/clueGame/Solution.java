@@ -10,7 +10,7 @@ public class Solution {
 	}
 	
 	public Card getSolutionRoom() {
-		return this.room;
+		return room;
 	}
 	
 	public void setSolutionWeapon(Card weapon) {
@@ -18,7 +18,7 @@ public class Solution {
 	}
 	
 	public Card getSolutionWeapon() {
-		return this.weapon;
+		return weapon;
 	}
 	
 	public void setSolutionPerson(Card person) {
@@ -26,6 +26,7 @@ public class Solution {
 	}
 	
 	public Card getSolutionPerson() {
-		return this.person;
+		return person;
 	}
+	
 }

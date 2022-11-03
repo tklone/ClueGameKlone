@@ -26,6 +26,9 @@ public class Board {
 	private ArrayList<Card> deck = new ArrayList<Card>();
 //	private ArrayList<Card> solution = new ArrayList<Card>();
 	private Solution theAnswer = new Solution();
+	private Boolean roomCheck = false;
+	private Boolean personCheck = false;
+	private Boolean weaponCheck = false;
 
 	// variable and methods used for singleton pattern
 	private static Board theInstance = new Board();
@@ -66,9 +69,10 @@ public class Board {
 		try {
 			File setupFile = new File("data/" + setupConfig);
 			Scanner setupReader = new Scanner(setupFile);
-			Card card = new Card();
 			while (setupReader.hasNext()) {
 				String wholeLine = setupReader.nextLine();
+				Card card = new Card();
+
 				if (wholeLine.charAt(0) != '/') {
 					String[] arrOfStr = wholeLine.split(", ");
 					if (arrOfStr[0].equals("Room") || arrOfStr[0].equals("Space")) {
@@ -339,15 +343,16 @@ public class Board {
 		ArrayList<Card> weapons = new ArrayList<>();
 		ArrayList<Card> people = new ArrayList<>();
 		ArrayList<Card> rooms = new ArrayList<>();
-		for (Card c : deck) {
-			if (c.equals(CardType.WEAPON)) {
+		for (Card c : getDeck()) {
+			if (c.getCardType() == CardType.WEAPON) {
 				weapons.add(c);
-			} else if (c.equals(CardType.PERSON)) {
+			} else if (c.getCardType() == CardType.PERSON) {
 				people.add(c);
-			} else if (c.equals(CardType.ROOM)) {
+			} else if (c.getCardType() == CardType.ROOM) {
 				rooms.add(c);
 			}
 		}
+		
 		
 		Card randomWeapon;
 		Card randomPlayer;
@@ -375,8 +380,29 @@ public class Board {
 		
 	}
 	
-	public Solution getTheAnswer() {
-		return theAnswer;
+//	public Solution getTheAnswer() {
+//		return theAnswer;
+//	}
+	
+	public Boolean hasSolutionRoom() {
+		if (theAnswer.getSolutionRoom().getCardType().equals(CardType.ROOM)) {
+			roomCheck = true;
+		}
+		return roomCheck;
+	}
+	
+	public Boolean hasSolutionPerson() {
+		if (theAnswer.getSolutionPerson().getCardType().equals(CardType.PERSON)) {
+			personCheck = true;
+		}
+		return personCheck;
+	}
+	
+	public Boolean hasSolutionWeapon() {
+		if (theAnswer.getSolutionWeapon().getCardType().equals(CardType.WEAPON)) {
+			weaponCheck = true;
+		}
+		return weaponCheck;
 	}
 	
 }

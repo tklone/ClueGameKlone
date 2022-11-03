@@ -28,7 +28,7 @@ public class Card {
 	}*/
 	
 	public CardType getCardType() {
-		return this.cardType;
+		return cardType;
 	}
 	
 	public Boolean equals(Card target) {
