@@ -49,9 +49,26 @@ class PlayerTests {
 
 	@Test
 	void testNumPlayers() {
-		ArrayList<Player> testList = new ArrayList<>();
-		testList = board.getPlayers();
+		ArrayList<Card> testList = new ArrayList<>();
+		testList = board.getPeopleCards();
 		assertEquals(6, testList.size());
+	}
+	
+	@Test
+	void testNumWeapons() {
+		ArrayList<Card> testList = new ArrayList<>();
+		testList = board.getWeaponsCards();
+		assertEquals(6, testList.size());
+	}
+	
+	@Test
+	void testNumRooms() {
+		ArrayList<Card> testList = new ArrayList<Card>();
+		for (int i = 0; i < board.getRoomCards().size(); i++) {
+			System.out.println(i);
+		}
+		testList = board.getRoomCards();
+		assertEquals(9, testList.size());
 	}
 
 	@Test

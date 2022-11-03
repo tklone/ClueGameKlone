@@ -27,6 +27,9 @@ public class Board {
 	private ArrayList<Card> deck = new ArrayList<Card>();
 	private ArrayList<Card> deckNoSolution = new ArrayList<Card>();
 	private ArrayList<Player> players = new ArrayList<Player>();
+	private ArrayList<Card> weapons = new ArrayList<>();
+	private ArrayList<Card> people = new ArrayList<>();
+	private ArrayList<Card> rooms = new ArrayList<>();
 	private Solution theAnswer = new Solution();
 	private Boolean roomCheck = false;
 	private Boolean personCheck = false;
@@ -77,24 +80,26 @@ public class Board {
 				Card card = new Card();
 				if (wholeLine.charAt(0) != '/') {
 					String[] arrOfStr = wholeLine.split(", ");
-					if (arrOfStr[0].equals("Room") || arrOfStr[0].equals("Space")) {
+					String type = arrOfStr[0];
+					String typeName = arrOfStr[1];
+					if (type.equals("Room") || type.equals("Space")) {
 						String current = arrOfStr[2];
 						Character c = current.charAt(0);
 						Room newRoom = new Room();
-						newRoom.setName(arrOfStr[1]);
+						newRoom.setName(typeName);
 						newRoom.setChar(c);
 						roomMap.put(c, newRoom);
-						if (arrOfStr[0].equals("Room")) {
+						if (type.equals("Room")) {
 							card.setCardType(CardType.ROOM);
-							card.setName(arrOfStr[1]);
-							deck.add(card);
+							card.setName(typeName);
+							rooms.add(card);
 						}
-					} else  if (arrOfStr[0].equals("Weapon")){
+					} else  if (type.equals("Weapon")){
 						card.setCardType(CardType.WEAPON);
-						card.setName(arrOfStr[1]);
-						deck.add(card);
-					} else if (arrOfStr[0].equals("Player")) {
-						String name = arrOfStr[1];
+						card.setName(typeName);
+						weapons.add(card);
+					} else if (type.equals("Player")) {
+						String name = typeName;
 						String color = arrOfStr[2];
 						String rowS = arrOfStr[3];
 						String colS = arrOfStr[4];
@@ -104,7 +109,7 @@ public class Board {
 						
 						//To make it so it's not hard coding, maybe do a 
 						//if (a number == 0) meaning like that's the first iteration maybe?
-						if (arrOfStr[1].equals("Santa Claus")) {
+						if (typeName.equals("Santa Claus")) {
 							Player human = new HumanPlayer(name, color, row, col);
 							players.add(human);
 						} else {
@@ -112,8 +117,8 @@ public class Board {
 							players.add(computer);
 						}
 						card.setCardType(CardType.PERSON);
-						card.setName(arrOfStr[1]);
-						deck.add(card);
+						card.setName(typeName);
+						people.add(card);
 						
 					} else {
 //						throw new BadConfigFormatException();
@@ -360,23 +365,54 @@ public class Board {
 		return deck;
 	}
 	
+	public ArrayList<Card> getWeaponsCards() {
+		return weapons;
+	}
+	
+	public void addToWeaponsCards(Card c) {
+		weapons.add(c);
+	}
+	
+	public ArrayList<Card> getPeopleCards() {
+		return people;
+	}
+	
+	public void addToPeopleCards(Card c) {
+		people.add(c);
+	}
+	
+	public ArrayList<Card> getRoomCards() {
+		return rooms;
+	}
+	public void addToRoomsCards(Card c) {
+		rooms.add(c);
+	}
+	
+	public void combineCards() {
+		deck.addAll(getWeaponsCards());
+		deck.addAll(getPeopleCards());
+		deck.addAll(getRoomCards());
+	}
+	
 	public void setTheAnswer() {
 		//Set the answer cards
 		//Pick a random person, weapon, and room and add it to the solution
-		ArrayList<Card> weapons = new ArrayList<>();
-		ArrayList<Card> people = new ArrayList<>();
-		ArrayList<Card> rooms = new ArrayList<>();
-		for (Card c : getDeck()) {
-			if (c.getCardType() == CardType.WEAPON) {
-				weapons.add(c);
-			} else if (c.getCardType() == CardType.PERSON) {
-				people.add(c);
-			} else if (c.getCardType() == CardType.ROOM) {
-				rooms.add(c);
-			}
-		}
+
+//		for (Card c : getDeck()) {
+//			if (c.getCardType() == CardType.WEAPON) {
+//				addToWeaponsCards(c);
+//			} else if (c.getCardType() == CardType.PERSON) {
+//				addToPeopleCards(c);
+//			} else if (c.getCardType() == CardType.ROOM) {
+//				addToRoomsCards(c);
+//			}
+//		}
 		
-		
+//		for (Card c : rooms) {
+//			System.out.println(c.getName());
+//
+//		}
+//		
 		Card randomWeapon;
 		Card randomPlayer;
 		Card randomRoom;
@@ -397,10 +433,14 @@ public class Board {
 		randomPlayer = people.get(int_radomP);
 		randomRoom = rooms.get(int_radomR);
 		
+		System.out.println("room list size: " + rooms.size());
+		
 		theAnswer.setSolutionWeapon(randomWeapon);
 		theAnswer.setSolutionPerson(randomPlayer);
 		theAnswer.setSolutionRoom(randomRoom);
 		
+		
+		combineCards();
 		for (int i = 0; i < deck.size(); i++) {
 			if (deck.get(i) != randomWeapon && deck.get(i) != randomPlayer && deck.get(i) != randomRoom) {
 				deckNoSolution.add(deck.get(i));
@@ -442,15 +482,11 @@ public class Board {
 	
 	public void drawHands() {
 		Collections.shuffle(deckNoSolution);
-		int i = 0;
 		int j = 0;
-		System.out.println(players.size());
 		while (!deckNoSolution.isEmpty()) {
-			
 			if (j == players.size()) {
 				j = 0;
 			}
-			
 			players.get(j).updateHand(deckNoSolution.get(0));
 			deckNoSolution.remove(0);
 			j++;
