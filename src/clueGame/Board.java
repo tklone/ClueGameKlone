@@ -22,6 +22,7 @@ public class Board {
 	private Map<Character, Room> roomMap = new HashMap<>();
 	private Set<BoardCell> targets = new HashSet<BoardCell>();
 	private Set<BoardCell> visited = new HashSet<BoardCell>();
+	private ArrayList<Card> deck = new ArrayList<Card>();
 
 	// variable and methods used for singleton pattern
 	private static Board theInstance = new Board();
@@ -62,6 +63,7 @@ public class Board {
 		try {
 			File setupFile = new File("data/" + setupConfig);
 			Scanner setupReader = new Scanner(setupFile);
+			Card card = new Card();
 			while (setupReader.hasNext()) {
 				String wholeLine = setupReader.nextLine();
 				if (wholeLine.charAt(0) != '/') {
@@ -73,8 +75,21 @@ public class Board {
 						newRoom.setName(arrOfStr[1]);
 						newRoom.setChar(c);
 						roomMap.put(c, newRoom);
+						if (arrOfStr[0].equals("Room")) {
+							card.setCardType(CardType.ROOM);
+							card.setName(arrOfStr[0]);
+							deck.add(card);
+						}
+					} else  if (arrOfStr[0].equals("Weapon")){
+						card.setCardType(CardType.WEAPON);
+						card.setName(arrOfStr[1]);
+						deck.add(card);
+					} else if (arrOfStr[0].equals("Player")) {
+						card.setCardType(CardType.PLAYER);
+						card.setName(arrOfStr[1]);
+						deck.add(card);
 					} else {
-						throw new BadConfigFormatException();
+//						throw new BadConfigFormatException();
 					}
 				}
 			}
@@ -310,4 +325,8 @@ public class Board {
 		return room;
 	}
 
+	public ArrayList<Card> getDeck() {
+		return deck;
+	}
+	
 }
