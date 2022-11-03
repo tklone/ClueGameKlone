@@ -17,7 +17,6 @@ import clueGame.Solution;
 class PlayerTests {
 	private static Board board;
 
-
 //	@BeforeEach
 	// Something here
 
@@ -30,7 +29,7 @@ class PlayerTests {
 
 	@Test
 	void testDeckSize() {
-		//This one should return 21
+		// This one should return 21
 		ArrayList<Card> testDeck = new ArrayList<>();
 		testDeck = board.getDeck();
 		assertEquals(21, testDeck.size());
@@ -44,22 +43,21 @@ class PlayerTests {
 		assertTrue(board.hasSolutionRoom());
 		assertTrue(board.hasSolutionPerson());
 		assertTrue(board.hasSolutionWeapon());
-		//Tests the size of the deck after the solution cards are removed
+		// Tests the size of the deck after the solution cards are removed
 		assertEquals(18, testDeck.size());
 	}
 
-	
 	@Test
 	void testNumPlayers() {
 		ArrayList<Player> testList = new ArrayList<>();
 		testList = board.getPlayers();
 		assertEquals(6, testList.size());
 	}
-	
+
 	@Test
 	void testHandSize() {
 		ArrayList<Player> testList = new ArrayList<>();
-		testList =  board.getPlayers();
+		testList = board.getPlayers();
 		board.drawHands();
 		assertEquals(3, testList.get(0).getHand().size());
 		assertEquals(3, testList.get(1).getHand().size());
@@ -67,7 +65,13 @@ class PlayerTests {
 		assertEquals(3, testList.get(3).getHand().size());
 		assertEquals(3, testList.get(4).getHand().size());
 		assertEquals(3, testList.get(5).getHand().size());
-
 	}
-	
+
+	@Test
+	void testStartingLocation() {
+		ArrayList<Player> testList = new ArrayList<>();
+		testList = board.getPlayers();
+		
+		
+	}
 }
