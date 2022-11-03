@@ -24,6 +24,7 @@ public class Board {
 	private Set<BoardCell> targets = new HashSet<BoardCell>();
 	private Set<BoardCell> visited = new HashSet<BoardCell>();
 	private ArrayList<Card> deck = new ArrayList<Card>();
+	private ArrayList<Card> deckNoSolution = new ArrayList<Card>();
 	private ArrayList<Player> players = new ArrayList<Player>();
 	private Solution theAnswer = new Solution();
 	private Boolean roomCheck = false;
@@ -102,6 +103,10 @@ public class Board {
 						
 						if (arrOfStr[1] == "Santa Claus") {
 							Player human = new HumanPlayer(name, color, row, col);
+							players.add(human);
+						} else {
+							Player computer = new ComputerPlayer(name, color, row, col);
+							players.add(computer);
 						}
 						card.setCardType(CardType.PERSON);
 						card.setName(arrOfStr[1]);
@@ -118,7 +123,7 @@ public class Board {
 		}
 	}
 
-	//reading in the csv file
+	//reading in the CSV file
 	public void loadLayoutConfig() {
 		try {
 			File layoutFile = new File("data/" + layoutConfig);
@@ -173,6 +178,9 @@ public class Board {
 		}
 	}
 
+	public ArrayList<Player> getPlayers() {
+		return players;
+	}
 	
 	public Set<BoardCell> getAdjList(int i, int j) {
 		return grid[i][j].getAdjListCell();
@@ -390,6 +398,16 @@ public class Board {
 		theAnswer.setSolutionPerson(randomPlayer);
 		theAnswer.setSolutionRoom(randomRoom);
 		
+		for (int i = 0; i < deck.size(); i++) {
+			if (deck.get(i) != randomWeapon && deck.get(i) != randomPlayer && deck.get(i) != randomRoom) {
+				deckNoSolution.add(deck.get(i));
+			}
+		}
+		
+	}
+	
+	public ArrayList<Card> getDeckNoSoln() {
+		return deckNoSolution;
 	}
 	
 	public Solution getTheAnswer() {
@@ -415,6 +433,13 @@ public class Board {
 			weaponCheck = true;
 		}
 		return weaponCheck;
+	}
+	
+	
+	public void drawHands() {
+		for (Player p : players) {
+			
+		}
 	}
 	
 }

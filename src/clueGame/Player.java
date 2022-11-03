@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public abstract class Player {
 	private String name;
-	private Color color;
+	private String color;
 	private int row, col;
 	private ArrayList <Card> hand = new ArrayList<>();
 	
@@ -15,7 +15,7 @@ public abstract class Player {
 //		Player computerPlayers[] = new ComputerPlayer[5];
 //	}
 	
-	public Player(String name, Color color, int row, int col) {
+	public Player(String name, String color, int row, int col) {
 		this.name = name;
 		this.color = color;
 		this.row = row;
@@ -39,12 +39,12 @@ public abstract class Player {
 		return this.name;
 	}
 	
-	public void setColor(Color color) {
+	public void setColor(String color) {
 		this.color = color;
 	}
 	
-	public Color getColor() {
-		return this.color;
+	public String getColor() {
+		return color;
 	}
 	
 	public int getRow() {

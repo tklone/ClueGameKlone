@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import clueGame.Board;
 import clueGame.Card;
 import clueGame.CardType;
+import clueGame.Player;
 import clueGame.Solution;
 
 class PlayerTests {
@@ -29,6 +30,7 @@ class PlayerTests {
 
 	@Test
 	void testDeckSize() {
+		//This one should return 21
 		ArrayList<Card> testDeck = new ArrayList<>();
 		testDeck = board.getDeck();
 		assertEquals(21, testDeck.size());
@@ -36,15 +38,22 @@ class PlayerTests {
 
 	@Test
 	void testSolutionCardTypes() {
+		ArrayList<Card> testDeck = new ArrayList<>();
+		testDeck = board.getDeckNoSoln();
 		board.setTheAnswer();
 		assertTrue(board.hasSolutionRoom());
 		assertTrue(board.hasSolutionPerson());
 		assertTrue(board.hasSolutionWeapon());
+		//Tests the size of the deck after the solution cards are removed
+		assertEquals(18, testDeck.size());
 	}
 
 	
 	@Test
-	void testHandSize() {
-		
+	void testNumPlayers() {
+		ArrayList<Player> testList = new ArrayList<>();
+		testList = board.getPlayers();
+		assertEquals(6, testList.size());
 	}
+	
 }
