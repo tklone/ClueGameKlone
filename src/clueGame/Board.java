@@ -102,6 +102,8 @@ public class Board {
 						int row = Integer.parseInt(rowS);
 						int col = Integer.parseInt(colS);
 						
+						//To make it so it's not hard coding, maybe do a 
+						//if (a number == 0) meaning like that's the first iteration maybe?
 						if (arrOfStr[1].equals("Santa Claus")) {
 							Player human = new HumanPlayer(name, color, row, col);
 							players.add(human);
