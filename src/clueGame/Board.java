@@ -102,7 +102,7 @@ public class Board {
 						int row = Integer.parseInt(rowS);
 						int col = Integer.parseInt(colS);
 						
-						if (arrOfStr[1] == "Santa Claus") {
+						if (arrOfStr[1].equals("Santa Claus")) {
 							Player human = new HumanPlayer(name, color, row, col);
 							players.add(human);
 						} else {
