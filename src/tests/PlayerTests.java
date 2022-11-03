@@ -1,5 +1,6 @@
 package tests;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
@@ -9,6 +10,8 @@ import org.junit.jupiter.api.Test;
 
 import clueGame.Board;
 import clueGame.Card;
+import clueGame.CardType;
+import clueGame.Solution;
 
 class PlayerTests {
 	private static Board board;
@@ -30,6 +33,13 @@ class PlayerTests {
 		testDeck = board.getDeck();
 		assertEquals(21, testDeck.size());
 //		fail("Not yet implemented");
+	}
+	
+	@Test
+	void solutionCardTypes() {
+		Solution testSolution = new Solution();
+		testSolution = board.getTheAnswer();
+//		assertTrue(CardType.ROOM, testSolution.getSolutionRoom());
 	}
 
 }

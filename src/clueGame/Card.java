@@ -32,7 +32,7 @@ public class Card {
 	}
 	
 	public Boolean equals(Card target) {
-		if(target.getName().equals(cardName)){
+		if(target.getCardType().equals(this.cardType)){
 			return true;
 		}
 		else {

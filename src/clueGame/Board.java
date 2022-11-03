@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -23,6 +24,8 @@ public class Board {
 	private Set<BoardCell> targets = new HashSet<BoardCell>();
 	private Set<BoardCell> visited = new HashSet<BoardCell>();
 	private ArrayList<Card> deck = new ArrayList<Card>();
+//	private ArrayList<Card> solution = new ArrayList<Card>();
+	private Solution theAnswer = new Solution();
 
 	// variable and methods used for singleton pattern
 	private static Board theInstance = new Board();
@@ -77,7 +80,7 @@ public class Board {
 						roomMap.put(c, newRoom);
 						if (arrOfStr[0].equals("Room")) {
 							card.setCardType(CardType.ROOM);
-							card.setName(arrOfStr[0]);
+							card.setName(arrOfStr[1]);
 							deck.add(card);
 						}
 					} else  if (arrOfStr[0].equals("Weapon")){
@@ -85,7 +88,7 @@ public class Board {
 						card.setName(arrOfStr[1]);
 						deck.add(card);
 					} else if (arrOfStr[0].equals("Player")) {
-						card.setCardType(CardType.PLAYER);
+						card.setCardType(CardType.PERSON);
 						card.setName(arrOfStr[1]);
 						deck.add(card);
 					} else {
@@ -327,6 +330,53 @@ public class Board {
 
 	public ArrayList<Card> getDeck() {
 		return deck;
+	}
+	
+//	@SuppressWarnings("unlikely-arg-type")
+	public void setTheAnswer() {
+		//Set the answer cards
+		//Pick a random person, weapon, and room and add it to the solution
+		ArrayList<Card> weapons = new ArrayList<>();
+		ArrayList<Card> people = new ArrayList<>();
+		ArrayList<Card> rooms = new ArrayList<>();
+		for (Card c : deck) {
+			if (c.equals(CardType.WEAPON)) {
+				weapons.add(c);
+			} else if (c.equals(CardType.PERSON)) {
+				people.add(c);
+			} else if (c.equals(CardType.ROOM)) {
+				rooms.add(c);
+			}
+		}
+		
+		Card randomWeapon;
+		Card randomPlayer;
+		Card randomRoom;
+		
+		Random randW = new Random();
+		int upperBoundW = weapons.size() - 1;
+		int int_randomW = randW.nextInt(upperBoundW);
+		
+		Random randP = new Random();
+		int upperBoundP = people.size() - 1;
+		int int_radomP = randP.nextInt(upperBoundP);
+
+		Random randR = new Random();
+		int upperBoundR = rooms.size() - 1;
+		int int_radomR = randR.nextInt(upperBoundR);
+		
+		randomWeapon = weapons.get(int_randomW);
+		randomPlayer = people.get(int_radomP);
+		randomRoom = rooms.get(int_radomR);
+		
+		theAnswer.setSolutionWeapon(randomWeapon);
+		theAnswer.setSolutionPerson(randomPlayer);
+		theAnswer.setSolutionRoom(randomRoom);
+		
+	}
+	
+	public Solution getTheAnswer() {
+		return theAnswer;
 	}
 	
 }
