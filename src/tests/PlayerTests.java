@@ -17,9 +17,6 @@ import clueGame.Solution;
 class PlayerTests {
 	private static Board board;
 
-//	@BeforeEach
-	// Something here
-
 	@BeforeAll
 	public static void setUp() {
 		board = Board.getInstance();
@@ -28,6 +25,7 @@ class PlayerTests {
 		board.dealCards();
 	}
 
+	//Testing that full deck is 21 cards
 	@Test
 	void testDeckSize() {
 		// This one should return 21
@@ -36,6 +34,7 @@ class PlayerTests {
 		assertEquals(21, testDeck.size());
 	}
 
+	//testing that the solution has one card of each (room, person, and weapon)
 	@Test
 	void testSolutionCardTypes() {
 		assertTrue(board.hasSolutionRoom());
@@ -43,6 +42,7 @@ class PlayerTests {
 		assertTrue(board.hasSolutionWeapon());
 	}
 
+	//There are 6 players
 	@Test
 	void testNumPlayers() {
 		ArrayList<Card> testList = new ArrayList<>();
@@ -50,6 +50,7 @@ class PlayerTests {
 		assertEquals(6, testList.size());
 	}
 	
+	//There are 6 weapons
 	@Test
 	void testNumWeapons() {
 		ArrayList<Card> testList = new ArrayList<>();
@@ -57,6 +58,7 @@ class PlayerTests {
 		assertEquals(6, testList.size());
 	}
 	
+	//there are 9 rooms
 	@Test
 	void testNumRooms() {
 		ArrayList<Card> testList = new ArrayList<Card>();
@@ -64,11 +66,11 @@ class PlayerTests {
 		assertEquals(9, testList.size());
 	}
 
+	//each player gets 3 cards
 	@Test
 	void testHandSize() {
 		ArrayList<Player> testList = new ArrayList<>();
 		testList = board.getPlayers();
-//		board.dealCards();
 		assertEquals(3, testList.get(0).getHand().size());
 		assertEquals(3, testList.get(1).getHand().size());
 		assertEquals(3, testList.get(2).getHand().size());
@@ -77,6 +79,7 @@ class PlayerTests {
 		assertEquals(3, testList.get(5).getHand().size());
 	}
 
+	//each player starts at the correct positions that was read in from ClueSetup.txt
 	@Test
 	void testStartingLocation() {
 		ArrayList<Player> testList = new ArrayList<>();
@@ -101,6 +104,7 @@ class PlayerTests {
 
 	}
 	
+	//each player is the correct color read in from ClueSetup.txt
 	@Test
 	void testColor() {
 		ArrayList<Player> testList = new ArrayList<>();

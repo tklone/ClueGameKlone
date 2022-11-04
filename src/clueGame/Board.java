@@ -476,7 +476,5 @@ public class Board {
 		}
 		return weaponCheck;
 	}
-
-
-
+	
 }
