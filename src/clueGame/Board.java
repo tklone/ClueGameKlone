@@ -47,7 +47,7 @@ public class Board {
 	public static Board getInstance() {
 		return theInstance;
 	}
-	
+
 	public void setConfigFiles(String layoutConfig, String setupConfig) {
 		this.layoutConfig = layoutConfig;
 		this.setupConfig = setupConfig;
@@ -69,12 +69,12 @@ public class Board {
 		}
 	}
 
-	//reading in the text file
+	// reading in the text file
 	public void loadSetupConfig() throws FileNotFoundException, BadConfigFormatException {
 		try {
 			File setupFile = new File("data/" + setupConfig);
 			Scanner setupReader = new Scanner(setupFile);
-		
+
 			while (setupReader.hasNext()) {
 				String wholeLine = setupReader.nextLine();
 				Card card = new Card();
@@ -94,7 +94,7 @@ public class Board {
 							card.setName(typeName);
 							rooms.add(card);
 						}
-					} else  if (type.equals("Weapon")){
+					} else if (type.equals("Weapon")) {
 						card.setCardType(CardType.WEAPON);
 						card.setName(typeName);
 						weapons.add(card);
@@ -103,12 +103,12 @@ public class Board {
 						String color = arrOfStr[2];
 						String rowS = arrOfStr[3];
 						String colS = arrOfStr[4];
-					
+
 						int row = Integer.parseInt(rowS);
 						int col = Integer.parseInt(colS);
-						
-						//To make it so it's not hard coding, maybe do a 
-						//if (a number == 0) meaning like that's the first iteration maybe?
+
+						// To make it so it's not hard coding, maybe do a
+						// if (a number == 0) meaning like that's the first iteration maybe?
 						if (typeName.equals("Santa Claus")) {
 							Player human = new HumanPlayer(name, color, row, col);
 							players.add(human);
@@ -119,9 +119,9 @@ public class Board {
 						card.setCardType(CardType.PERSON);
 						card.setName(typeName);
 						people.add(card);
-						
+
 					} else {
-//						throw new BadConfigFormatException();
+						throw new BadConfigFormatException();
 					}
 				}
 			}
@@ -131,7 +131,7 @@ public class Board {
 		}
 	}
 
-	//reading in the CSV file
+	// reading in the CSV file
 	public void loadLayoutConfig() {
 		try {
 			File layoutFile = new File("data/" + layoutConfig);
@@ -189,7 +189,7 @@ public class Board {
 	public ArrayList<Player> getPlayers() {
 		return players;
 	}
-	
+
 	public Set<BoardCell> getAdjList(int i, int j) {
 		return grid[i][j].getAdjListCell();
 	}
@@ -336,6 +336,7 @@ public class Board {
 			}
 		}
 	}
+
 	public Room getRoom(Character c) {
 		Room room = new Room();
 		room = roomMap.get(c);
@@ -364,63 +365,47 @@ public class Board {
 	public ArrayList<Card> getDeck() {
 		return deck;
 	}
-	
+
 	public ArrayList<Card> getWeaponsCards() {
 		return weapons;
 	}
-	
+
 	public void addToWeaponsCards(Card c) {
 		weapons.add(c);
 	}
-	
+
 	public ArrayList<Card> getPeopleCards() {
 		return people;
 	}
-	
+
 	public void addToPeopleCards(Card c) {
 		people.add(c);
 	}
-	
+
 	public ArrayList<Card> getRoomCards() {
 		return rooms;
 	}
+
 	public void addToRoomsCards(Card c) {
 		rooms.add(c);
 	}
-	
-	public void combineCards() {
-		deck.addAll(getWeaponsCards());
-		deck.addAll(getPeopleCards());
-		deck.addAll(getRoomCards());
-	}
-	
-	public void setTheAnswer() {
-		//Set the answer cards
-		//Pick a random person, weapon, and room and add it to the solution
 
-//		for (Card c : getDeck()) {
-//			if (c.getCardType() == CardType.WEAPON) {
-//				addToWeaponsCards(c);
-//			} else if (c.getCardType() == CardType.PERSON) {
-//				addToPeopleCards(c);
-//			} else if (c.getCardType() == CardType.ROOM) {
-//				addToRoomsCards(c);
-//			}
-//		}
-		
-//		for (Card c : rooms) {
-//			System.out.println(c.getName());
-//
-//		}
-//		
+	public void combineCards() {
+//		deck.addAll(getWeaponsCards());
+//		deck.addAll(getPeopleCards());
+//		deck.addAll(getRoomCards());
+	}
+
+	public void dealCards() {
+
 		Card randomWeapon;
 		Card randomPlayer;
 		Card randomRoom;
-		
+
 		Random randW = new Random();
 		int upperBoundW = weapons.size() - 1;
 		int int_randomW = randW.nextInt(upperBoundW);
-		
+
 		Random randP = new Random();
 		int upperBoundP = people.size() - 1;
 		int int_radomP = randP.nextInt(upperBoundP);
@@ -428,69 +413,69 @@ public class Board {
 		Random randR = new Random();
 		int upperBoundR = rooms.size() - 1;
 		int int_radomR = randR.nextInt(upperBoundR);
-		
+
 		randomWeapon = weapons.get(int_randomW);
 		randomPlayer = people.get(int_radomP);
 		randomRoom = rooms.get(int_radomR);
-		
-		System.out.println("room list size: " + rooms.size());
-		
+
 		theAnswer.setSolutionWeapon(randomWeapon);
 		theAnswer.setSolutionPerson(randomPlayer);
 		theAnswer.setSolutionRoom(randomRoom);
+
+		deck.addAll(getWeaponsCards());
+		deck.addAll(getPeopleCards());
+		deck.addAll(getRoomCards());
 		
-		
-		combineCards();
+		System.out.println("FULL DECK: " + deck.size());
+
 		for (int i = 0; i < deck.size(); i++) {
 			if (deck.get(i) != randomWeapon && deck.get(i) != randomPlayer && deck.get(i) != randomRoom) {
 				deckNoSolution.add(deck.get(i));
 			}
 		}
 		
+		Collections.shuffle(deckNoSolution);
+		int i = 0;
+		while (!deckNoSolution.isEmpty()) {
+			if (i == players.size()) {
+				i = 0;
+			}
+			players.get(i).updateHand(deckNoSolution.get(0));
+			deckNoSolution.remove(0);
+			i++;
+		}
+
 	}
-	
+
 	public ArrayList<Card> getDeckNoSoln() {
 		return deckNoSolution;
 	}
-	
-	
+
 	public Solution getTheAnswer() {
 		return theAnswer;
 	}
-	
+
 	public Boolean hasSolutionRoom() {
 		if (theAnswer.getSolutionRoom().getCardType().equals(CardType.ROOM)) {
 			roomCheck = true;
 		}
 		return roomCheck;
 	}
-	
+
 	public Boolean hasSolutionPerson() {
 		if (theAnswer.getSolutionPerson().getCardType().equals(CardType.PERSON)) {
 			personCheck = true;
 		}
 		return personCheck;
 	}
-	
+
 	public Boolean hasSolutionWeapon() {
 		if (theAnswer.getSolutionWeapon().getCardType().equals(CardType.WEAPON)) {
 			weaponCheck = true;
 		}
 		return weaponCheck;
 	}
-	
-	
-	public void drawHands() {
-		Collections.shuffle(deckNoSolution);
-		int j = 0;
-		while (!deckNoSolution.isEmpty()) {
-			if (j == players.size()) {
-				j = 0;
-			}
-			players.get(j).updateHand(deckNoSolution.get(0));
-			deckNoSolution.remove(0);
-			j++;
-		}
-	}
-	
+
+
+
 }

@@ -25,6 +25,7 @@ class PlayerTests {
 		board = Board.getInstance();
 		board.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
 		board.initialize();
+		board.dealCards();
 	}
 
 	@Test
@@ -37,14 +38,9 @@ class PlayerTests {
 
 	@Test
 	void testSolutionCardTypes() {
-		ArrayList<Card> testDeck = new ArrayList<>();
-		testDeck = board.getDeckNoSoln();
-		board.setTheAnswer();
 		assertTrue(board.hasSolutionRoom());
 		assertTrue(board.hasSolutionPerson());
 		assertTrue(board.hasSolutionWeapon());
-		// Tests the size of the deck after the solution cards are removed
-		assertEquals(18, testDeck.size());
 	}
 
 	@Test
@@ -64,9 +60,6 @@ class PlayerTests {
 	@Test
 	void testNumRooms() {
 		ArrayList<Card> testList = new ArrayList<Card>();
-		for (int i = 0; i < board.getRoomCards().size(); i++) {
-			System.out.println(i);
-		}
 		testList = board.getRoomCards();
 		assertEquals(9, testList.size());
 	}
@@ -75,7 +68,7 @@ class PlayerTests {
 	void testHandSize() {
 		ArrayList<Player> testList = new ArrayList<>();
 		testList = board.getPlayers();
-		board.drawHands();
+//		board.dealCards();
 		assertEquals(3, testList.get(0).getHand().size());
 		assertEquals(3, testList.get(1).getHand().size());
 		assertEquals(3, testList.get(2).getHand().size());
