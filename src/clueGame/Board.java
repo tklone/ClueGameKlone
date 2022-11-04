@@ -19,18 +19,25 @@ public class Board {
 	private static BoardCell[][] grid;
 	private int numRows;
 	private int numCols;
+	
 	private String setupConfig;
 	private String layoutConfig;
-	private Map<Character, Room> roomMap = new HashMap<>();
+	
 	private Set<BoardCell> targets = new HashSet<BoardCell>();
 	private Set<BoardCell> visited = new HashSet<BoardCell>();
+	
+	private Map<Character, Room> roomMap = new HashMap<>();
+	
 	private ArrayList<Card> deck = new ArrayList<Card>();
 	private ArrayList<Card> deckNoSolution = new ArrayList<Card>();
-	private ArrayList<Player> players = new ArrayList<Player>();
 	private ArrayList<Card> weapons = new ArrayList<>();
 	private ArrayList<Card> people = new ArrayList<>();
 	private ArrayList<Card> rooms = new ArrayList<>();
+	
+	private ArrayList<Player> players = new ArrayList<Player>();
+	
 	private Solution theAnswer = new Solution();
+	
 	private Boolean roomCheck = false;
 	private Boolean personCheck = false;
 	private Boolean weaponCheck = false;
@@ -337,6 +344,57 @@ public class Board {
 		}
 	}
 
+	public void dealCards() {
+
+		Card randomWeapon;
+		Card randomPlayer;
+		Card randomRoom;
+
+		Random randW = new Random();
+		int upperBoundW = weapons.size() - 1;
+		int int_randomW = randW.nextInt(upperBoundW);
+
+		Random randP = new Random();
+		int upperBoundP = people.size() - 1;
+		int int_radomP = randP.nextInt(upperBoundP);
+
+		Random randR = new Random();
+		int upperBoundR = rooms.size() - 1;
+		int int_radomR = randR.nextInt(upperBoundR);
+
+		randomWeapon = weapons.get(int_randomW);
+		randomPlayer = people.get(int_radomP);
+		randomRoom = rooms.get(int_radomR);
+
+		theAnswer.setSolutionWeapon(randomWeapon);
+		theAnswer.setSolutionPerson(randomPlayer);
+		theAnswer.setSolutionRoom(randomRoom);
+
+		deck.addAll(getWeaponsCards());
+		deck.addAll(getPeopleCards());
+		deck.addAll(getRoomCards());
+		
+		System.out.println("FULL DECK: " + deck.size());
+
+		for (int i = 0; i < deck.size(); i++) {
+			if (deck.get(i) != randomWeapon && deck.get(i) != randomPlayer && deck.get(i) != randomRoom) {
+				deckNoSolution.add(deck.get(i));
+			}
+		}
+		
+		Collections.shuffle(deckNoSolution);
+		int i = 0;
+		while (!deckNoSolution.isEmpty()) {
+			if (i == players.size()) {
+				i = 0;
+			}
+			players.get(i).updateHand(deckNoSolution.get(0));
+			deckNoSolution.remove(0);
+			i++;
+		}
+
+	}
+	
 	public Room getRoom(Character c) {
 		Room room = new Room();
 		room = roomMap.get(c);
@@ -388,63 +446,6 @@ public class Board {
 
 	public void addToRoomsCards(Card c) {
 		rooms.add(c);
-	}
-
-	public void combineCards() {
-//		deck.addAll(getWeaponsCards());
-//		deck.addAll(getPeopleCards());
-//		deck.addAll(getRoomCards());
-	}
-
-	public void dealCards() {
-
-		Card randomWeapon;
-		Card randomPlayer;
-		Card randomRoom;
-
-		Random randW = new Random();
-		int upperBoundW = weapons.size() - 1;
-		int int_randomW = randW.nextInt(upperBoundW);
-
-		Random randP = new Random();
-		int upperBoundP = people.size() - 1;
-		int int_radomP = randP.nextInt(upperBoundP);
-
-		Random randR = new Random();
-		int upperBoundR = rooms.size() - 1;
-		int int_radomR = randR.nextInt(upperBoundR);
-
-		randomWeapon = weapons.get(int_randomW);
-		randomPlayer = people.get(int_radomP);
-		randomRoom = rooms.get(int_radomR);
-
-		theAnswer.setSolutionWeapon(randomWeapon);
-		theAnswer.setSolutionPerson(randomPlayer);
-		theAnswer.setSolutionRoom(randomRoom);
-
-		deck.addAll(getWeaponsCards());
-		deck.addAll(getPeopleCards());
-		deck.addAll(getRoomCards());
-		
-		System.out.println("FULL DECK: " + deck.size());
-
-		for (int i = 0; i < deck.size(); i++) {
-			if (deck.get(i) != randomWeapon && deck.get(i) != randomPlayer && deck.get(i) != randomRoom) {
-				deckNoSolution.add(deck.get(i));
-			}
-		}
-		
-		Collections.shuffle(deckNoSolution);
-		int i = 0;
-		while (!deckNoSolution.isEmpty()) {
-			if (i == players.size()) {
-				i = 0;
-			}
-			players.get(i).updateHand(deckNoSolution.get(0));
-			deckNoSolution.remove(0);
-			i++;
-		}
-
 	}
 
 	public ArrayList<Card> getDeckNoSoln() {
