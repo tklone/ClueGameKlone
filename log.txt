@@ -1,5 +1,202 @@
-<<<<<<< HEAD
-=======
+commit 913c9e60c18abe609dfc20ace95b74bd748da2fd
+Author: smithqd <qsmith@mines.edu>
+Date:   Fri Nov 4 08:41:56 2022 -0600
+
+    ExceptionTests306 now pass
+
+commit dbfe009696036e2900bf68ad1d892897a0300bc3
+Author: smithqd <qsmith@mines.edu>
+Date:   Fri Nov 4 08:24:31 2022 -0600
+
+    adding comments for each PlayerTest
+
+commit 91db02a760f3ba5400f971b78e25b4550a7c89ac
+Author: smithqd <qsmith@mines.edu>
+Date:   Fri Nov 4 08:18:31 2022 -0600
+
+    some refractoring
+
+commit dabf043f5dc317811a375733ba5a2356a7f42824
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Thu Nov 3 18:06:51 2022 -0600
+
+    got all tests to pass with player stuff
+
+commit be02385ecc6c636855476d8e3fd3f8088fbd4c3f
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Thu Nov 3 17:47:40 2022 -0600
+
+    got all tests to pass
+
+commit d1ee52b95c83ed58a588080f00676c9cb73771d3
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Thu Nov 3 15:17:10 2022 -0600
+
+    tests to pass for starting locations
+
+commit a2ee3cf745c8061ef691cf17b0755e0f773efac9
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Thu Nov 3 15:11:35 2022 -0600
+
+    trying to add the test to test the players starting locations
+
+commit e43250c15d51e8bb93e0fc3b349a3d0f7c3daf12
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Thu Nov 3 15:05:22 2022 -0600
+
+    added a comment for an idea to not hard code the first player
+
+commit 54e54bc15b3a394bd4952b6acf92ce3125deebe7
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Thu Nov 3 15:03:31 2022 -0600
+
+    accidentally used the wrong equals for a string
+
+commit ff05a7b679449c022ccb27687b75280f5939e4bb
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Thu Nov 3 14:59:20 2022 -0600
+
+    updated players hands and made a test to make sure that they should each have 3 cards.  Test passes.
+
+commit b9ea1b1ca084ee7a94a90595bf1b435bdcab39ac
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Thu Nov 3 14:33:02 2022 -0600
+
+    added another list of the deck that does not contain the solution cards and made the tests reflect that
+
+commit 21fe75f8f6085a68d86857402ccf233dddb4d65a
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Thu Nov 3 13:45:05 2022 -0600
+
+    started human and computer player things
+
+commit c2be887be2b33e061df09981e0d930498b83fc90
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Thu Nov 3 13:22:04 2022 -0600
+
+    made another test to make sure that the solution has a room, person, and weapon
+
+commit 151f7fa5154c1ccf8951bebded7442cfd37187c5
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Thu Nov 3 12:53:23 2022 -0600
+
+    added solutionn
+
+commit a2cb4112fca7b009da7cb59402370d90e6ca13a2
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Thu Nov 3 12:49:55 2022 -0600
+
+    creating the solution
+
+commit 60469d4168a02ad8ab9bc6d7ced9e6d0e4496ad9
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Thu Nov 3 12:05:27 2022 -0600
+
+    added the whole deck and made a test to test the size of the deck, the test passes
+
+commit 3326819c2fd0bdf35d807a0f597ce8bf07e58bd2
+Author: smithqd <qsmith@mines.edu>
+Date:   Wed Nov 2 17:35:56 2022 -0600
+
+    filled out body for bool card target method
+
+commit 831e422bae67704552270c415f5bd74dfb4fceda
+Author: smithqd <qsmith@mines.edu>
+Date:   Wed Nov 2 17:27:43 2022 -0600
+
+    setting card type to either person, weapon, or room in Card.java
+
+commit 79707fc3eb99abc2aec792b66949f5a59b2c0b8b
+Author: smithqd <qsmith@mines.edu>
+Date:   Wed Nov 2 17:22:23 2022 -0600
+
+    added player constructor
+
+commit 30599dda0109d3073b6e856e41d816ed9c62a5aa
+Author: smithqd <qsmith@mines.edu>
+Date:   Wed Nov 2 17:21:35 2022 -0600
+
+    bash profile?
+
+commit a0c75501550d781da9fbf3182a70d03bbbfb815b
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Tue Nov 1 13:46:39 2022 -0600
+
+    read in the file into a deck of cards
+
+commit 8ae752a9a01f095bbc602889f78082f830ba7a4a
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Tue Nov 1 13:08:07 2022 -0600
+
+    added a couple enums
+
+commit e5263d82431a4adca46f84d483532c99bbd9f4f9
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Tue Nov 1 12:26:51 2022 -0600
+
+    trying to figure some things out, adding comments
+
+commit 0f18b0adbab2c43caf56d63e283749cf75536897
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Oct 31 13:39:28 2022 -0600
+
+    chipping away on C20A, but not doing a ton
+
+commit 0964c69b03193547f5cef4b0dcd21c31c4e38a9c
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Oct 31 13:35:21 2022 -0600
+
+    adding some more to players
+
+commit 4d55b81cc34549ca8cb565a6f2e5d8af4015b403
+Merge: 848ecba 7c17fd0
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Oct 31 13:31:00 2022 -0600
+
+    started working on the player assignment
+
+commit 848ecbaa27308a5b4d8b3e2a96184c1435a8c380
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Oct 31 13:30:30 2022 -0600
+
+    started on making the player classes
+
+commit 7c17fd018b2118e53e64ec4b7286ed55e8a1cc28
+Author: smithqd <qsmith@mines.edu>
+Date:   Mon Oct 24 18:34:00 2022 -0600
+
+    removed unused variable
+
+commit d2932f3bf255059b4a06e7425ef7a4fcd03d528f
+Author: smithqd <qsmith@mines.edu>
+Date:   Mon Oct 24 18:27:18 2022 -0600
+
+    changed scanner variable to in for simplicity
+
+commit 6f178bd7e3694929b31fc17b020d36eee447a765
+Author: smithqd <qsmith@mines.edu>
+Date:   Mon Oct 24 18:25:12 2022 -0600
+
+    moved getters and setters to bottom of Board Class for readability
+
+commit a85dfe118042cebc380bafa6e01b6ae047dea3c2
+Author: smithqd <qsmith@mines.edu>
+Date:   Mon Oct 24 18:19:32 2022 -0600
+
+    removed debugging code in Room class
+
+commit 3f4b273e9c9df190a846d85cf1441dfab277f508
+Author: smithqd <qsmith@mines.edu>
+Date:   Mon Oct 24 18:18:26 2022 -0600
+
+    untracked file?
+
+commit f6389b03417471ce97459b64e99006a2571b1091
+Author: smithqd <qsmith@mines.edu>
+Date:   Mon Oct 24 18:17:40 2022 -0600
+
+    log
+
 commit e3049b92eaacfe8ce613baf35f1d3052ff35c9b8
 Author: smithqd <qsmith@mines.edu>
 Date:   Mon Oct 24 18:12:20 2022 -0600
@@ -12,7 +209,6 @@ Date:   Mon Oct 24 18:03:46 2022 -0600
 
     Removed unused variables declared in Board class
 
->>>>>>> 7c17fd018b2118e53e64ec4b7286ed55e8a1cc28
 commit 30b2ec0e3ce04e124b5e6964b5acbff89c6f38ab
 Author: smithqd <qsmith@mines.edu>
 Date:   Mon Oct 24 18:02:10 2022 -0600
