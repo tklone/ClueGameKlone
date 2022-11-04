@@ -127,7 +127,8 @@ public class Board {
 						card.setName(typeName);
 						people.add(card);
 
-					} else {
+					} 
+					else {
 						throw new BadConfigFormatException();
 					}
 				}
@@ -182,6 +183,12 @@ public class Board {
 							&& newCell.getLabel().charAt(1) != '#' && !newCell.isDoorway()) {
 						room.setHasSP(true);
 						room.setSecretPassageCell(newCell);
+					}
+					if(currentString.length != numCols) {
+						throw new BadConfigFormatException();
+					}
+					if(!roomMap.containsKey(newCell.getInitial())) {
+						throw new BadConfigFormatException();
 					}
 				}
 			}
