@@ -484,7 +484,9 @@ public class Board {
 	}
 	
 	public Boolean checkAccusation() {
-		
+		if (createSuggestion() == theAnswer) {
+			accusationCheck = true;
+		}
 		return accusationCheck;
 	}
 	
