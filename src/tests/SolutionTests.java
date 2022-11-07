@@ -53,29 +53,14 @@ class SolutionTests {
 		//Suggestion only suggesting player can disprove returns null
 		//Suggestion only human can disprove returns answer (i.e., card that disproves suggestion)
 		//Suggestion that two players can disprove, correct player (based on starting with next player in list) returns answer
-		
+	
 		ArrayList<Player> playerList = new ArrayList<Player>();
-		Solution suggestion = new Solution(card.getCardType("maid"), card.getCardType("Kitchen"), card.getCardType("axe"));
+		Solution suggestion = new Solution("Cookie Room", "Nutcracker", "Santa Claus");
 		
-		// set up human player
-		String humanColor = Player.getColor();
-		HumanPlayer humanPlayer = new HumanPlayer("test", humanColor, 0, 0);
-		ArrayList<Card> humanHand = new ArrayList<Card>();
-		humanHand.add(board.getCardType("guest"));
-		humanHand.add(board.getCardType("houseKeeping"));
-		humanHand.add(board.getCardType("suitcase"));
-		humanPlayer.setCards(humanHand);
-		playerList.add(humanPlayer);	
 		
-		// set up three computer players
-		Color computer1Color = board.convertColor("Orange");
-		ComputerPlayer computer1Player = new ComputerPlayer("test", computer1Color, 1, 1);
-		ArrayList<Card> computer1Hand = new ArrayList<Card>();
-		computer1Hand.add(board.getCard("bellhop"));
-		computer1Hand.add(board.getCard("Elevator"));
-		computer1Hand.add(board.getCard("mop"));
-		computer1Player.setCards(computer1Hand);
-		playerList.add(computer1Player);
+		
+		
+		
 	}
 
 }

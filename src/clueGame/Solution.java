@@ -7,7 +7,11 @@ public class Solution {
 	private Card weapon;
 	private Card person;
 	
-	public void setSolution(Card room, Card weapon, Card person) {
+	public Solution() {
+		super();
+	}
+	
+	public Solution(String room, String weapon, String person) {
 		ArrayList<Solution> fullSolution = new ArrayList<Solution>();
 		Solution items = new Solution(room, weapon, person);
 		fullSolution.add(items);
