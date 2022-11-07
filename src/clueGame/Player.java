@@ -33,6 +33,7 @@ public abstract class Player {
 		return null;
 	}
 	
+	
 	public ArrayList<Card> getHand() {
 		return hand;
 	}
