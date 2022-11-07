@@ -494,7 +494,7 @@ public class Board {
 	
 	//Process all the players in turn, each to see if they can dispute the suggestion. If return null, 
 	//no player can dispute the suggestion. Otherwise return the first card that disputed the suggestion.
-	public Card handleSuggestion(Solution suggestion, ArrayList<Player> playersList, Player accuser) {
+	public Card handleSuggestion(Solution suggestion, Player accuser) {
 		//Setup: Create a small number of players with known cards (simulated deal. But it’s not necessary to distribute all cards).
 		//Be sure to include the human.
 		//Players are queried in order. Some ways to test:
@@ -505,24 +505,32 @@ public class Board {
 		//The instructor's version of GameSolutionTest.java has a @BeforeAll method that creates a number of cards that can be used to 
 			//create specific test conditions. Cards are static (only one copy needed, set up in @BeforeAll which is static)
 		
-		//we need to go through all the players to check
-		for(Player player : playersList) {
+		//index of the accusing player(being passed in), starting place
+		int playerIndex = players.indexOf(accuser);
+		
+		//need to ask remaining players to disprove suggestion
+		while(true) {
+			//get a new index - increment then % by the number of players
+			playerIndex++;
+			playerIndex = playerIndex % players.size();
 			
-			// if the accuser can disprove the suggestion, return null
-			if(player == accuser) {
-				return null;
+			// Break case - if the current player index is the index of the accuser
+			if(playerIndex == players.indexOf(accuser)) {
+				break;
 			}
 			
-			// if player can disprove suggestion, return that card
-			Card disprove = player.disproveSuggestion(suggestion);
+			// Call disproveSuggestion
+			Card disprove = accuser.disproveSuggestion(suggestion);
+			// if there's  a result, return it
 			if(disprove != null) {
-				player.updateSeen(disprove);
+				accuser.updateSeen(disprove);
 				return disprove;
 			}
+			// otherwise, keep looking
+			
+			
 		}
 		return null;
-		
-		
 		
 	}
 }
