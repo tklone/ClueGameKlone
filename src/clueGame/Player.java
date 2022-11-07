@@ -29,7 +29,6 @@ public abstract class Player {
 	}
 
 	public Card disproveSuggestion(Solution guess) {
-		int matchingCardsNum = 0;
 		ArrayList<Card> matchingCards = new ArrayList<>();
 
 		for (Card c : hand) {
@@ -45,10 +44,9 @@ public abstract class Player {
 		}
 
 		Random rand = new Random();
-		int upperBound = matchingCards.size();
-		int randomNum = rand.nextInt(upperBound);
+		int randomNum = rand.nextInt(matchingCards.size());
 		
-		if (upperBound == 0) {
+		if (matchingCards.size() == 0) {
 			return null;
 		}
 		
