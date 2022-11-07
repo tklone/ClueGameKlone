@@ -11,10 +11,14 @@ public class Solution {
 		super();
 	}
 	
-	public Solution(String room, String weapon, String person) {
-		ArrayList<Solution> fullSolution = new ArrayList<Solution>();
-		Solution items = new Solution(room, weapon, person);
-		fullSolution.add(items);
+	public Solution(Card room, Card weapon, Card person) {
+//		ArrayList<Solution> fullSolution = new ArrayList<Solution>();
+//		Solution items = new Solution(room, weapon, person);
+//		fullSolution.add(items);
+		super();
+		this.room = room;
+		this.weapon = weapon;
+		this.person = person;
 	}
 	
 	public void setSolutionRoom(Card room) {
