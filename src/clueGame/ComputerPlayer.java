@@ -8,4 +8,13 @@ public class ComputerPlayer extends Player {
 		super(name, color, row, col);
 	}
 
+	public Solution createSuggestion() {
+		Solution computerGuess = new Solution();
+		return computerGuess;
+	}
+	
+	public BoardCell selectTarget() {
+		return null;
+	}
+	
 }

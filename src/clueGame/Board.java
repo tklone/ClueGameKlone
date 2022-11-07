@@ -41,6 +41,7 @@ public class Board {
 	private Boolean roomCheck = false;
 	private Boolean personCheck = false;
 	private Boolean weaponCheck = false;
+	private Boolean accusationCheck = false;
 
 	// variable and methods used for singleton pattern
 	private static Board theInstance = new Board();
@@ -381,8 +382,6 @@ public class Board {
 		deck.addAll(getPeopleCards());
 		deck.addAll(getRoomCards());
 		
-		System.out.println("FULL DECK: " + deck.size());
-
 		for (int i = 0; i < deck.size(); i++) {
 			if (deck.get(i) != randomWeapon && deck.get(i) != randomPlayer && deck.get(i) != randomRoom) {
 				deckNoSolution.add(deck.get(i));
@@ -484,4 +483,14 @@ public class Board {
 		return weaponCheck;
 	}
 	
+	public Boolean checkAccusation() {
+		
+		return accusationCheck;
+	}
+	
+	public Card handleSuggestion() {
+		//We don't want it to be making a new card, but I did this just so it would have something to return
+		Card card = new Card();
+		return card;
+	}
 }
