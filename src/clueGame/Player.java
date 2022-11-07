@@ -29,37 +29,30 @@ public abstract class Player {
 	}
 
 	public Card disproveSuggestion(Solution guess) {
-		int matchingCards = 0;
-		if (hand.contains(guess.getSolutionPerson())) {
-			matchingCards++;
-		}
-		if (hand.contains(guess.getSolutionRoom())) {
-			matchingCards++;
-		}
-		if (hand.contains(guess.getSolutionWeapon())) {
-			matchingCards++;
-		}
+		int matchingCardsNum = 0;
+		ArrayList<Card> matchingCards = new ArrayList<>();
 
-		if (matchingCards == 1) {
-			for (Card c : hand) {
-				if (c.equals(guess.getSolutionPerson())) {
-					return c;
-				}
-				if (c.equals(guess.getSolutionRoom())) {
-					return c;
-				}
-				if (c.equals(guess.getSolutionWeapon())) {
-					return c;
-				}
+		for (Card c : hand) {
+			if (c.equals(guess.getSolutionPerson())) {
+				matchingCards.add(c);
 			}
-		} else if (matchingCards > 1) {
-			Random rand = new Random();
-			int upperBound = matchingCards;
-			
-			//I don't know how to do the random portion of this
+			if (c.equals(guess.getSolutionRoom())) {
+				matchingCards.add(c);
+			}
+			if (c.equals(guess.getSolutionWeapon())) {
+				matchingCards.add(c);
+			}
 		}
 
-		return null;
+		Random rand = new Random();
+		int upperBound = matchingCards.size();
+		int randomNum = rand.nextInt(upperBound);
+		
+		if (upperBound == 0) {
+			return null;
+		}
+		
+		return matchingCards.get(randomNum);
 	}
 
 	public ArrayList<Card> getHand() {
