@@ -483,8 +483,12 @@ public class Board {
 		return weaponCheck;
 	}
 	
-	public Boolean checkAccusation() {
-		
+	//Check an accusation [class Board] – returns true if accusation matches theAnswer 
+	//(i.e. the player guessed who did it, where and with what).
+	public Boolean checkAccusation(Solution playerGuess) {
+		if(playerGuess.getSolutionPerson() == theAnswer.getSolutionPerson() && playerGuess.getSolutionRoom() == theAnswer.getSolutionRoom() && playerGuess.getSolutionWeapon() == theAnswer.getSolutionWeapon()) {
+			accusationCheck = true;
+		}
 		return accusationCheck;
 	}
 	
