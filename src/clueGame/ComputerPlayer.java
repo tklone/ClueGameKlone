@@ -10,6 +10,8 @@ public class ComputerPlayer extends Player {
 		super(name, color, row, col);
 	}
 
+	
+	//It seems like this would be wrong because I don't know where we would call this
 	public Solution createSuggestion(ArrayList<Card> rooms, ArrayList<Card> people, ArrayList<Card> weapons) {
 		Solution computerGuess = new Solution();
 		Random randRoomGuessNum = new Random();
@@ -25,11 +27,12 @@ public class ComputerPlayer extends Player {
 		int randPeople = randPersonGuessNum.nextInt(upperBoundPeople);
 		int randWeapons = randWeaponGuessNum.nextInt(upperBoundWeapons);
 
+		if (!hand.contains(rooms.get(randRooms)) && !hand.contains(people.get(randPeople)) && !hand.contains(weapons.get(randWeapons)) && !seenCards.contains(rooms.get(randRooms)) && !seenCards.contains(people.get(randPeople)) && !seenCards.contains(weapons.get(randWeapons))) {
+			computerGuess.setSolutionRoom(rooms.get(randRooms));
+			computerGuess.setSolutionPerson(people.get(randPeople));
+			computerGuess.setSolutionWeapon(weapons.get(randWeapons));
+		}
 		
-		computerGuess.setSolutionRoom(rooms.get(randRooms));
-		computerGuess.setSolutionPerson(people.get(randPeople));
-		computerGuess.setSolutionWeapon(weapons.get(randWeapons));
-
 		return computerGuess;
 	}
 	
