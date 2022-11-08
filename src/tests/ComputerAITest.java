@@ -16,6 +16,7 @@ import clueGame.Card;
 import clueGame.CardType;
 import clueGame.ComputerPlayer;
 import clueGame.Player;
+import clueGame.Room;
 
 class ComputerAITest {
 
@@ -65,15 +66,47 @@ class ComputerAITest {
 	@Test
 	void testSelectTargets() {
 		Set<BoardCell> tempTargets = new HashSet<BoardCell>();
+		
+		ArrayList <Card> tempHand = new ArrayList<>();
+		Card personCard = new Card();
+		personCard.setCardType(CardType.PERSON);
+		personCard.setName("Rudolph");
+		tempHand.add(personCard);
+		Card weaponCard = new Card();
+		weaponCard.setCardType(CardType.WEAPON);
+		weaponCard.setName("Nutcracker");
+		tempHand.add(weaponCard);
+		Card roomCard = new Card();
+		roomCard.setCardType(CardType.ROOM);
+		roomCard.setName("Sleigh Storage");
+		tempHand.add(roomCard);
+		
 		ComputerPlayer computerPlayer = new ComputerPlayer("The Grinch", "Green", 25, 16);
 
 		board.calcTargets(computerPlayer.getLocation(), 1);
 		tempTargets = board.getTargets();
-		//if no rooms in list, select randomly
+		//Making sure no room is in the targetList
+		for (BoardCell c : tempTargets) {
+			assertTrue(!c.isRoomCenter());
+		}
+		tempTargets.clear();
 		
 		//if room in list that has not been seen, select it
 		board.calcTargets(computerPlayer.getLocation(), 7);
 		tempTargets = board.getTargets();
+		//Making sure that the room center is in the target list
+		for (BoardCell c : tempTargets) {
+			assertTrue(c.isRoomCenter());
+			Room currentRoom = getRoom(c);
+			String currentRoomName = currentRoom.getName();
+			Card currentCard = getCard(currentRoomName);
+			if (computerPlayer.seenCards.contains(c.get)) {
+				
+			}
+		}
+		
+		//if (seenCards.contains(boardCell.getRoo())
+		
 		
 		//if room in list that has been seen, each target (including room) selected randomly
 		
