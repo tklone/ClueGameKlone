@@ -76,6 +76,7 @@ class SolutionTests {
 	@Test 
 	public void handleSuggestion() {
 		//Suggestion no one can disprove returns null
+		
 		//Suggestion only suggesting player can disprove returns null
 		//Suggestion only human can disprove returns answer (i.e., card that disproves suggestion)
 		//Suggestion that two players can disprove, correct player (based on starting with next player in list) returns answer
