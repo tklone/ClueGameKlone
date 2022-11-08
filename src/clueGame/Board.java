@@ -59,8 +59,6 @@ public class Board {
 	public static Card getCard(String string) {
 		
 		for (Card c : deck) {
-			System.out.println(string);
-			System.out.println(c.getName());
 			if (c.getName().equals(string)) {
 				return c;
 			}

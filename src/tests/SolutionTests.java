@@ -32,17 +32,17 @@ class SolutionTests {
 	
 	@Test
 	public void testCheckAccusation() {
-		board.setSolution(board.getCard("Christmas Tree Factory"), board.getCard("Candlestick"), board.getCard("The Grinch"));
+		board.setSolution(board.getCard("The Grinch"), board.getCard("Christmas Tree Factory"), board.getCard("Broken Christmas Ornaments"));
 		
 		//Solution that is correct
 		Solution fakeSolutionCorrect = new Solution();
 		Card personCard = board.getCard("The Grinch");
-		fakeSolutionCorrect.setSolution(board.getCard("TheGrinch"), board.getCard("Christmas Tree Factory"), board.getCard("Candlestick"));
+		fakeSolutionCorrect.setSolution(board.getCard("The Grinch"), board.getCard("Christmas Tree Factory"), board.getCard("Broken Christmas Ornaments"));
 		assertTrue(board.checkAccusation(fakeSolutionCorrect));
 		
 		//solution with wrong person
 		Solution fakeSolutionPerson = new Solution();
-		fakeSolutionPerson.setSolution(board.getCard("Mrs. Claus"), board.getCard("Christmas Tree Factory"), board.getCard("Candlestick"));
+		fakeSolutionPerson.setSolution(board.getCard("Mrs. Claus"), board.getCard("Christmas Tree Factory"), board.getCard("Broken Christmas Ornaments"));
 		assertFalse(board.checkAccusation(fakeSolutionPerson));
 		
 		//solution with wrong weapon
@@ -51,7 +51,7 @@ class SolutionTests {
 		assertFalse(board.checkAccusation(fakeSolutionWeapon));
 		//solution with wrong room
 		Solution fakeSolutionRoom = new Solution();
-		fakeSolutionRoom.setSolution(board.getCard("TheGrinch"), board.getCard("Bathroom"), board.getCard("Candlestick"));
+		fakeSolutionRoom.setSolution(board.getCard("TheGrinch"), board.getCard("Bathroom"), board.getCard("Broken Christmas Ornaments"));
 		assertFalse(board.checkAccusation(fakeSolutionRoom));
 
 	}
@@ -61,7 +61,7 @@ class SolutionTests {
 	public void disproveSuggestion() {
 		ComputerPlayer computerPlayer = new ComputerPlayer("The Grinch", "Green", 25, 16);
 		Solution guess = new Solution();
-		guess.setSolution(board.getCard("Mrs. Claus"), board.getCard("Christmas Tree Factory"), board.getCard("Candlestick"));
+		guess.setSolution(board.getCard("Mrs. Claus"), board.getCard("Christmas Tree Factory"), board.getCard("Broken Christmas Ornaments"));
 
 		computerPlayer.updateHand(Board.getCard("Mrs. Claus"));
 		computerPlayer.updateHand(Board.getCard("String of Lights"));
