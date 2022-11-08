@@ -11,31 +11,30 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
-
 public class Board {
 
 	private static BoardCell[][] grid;
 	private int numRows;
 	private int numCols;
-	
+
 	private String setupConfig;
 	private String layoutConfig;
-	
+
 	private static Set<BoardCell> targets = new HashSet<BoardCell>();
 	private Set<BoardCell> visited = new HashSet<BoardCell>();
-	
+
 	private Map<Character, Room> roomMap = new HashMap<>();
-	
+
 	private static ArrayList<Card> deck = new ArrayList<Card>();
 	private ArrayList<Card> deckNoSolution = new ArrayList<Card>();
 	private ArrayList<Card> weapons = new ArrayList<>();
 	private ArrayList<Card> people = new ArrayList<>();
 	private ArrayList<Card> rooms = new ArrayList<>();
-	
+
 	private ArrayList<Player> players = new ArrayList<Player>();
-	
+
 	private Solution theAnswer = new Solution();
-	
+
 	private Boolean roomCheck = false;
 	private Boolean personCheck = false;
 	private Boolean weaponCheck = false;
@@ -53,18 +52,18 @@ public class Board {
 	public static Board getInstance() {
 		return theInstance;
 	}
-	
+
 	public static Card getCard(String string) {
-		
+
 		for (Card c : deck) {
 			if (c.getName().equals(string)) {
 				return c;
 			}
 		}
-		//I don't like this \/
+		// I don't like this \/
 		return null;
 	}
-	
+
 	public static Card getCard(BoardCell c) {
 		String name = c.getLabel();
 		Card card = getCard(name);
@@ -145,9 +144,8 @@ public class Board {
 						card.setName(typeName);
 						people.add(card);
 						deck.add(card);
-						
-					} 
-					else {
+
+					} else {
 						throw new BadConfigFormatException();
 					}
 				}
@@ -203,10 +201,10 @@ public class Board {
 						room.setHasSP(true);
 						room.setSecretPassageCell(newCell);
 					}
-					if(currentString.length != numCols) {
+					if (currentString.length != numCols) {
 						throw new BadConfigFormatException();
 					}
-					if(!roomMap.containsKey(newCell.getInitial())) {
+					if (!roomMap.containsKey(newCell.getInitial())) {
 						throw new BadConfigFormatException();
 					}
 				}
@@ -284,7 +282,7 @@ public class Board {
 		return theCell.getAdjListCell();
 	}
 
-	public static  Set<BoardCell> getTargets() {
+	public static Set<BoardCell> getTargets() {
 		return targets;
 	}
 
@@ -395,16 +393,15 @@ public class Board {
 //		theAnswer.setSolutionWeapon(randomWeapon);
 //		theAnswer.setSolutionPerson(randomPlayer);
 //		theAnswer.setSolutionRoom(randomRoom);
-		
+
 		theAnswer.setSolution(randomPlayer, randomRoom, randomWeapon);
 
-		
 		for (int i = 0; i < deck.size(); i++) {
 			if (deck.get(i) != randomWeapon && deck.get(i) != randomPlayer && deck.get(i) != randomRoom) {
 				deckNoSolution.add(deck.get(i));
 			}
 		}
-		
+
 		Collections.shuffle(deckNoSolution);
 		int i = 0;
 		while (!deckNoSolution.isEmpty()) {
@@ -417,13 +414,13 @@ public class Board {
 		}
 
 	}
-	
+
 	public void setSolution(Card name, Card room, Card weapon) {
 		theAnswer.setSolutionPerson(name);
 		theAnswer.setSolutionRoom(room);
 		theAnswer.setSolutionWeapon(weapon);
 	}
-	
+
 	public Room getRoom(Character c) {
 		Room room = new Room();
 		room = roomMap.get(c);
@@ -484,7 +481,7 @@ public class Board {
 	public Solution getTheAnswer() {
 		return theAnswer;
 	}
-	
+
 	public Boolean hasSolutionRoom() {
 		if (theAnswer.getSolutionRoom().getCardType().equals(CardType.ROOM)) {
 			roomCheck = true;
@@ -505,67 +502,68 @@ public class Board {
 		}
 		return weaponCheck;
 	}
-	
-	//Check an accusation [class Board] – returns true if accusation matches theAnswer 
-	//(i.e. the player guessed who did it, where and with what).
+
+	// Check an accusation [class Board] – returns true if accusation matches
+	// theAnswer
+	// (i.e. the player guessed who did it, where and with what).
 	public Boolean checkAccusation(Solution playerGuess) {
-		if(playerGuess.getSolutionPerson() == theAnswer.getSolutionPerson() && playerGuess.getSolutionRoom() == theAnswer.getSolutionRoom() && playerGuess.getSolutionWeapon() == theAnswer.getSolutionWeapon()) {
+		if (playerGuess.getSolutionPerson() == theAnswer.getSolutionPerson()
+				&& playerGuess.getSolutionRoom() == theAnswer.getSolutionRoom()
+				&& playerGuess.getSolutionWeapon() == theAnswer.getSolutionWeapon()) {
 			accusationCheck = true;
 		} else {
 			accusationCheck = false;
 		}
 		return accusationCheck;
 	}
-	
-	//Process all the players in turn, each to see if they can dispute the suggestion. If return null, 
-	//no player can dispute the suggestion. Otherwise return the first card that disputed the suggestion.
-	
-	//Setup: Create a small number of players with known cards (simulated deal. But it’s not necessary to distribute all cards).
-			//Be sure to include the human.
-			//Players are queried in order. Some ways to test:
-			//Do a query that no players can disprove, ensure null returned.
-			//Do a query that only the suggesting player can disprove, ensure null.
-			//Players are queried in order. Do several queries with player 0 as accuser. Do a query that player 1 and 2 can disprove, 
-				//ensure player 1 disproves (ensures players are not asked after one can disprove).
-			//The instructor's version of GameSolutionTest.java has a @BeforeAll method that creates a number of cards that can be used to 
-				//create specific test conditions. Cards are static (only one copy needed, set up in @BeforeAll which is static)
-			
-			//index of the accusing player(being passed in), starting place
+
+	// Process all the players in turn, each to see if they can dispute the
+	// suggestion. If return null,
+	// no player can dispute the suggestion. Otherwise return the first card that
+	// disputed the suggestion.
+
+	// Setup: Create a small number of players with known cards (simulated deal. But
+	// it’s not necessary to distribute all cards).
+	// Be sure to include the human.
+	// Players are queried in order. Some ways to test:
+	// Do a query that no players can disprove, ensure null returned.
+	// Do a query that only the suggesting player can disprove, ensure null.
+	// Players are queried in order. Do several queries with player 0 as accuser. Do
+	// a query that player 1 and 2 can disprove,
+	// ensure player 1 disproves (ensures players are not asked after one can
+	// disprove).
+	// The instructor's version of GameSolutionTest.java has a @BeforeAll method
+	// that creates a number of cards that can be used to
+	// create specific test conditions. Cards are static (only one copy needed, set
+	// up in @BeforeAll which is static)
+
+	// index of the accusing player(being passed in), starting place
 	public Card handleSuggestion(Solution suggestion, Player accuser) {
-		System.out.println(accuser.getName());
-		int playerIndex = players.indexOf(accuser);
-		System.out.println(players.get(0).getName());
-		
-		int i = 0;
+
+		ArrayList<Card> disproveCards = new ArrayList<>();
 		for (Player p : players) {
-			System.out.println("index: " + i + " name: " + p.getName());
-			i++;
+			//create .equals() 
+			if (!p.equals(accuser)) {
+				Card disprove = p.disproveSuggestion(suggestion);
+				if (disprove != null) {
+					disproveCards.add(disprove);
+				}
+			} else {
+				continue;
+			}
+		}
+
+		for (Card c : disproveCards) {
+			System.out.println(c.getName());
+		}
+		if (disproveCards.size() > 0) {
+			
+			Random rand = new Random();
+			int randInt = rand.nextInt(disproveCards.size() - 1);
+			return disproveCards.get(randInt);
+
 		}
 		
-		System.out.println("player index: " + playerIndex);
-		Boolean keepGoing = true;
-		//need to ask remaining players to disprove suggestion
-		while(keepGoing) {
-			//get a new index - increment then % by the number of players
-			playerIndex++;
-			playerIndex = playerIndex % players.size();
-			
-			// Break case - if the current player index is the index of the accuser
-			if(playerIndex == players.indexOf(accuser)) {
-				break;
-			}
-			
-			// Call disproveSuggestion
-			Card disprove = accuser.disproveSuggestion(suggestion);
-			// if there's  a result, return it
-			if(disprove != null) {
-				accuser.updateSeen(disprove);
-				keepGoing = false;
-				return disprove;
-				
-			}
-			// otherwise, keep looking
-		}
 		return null;
 	}
 }

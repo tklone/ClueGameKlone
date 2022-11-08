@@ -12,6 +12,7 @@ public abstract class Player {
 	private int row, col;
 	protected ArrayList<Card> hand = new ArrayList<>();
 	protected Set<Card> seenCards = new HashSet<Card>();
+	private Boolean equalsBool = false;
 
 	public Player(String name, String color, int row, int col) {
 		this.name = name;
@@ -89,5 +90,12 @@ public abstract class Player {
 	
 	public BoardCell getLocation() {
 		return Board.getCell(this.row, this.col);
+	}
+	
+	public Boolean equals(Player p) {
+		if (p.getName().equals(this.getName())) {
+			equalsBool = true;
+		}
+		return equalsBool;
 	}
 }

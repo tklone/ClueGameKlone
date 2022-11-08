@@ -103,12 +103,13 @@ class SolutionTests {
 		// Suggestion no one can disprove returns null
 		Solution playerSuggestion = new Solution();
 		playerSuggestion.setSolution(board.getCard("Mrs. Claus"), board.getCard("Elve's Workshop"), board.getCard("String of Lights"));
-//		board.handleSuggestion(playerSuggestion, humanPlayer);
-		Object obj = board.handleSuggestion(playerSuggestion, humanPlayer);
-//		assertTrue(obj == null);
+		assertTrue(board.handleSuggestion(playerSuggestion, humanPlayer) == null);
 		// Suggestion only suggesting player can disprove returns null
-		// Suggestion only human can disprove returns answer (i.e., card that disproves
-		// suggestion)
+		playerSuggestion.setSolution(board.getCard("Rudolph"), board.getCard("Bathroom"), board.getCard("Reindeer Antler"));
+		assertTrue(board.handleSuggestion(playerSuggestion, computerPlayer1) == null);
+		// Suggestion only human can disprove returns answer (i.e., card that disproves suggestion)
+		playerSuggestion.setSolution(board.getCard("Buddy the Elf"), board.getCard("Sleigh Storage"), board.getCard("Candy Cane Crossbow"));
+		assertEquals("Candy Cane Crossbow", board.handleSuggestion(playerSuggestion, computerPlayer1).getName());
 		// Suggestion that two players can disprove, correct player (based on starting
 		// with next player in list) returns answer
 
