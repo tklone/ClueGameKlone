@@ -11,16 +11,10 @@ public class Solution {
 		super();
 	}
 	
-	public Solution(Card room, Card weapon, Card person) {
-//		ArrayList<Solution> fullSolution = new ArrayList<Solution>();
-//		Solution items = new Solution(room, weapon, person);
-//		fullSolution.add(items);
-//		super();
-//		this.room = room;
-//		this.weapon = weapon;
-//		this.person = person;
-	}
-	
+//	public Solution(Card room, Card weapon, Card person) {
+//		
+//	}
+//	
 	public void setSolutionRoom(Card room) {
 		this.room = room;
 	}
@@ -43,6 +37,12 @@ public class Solution {
 	
 	public Card getSolutionPerson() {
 		return person;
+	}
+	
+	public void setSolution(Card person, Card room, Card weapon) {
+		this.room = room;
+		this.weapon = weapon;
+		this.person = person;
 	}
 	
 }

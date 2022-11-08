@@ -26,11 +26,13 @@ public class ComputerPlayer extends Player {
 		if (!hand.contains(room) && !hand.contains(person) && !hand.contains(weapon) && !seenCards.contains(room)
 				&& !seenCards.contains(person) && !seenCards.contains(weapon)) {
 			this.suggestRoom = room;
-			computerGuess.setSolutionRoom(room);
+//			computerGuess.setSolutionRoom(room);
 			this.suggestPerson = person;
-			computerGuess.setSolutionPerson(person);
+//			computerGuess.setSolutionPerson(person);
 			this.suggestWeapon = weapon;
-			computerGuess.setSolutionWeapon(weapon);
+//			computerGuess.setSolutionWeapon(weapon);
+			
+			computerGuess.setSolution(person, room, weapon);
 		}
 
 		return computerGuess;

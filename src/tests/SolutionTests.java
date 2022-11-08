@@ -32,19 +32,26 @@ class SolutionTests {
 	
 	@Test
 	public void testCheckAccusation() {
-		board.setSolution(board.getCard("Christmas Tree Factory"), board.getCard("Candlestick"), board.getCard("Grinch"));
+		board.setSolution(board.getCard("Christmas Tree Factory"), board.getCard("Candlestick"), board.getCard("The Grinch"));
 		
 		//Solution that is correct
-		Solution fakeSolutionCorrect = new Solution(board.getCard("Christmas Tree Factory"), board.getCard("Candlestick"), board.getCard("Grinch"));
+		Solution fakeSolutionCorrect = new Solution();
+		Card personCard = board.getCard("The Grinch");
+		fakeSolutionCorrect.setSolution(board.getCard("TheGrinch"), board.getCard("Christmas Tree Factory"), board.getCard("Candlestick"));
 		assertTrue(board.checkAccusation(fakeSolutionCorrect));
+		
 		//solution with wrong person
-		Solution fakeSolutionPerson = new Solution(board.getCard("Christmas Tree Factory"), board.getCard("Candlestick"), board.getCard("Mrs. Claus"));		
+		Solution fakeSolutionPerson = new Solution();
+		fakeSolutionPerson.setSolution(board.getCard("Mrs. Claus"), board.getCard("Christmas Tree Factory"), board.getCard("Candlestick"));
 		assertFalse(board.checkAccusation(fakeSolutionPerson));
+		
 		//solution with wrong weapon
-		Solution fakeSolutionWeapon = new Solution(board.getCard("Christmas Tree Factory"), board.getCard("String of Lights"), board.getCard("Grinch"));		
+		Solution fakeSolutionWeapon = new Solution();
+		fakeSolutionWeapon.setSolution(board.getCard("TheGrinch"), board.getCard("Christmas Tree Factory"), board.getCard("String of Lights"));
 		assertFalse(board.checkAccusation(fakeSolutionWeapon));
 		//solution with wrong room
-		Solution fakeSolutionRoom = new Solution(board.getCard("Bathroom"), board.getCard("Candlestick"), board.getCard("Grinch"));		
+		Solution fakeSolutionRoom = new Solution();
+		fakeSolutionRoom.setSolution(board.getCard("TheGrinch"), board.getCard("Bathroom"), board.getCard("Candlestick"));
 		assertFalse(board.checkAccusation(fakeSolutionRoom));
 
 	}
@@ -54,11 +61,8 @@ class SolutionTests {
 	public void disproveSuggestion() {
 		ComputerPlayer computerPlayer = new ComputerPlayer("The Grinch", "Green", 25, 16);
 		Solution guess = new Solution();
-//		board.getCard("Santa Claus"), board.getCard("Christmas Tree Factory"), board.getCard("Candlestick"));
-		guess.setSolutionPerson(Board.getCard("Mrs. Claus"));
-		guess.setSolutionRoom(Board.getCard("Christmas Tree Factory"));
-		guess.setSolutionWeapon(Board.getCard("Candlestick"));
-//		
+		guess.setSolution(board.getCard("Mrs. Claus"), board.getCard("Christmas Tree Factory"), board.getCard("Candlestick"));
+
 		computerPlayer.updateHand(Board.getCard("Mrs. Claus"));
 		computerPlayer.updateHand(Board.getCard("String of Lights"));
 		computerPlayer.updateHand(Board.getCard("Bathroom"));
@@ -66,14 +70,15 @@ class SolutionTests {
 		computerPlayer.disproveSuggestion(guess);
 		assertEquals("Mrs. Claus", guess.getSolutionPerson().getName());
 		
-		guess.setSolutionRoom(Board.getCard("String of Lights"));
-//		assertEquals()
+		guess.setSolution(board.getCard("Mrs. Claus"), board.getCard("Christmas Tree Factory"), board.getCard("String of Lights"));
+
+//		guess.setSolutionRoom(Board.getCard("String of Lights"));
 		//If players has >1 matching card, returned card should be chosen randomly
 		//If player has no matching cards, null is returned
 	}
 
 
-	@Test 
+//	@Test 
 	public void handleSuggestion() {
 		//Suggestion no one can disprove returns null
 		

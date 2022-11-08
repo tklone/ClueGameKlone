@@ -57,7 +57,10 @@ public class Board {
 	}
 	
 	public static Card getCard(String string) {
+		
 		for (Card c : deck) {
+			System.out.println(string);
+			System.out.println(c.getName());
 			if (c.getName().equals(string)) {
 				return c;
 			}
@@ -117,11 +120,13 @@ public class Board {
 							card.setCardType(CardType.ROOM);
 							card.setName(typeName);
 							rooms.add(card);
+							deck.add(card);
 						}
 					} else if (type.equals("Weapon")) {
 						card.setCardType(CardType.WEAPON);
 						card.setName(typeName);
 						weapons.add(card);
+						deck.add(card);
 					} else if (type.equals("Player")) {
 						String name = typeName;
 						String color = arrOfStr[2];
@@ -143,7 +148,7 @@ public class Board {
 						card.setCardType(CardType.PERSON);
 						card.setName(typeName);
 						people.add(card);
-
+						deck.add(card);
 					} 
 					else {
 						throw new BadConfigFormatException();
@@ -391,13 +396,12 @@ public class Board {
 		randomPlayer = people.get(int_radomP);
 		randomRoom = rooms.get(int_radomR);
 
-		theAnswer.setSolutionWeapon(randomWeapon);
-		theAnswer.setSolutionPerson(randomPlayer);
-		theAnswer.setSolutionRoom(randomRoom);
+//		theAnswer.setSolutionWeapon(randomWeapon);
+//		theAnswer.setSolutionPerson(randomPlayer);
+//		theAnswer.setSolutionRoom(randomRoom);
+		
+		theAnswer.setSolution(randomPlayer, randomRoom, randomWeapon);
 
-		deck.addAll(getWeaponsCards());
-		deck.addAll(getPeopleCards());
-		deck.addAll(getRoomCards());
 		
 		for (int i = 0; i < deck.size(); i++) {
 			if (deck.get(i) != randomWeapon && deck.get(i) != randomPlayer && deck.get(i) != randomRoom) {
@@ -449,7 +453,7 @@ public class Board {
 		return room;
 	}
 
-	public ArrayList<Card> getDeck() {
+	public static ArrayList<Card> getDeck() {
 		return deck;
 	}
 
@@ -511,7 +515,6 @@ public class Board {
 	//(i.e. the player guessed who did it, where and with what).
 	public Boolean checkAccusation(Solution playerGuess) {
 		if(playerGuess.getSolutionPerson() == theAnswer.getSolutionPerson() && playerGuess.getSolutionRoom() == theAnswer.getSolutionRoom() && playerGuess.getSolutionWeapon() == theAnswer.getSolutionWeapon()) {
-			System.out.println("how many times");
 			accusationCheck = true;
 		} else {
 			accusationCheck = false;
