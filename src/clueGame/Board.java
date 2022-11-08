@@ -56,7 +56,7 @@ public class Board {
 		return theInstance;
 	}
 	
-	public Card getCard(String string) {
+	public static Card getCard(String string) {
 		for (Card c : deck) {
 			if (c.getName().equals(string)) {
 				return c;
@@ -64,6 +64,12 @@ public class Board {
 		}
 		//I don't like this \/
 		return null;
+	}
+	
+	public static Card getCard(BoardCell c) {
+		String name = c.getLabel();
+		Card card = getCard(name);
+		return card;
 	}
 
 	public void setConfigFiles(String layoutConfig, String setupConfig) {
@@ -207,6 +213,7 @@ public class Board {
 			in.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("Can't open file LAYOUT");
+			System.out.println(e);
 
 		}
 	}
@@ -276,7 +283,7 @@ public class Board {
 		return theCell.getAdjListCell();
 	}
 
-	public static Set<BoardCell> getTargets() {
+	public static  Set<BoardCell> getTargets() {
 		return targets;
 	}
 
@@ -305,7 +312,7 @@ public class Board {
 			// else add adjCell to visited list
 			visited.add(c);
 
-			if (c.isRoom()) {
+			if (c.isRoomCenter()) {
 				targets.add(c);
 				continue;
 			}
@@ -411,6 +418,12 @@ public class Board {
 
 	}
 	
+	public void setSolution(Card name, Card room, Card weapon) {
+		theAnswer.setSolutionPerson(name);
+		theAnswer.setSolutionRoom(room);
+		theAnswer.setSolutionWeapon(weapon);
+	}
+	
 	public Room getRoom(Character c) {
 		Room room = new Room();
 		room = roomMap.get(c);
@@ -498,7 +511,10 @@ public class Board {
 	//(i.e. the player guessed who did it, where and with what).
 	public Boolean checkAccusation(Solution playerGuess) {
 		if(playerGuess.getSolutionPerson() == theAnswer.getSolutionPerson() && playerGuess.getSolutionRoom() == theAnswer.getSolutionRoom() && playerGuess.getSolutionWeapon() == theAnswer.getSolutionWeapon()) {
+			System.out.println("how many times");
 			accusationCheck = true;
+		} else {
+			accusationCheck = false;
 		}
 		return accusationCheck;
 	}

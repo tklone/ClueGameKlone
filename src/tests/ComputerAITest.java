@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -92,23 +93,16 @@ class ComputerAITest {
 		tempTargets.clear();
 		
 		//if room in list that has not been seen, select it
+		board.findAllTargets(board.getCell(25, 16), 7);
 		board.calcTargets(computerPlayer.getLocation(), 7);
 		tempTargets = board.getTargets();
+		
+		board.findAllTargets(board.getCell(25, 16), 7);
+		BoardCell target = computerPlayer.selectTarget();
+		assertEquals(board.getCell(20, 12), target);
 		//Making sure that the room center is in the target list
-		for (BoardCell c : tempTargets) {
-			assertTrue(c.isRoomCenter());
-			Room currentRoom = board.getRoom(c);
-			String currentRoomName = currentRoom.getName();
-			Card currentCard = board.getCard(currentRoomName);
-			if (computerPlayer.getSeenCards().contains(currentCard)) {
-				
-			}
-		}
-		
-		//if (seenCards.contains(boardCell.getRoo())
 		
 		
-		//if room in list that has been seen, each target (including room) selected randomly
 		
 	}
 }

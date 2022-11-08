@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
@@ -16,12 +17,14 @@ public class ComputerPlayer extends Player {
 	private Card suggestRoom;
 	private Card suggestPerson;
 	private Card suggestWeapon;
-	
-	//It seems like this would be wrong because I don't know where we would call this
+
+	// It seems like this would be wrong because I don't know where we would call
+	// this
 	public Solution createSuggestion(Card room, Card person, Card weapon) {
 		Solution computerGuess = new Solution();
 
-		if (!hand.contains(room) && !hand.contains(person) && !hand.contains(weapon) && !seenCards.contains(room) && !seenCards.contains(person) && !seenCards.contains(weapon)) {
+		if (!hand.contains(room) && !hand.contains(person) && !hand.contains(weapon) && !seenCards.contains(room)
+				&& !seenCards.contains(person) && !seenCards.contains(weapon)) {
 			this.suggestRoom = room;
 			computerGuess.setSolutionRoom(room);
 			this.suggestPerson = person;
@@ -29,34 +32,39 @@ public class ComputerPlayer extends Player {
 			this.suggestWeapon = weapon;
 			computerGuess.setSolutionWeapon(weapon);
 		}
-		
+
 		return computerGuess;
 	}
-	
+
 	public Card getRoomSuggest() {
 		return suggestRoom;
 	}
-	
+
 	public Card getPersonSuggest() {
 		return suggestPerson;
 	}
-	
+
 	public Card getWeaponSuggest() {
 		return suggestWeapon;
 	}
-	
-	
-	public BoardCell selectTarget(Set <BoardCell> targets) {
-		//if not in seen cards or in hand, then it can be selected
-		//if multiple rooms, pick a random one
-		ArrayList <BoardCell> seenBoardCell = new ArrayList<>();
+
+	public BoardCell selectTarget() {
+		// if not in seen cards or in hand, then it can be selected
+		// if multiple rooms, pick a random one
+		ArrayList<BoardCell> seenBoardCell = new ArrayList<>();
 		BoardCell returnCell = null;
-		for (BoardCell c : targets) {
-			if (getSeenCards().contains(Board.getCard(c))) {
-				seenBoardCell.add(c);
+		
+		//Board.getTargets() is nothing, DNE
+		for (BoardCell c : Board.getTargets()) {
+			if (c.isRoomCenter()) {
+				Card currentCard = Board.getCard(c);
+				if (!seenCards.contains(currentCard)) {
+					updateSeen(currentCard);
+					seenBoardCell.add(c);
+				}
 			}
 		}
-		
+
 		
 		if (seenBoardCell.size() == 1) {
 			returnCell = seenBoardCell.get(0);
@@ -69,5 +77,5 @@ public class ComputerPlayer extends Player {
 		}
 		return returnCell;
 	}
-	
+
 }

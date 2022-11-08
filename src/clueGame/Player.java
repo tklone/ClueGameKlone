@@ -23,6 +23,10 @@ public abstract class Player {
 	public void updateHand(Card card) {
 		hand.add(card);
 	}
+	
+	public Set<Card> getSeenCards() {
+		return seenCards;
+	}
 
 	public void updateSeen(Card seenCard) {
 		seenCards.add(seenCard);
@@ -31,14 +35,15 @@ public abstract class Player {
 	public Card disproveSuggestion(Solution guess) {
 		ArrayList<Card> matchingCards = new ArrayList<>();
 
+		
 		for (Card c : hand) {
-			if (c.equals(guess.getSolutionPerson())) {
+			if (c == guess.getSolutionPerson()) {
 				matchingCards.add(c);
 			}
-			if (c.equals(guess.getSolutionRoom())) {
+			if (c == guess.getSolutionRoom()) {
 				matchingCards.add(c);
 			}
-			if (c.equals(guess.getSolutionWeapon())) {
+			if (c == guess.getSolutionWeapon()) {
 				matchingCards.add(c);
 			}
 		}

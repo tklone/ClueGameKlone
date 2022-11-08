@@ -15,10 +15,10 @@ public class Solution {
 //		ArrayList<Solution> fullSolution = new ArrayList<Solution>();
 //		Solution items = new Solution(room, weapon, person);
 //		fullSolution.add(items);
-		super();
-		this.room = room;
-		this.weapon = weapon;
-		this.person = person;
+//		super();
+//		this.room = room;
+//		this.weapon = weapon;
+//		this.person = person;
 	}
 	
 	public void setSolutionRoom(Card room) {
