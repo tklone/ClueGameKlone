@@ -11,8 +11,6 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
-import experiment.TestBoard;
-import experiment.TestBoardCell;
 
 public class Board {
 
@@ -147,6 +145,8 @@ public class Board {
 						card.setName(typeName);
 						people.add(card);
 						deck.add(card);
+						
+						setupReader.close();
 					} 
 					else {
 						throw new BadConfigFormatException();
@@ -211,9 +211,9 @@ public class Board {
 						throw new BadConfigFormatException();
 					}
 				}
+				in.close();
 			}
 
-			in.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("Can't open file LAYOUT");
 			System.out.println(e);

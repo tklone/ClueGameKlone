@@ -1,12 +1,8 @@
 package clueGame;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.awt.Color;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Random;
-import java.util.Set;
 
 public class ComputerPlayer extends Player {
 

@@ -1,6 +1,5 @@
 package clueGame;
 
-import java.util.ArrayList;
 
 public class Solution {
 	private Card room;

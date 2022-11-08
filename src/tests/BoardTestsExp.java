@@ -1,6 +1,5 @@
 package tests;
 
-import java.util.Iterator;
 import java.util.Set;
 
 import org.junit.Assert;

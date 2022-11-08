@@ -10,9 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import clueGame.Board;
 import clueGame.Card;
-import clueGame.CardType;
 import clueGame.Player;
-import clueGame.Solution;
 
 class PlayerTests {
 	private static Board board;

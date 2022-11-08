@@ -3,17 +3,14 @@ package tests;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import clueGame.Board;
 import clueGame.Card;
-import clueGame.Color;
 import clueGame.ComputerPlayer;
 import clueGame.HumanPlayer;
-import clueGame.Player;
 import clueGame.Solution;
 
 class SolutionTests {
