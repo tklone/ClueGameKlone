@@ -55,7 +55,7 @@ class SolutionTests {
 		//Suggestion that two players can disprove, correct player (based on starting with next player in list) returns answer
 	
 		ArrayList<Player> playerList = new ArrayList<Player>();
-		Solution suggestion = new Solution("Cookie Room", "Nutcracker", "Santa Claus");
+		Solution suggestion = new Solution(board.getCard("Cookie Room"), board.getCard("Nutcracker"), board.getCard("Santa Claus"));
 		
 		
 		

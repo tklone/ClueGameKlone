@@ -28,7 +28,7 @@ public class Board {
 	
 	private Map<Character, Room> roomMap = new HashMap<>();
 	
-	private ArrayList<Card> deck = new ArrayList<Card>();
+	private static ArrayList<Card> deck = new ArrayList<Card>();
 	private ArrayList<Card> deckNoSolution = new ArrayList<Card>();
 	private ArrayList<Card> weapons = new ArrayList<>();
 	private ArrayList<Card> people = new ArrayList<>();
@@ -54,6 +54,16 @@ public class Board {
 	// this method returns the only Board
 	public static Board getInstance() {
 		return theInstance;
+	}
+	
+	public Card getCard(String string) {
+		for (Card c : deck) {
+			if (c.getName().equals(string)) {
+				return c;
+			}
+		}
+		//I don't like this \/
+		return null;
 	}
 
 	public void setConfigFiles(String layoutConfig, String setupConfig) {
@@ -461,6 +471,7 @@ public class Board {
 	public Solution getTheAnswer() {
 		return theAnswer;
 	}
+	
 
 	public Boolean hasSolutionRoom() {
 		if (theAnswer.getSolutionRoom().getCardType().equals(CardType.ROOM)) {
@@ -507,9 +518,9 @@ public class Board {
 		
 		//index of the accusing player(being passed in), starting place
 		int playerIndex = players.indexOf(accuser);
-		
+		Boolean keepGoing = true;
 		//need to ask remaining players to disprove suggestion
-		while(true) {
+		while(keepGoing) {
 			//get a new index - increment then % by the number of players
 			playerIndex++;
 			playerIndex = playerIndex % players.size();
@@ -524,7 +535,9 @@ public class Board {
 			// if there's  a result, return it
 			if(disprove != null) {
 				accuser.updateSeen(disprove);
+				keepGoing = false;
 				return disprove;
+				
 			}
 			// otherwise, keep looking
 			

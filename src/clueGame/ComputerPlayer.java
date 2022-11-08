@@ -10,6 +10,9 @@ public class ComputerPlayer extends Player {
 		super(name, color, row, col);
 	}
 
+	private Card suggestRoom;
+	private Card suggestPerson;
+	private Card suggestWeapon;
 	
 	//It seems like this would be wrong because I don't know where we would call this
 	public Solution createSuggestion(Card room, Card person, Card weapon) {
@@ -29,12 +32,27 @@ public class ComputerPlayer extends Player {
 //		int randWeapons = randWeaponGuessNum.nextInt(upperBoundWeapons);
 
 		if (!hand.contains(room) && !hand.contains(person) && !hand.contains(weapon) && !seenCards.contains(room) && !seenCards.contains(person) && !seenCards.contains(weapon)) {
+			this.suggestRoom = room;
 			computerGuess.setSolutionRoom(room);
+			this.suggestPerson = person;
 			computerGuess.setSolutionPerson(person);
+			this.suggestWeapon = weapon;
 			computerGuess.setSolutionWeapon(weapon);
 		}
 		
 		return computerGuess;
+	}
+	
+	public Card getRoomSuggest() {
+		return suggestRoom;
+	}
+	
+	public Card getPersonSuggest() {
+		return suggestPerson;
+	}
+	
+	public Card getWeaponSuggest() {
+		return suggestWeapon;
 	}
 	
 	public BoardCell selectTarget() {
