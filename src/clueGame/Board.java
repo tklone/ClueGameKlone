@@ -146,7 +146,6 @@ public class Board {
 						people.add(card);
 						deck.add(card);
 						
-						setupReader.close();
 					} 
 					else {
 						throw new BadConfigFormatException();
@@ -211,7 +210,6 @@ public class Board {
 						throw new BadConfigFormatException();
 					}
 				}
-				in.close();
 			}
 
 		} catch (FileNotFoundException e) {
@@ -487,7 +485,6 @@ public class Board {
 		return theAnswer;
 	}
 	
-
 	public Boolean hasSolutionRoom() {
 		if (theAnswer.getSolutionRoom().getCardType().equals(CardType.ROOM)) {
 			roomCheck = true;
@@ -535,8 +532,17 @@ public class Board {
 			
 			//index of the accusing player(being passed in), starting place
 	public Card handleSuggestion(Solution suggestion, Player accuser) {
-		
+		System.out.println(accuser.getName());
 		int playerIndex = players.indexOf(accuser);
+		System.out.println(players.get(0).getName());
+		
+		int i = 0;
+		for (Player p : players) {
+			System.out.println("index: " + i + " name: " + p.getName());
+			i++;
+		}
+		
+		System.out.println("player index: " + playerIndex);
 		Boolean keepGoing = true;
 		//need to ask remaining players to disprove suggestion
 		while(keepGoing) {

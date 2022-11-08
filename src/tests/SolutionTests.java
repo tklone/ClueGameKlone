@@ -3,6 +3,7 @@ package tests;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -11,6 +12,7 @@ import clueGame.Board;
 import clueGame.Card;
 import clueGame.ComputerPlayer;
 import clueGame.HumanPlayer;
+import clueGame.Player;
 import clueGame.Solution;
 
 class SolutionTests {
@@ -81,6 +83,8 @@ class SolutionTests {
 
 	@Test
 	public void testHandleSuggestion() {
+		ArrayList <Player> players = board.getPlayers();
+		
 		HumanPlayer humanPlayer = new HumanPlayer("Santa Claus", "Red", 25, 8);
 		humanPlayer.updateHand(board.getCard("Poisoned Egg Nog"));
 		humanPlayer.updateHand(board.getCard("Candy Cane Crossbow"));
