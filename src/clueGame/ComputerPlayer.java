@@ -3,6 +3,7 @@ package clueGame;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Set;
 
 public class ComputerPlayer extends Player {
 
@@ -57,6 +58,10 @@ public class ComputerPlayer extends Player {
 	
 	
 	public BoardCell selectTarget() {
+		//if not in seen cards or in hand, then it can be selected
+		//if multiple rooms, pick a random one
+		
+		Set<BoardCell> targets = Board.getTargets();
 		return null;
 	}
 	

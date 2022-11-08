@@ -23,7 +23,7 @@ public class Board {
 	private String setupConfig;
 	private String layoutConfig;
 	
-	private Set<BoardCell> targets = new HashSet<BoardCell>();
+	private static Set<BoardCell> targets = new HashSet<BoardCell>();
 	private Set<BoardCell> visited = new HashSet<BoardCell>();
 	
 	private Map<Character, Room> roomMap = new HashMap<>();
@@ -276,7 +276,7 @@ public class Board {
 		return theCell.getAdjListCell();
 	}
 
-	public Set<BoardCell> getTargets() {
+	public static Set<BoardCell> getTargets() {
 		return targets;
 	}
 
