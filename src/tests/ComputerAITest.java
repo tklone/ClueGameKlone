@@ -97,10 +97,10 @@ class ComputerAITest {
 		//Making sure that the room center is in the target list
 		for (BoardCell c : tempTargets) {
 			assertTrue(c.isRoomCenter());
-			Room currentRoom = getRoom(c);
+			Room currentRoom = board.getRoom(c);
 			String currentRoomName = currentRoom.getName();
-			Card currentCard = getCard(currentRoomName);
-			if (computerPlayer.seenCards.contains(c.get)) {
+			Card currentCard = board.getCard(currentRoomName);
+			if (computerPlayer.getSeenCards().contains(currentCard)) {
 				
 			}
 		}
