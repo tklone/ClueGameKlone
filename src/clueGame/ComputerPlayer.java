@@ -55,6 +55,7 @@ public class ComputerPlayer extends Player {
 		return suggestWeapon;
 	}
 	
+	
 	public BoardCell selectTarget() {
 		return null;
 	}

@@ -3,11 +3,15 @@ package tests;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import clueGame.Board;
+import clueGame.BoardCell;
 import clueGame.Card;
 import clueGame.CardType;
 import clueGame.ComputerPlayer;
@@ -23,10 +27,14 @@ class ComputerAITest {
 		board.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
 		board.initialize();
 	}
+	
+	@BeforeEach
+	public static void setUpComputerPlayer() {
+		ComputerPlayer computerPlayer = new ComputerPlayer("The Grinch", "Green", 25, 16);
+	}
 
 	@Test
 	void testCreateSuggestion() {
-		ComputerPlayer computerPlayer = new ComputerPlayer("The Grinch", "Green", 25, 16);
 		
 		ArrayList <Card> tempHand = new ArrayList<>();
 		Card personCard = new Card();
@@ -46,9 +54,18 @@ class ComputerAITest {
 		computerPlayer.createSuggestion(board.getCard("Christmas Tree Factory"), board.getCard("Grinch"), board.getCard("String of Lights"));
 		assertTrue(!tempHand.contains(computerPlayer.getRoomSuggest()));
 		assertTrue(!tempHand.contains(computerPlayer.getPersonSuggest()));
-		assertTrue(!tempHand.contains(computerPlayer.getWeaponSuggest()));
-//		assertTrue(computerPlayer.getRoomSuggest() != board.getCard("Sleigh Storage"));
-		
+		assertTrue(!tempHand.contains(computerPlayer.getWeaponSuggest()));		
 	}
 
+	
+	@Test
+	void testSelectTargets() {
+		Set<BoardCell> tempTargets = new HashSet<BoardCell>();
+		board.calcTargets()
+		tempTargets = board.getTargets();
+		//if no rooms in list, select randomly
+		//if room in list that has not been seen, select it
+		//if room in list that has been seen, each target (including room) selected randomly
+		
+	}
 }

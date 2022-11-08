@@ -80,4 +80,8 @@ public abstract class Player {
 	public int getCol() {
 		return this.col;
 	}
+	
+	public BoardCell getLocation() {
+		return Board.getCell(this.row, this.col);
+	}
 }
