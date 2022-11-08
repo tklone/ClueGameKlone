@@ -49,11 +49,12 @@ public abstract class Player {
 		}
 
 		Random rand = new Random();
-		int randomNum = rand.nextInt(matchingCards.size());
-		
 		if (matchingCards.size() == 0) {
 			return null;
 		}
+		int randomNum = rand.nextInt(matchingCards.size());
+		
+		
 		
 		return matchingCards.get(randomNum);
 	}

@@ -83,8 +83,28 @@ class SolutionTests {
 	}
 
 	@Test
-	public void handleSuggestion() {
+	public void testHandleSuggestion() {
+		HumanPlayer humanPlayer = new HumanPlayer("Santa Claus", "Red", 25, 8);
+		humanPlayer.updateHand(board.getCard("Poisoned Egg Nog"));
+		humanPlayer.updateHand(board.getCard("Candy Cane Crossbow"));
+		humanPlayer.updateHand(board.getCard("Santa Claus"));
+		
+		ComputerPlayer computerPlayer1 = new ComputerPlayer("Mrs. Claus", "Pink", 10, 1);
+		computerPlayer1.updateHand(board.getCard("Reindeer Antler"));
+		computerPlayer1.updateHand(board.getCard("Bathroom"));
+		computerPlayer1.updateHand(board.getCard("Rudolph"));
+		
+		ComputerPlayer computerPlayer2 = new ComputerPlayer("Olive the Other Reindeer", "Blue", 1, 16);
+		computerPlayer2.updateHand(board.getCard("Buddy the Elf"));
+		computerPlayer2.updateHand(board.getCard("The Grinch"));
+		computerPlayer2.updateHand(board.getCard("Reindeer Barn"));
+		
 		// Suggestion no one can disprove returns null
+		Solution playerSuggestion = new Solution();
+		playerSuggestion.setSolution(board.getCard("Mrs. Claus"), board.getCard("Elve's Workshop"), board.getCard("String of Lights"));
+//		board.handleSuggestion(playerSuggestion, humanPlayer);
+		Object obj = board.handleSuggestion(playerSuggestion, humanPlayer);
+//		assertTrue(obj == null);
 		// Suggestion only suggesting player can disprove returns null
 		// Suggestion only human can disprove returns answer (i.e., card that disproves
 		// suggestion)
@@ -93,7 +113,7 @@ class SolutionTests {
 
 //		ArrayList<Player> playerList = new ArrayList<Player>();
 //		Solution suggestion = new Solution(board.getCard("Cookie Room"), board.getCard("Nutcracker"), board.getCard("Santa Claus"));
-		fail("Not yet implemented");
+//		fail("Not yet implemented");
 
 	}
 
