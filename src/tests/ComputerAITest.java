@@ -26,15 +26,13 @@ class ComputerAITest {
 		board = Board.getInstance();
 		board.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
 		board.initialize();
+
 	}
-	
-	@BeforeEach
-	public static void setUpComputerPlayer() {
-		ComputerPlayer computerPlayer = new ComputerPlayer("The Grinch", "Green", 25, 16);
-	}
+
 
 	@Test
 	void testCreateSuggestion() {
+		ComputerPlayer computerPlayer = new ComputerPlayer("The Grinch", "Green", 25, 16);
 		
 		ArrayList <Card> tempHand = new ArrayList<>();
 		Card personCard = new Card();
@@ -61,7 +59,9 @@ class ComputerAITest {
 	@Test
 	void testSelectTargets() {
 		Set<BoardCell> tempTargets = new HashSet<BoardCell>();
-		board.calcTargets()
+		ComputerPlayer computerPlayer = new ComputerPlayer("The Grinch", "Green", 25, 16);
+
+		board.calcTargets(computerPlayer.getLocation(), 1);
 		tempTargets = board.getTargets();
 		//if no rooms in list, select randomly
 		//if room in list that has not been seen, select it
