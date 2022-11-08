@@ -541,11 +541,13 @@ public class Board {
 	public Card handleSuggestion(Solution suggestion, Player accuser) {
 
 		ArrayList<Card> disproveCards = new ArrayList<>();
+		
 		for (Player p : players) {
 			//create .equals() 
 			if (!p.equals(accuser)) {
 				Card disprove = p.disproveSuggestion(suggestion);
 				if (disprove != null) {
+//					System.out.println(disprove.getName());
 					disproveCards.add(disprove);
 				}
 			} else {
@@ -553,11 +555,13 @@ public class Board {
 			}
 		}
 
-		for (Card c : disproveCards) {
-			System.out.println(c.getName());
-		}
+//		System.out.println(disproveCards.size());
+//		
+//		for (Card c : disproveCards) {
+//			System.out.println(c.getName());
+//		}
+		
 		if (disproveCards.size() > 0) {
-			
 			Random rand = new Random();
 			int randInt = rand.nextInt(disproveCards.size() - 1);
 			return disproveCards.get(randInt);

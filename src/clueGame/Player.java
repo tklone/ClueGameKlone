@@ -35,28 +35,39 @@ public abstract class Player {
 
 	public Card disproveSuggestion(Solution guess) {
 		ArrayList<Card> matchingCards = new ArrayList<>();
-
+		//For some reason, hand is empty here
+		
 		
 		for (Card c : hand) {
-			if (c == guess.getSolutionPerson()) {
+			System.out.println("card: " + c.getName());
+			System.out.println("Solution: " + guess.getSolutionRoom().getName() + ", " + guess.getSolutionWeapon().getName() + ", " + guess.getSolutionPerson().getName());
+			if (c.getName().equals(guess.getSolutionPerson().getName())) {
 				matchingCards.add(c);
+				System.out.println("ADDED PERSON");
 			}
-			if (c == guess.getSolutionRoom()) {
+			if (c.getName().equals(guess.getSolutionRoom().getName())) {
 				matchingCards.add(c);
+				System.out.println("ADDED ROOM");
 			}
-			if (c == guess.getSolutionWeapon()) {
+			if (c.getName().equals(guess.getSolutionWeapon().getName())) {
 				matchingCards.add(c);
+				System.out.println("ADDED WEAPON");
 			}
+			System.out.println();
+
 		}
 
 		Random rand = new Random();
+		
+//		for (Card c : matchingCards) {
+//			System.out.println(c.getName());
+//		}
+		
 		if (matchingCards.size() == 0) {
 			return null;
 		}
+		
 		int randomNum = rand.nextInt(matchingCards.size());
-		
-		
-		
 		return matchingCards.get(randomNum);
 	}
 

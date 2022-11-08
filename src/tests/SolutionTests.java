@@ -85,21 +85,28 @@ class SolutionTests {
 	public void testHandleSuggestion() {
 		ArrayList <Player> players = board.getPlayers();
 		
-		HumanPlayer humanPlayer = new HumanPlayer("Santa Claus", "Red", 25, 8);
+//		HumanPlayer humanPlayer = new HumanPlayer("Santa Claus", "Red", 25, 8);
+		Player humanPlayer = players.get(0);
+		Player computerPlayer1 = players.get(1);
+		Player computerPlayer2 = players.get(2);
+
 		humanPlayer.updateHand(board.getCard("Poisoned Egg Nog"));
 		humanPlayer.updateHand(board.getCard("Candy Cane Crossbow"));
 		humanPlayer.updateHand(board.getCard("Santa Claus"));
 		
-		ComputerPlayer computerPlayer1 = new ComputerPlayer("Mrs. Claus", "Pink", 10, 1);
+//		ComputerPlayer computerPlayer1 = new ComputerPlayer("Mrs. Claus", "Pink", 10, 1);
 		computerPlayer1.updateHand(board.getCard("Reindeer Antler"));
 		computerPlayer1.updateHand(board.getCard("Bathroom"));
 		computerPlayer1.updateHand(board.getCard("Rudolph"));
 		
-		ComputerPlayer computerPlayer2 = new ComputerPlayer("Olive the Other Reindeer", "Blue", 1, 16);
+//		ComputerPlayer computerPlayer2 = new ComputerPlayer("Olive the Other Reindeer", "Blue", 1, 16);
 		computerPlayer2.updateHand(board.getCard("Buddy the Elf"));
 		computerPlayer2.updateHand(board.getCard("The Grinch"));
 		computerPlayer2.updateHand(board.getCard("Reindeer Barn"));
 		
+		players.add(humanPlayer);
+		players.add(computerPlayer1);
+		players.add(computerPlayer2);
 		// Suggestion no one can disprove returns null
 		Solution playerSuggestion = new Solution();
 		playerSuggestion.setSolution(board.getCard("Mrs. Claus"), board.getCard("Elve's Workshop"), board.getCard("String of Lights"));
