@@ -244,9 +244,8 @@ public class Board {
 
 		}
 		// This is for seeing if cell is a walkway, then adding adj cells to adjList
-		else if (theCell.isWalkway() || theCell.getInitial() == 'X') {
-			if (i + 1 < numRows) {
-//				&& grid[i + 1][j].getInitial() != 'X') {
+		else if (theCell.isWalkway()) {
+			if (i + 1 < numRows && grid[i + 1][j].getInitial() != 'X') {
 				if (theCell.getDoorDirection() == DoorDirection.DOWN) {
 					theCell.addAdjacency(getRoom(grid[i + 1][j]).getCenterCell());
 					getRoom(grid[i + 1][j]).getCenterCell().addAdjacency(theCell);
@@ -254,8 +253,7 @@ public class Board {
 					theCell.addAdjacency(grid[i + 1][j]);
 				}
 			}
-			if (j + 1 < numCols) {
-//				&& grid[i][j + 1].getInitial() != 'X') {
+			if (j + 1 < numCols && grid[i][j + 1].getInitial() != 'X') {
 				if (theCell.getDoorDirection() == DoorDirection.RIGHT) {
 					theCell.addAdjacency(getRoom(grid[i][j + 1]).getCenterCell());
 					getRoom(grid[i][j + 1]).getCenterCell().addAdjacency(theCell);
@@ -263,8 +261,7 @@ public class Board {
 					theCell.addAdjacency(grid[i][j + 1]);
 				}
 			}
-			if (i - 1 >= 0) {
-//				&& grid[i - 1][j].getInitial() != 'X') {
+			if (i - 1 >= 0 && grid[i - 1][j].getInitial() != 'X') {
 				if (theCell.getDoorDirection() == DoorDirection.UP) {
 					theCell.addAdjacency(getRoom(grid[i - 1][j]).getCenterCell());
 					getRoom(grid[i - 1][j]).getCenterCell().addAdjacency(theCell);
@@ -272,8 +269,7 @@ public class Board {
 					theCell.addAdjacency(grid[i - 1][j]);
 				}
 			}
-			if (j - 1 >= 0) {
-//					&& grid[i][j - 1].getInitial() != 'X') {
+			if (j - 1 >= 0 && grid[i][j - 1].getInitial() != 'X') {
 				if (theCell.getDoorDirection() == DoorDirection.LEFT) {
 					theCell.addAdjacency(getRoom(grid[i][j - 1]).getCenterCell());
 					getRoom(grid[i][j - 1]).getCenterCell().addAdjacency(theCell);

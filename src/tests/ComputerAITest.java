@@ -90,16 +90,13 @@ class ComputerAITest {
 		
 		//if room in list that has not been seen, select it
 		BoardCell cellTest = computerPlayer.getLocation();
-		board.findAllTargets(board.getCell(25, 16), 7);
+		board.findAllTargets(board.getCell(24, 16), 7);
 		board.calcTargets(computerPlayer.getLocation(), 7);
 		tempTargets = board.getTargets();
 		
-		board.findAllTargets(board.getCell(25, 16), 7);
+		board.findAllTargets(board.getCell(24, 16), 7);
 		BoardCell target = computerPlayer.selectTarget();
-		assertEquals(board.getCell(20, 12), target);
-		//Making sure that the room center is in the target list
-		
-		
+		assertEquals(board.getCell(20, 12), target);		
 		
 	}
 }
