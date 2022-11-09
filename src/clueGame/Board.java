@@ -543,7 +543,7 @@ public class Board {
 		ArrayList<Card> disproveCards = new ArrayList<>();
 		
 		for (Player p : players) {
-			//create .equals() 
+				System.out.println("!" + accuser.getName());
 			if (!p.equals(accuser)) {
 				Card disprove = p.disproveSuggestion(suggestion);
 				if (disprove != null) {

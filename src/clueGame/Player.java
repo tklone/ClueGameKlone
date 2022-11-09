@@ -104,9 +104,7 @@ public abstract class Player {
 	}
 	
 	public Boolean equals(Player p) {
-		if (p.getName().equals(this.getName())) {
-			equalsBool = true;
-		}
-		return equalsBool;
+		return p.getName().equals(this.getName());
+		
 	}
 }

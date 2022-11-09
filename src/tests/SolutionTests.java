@@ -84,15 +84,16 @@ class SolutionTests {
 	@Test
 	public void testHandleSuggestion() {
 		ArrayList <Player> players = board.getPlayers();
+		ArrayList<Player> testPlayers = new ArrayList<>();
 		
 //		HumanPlayer humanPlayer = new HumanPlayer("Santa Claus", "Red", 25, 8);
-		Player humanPlayer = players.get(0);
+		Player computerPlayer = players.get(0);
 		Player computerPlayer1 = players.get(1);
 		Player computerPlayer2 = players.get(2);
 
-		humanPlayer.updateHand(board.getCard("Poisoned Egg Nog"));
-		humanPlayer.updateHand(board.getCard("Candy Cane Crossbow"));
-		humanPlayer.updateHand(board.getCard("Santa Claus"));
+		computerPlayer.updateHand(board.getCard("Poisoned Egg Nog"));
+		computerPlayer.updateHand(board.getCard("Candy Cane Crossbow"));
+		computerPlayer.updateHand(board.getCard("Santa Claus"));
 		
 //		ComputerPlayer computerPlayer1 = new ComputerPlayer("Mrs. Claus", "Pink", 10, 1);
 		computerPlayer1.updateHand(board.getCard("Reindeer Antler"));
@@ -104,18 +105,18 @@ class SolutionTests {
 		computerPlayer2.updateHand(board.getCard("The Grinch"));
 		computerPlayer2.updateHand(board.getCard("Reindeer Barn"));
 		
-		players.add(humanPlayer);
+		players.add(computerPlayer);
 		players.add(computerPlayer1);
 		players.add(computerPlayer2);
 		// Suggestion no one can disprove returns null
 		Solution playerSuggestion = new Solution();
 		playerSuggestion.setSolution(board.getCard("Mrs. Claus"), board.getCard("Elve's Workshop"), board.getCard("String of Lights"));
-		assertTrue(board.handleSuggestion(playerSuggestion, humanPlayer) == null);
+		assertTrue(board.handleSuggestion(playerSuggestion, computerPlayer) == null);
 		// Suggestion only suggesting player can disprove returns null
 		playerSuggestion.setSolution(board.getCard("Rudolph"), board.getCard("Bathroom"), board.getCard("Reindeer Antler"));
 		assertTrue(board.handleSuggestion(playerSuggestion, computerPlayer1) == null);
 		// Suggestion only human can disprove returns answer (i.e., card that disproves suggestion)
-		playerSuggestion.setSolution(board.getCard("Buddy the Elf"), board.getCard("Sleigh Storage"), board.getCard("Candy Cane Crossbow"));
+		playerSuggestion.setSolution(board.getCard("Olive the Other Reindeer"), board.getCard("Sleigh Storage"), board.getCard("Candy Cane Crossbow"));
 		assertEquals("Candy Cane Crossbow", board.handleSuggestion(playerSuggestion, computerPlayer1).getName());
 		// Suggestion that two players can disprove, correct player (based on starting
 		// with next player in list) returns answer
