@@ -89,6 +89,7 @@ class ComputerAITest {
 		tempTargets.clear();
 		
 		//if room in list that has not been seen, select it
+		BoardCell cellTest = computerPlayer.getLocation();
 		board.findAllTargets(board.getCell(25, 16), 7);
 		board.calcTargets(computerPlayer.getLocation(), 7);
 		tempTargets = board.getTargets();
