@@ -22,7 +22,6 @@ public class GameControlPanel extends JPanel {
 	 */
 	public GameControlPanel()  {
 		
-//		Button to make an accusation
 //		Display of the roll of the die
 //		Display of whose turn it is
 //		Display of guesses made by players and the result
@@ -34,47 +33,49 @@ public class GameControlPanel extends JPanel {
 		JPanel gameControlPanel = new JPanel();
 		gameControlPanel.setLayout(new GridLayout(2,1));
 		
-		JPanel controls = new JPanel();
-		controls.setLayout(new GridLayout(1,4));
-		
-		//Button to move to the next player
-		JPanel nextButton = createNextButton();
-		controls.add(nextButton, BorderLayout.EAST);
+		JPanel rightSide = new JPanel();
+		rightSide.setLayout(new GridLayout(1,4));
 
 		// make accusation button
 		JPanel accusationButton = createAccusationButton();
-		controls.add(accusationButton, BorderLayout.EAST);
+		rightSide.add(accusationButton, BorderLayout.WEST);
 
+		//Button to move to the next player
+		JPanel nextButton = createNextButton();
+		rightSide.add(nextButton, BorderLayout.EAST);
+		
+		gameControlPanel.add(rightSide, BorderLayout.NORTH);
 
-		JPanel JPanel0x2 = new JPanel();
-		JPanel0x2.setLayout(new GridLayout(1,2));
+		
+		JPanel textFields = new JPanel();
+		textFields.setLayout(new GridLayout(1,2));
 
 		// theGuess text field
 		JPanel textField = createGuess();
-		JPanel0x2.add(textField, BorderLayout.WEST);
+		textFields.add(textField, BorderLayout.WEST);
 
 		// theGuessResult text field
 		JPanel JPanel1x0x2 = createGuessResult();
-		JPanel0x2.add(JPanel1x0x2, BorderLayout.EAST);
+		textFields.add(JPanel1x0x2, BorderLayout.EAST);
 
-		gameControlPanel.add(controls, BorderLayout.NORTH);
-		gameControlPanel.add(JPanel0x2, BorderLayout.SOUTH);
+		gameControlPanel.add(textFields, BorderLayout.SOUTH);
 
 		add(gameControlPanel, BorderLayout.NORTH);
 	}
 	
+	// creates the Make Accusation button
+		private JPanel createAccusationButton() {
+			JPanel panel = new JPanel();
+			panel.setLayout(new GridLayout(1, 1));
+			panel.add(accusationButton);
+			return panel;
+		}
+		
 	// creates the NEXT! button
 	private JPanel createNextButton() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(1, 1));
 		panel.add(nextButton);
-		return panel;
-	}
-	// creates the Make Accusation button
-	private JPanel createAccusationButton() {
-		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(1, 1));
-		panel.add(accusationButton);
 		return panel;
 	}
 	
