@@ -39,6 +39,10 @@ public class GameControlPanel extends JPanel {
 		buttonsPanel.add(accusationButton, BorderLayout.WEST);
 		JPanel nextButton = createNextButton();
 		buttonsPanel.add(nextButton, BorderLayout.EAST);
+		
+		//adding turn and roll
+		JPanel turnTextField = new JPanel();
+		turnTextField.add(turnTextField, BorderLayout.WEST);
 
 		upperHalf.add(buttonsPanel, BorderLayout.EAST);
 
@@ -53,8 +57,8 @@ public class GameControlPanel extends JPanel {
 		JPanel theGuessResult = createGuessResult();
 		guessPanel.add(theGuessResult, BorderLayout.EAST);
 
-		gameControlPanel.add(guessPanel, BorderLayout.SOUTH);
 		gameControlPanel.add(upperHalf, BorderLayout.NORTH);
+		gameControlPanel.add(guessPanel, BorderLayout.SOUTH);
 
 		add(gameControlPanel);
 
