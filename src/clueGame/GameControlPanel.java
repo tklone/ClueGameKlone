@@ -14,6 +14,7 @@ public class GameControlPanel extends JPanel {
 
 	private static JTextField theGuess;
 	private static JTextField theGuessResult;
+	private static JTextField whoseTurn;
 	public static JButton nextButton = new JButton("NEXT!");
 	public static JButton accusationButton = new JButton("Make Accusation");
 
@@ -40,10 +41,19 @@ public class GameControlPanel extends JPanel {
 		JPanel nextButton = createNextButton();
 		buttonsPanel.add(nextButton, BorderLayout.EAST);
 		
-		//adding turn and roll
-		JPanel turnTextField = new JPanel();
-		turnTextField.add(turnTextField, BorderLayout.WEST);
-
+		//adding turn
+		JPanel turnPanel = new JPanel();
+		turnPanel.setLayout(new GridLayout(2, 1));
+		//adding roll
+		JPanel rollPanel = new JPanel();
+		rollPanel.setLayout(new GridLayout(1, 2));
+		
+		//turn
+		JPanel turnTextField = createTurnTextField();
+		turnPanel.add(turnTextField, BorderLayout.SOUTH);
+		
+		upperHalf.add(rollPanel, BorderLayout.WEST);
+		upperHalf.add(turnPanel, BorderLayout.WEST);
 		upperHalf.add(buttonsPanel, BorderLayout.EAST);
 
 		// guess panel
@@ -62,6 +72,15 @@ public class GameControlPanel extends JPanel {
 
 		add(gameControlPanel);
 
+	}
+	
+	private JPanel createTurnTextField() {
+		JPanel panel = new JPanel();
+		panel.setLayout(new GridLayout(1,1));
+		whoseTurn = new JTextField();
+		whoseTurn.setBorder(new TitledBorder("Whose Turn?"));
+		panel.add(whoseTurn);
+		return panel;
 	}
 
 	private JPanel createGuess() {
