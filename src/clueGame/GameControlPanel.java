@@ -37,26 +37,21 @@ public class GameControlPanel extends JPanel {
 		JPanel controls = new JPanel();
 		controls.setLayout(new GridLayout(1,4));
 		
-//		Button to move to the next player
-		
-		
-	
+		//Button to move to the next player
+		JPanel nextButton = createNextButton();
+		controls.add(nextButton, BorderLayout.EAST);
 
 		// make accusation button
 		JPanel accusationButton = createAccusationButton();
 		controls.add(accusationButton, BorderLayout.EAST);
-
-		// next button
-		JPanel JButton1x4x2 = createNextButton();
-		controls.add(JButton1x4x2, BorderLayout.EAST);
 
 
 		JPanel JPanel0x2 = new JPanel();
 		JPanel0x2.setLayout(new GridLayout(1,2));
 
 		// theGuess text field
-		JPanel JPanel1x0x1 = createGuess();
-		JPanel0x2.add(JPanel1x0x1, BorderLayout.WEST);
+		JPanel textField = createGuess();
+		JPanel0x2.add(textField, BorderLayout.WEST);
 
 		// theGuessResult text field
 		JPanel JPanel1x0x2 = createGuessResult();
@@ -73,15 +68,13 @@ public class GameControlPanel extends JPanel {
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(1, 1));
 		panel.add(nextButton);
-//		nextButton.addActionListener(nextListener);
 		return panel;
 	}
 	// creates the Make Accusation button
 	private JPanel createAccusationButton() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(1, 1));
-		panel.add(nextButton);
-//		nextButton.addActionListener(nextListener);
+		panel.add(accusationButton);
 		return panel;
 	}
 	
@@ -93,7 +86,6 @@ public class GameControlPanel extends JPanel {
 
 		theGuess = new JTextField(10);
 		theGuess.setBorder(new TitledBorder(new EtchedBorder(), "Guess"));
-		theGuess.setEditable(false);
 		panel.add(theGuess, BorderLayout.CENTER);
 
 		return panel;
@@ -107,7 +99,6 @@ public class GameControlPanel extends JPanel {
 
 		theGuessResult = new JTextField(10);
 		theGuessResult.setBorder(new TitledBorder(new EtchedBorder(), "Guess Result"));
-		theGuessResult.setEditable(false);
 		panel.add(theGuessResult, BorderLayout.CENTER);
 
 		return panel;
@@ -125,7 +116,6 @@ public class GameControlPanel extends JPanel {
 		frame.setSize(750, 180);  // size the frame
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
 		
-//		frame.add(panel, BorderLayout.CENTER);
 		frame.setVisible(true); // make it visible
 		
 		// test filling in the data
