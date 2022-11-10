@@ -25,6 +25,10 @@ public class GameControlPanel extends JPanel {
 		// larger panel to add smaller panels to
 		JPanel gameControlPanel = new JPanel();
 		gameControlPanel.setLayout(new GridLayout(1, 1));
+		
+		//upper half(turn, roll, and buttons)
+		JPanel upperHalf = new JPanel();
+		upperHalf.setLayout(new GridLayout(1, 4));
 
 		// next or accusations panel
 		JPanel buttonsPanel = new JPanel();
@@ -36,7 +40,7 @@ public class GameControlPanel extends JPanel {
 		JPanel nextButton = createNextButton();
 		buttonsPanel.add(nextButton, BorderLayout.EAST);
 
-		gameControlPanel.add(buttonsPanel, BorderLayout.EAST);
+		upperHalf.add(buttonsPanel, BorderLayout.EAST);
 
 		// guess panel
 		JPanel guessPanel = new JPanel();
@@ -50,6 +54,7 @@ public class GameControlPanel extends JPanel {
 		guessPanel.add(theGuessResult, BorderLayout.EAST);
 
 		gameControlPanel.add(guessPanel, BorderLayout.SOUTH);
+		gameControlPanel.add(upperHalf, BorderLayout.NORTH);
 
 		add(gameControlPanel);
 
