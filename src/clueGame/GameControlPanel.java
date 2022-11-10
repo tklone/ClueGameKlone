@@ -15,6 +15,7 @@ public class GameControlPanel extends JPanel {
 	private static JTextField theGuess;
 	private static JTextField theGuessResult;
 	private static JTextField whoseTurn;
+	private static JTextField roll;
 	public static JButton nextButton = new JButton("NEXT!");
 	public static JButton accusationButton = new JButton("Make Accusation");
 
@@ -52,8 +53,12 @@ public class GameControlPanel extends JPanel {
 		JPanel turnTextField = createTurnTextField();
 		turnPanel.add(turnTextField, BorderLayout.SOUTH);
 		
-		upperHalf.add(rollPanel, BorderLayout.WEST);
+		//roll
+		JPanel rollTextField = createRollTextField();
+		rollPanel.add(rollTextField, BorderLayout.EAST);
+		
 		upperHalf.add(turnPanel, BorderLayout.WEST);
+		upperHalf.add(rollPanel, BorderLayout.EAST);
 		upperHalf.add(buttonsPanel, BorderLayout.EAST);
 
 		// guess panel
@@ -80,6 +85,14 @@ public class GameControlPanel extends JPanel {
 		whoseTurn = new JTextField();
 		whoseTurn.setBorder(new TitledBorder("Whose Turn?"));
 		panel.add(whoseTurn);
+		return panel;
+	}
+	private JPanel createRollTextField() {
+		JPanel panel = new JPanel();
+		panel.setLayout(new GridLayout(1,1));
+		roll = new JTextField();
+		roll.setBorder(new TitledBorder("Roll"));
+		panel.add(roll);
 		return panel;
 	}
 
@@ -130,14 +143,15 @@ public class GameControlPanel extends JPanel {
 		frame.setVisible(true); // make it visible
 
 		// test filling in the data
-		panel.setTurn(new ComputerPlayer("Col. Mustard", "orange", 0, 0), 5);
+		panel.setTurn(new ComputerPlayer("Santa Claus", "red", 0, 0), 5);
 		panel.setGuess("I have no guess!");
 		panel.setGuessResult("So you have nothing?");
 	}
 
 	// Setters to update data
-	public void setTurn(Player computerPlayer, int numSteps) {
-
+	public void setTurn(Player computerPlayer, Integer numSteps) {
+		whoseTurn.setText(computerPlayer.getName());
+		roll.setText(numSteps.toString());
 	}
 
 	public void setGuess(String guess) {
