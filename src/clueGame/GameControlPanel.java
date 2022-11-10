@@ -24,7 +24,7 @@ public class GameControlPanel extends JPanel {
 
 		// larger panel to add smaller panels to
 		JPanel gameControlPanel = new JPanel();
-		gameControlPanel.setLayout(new GridLayout(1, 1));
+		gameControlPanel.setLayout(new GridLayout(2, 0));
 		
 		//upper half(turn, roll, and buttons)
 		JPanel upperHalf = new JPanel();
@@ -44,7 +44,7 @@ public class GameControlPanel extends JPanel {
 
 		// guess panel
 		JPanel guessPanel = new JPanel();
-		guessPanel.setLayout(new GridLayout(1, 2));
+		guessPanel.setLayout(new GridLayout(0, 2));
 
 		// adding theGuess and theGuessResult to left and right sides of panel,
 		// respectively
@@ -62,17 +62,19 @@ public class GameControlPanel extends JPanel {
 
 	private JPanel createGuess() {
 		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(1, 1));
+		panel.setLayout(new GridLayout(1, 0));
 		theGuess = new JTextField();
 		theGuess.setBorder(new TitledBorder(new EtchedBorder(), "Guess"));
+		panel.add(theGuess);
 		return panel;
 	}
 
 	private JPanel createGuessResult() {
 		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(1, 1));
+		panel.setLayout(new GridLayout(1, 0));
 		theGuessResult = new JTextField();
 		theGuessResult.setBorder(new TitledBorder(new EtchedBorder(), "Guess Result"));
+		panel.add(theGuessResult);
 		return panel;
 	}
 
