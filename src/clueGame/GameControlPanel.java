@@ -11,97 +11,51 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
 public class GameControlPanel extends JPanel {
-
+	
 	private static JTextField theGuess;
 	private static JTextField theGuessResult;
 	public static JButton nextButton = new JButton("NEXT!");
 	public static JButton accusationButton = new JButton("Make Accusation");
-
+	
+	
 	/**
 	 * Constructor for the panel, it does 90% of the work
 	 */
 	public GameControlPanel() {
-
-//		Display of the roll of the die
-//		Display of whose turn it is
-//		Display of guesses made by players and the result
-//		Be able to set or update the information in the fields with setters.
-
-		//layout with 2 rows, 0 because we can change as we go
-		setLayout(new GridLayout(2, 0));
-
-		// GameControlPanel
+		//larger panel to add smaller panels to
 		JPanel gameControlPanel = new JPanel();
-		gameControlPanel.setLayout(new GridLayout(2, 1));
-
-		JPanel rightSide = new JPanel();
-		rightSide.setLayout(new GridLayout(1, 4));
-
-		// make accusation button
-		JPanel accusationButton = createAccusationButton();
-		rightSide.add(accusationButton, BorderLayout.WEST);
-
-		// Button to move to the next player
-		JPanel nextButton = createNextButton();
-		rightSide.add(nextButton, BorderLayout.EAST);
-
-		gameControlPanel.add(rightSide, BorderLayout.NORTH);
-
-		JPanel textFields = new JPanel();
-		textFields.setLayout(new GridLayout(1, 2));
-
-		// theGuess text field
+		gameControlPanel.setLayout(new GridLayout(1,1));
+		
+		//guess panel
+		JPanel guessPanel = new JPanel();
+		guessPanel.setLayout(new GridLayout(1, 2));
+		
+		//adding theGuess and theGuessResult to left and right sides of panel, respectively
 		JPanel guessTextField = createGuess();
-		textFields.add(guessTextField, BorderLayout.WEST);
-
-		// theGuessResult text field
-		JPanel guessResultTextField = createGuessResult();
-		textFields.add(guessResultTextField, BorderLayout.EAST);
-
-		gameControlPanel.add(textFields, BorderLayout.SOUTH);
-
-		add(gameControlPanel, BorderLayout.NORTH);
+		guessPanel.add(guessTextField, BorderLayout.WEST);
+		JPanel theGuessResult = createGuessResult();
+		guessPanel.add(theGuessResult, BorderLayout.EAST);
+		
+		gameControlPanel.add(guessPanel, BorderLayout.SOUTH);
+	
+		//next or accusations panel
+		
+		
+		
 	}
-
-	// creates the Make Accusation button
-	private JPanel createAccusationButton() {
-		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(1, 1));
-		panel.add(accusationButton);
-		return panel;
-	}
-
-	// creates the NEXT! button
-	private JPanel createNextButton() {
-		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(1, 1));
-		panel.add(nextButton);
-		return panel;
-	}
-
-	// Make "Guess" text field
+	
 	private JPanel createGuess() {
-
 		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(1, 1));
-
-		theGuess = new JTextField(5);
+		panel.setLayout(new GridLayout(1,1));
+		theGuess = new JTextField();
 		theGuess.setBorder(new TitledBorder(new EtchedBorder(), "Guess"));
-		panel.add(theGuess, BorderLayout.CENTER);
-
 		return panel;
 	}
-
-	// creates "Guess Result" text field
 	private JPanel createGuessResult() {
-
 		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(1, 1));
-
-		theGuessResult = new JTextField(10);
+		panel.setLayout(new GridLayout(1,1));
+		theGuessResult = new JTextField();
 		theGuessResult.setBorder(new TitledBorder(new EtchedBorder(), "Guess Result"));
-		panel.add(theGuessResult, BorderLayout.CENTER);
-
 		return panel;
 	}
 
