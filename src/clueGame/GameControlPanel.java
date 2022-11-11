@@ -24,10 +24,12 @@ public class GameControlPanel extends JPanel {
 	 * Constructor for the panel, it does 90% of the work
 	 */
 	public GameControlPanel() {
+		
+		setLayout(new GridLayout(1,1));
 
 		// larger panel to add smaller panels to
 		JPanel gameControlPanel = new JPanel();
-		gameControlPanel.setLayout(new GridLayout(2, 0));
+		gameControlPanel.setLayout(new GridLayout(2, 1));
 		
 		//upper half(turn, roll, and buttons)
 		JPanel upperHalf = new JPanel();
@@ -43,12 +45,15 @@ public class GameControlPanel extends JPanel {
 		JPanel nextButton = createNextButton();
 		buttonsPanel.add(nextButton, BorderLayout.EAST);
 		
+		//left side of upper half
+		JPanel upperLeft = new JPanel();
+		
 		//adding turn
 		JPanel turnPanel = new JPanel();
-		turnPanel.setLayout(new GridLayout(2, 1));
+		turnPanel.setLayout(new GridLayout(1, 1));
 		//adding roll
 		JPanel rollPanel = new JPanel();
-		rollPanel.setLayout(new GridLayout(1, 2));
+		rollPanel.setLayout(new GridLayout(1, 1));
 		
 		//turn
 		JPanel turnTextField = createTurnTextField();
@@ -59,7 +64,7 @@ public class GameControlPanel extends JPanel {
 		rollPanel.add(rollTextField, BorderLayout.EAST);
 		
 		upperHalf.add(turnPanel, BorderLayout.WEST);
-		upperHalf.add(rollPanel, BorderLayout.EAST);
+		upperHalf.add(rollPanel, BorderLayout.WEST);
 		upperHalf.add(buttonsPanel, BorderLayout.EAST);
 
 		// guess panel
@@ -104,7 +109,7 @@ public class GameControlPanel extends JPanel {
 
 	private JPanel createGuess() {
 		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(1, 0));
+		panel.setLayout(new GridLayout(1, 1));
 		theGuess = new JTextField(10);
 		theGuess.setBorder(new TitledBorder(new EtchedBorder(), "Guess"));
 		panel.add(theGuess);
@@ -113,7 +118,7 @@ public class GameControlPanel extends JPanel {
 
 	private JPanel createGuessResult() {
 		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(1, 0));
+		panel.setLayout(new GridLayout(1, 1));
 		theGuessResult = new JTextField();
 		theGuessResult.setBorder(new TitledBorder(new EtchedBorder(), "Guess Result"));
 		panel.add(theGuessResult);
