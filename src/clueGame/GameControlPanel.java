@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
@@ -81,25 +82,30 @@ public class GameControlPanel extends JPanel {
 	
 	private JPanel createTurnTextField() {
 		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(1,1));
+		panel.setLayout(new GridLayout(2,1));
+		
+		JLabel label = new JLabel("Whose Turn?");
 		whoseTurn = new JTextField();
-		whoseTurn.setBorder(new TitledBorder("Whose Turn?"));
-		panel.add(whoseTurn);
+		panel.add(label, BorderLayout.NORTH);
+		panel.add(whoseTurn, BorderLayout.SOUTH);
 		return panel;
+	
 	}
 	private JPanel createRollTextField() {
 		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(1,1));
-		roll = new JTextField();
-		roll.setBorder(new TitledBorder("Roll"));
-		panel.add(roll);
+		panel.setLayout(new GridLayout(1,2));
+		
+		JLabel label = new JLabel("Roll:");
+		roll = new JTextField(10);
+		panel.add(label, BorderLayout.WEST);
+		panel.add(roll, BorderLayout.EAST);
 		return panel;
 	}
 
 	private JPanel createGuess() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(1, 0));
-		theGuess = new JTextField();
+		theGuess = new JTextField(10);
 		theGuess.setBorder(new TitledBorder(new EtchedBorder(), "Guess"));
 		panel.add(theGuess);
 		return panel;
