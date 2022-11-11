@@ -121,7 +121,7 @@ public class KnownCardsPanel extends JPanel {
 		panel.setLayout(new GridLayout(0, 1));
 		roomsInHandLabel = new JLabel("In Hand: ");
 
-		roomsInHand = new JTextField(10);
+		roomsInHand = new JTextField();
 		roomsInHand.setText("None");
 		panel.add(roomsInHandLabel, BorderLayout.NORTH);
 		panel.add(roomsInHand, BorderLayout.SOUTH);
@@ -137,7 +137,7 @@ public class KnownCardsPanel extends JPanel {
 		roomsSeenLabel = new JLabel("Seen: ");
 
 		// seen
-		roomsSeen = new JTextField(10);
+		roomsSeen = new JTextField();
 		roomsSeen.setText("None");
 		panel.add(roomsSeenLabel, BorderLayout.NORTH);
 		panel.add(roomsSeen, BorderLayout.SOUTH);
@@ -152,7 +152,7 @@ public class KnownCardsPanel extends JPanel {
 		panel.setLayout(new GridLayout(0, 1));
 		weaponsInHandLabel = new JLabel("In Hand: ");
 
-		weaponsInHand = new JTextField(10);
+		weaponsInHand = new JTextField();
 		weaponsInHand.setText("None");
 		panel.add(weaponsInHandLabel, BorderLayout.NORTH);
 		panel.add(weaponsInHand, BorderLayout.SOUTH);
@@ -167,7 +167,7 @@ public class KnownCardsPanel extends JPanel {
 		panel.setLayout(new GridLayout(0, 1));
 		weaponsSeenLabel = new JLabel("Seen: ");
 
-		weaponsSeen = new JTextField(10);
+		weaponsSeen = new JTextField();
 		weaponsSeen.setText("None");
 		panel.add(weaponsSeenLabel, BorderLayout.NORTH);
 		panel.add(weaponsSeen, BorderLayout.SOUTH);
