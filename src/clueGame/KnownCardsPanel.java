@@ -199,15 +199,15 @@ public class KnownCardsPanel extends JPanel {
 		if (knownCard.getCardType().equals(CardType.PERSON)) {
 			//Add card to IN HAND
 			personName.setText(knownCard.getName());
-			peopleInHandPanel.add(personName);
+			peopleInHandPanel.add(personName, BorderLayout.NORTH);
 		} else if (knownCard.getCardType().equals(CardType.WEAPON)) {
 			//Add card to IN HAND
 			weaponName.setText(knownCard.getName());
-			weaponsInHandPanel.add(weaponName);
+			weaponsInHandPanel.add(weaponName, BorderLayout.NORTH);
 		} else if (knownCard.getCardType().equals(CardType.ROOM)) {
 			//Add card to IN HAND
 			roomName.setText(knownCard.getName());
-			roomsInHandPanel.add(roomName);
+			roomsInHandPanel.add(roomName, BorderLayout.NORTH);
 		}
 	}
 
