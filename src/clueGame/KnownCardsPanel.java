@@ -1,4 +1,4 @@
-package tests;
+package clueGame;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -10,9 +10,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
-
-import clueGame.Card;
-import clueGame.Player;
 
 public class KnownCardsPanel extends JPanel {
 
