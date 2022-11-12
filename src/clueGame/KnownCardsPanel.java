@@ -1,4 +1,4 @@
-package tests;
+package clueGame;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -10,9 +10,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
-
-import clueGame.Card;
-import clueGame.Player;
 
 public class KnownCardsPanel extends JPanel {
 
@@ -36,6 +33,10 @@ public class KnownCardsPanel extends JPanel {
 	private static JPanel peopleSeenPanel;
 	private static JPanel roomsSeenPanel;
 	private static JPanel weaponsSeenPanel;
+	
+	private static JTextField personName;
+	private static JTextField weaponName;
+	private static JTextField roomName;
 
 	public KnownCardsPanel() {
 
@@ -191,12 +192,28 @@ public class KnownCardsPanel extends JPanel {
 
 	// set player cards in hand
 	public void setKnownCards(Card knownCard) {
-
+		peopleInHandPanel.removeAll();
+		roomsInHandPanel.removeAll();
+		weaponsInHandPanel.removeAll();
+		
+		if (knownCard.getCardType().equals(CardType.PERSON)) {
+			//Add card to IN HAND
+			personName.setText(knownCard.getName());
+			peopleInHandPanel.add(personName);
+		} else if (knownCard.getCardType().equals(CardType.WEAPON)) {
+			//Add card to IN HAND
+			weaponName.setText(knownCard.getName());
+			weaponsInHandPanel.add(weaponName);
+		} else if (knownCard.getCardType().equals(CardType.ROOM)) {
+			//Add card to IN HAND
+			roomName.setText(knownCard.getName());
+			roomsInHandPanel.add(roomName);
+		}
 	}
 
 	// update seen cards
 	public static void updateSeenCards(Card knownCard, Player disprovePlayer) {
-
+		
 	}
 
 }
