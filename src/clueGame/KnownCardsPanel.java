@@ -2,6 +2,7 @@ package clueGame;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -23,14 +24,13 @@ public class KnownCardsPanel extends JPanel {
 	private JPanel peoplePanel;
 	private JPanel roomsPanel;
 	private JPanel weaponsPanel;
-	
-	private Player player;
-	private Board board;
 
+	private Player humanPlayer;
+	private Board board;
 
 	public KnownCardsPanel(Board board) {
 		this.board = board;
-		player = board.getHumanPlayer();
+		humanPlayer = board.getHumanPlayer();
 
 		// JPanel 3 rows, 1 column
 		setLayout(new GridLayout(3, 1));
@@ -45,11 +45,9 @@ public class KnownCardsPanel extends JPanel {
 
 		add(roomsPanel);
 
-
 		weaponsPanel.setBorder(new TitledBorder(new EtchedBorder(), "Weapons"));
 
 		add(weaponsPanel, BorderLayout.SOUTH);
-
 
 	}
 
@@ -85,8 +83,7 @@ public class KnownCardsPanel extends JPanel {
 		roomsInHand = new JTextField();
 		roomsInHand.setText("None");
 		roomsInHand.setEditable(false);
-		
-		
+
 		panel.add(roomsInHandLabel, BorderLayout.NORTH);
 		panel.add(roomsInHand, BorderLayout.SOUTH);
 
@@ -105,22 +102,46 @@ public class KnownCardsPanel extends JPanel {
 	private JPanel createWeaponsPanel() {
 
 		JPanel panel = new JPanel();
+		
 		panel.setLayout(new GridLayout(0, 1));
 		JLabel weaponsInHandLabel = new JLabel("In Hand: ");
-
-		weaponsInHand = new JTextField();
-		weaponsInHand.setText("None");
 		panel.add(weaponsInHandLabel, BorderLayout.NORTH);
-		panel.add(weaponsInHand, BorderLayout.SOUTH);
 
+	
+
+		//Creating an ArrayList of the weapons in the human player's hand
+		ArrayList<Card> weaponsInHandList = new ArrayList<>();
+		for (Card c : humanPlayer.getHand()) {
+			if (c.getCardType().equals(CardType.WEAPON)) {
+				weaponsInHandList.add(c);
+			}
+		}
+
+		
+		//If there are no weapons in their hand, we want to print "none"
+		if (weaponsInHandList.size() == 0) {
+	
+			weaponsInHand = new JTextField();
+			weaponsInHand.setText("None");
+			panel.add(weaponsInHand, BorderLayout.SOUTH);
+			
+		} else { //Otherwise, set the text to whatever the name of the card it
+			for (Card c : weaponsInHandList) {
+
+				weaponsInHand = new JTextField();
+				weaponsInHand.setText(c.getName());
+				panel.add(weaponsInHand, BorderLayout.SOUTH);
+			}
+		}
+		
 		JLabel weaponsSeenLabel = new JLabel("Seen: ");
-
 		weaponsSeen = new JTextField();
 		weaponsSeen.setText("None");
 		panel.add(weaponsSeenLabel, BorderLayout.NORTH);
 		panel.add(weaponsSeen, BorderLayout.SOUTH);
-
+		
 		return panel;
+
 	}
 
 	public static void main(String[] args) {
@@ -132,7 +153,7 @@ public class KnownCardsPanel extends JPanel {
 		board.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
 		board.initialize();
 		board.dealCards();
-		
+
 		KnownCardsPanel panel = new KnownCardsPanel(board);
 		frame.add(panel, BorderLayout.CENTER);
 
@@ -142,27 +163,19 @@ public class KnownCardsPanel extends JPanel {
 
 	// set player cards in hand
 	/*
-	public void setKnownCards(Card knownCard) {
-		peopleInHandPanel.removeAll();
-		roomsInHandPanel.removeAll();
-		weaponsInHandPanel.removeAll();
-		
-		if (knownCard.getCardType().equals(CardType.PERSON)) {
-			//Add card to IN HAND
-			personName.setText(knownCard.getName());
-			peopleInHandPanel.add(personName, BorderLayout.NORTH);
-		} else if (knownCard.getCardType().equals(CardType.WEAPON)) {
-			//Add card to IN HAND
-			weaponName.setText(knownCard.getName());
-			weaponsInHandPanel.add(weaponName, BorderLayout.NORTH);
-		} else if (knownCard.getCardType().equals(CardType.ROOM)) {
-			//Add card to IN HAND
-			roomName.setText(knownCard.getName());
-			roomsInHandPanel.add(roomName, BorderLayout.NORTH);
-		}
-	}
-	*/
-
+	 * public void setKnownCards(Card knownCard) { peopleInHandPanel.removeAll();
+	 * roomsInHandPanel.removeAll(); weaponsInHandPanel.removeAll();
+	 * 
+	 * if (knownCard.getCardType().equals(CardType.PERSON)) { //Add card to IN HAND
+	 * personName.setText(knownCard.getName()); peopleInHandPanel.add(personName,
+	 * BorderLayout.NORTH); } else if
+	 * (knownCard.getCardType().equals(CardType.WEAPON)) { //Add card to IN HAND
+	 * weaponName.setText(knownCard.getName()); weaponsInHandPanel.add(weaponName,
+	 * BorderLayout.NORTH); } else if
+	 * (knownCard.getCardType().equals(CardType.ROOM)) { //Add card to IN HAND
+	 * roomName.setText(knownCard.getName()); roomsInHandPanel.add(roomName,
+	 * BorderLayout.NORTH); } }
+	 */
 
 	public void updatePanels() {
 		peoplePanel = createPeoplePanel();
