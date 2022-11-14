@@ -11,7 +11,9 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
-public class Board {
+import javax.swing.JPanel;
+
+public class Board extends JPanel{
 
 	private static BoardCell[][] grid;
 	private int numRows;
@@ -569,5 +571,9 @@ public class Board {
 		}
 		
 		return null;
+	}
+	
+	public Player getHumanPlayer() {
+		return players.get(0);
 	}
 }
