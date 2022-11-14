@@ -20,92 +20,52 @@ public class KnownCardsPanel extends JPanel {
 	private static JTextField roomsSeen;
 	private static JTextField weaponsSeen;
 
-	private JLabel peopleInHandLabel;
-	private JLabel roomsInHandLabel;
-	private JLabel weaponsInHandLabel;
-	private JLabel peopleSeenLabel;
-	private JLabel roomsSeenLabel;
-	private JLabel weaponsSeenLabel;
-
-	private JPanel peopleInHandPanel;
-	private JPanel roomsInHandPanel;
-	private JPanel weaponsInHandPanel;
-	private static JPanel peopleSeenPanel;
-	private static JPanel roomsSeenPanel;
-	private static JPanel weaponsSeenPanel;
+	private JPanel peoplePanel;
+	private JPanel roomsPanel;
+	private JPanel weaponsPanel;
 	
-	private static JTextField personName;
-	private static JTextField weaponName;
-	private static JTextField roomName;
+	private Player player;
+	private Board board;
 
-	public KnownCardsPanel() {
+
+	public KnownCardsPanel(Board board) {
+		this.board = board;
+		player = board.getHumanPlayer();
 
 		// JPanel 3 rows, 1 column
-		JPanel knownCards = new JPanel();
-		knownCards.setLayout(new GridLayout(3, 1));
+		setLayout(new GridLayout(3, 1));
+		setBorder(new TitledBorder(new EtchedBorder(), "Known Cards"));
 
-		// people
-		JPanel peoplePanel = new JPanel();
-		peoplePanel.setLayout(new GridLayout(2, 1));
+		updatePanels();
 		peoplePanel.setBorder(new TitledBorder(new EtchedBorder(), "People"));
-		peopleInHandPanel = createPeopleInHandPanel();
-		peopleSeenPanel = createPeopleSeenPanel();
-
-		peoplePanel.add(peopleInHandPanel, BorderLayout.NORTH);
-		peoplePanel.add(peopleSeenPanel, BorderLayout.SOUTH);
-
-		knownCards.add(peoplePanel, BorderLayout.NORTH);
+		add(peoplePanel);
 
 		// rooms
-		JPanel roomPanel = new JPanel();
-		roomPanel.setLayout(new GridLayout(2, 1));
-		roomPanel.setBorder(new TitledBorder(new EtchedBorder(), "Rooms"));
-		roomsInHandPanel = createRoomsInHandPanel();
-		roomsSeenPanel = createRoomsSeenPanel();
+		roomsPanel.setBorder(new TitledBorder(new EtchedBorder(), "Rooms"));
 
-		roomPanel.add(roomsInHandPanel, BorderLayout.NORTH);
-		roomPanel.add(roomsSeenPanel, BorderLayout.SOUTH);
+		add(roomsPanel);
 
-		knownCards.add(roomPanel, BorderLayout.CENTER);
 
-		// weapons
-		JPanel weaponPanel = new JPanel();
-		weaponPanel.setLayout(new GridLayout(2, 1));
-		weaponPanel.setBorder(new TitledBorder(new EtchedBorder(), "Weapons"));
-		weaponsInHandPanel = createWeaponsInHandPanel();
-		weaponsSeenPanel = createWeaponsSeenPanel();
+		weaponsPanel.setBorder(new TitledBorder(new EtchedBorder(), "Weapons"));
 
-		weaponPanel.add(weaponsInHandPanel, BorderLayout.NORTH);
-		weaponPanel.add(weaponsSeenPanel, BorderLayout.SOUTH);
+		add(weaponsPanel, BorderLayout.SOUTH);
 
-		knownCards.add(weaponPanel, BorderLayout.SOUTH);
-
-		add(knownCards);
 
 	}
 
 	// create people cards in hand
-	private JPanel createPeopleInHandPanel() {
+	private JPanel createPeoplePanel() {
 
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(0, 1)); // 1 column, 0 bc may change
-		peopleInHandLabel = new JLabel("In Hand: ");
+		JLabel peopleInHandLabel = new JLabel("In Hand: ");
 
 		peopleInHand = new JTextField();
 		peopleInHand.setText("None");
 		panel.add(peopleInHandLabel, BorderLayout.NORTH);
 		panel.add(peopleInHand, BorderLayout.SOUTH);
 
-		return panel;
-
-	}
-
-	// creates people seen cards
-	private JPanel createPeopleSeenPanel() {
-
-		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(0, 1));
-		peopleSeenLabel = new JLabel("Seen: ");
+		JLabel peopleSeenLabel = new JLabel("Seen: ");
 
 		peopleSeen = new JTextField(10);
 		peopleSeen.setText("None");
@@ -116,26 +76,21 @@ public class KnownCardsPanel extends JPanel {
 	}
 
 	// creates room cards in hand
-	private JPanel createRoomsInHandPanel() {
+	private JPanel createRoomsPanel() {
 
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(0, 1));
-		roomsInHandLabel = new JLabel("In Hand: ");
+		JLabel roomsInHandLabel = new JLabel("In Hand: ");
 
 		roomsInHand = new JTextField();
 		roomsInHand.setText("None");
+		roomsInHand.setEditable(false);
+		
+		
 		panel.add(roomsInHandLabel, BorderLayout.NORTH);
 		panel.add(roomsInHand, BorderLayout.SOUTH);
 
-		return panel;
-	}
-
-	// creates room seen cards
-	private JPanel createRoomsSeenPanel() {
-
-		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(0, 1));
-		roomsSeenLabel = new JLabel("Seen: ");
+		JLabel roomsSeenLabel = new JLabel("Seen: ");
 
 		// seen
 		roomsSeen = new JTextField();
@@ -147,26 +102,18 @@ public class KnownCardsPanel extends JPanel {
 	}
 
 	// creates weapon cards in hand
-	private JPanel createWeaponsInHandPanel() {
+	private JPanel createWeaponsPanel() {
 
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(0, 1));
-		weaponsInHandLabel = new JLabel("In Hand: ");
+		JLabel weaponsInHandLabel = new JLabel("In Hand: ");
 
 		weaponsInHand = new JTextField();
 		weaponsInHand.setText("None");
 		panel.add(weaponsInHandLabel, BorderLayout.NORTH);
 		panel.add(weaponsInHand, BorderLayout.SOUTH);
 
-		return panel;
-	}
-
-	// creates weapon seen cards
-	private JPanel createWeaponsSeenPanel() {
-
-		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(0, 1));
-		weaponsSeenLabel = new JLabel("Seen: ");
+		JLabel weaponsSeenLabel = new JLabel("Seen: ");
 
 		weaponsSeen = new JTextField();
 		weaponsSeen.setText("None");
@@ -181,9 +128,12 @@ public class KnownCardsPanel extends JPanel {
 		frame.setSize(180, 750); // size the frame
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
 
-		KnownCardsPanel panel = new KnownCardsPanel();
-		panel.setBorder(new TitledBorder(new EtchedBorder(), "Known Cards"));
-		panel.setLayout(new GridLayout(1, 1));
+		Board board = Board.getInstance();
+		board.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
+		board.initialize();
+		board.dealCards();
+		
+		KnownCardsPanel panel = new KnownCardsPanel(board);
 		frame.add(panel, BorderLayout.CENTER);
 
 		frame.setVisible(true); // make it visible
@@ -191,6 +141,7 @@ public class KnownCardsPanel extends JPanel {
 	}
 
 	// set player cards in hand
+	/*
 	public void setKnownCards(Card knownCard) {
 		peopleInHandPanel.removeAll();
 		roomsInHandPanel.removeAll();
@@ -210,10 +161,13 @@ public class KnownCardsPanel extends JPanel {
 			roomsInHandPanel.add(roomName, BorderLayout.NORTH);
 		}
 	}
+	*/
 
-	// update seen cards
-	public static void updateSeenCards(Card knownCard, Player disprovePlayer) {
-		
+
+	public void updatePanels() {
+		peoplePanel = createPeoplePanel();
+		roomsPanel = createRoomsPanel();
+		weaponsPanel = createWeaponsPanel();
+
 	}
-
 }
