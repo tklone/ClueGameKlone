@@ -1,3 +1,316 @@
+commit f632ca6e911b382632a26dc0f1fe85e5fa63b88f
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Fri Nov 11 17:08:32 2022 -0700
+
+    updated readme for C22A-1
+
+commit 32475dc720f993bfda5423ba132acabf841e785c
+Author: smithqd <qsmith@mines.edu>
+Date:   Fri Nov 11 15:46:14 2022 -0700
+
+    some refactoring
+
+commit 3b44fd72ea5f2b1fc13f74d4375ceb0d863d830e
+Author: smithqd <qsmith@mines.edu>
+Date:   Fri Nov 11 15:45:14 2022 -0700
+
+    known cards panel
+
+commit aedd598752cc94798f70e29a9b9c1cb8220783d3
+Author: smithqd <qsmith@mines.edu>
+Date:   Fri Nov 11 13:13:06 2022 -0700
+
+    fixed turn panel
+
+commit ab75f172cb06b47dc14fea66264897d74fccec65
+Author: smithqd <qsmith@mines.edu>
+Date:   Thu Nov 10 13:42:27 2022 -0700
+
+    added all jframe components, need to fix some aesthetics
+
+commit d1d6383276c668bb973489eab98ca0a62e498bf3
+Author: smithqd <qsmith@mines.edu>
+Date:   Thu Nov 10 13:31:16 2022 -0700
+
+    whose turn box added
+
+commit e9e5e212f254dd8c0c77d58f4ed9a6792c975e5b
+Author: smithqd <qsmith@mines.edu>
+Date:   Thu Nov 10 13:17:28 2022 -0700
+
+    update
+
+commit 90ef0bad2dd442dcca5345f674a13234c3398e04
+Author: smithqd <qsmith@mines.edu>
+Date:   Thu Nov 10 13:01:35 2022 -0700
+
+    guess boxes now show up
+
+commit 994b813315a1140be1b741e2b6104499a184021f
+Author: smithqd <qsmith@mines.edu>
+Date:   Thu Nov 10 12:14:14 2022 -0700
+
+    guess panel not showing up still??
+
+commit b42cf7fe549fea0b865a2a21a0f215147a84f831
+Author: smithqd <qsmith@mines.edu>
+Date:   Thu Nov 10 12:03:21 2022 -0700
+
+    still working on game control panel
+
+commit 959c3e9f6f962f80a8ebea11d23b706a8764adc7
+Author: smithqd <qsmith@mines.edu>
+Date:   Thu Nov 10 11:45:48 2022 -0700
+
+    i broke something
+
+commit af207a49ad1792cbead5671b38fe28ca5816f4fa
+Author: smithqd <qsmith@mines.edu>
+Date:   Thu Nov 10 11:01:14 2022 -0700
+
+    trying to get the sizing right
+
+commit b72f259887717ce3226625c0a85fbbfbcb7b9fbc
+Author: smithqd <qsmith@mines.edu>
+Date:   Thu Nov 10 10:44:03 2022 -0700
+
+    more refactoring
+
+commit ec5797f24b3edf864c3e1bb127f9b2f874f18dc5
+Author: smithqd <qsmith@mines.edu>
+Date:   Thu Nov 10 10:38:33 2022 -0700
+
+    some refactoring
+
+commit 0aafdcece45bb1c0fee0681600378d9ae0593ff7
+Author: smithqd <qsmith@mines.edu>
+Date:   Thu Nov 10 10:32:06 2022 -0700
+
+    got the guess and guess result to show up. Also got NEXT! button to show. Accusation button not working yet
+
+commit 45d442197ce728abe4226a69bb932c594ccd1eff
+Author: smithqd <qsmith@mines.edu>
+Date:   Thu Nov 10 09:57:28 2022 -0700
+
+    game control panel class
+
+commit faeb7c02aa0005096ed40d68c80e6b6ae2b9acd8
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Tue Nov 8 19:23:18 2022 -0700
+
+    got all tests to pass
+
+commit 47f8552c56825545cac4cbfc88b3c2d01fb1ac00
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Tue Nov 8 18:07:34 2022 -0700
+
+    fixed CompterAITest but broke BoardAdjTargetTest.  Basically, the starting point of our players don't have an adjacency list because they are X's
+
+commit b3d0ad60ae36811155400938cd4f505a8ef888ba
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Tue Nov 8 17:07:02 2022 -0700
+
+    Got all solution tests to pass
+
+commit cf175e7abcd99650020937381e94a27598dc906a
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Tue Nov 8 16:33:38 2022 -0700
+
+    handleSuggestion test still
+
+commit 52212d3d9a5cbfdf0d05aea628791dc53ab75cee
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Tue Nov 8 13:44:09 2022 -0700
+
+    working on handleSuggestion() test
+
+commit f5c058ef969c3106df979e4453cd500621d69b6f
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Tue Nov 8 13:12:54 2022 -0700
+
+    broke some things and then fixed them
+
+commit 4f8f008cb9595894bae5515544a7475fa1a7a8c9
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Tue Nov 8 12:53:55 2022 -0700
+
+    removed some things that don't matter
+
+commit be58a92c2d1e2231b8377143ed2d0505f49d98a5
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Tue Nov 8 12:46:33 2022 -0700
+
+    working on the handleSuggestion test
+
+commit fd6ce36ac1c570c80a243f18722a49d94a468107
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Tue Nov 8 12:17:14 2022 -0700
+
+    cleaned up code
+
+commit 2eca6e9f9637121891356ed128cc33769024351a
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Tue Nov 8 12:15:55 2022 -0700
+
+    got testCheckAccusation() to pass
+
+commit a8f7a0336efeb905ac0ebd7a30c804ba57d731f3
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Tue Nov 8 12:10:30 2022 -0700
+
+    got disproveSuggestion() to pass, and testCheckAccusation() to stop failing, and now it just fails which is good
+
+commit c61d69e7e92dd45ef687ad625ffc55e45ab130a0
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Nov 7 23:24:18 2022 -0700
+
+    pushing one more time before submitting
+
+commit 18a74acbe431298b94f3b0fd7133c4f4fa730060
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Nov 7 23:22:56 2022 -0700
+
+    working on solution tests
+
+commit 94732230da8d6c9ba3fc02c3dbf541def8f64e94
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Nov 7 21:44:02 2022 -0700
+
+    selectTarget() method
+
+commit e59b511db4c2eb4889e91e3b362274a5ffeed1d7
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Nov 7 21:20:44 2022 -0700
+
+    making tests still
+
+commit 02cb20c2c5e4a0e76108be212a21fc0222b3684f
+Author: smithqd <qsmith@mines.edu>
+Date:   Mon Nov 7 18:05:48 2022 -0700
+
+    selectTarget method in computerPlayer class
+
+commit bee875f815b807c80605d828eee1faae425ea753
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Nov 7 17:39:08 2022 -0700
+
+    took out beforeEach
+
+commit b4a8742bab0e35fc0bc790918fefbb5433bcb2d5
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Nov 7 17:37:32 2022 -0700
+
+    COMPTER DYING
+
+commit 31241839cdea8ca813cf107c57850a74e13678d0
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Nov 7 17:28:11 2022 -0700
+
+    Got createSuggestion() test to work
+
+commit 67681117911d9427203a98f61867b08982f3e956
+Merge: 93fd347 cb51e72
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Nov 7 16:59:13 2022 -0700
+
+    Merge branch 'master' of https://github.com/tklone/ClueGameKlone
+
+commit 93fd347ab560248380b4332b56c5ae4295aee982
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Nov 7 16:59:08 2022 -0700
+
+    changed to not rand in createSuggestion
+
+commit cb51e72260273327f0cd4a39718603da4d575ccb
+Author: smithqd <qsmith@mines.edu>
+Date:   Mon Nov 7 16:57:26 2022 -0700
+
+    solution constructor
+
+commit 4a1c11a47013921c325b3eb048e7c41fa3289b5f
+Author: smithqd <qsmith@mines.edu>
+Date:   Mon Nov 7 16:05:37 2022 -0700
+
+    solution tests for handle suggestion
+
+commit f0f91289f6fb6e76251cded7f7b00ddd4684192b
+Author: smithqd <qsmith@mines.edu>
+Date:   Mon Nov 7 15:48:03 2022 -0700
+
+    handle suggestion method and solution tests
+
+commit 1288f3bf563f957b49a69a1316cda3d8831d0e54
+Author: smithqd <qsmith@mines.edu>
+Date:   Mon Nov 7 14:44:48 2022 -0700
+
+    test stubs and pseudocode for handle suggestion
+
+commit dfa31de972b6d93f361dc1c58b8bd71cba37f9f4
+Author: smithqd <qsmith@mines.edu>
+Date:   Mon Nov 7 14:05:44 2022 -0700
+
+    adding test cases
+
+commit 6e7e88df5ea8025e66dd07de9ca3ee047437d769
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Nov 7 13:30:19 2022 -0700
+
+    made the JUnit test files
+
+commit a0bc29a7d05c87ddae29535b1385b74cf149eced
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Nov 7 13:28:54 2022 -0700
+
+    removing unncessary things
+
+commit 8e18fb4c91ff35af751396ea86e80b4cd9a96f8f
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Nov 7 13:28:26 2022 -0700
+
+    adding to the disprove method
+
+commit 6d734da95b05a7f6d9c8e5b99446214e94b282f4
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Nov 7 13:19:58 2022 -0700
+
+    adding things to disprove method
+
+commit 1c1acbf9ab89c79030f44ced572af0a1c550bcb0
+Author: smithqd <qsmith@mines.edu>
+Date:   Mon Nov 7 12:54:54 2022 -0700
+
+    added body to check accusation method
+
+commit ce971c775aed2966ade072ecd9ee8a6f8fb29ac3
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Nov 7 12:27:00 2022 -0700
+
+    still added some incorrect things prolly
+
+commit 303f58cc683af5e44ab54f3c3d287c56ef4ff336
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Nov 7 12:23:21 2022 -0700
+
+    I added some things but I think they're wrong
+
+commit b64eeb385489ecbff388daaadba5e7561c1c12b9
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Nov 7 12:08:26 2022 -0700
+
+    adding some small things
+
+commit 74ee0a4c030052c6cf186a95332e1761d5e5bf29
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Nov 7 11:14:00 2022 -0700
+
+    started making the classes for C21A
+
+commit d25d0d5ff5ab2c2f32b31fb444d13714f58c1578
+Author: smithqd <qsmith@mines.edu>
+Date:   Fri Nov 4 08:54:54 2022 -0600
+
+    added updated git log for submission
+
 commit 913c9e60c18abe609dfc20ace95b74bd748da2fd
 Author: smithqd <qsmith@mines.edu>
 Date:   Fri Nov 4 08:41:56 2022 -0600

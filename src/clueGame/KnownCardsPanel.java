@@ -33,6 +33,10 @@ public class KnownCardsPanel extends JPanel {
 	private static JPanel peopleSeenPanel;
 	private static JPanel roomsSeenPanel;
 	private static JPanel weaponsSeenPanel;
+	
+	private static JTextField personName;
+	private static JTextField weaponName;
+	private static JTextField roomName;
 
 	public KnownCardsPanel() {
 
@@ -188,12 +192,28 @@ public class KnownCardsPanel extends JPanel {
 
 	// set player cards in hand
 	public void setKnownCards(Card knownCard) {
-
+		peopleInHandPanel.removeAll();
+		roomsInHandPanel.removeAll();
+		weaponsInHandPanel.removeAll();
+		
+		if (knownCard.getCardType().equals(CardType.PERSON)) {
+			//Add card to IN HAND
+			personName.setText(knownCard.getName());
+			peopleInHandPanel.add(personName, BorderLayout.NORTH);
+		} else if (knownCard.getCardType().equals(CardType.WEAPON)) {
+			//Add card to IN HAND
+			weaponName.setText(knownCard.getName());
+			weaponsInHandPanel.add(weaponName, BorderLayout.NORTH);
+		} else if (knownCard.getCardType().equals(CardType.ROOM)) {
+			//Add card to IN HAND
+			roomName.setText(knownCard.getName());
+			roomsInHandPanel.add(roomName, BorderLayout.NORTH);
+		}
 	}
 
 	// update seen cards
 	public static void updateSeenCards(Card knownCard, Player disprovePlayer) {
-
+		
 	}
 
 }

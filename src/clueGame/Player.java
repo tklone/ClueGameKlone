@@ -13,6 +13,7 @@ public abstract class Player {
 	protected ArrayList<Card> hand = new ArrayList<>();
 	protected Set<Card> seenCards = new HashSet<Card>();
 	private Boolean equalsBool = false;
+	
 
 	public Player(String name, String color, int row, int col) {
 		this.name = name;
