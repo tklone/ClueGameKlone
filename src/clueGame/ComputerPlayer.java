@@ -57,6 +57,7 @@ public class ComputerPlayer extends Player {
 			if (c.isRoomCenter()) {
 				Card currentCard = Board.getCard(c);
 				if (!seenCards.contains(currentCard)) {
+					//I don't think we want to update seen here?
 					updateSeen(currentCard);
 					seenBoardCell.add(c);
 				}

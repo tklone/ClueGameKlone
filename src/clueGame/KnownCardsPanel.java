@@ -42,13 +42,9 @@ public class KnownCardsPanel extends JPanel {
 
 		// rooms
 		roomsPanel.setBorder(new TitledBorder(new EtchedBorder(), "Rooms"));
-
 		add(roomsPanel);
-
 		weaponsPanel.setBorder(new TitledBorder(new EtchedBorder(), "Weapons"));
-
 		add(weaponsPanel, BorderLayout.SOUTH);
-
 	}
 
 	// create people cards in hand
@@ -58,21 +54,22 @@ public class KnownCardsPanel extends JPanel {
 		panel.setLayout(new GridLayout(0, 1));
 		JLabel peopleInHandLabel = new JLabel("In Hand: ");
 		panel.add(peopleInHandLabel, BorderLayout.NORTH);
-
+		
+	
 		//Creating an ArrayList of the weapons in the human player's hand
 		ArrayList<Card> peopleInHandList = new ArrayList<>();
 		for (Card c : humanPlayer.getHand()) {
+			System.out.println(c.getName());
 			if (c.getCardType().equals(CardType.PERSON)) {
 				peopleInHandList.add(c);
 			}
 		}
 
-		
 		//If there are no weapons in their hand, we want to print "none"
 		if (peopleInHandList.size() == 0) {
 			peopleInHand = new JTextField();
 			peopleInHand.setText("None");
-			panel.add(weaponsInHand, BorderLayout.SOUTH);
+			panel.add(peopleInHand, BorderLayout.SOUTH);
 		} else { //Otherwise, set the text to whatever the name of the card it
 			for (Card c : peopleInHandList) {
 				peopleInHand = new JTextField();
@@ -81,12 +78,33 @@ public class KnownCardsPanel extends JPanel {
 			}
 		}
 		
+		
 		JLabel peopleSeenLabel = new JLabel("Seen: ");
-		peopleSeen = new JTextField();
-		peopleSeen.setText("None");
-		panel.add(peopleSeenLabel, BorderLayout.NORTH);
-		panel.add(peopleSeen, BorderLayout.SOUTH);
+		panel.add(peopleSeenLabel);
+		
+		ArrayList<Card> peopleInSeenList = new ArrayList<>();
+		System.out.println("SEEN CARDS");
 
+		for (Card c : humanPlayer.getSeenCards()) {
+			System.out.println(c.getName());
+			if (c.getCardType().equals(CardType.PERSON)) {
+				peopleInSeenList.add(c);
+			}
+		}
+
+		
+		//If there are no weapons in their hand, we want to print "none"
+		if (peopleInSeenList.size() == 0) {
+			peopleSeen = new JTextField();
+			peopleSeen.setText("None");
+			panel.add(peopleSeen, BorderLayout.SOUTH);
+		} else { //Otherwise, set the text to whatever the name of the card it
+			for (Card c : peopleInHandList) {
+				peopleSeen = new JTextField();
+				peopleSeen.setText(c.getName());
+				panel.add(peopleSeen, BorderLayout.SOUTH);
+			}
+		}
 
 		return panel;
 	}

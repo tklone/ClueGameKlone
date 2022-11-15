@@ -392,10 +392,6 @@ public class Board extends JPanel{
 		randomPlayer = people.get(int_radomP);
 		randomRoom = rooms.get(int_radomR);
 
-//		theAnswer.setSolutionWeapon(randomWeapon);
-//		theAnswer.setSolutionPerson(randomPlayer);
-//		theAnswer.setSolutionRoom(randomRoom);
-
 		theAnswer.setSolution(randomPlayer, randomRoom, randomWeapon);
 
 		for (int i = 0; i < deck.size(); i++) {
@@ -519,49 +515,23 @@ public class Board extends JPanel{
 		return accusationCheck;
 	}
 
-	// Process all the players in turn, each to see if they can dispute the
-	// suggestion. If return null,
-	// no player can dispute the suggestion. Otherwise return the first card that
-	// disputed the suggestion.
-
-	// Setup: Create a small number of players with known cards (simulated deal. But
-	// it’s not necessary to distribute all cards).
-	// Be sure to include the human.
-	// Players are queried in order. Some ways to test:
-	// Do a query that no players can disprove, ensure null returned.
-	// Do a query that only the suggesting player can disprove, ensure null.
-	// Players are queried in order. Do several queries with player 0 as accuser. Do
-	// a query that player 1 and 2 can disprove,
-	// ensure player 1 disproves (ensures players are not asked after one can
-	// disprove).
-	// The instructor's version of GameSolutionTest.java has a @BeforeAll method
-	// that creates a number of cards that can be used to
-	// create specific test conditions. Cards are static (only one copy needed, set
-	// up in @BeforeAll which is static)
-
-	// index of the accusing player(being passed in), starting place
+	
 	public Card handleSuggestion(Solution suggestion, Player accuser) {
 
 		ArrayList<Card> disproveCards = new ArrayList<>();
 		
 		for (Player p : players) {
-				System.out.println("!" + accuser.getName());
 			if (!p.equals(accuser)) {
 				Card disprove = p.disproveSuggestion(suggestion);
 				if (disprove != null) {
-//					System.out.println(disprove.getName());
 					disproveCards.add(disprove);
+					//We think this makes sense to have here but we aren't entirely sure??
+//					accuser.updateSeen(disprove, p.getColor());
 				}
 			} else {
 				continue;
 			}
 		}
-
-//		System.out.println(disproveCards.size());
-//		
-//		for (Card c : disproveCards) {
-//			System.out.println(c.getName());
-//		}
 		
 		if (disproveCards.size() > 0) {
 			Random rand = new Random();
