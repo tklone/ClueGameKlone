@@ -526,7 +526,7 @@ public class Board extends JPanel{
 				if (disprove != null) {
 					disproveCards.add(disprove);
 					//We think this makes sense to have here but we aren't entirely sure??
-//					accuser.updateSeen(disprove, p.getColor());
+					accuser.updateSeen(disprove, p.getColor());
 				}
 			} else {
 				continue;
