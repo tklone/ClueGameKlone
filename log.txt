@@ -1,3 +1,72 @@
+commit 468cd5af5b6afdfe3d5297459d489f69a4e78ef1
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Nov 14 17:53:07 2022 -0700
+
+    updating seen list
+
+commit 818cd7229e3abd537bdd28f7bad7ae378b295b0c
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Nov 14 17:27:22 2022 -0700
+
+    working on seen cards
+
+commit faaa3ceb20ed165f8a2208b31ba737bb68c438cc
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Nov 14 17:03:10 2022 -0700
+
+    got all types in hand to work
+
+commit 8a0d6afdf0ddb3af4ea4af0dcba8f9e0dda81c8f
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Nov 14 16:56:42 2022 -0700
+
+    adding weapons in hand
+
+commit d23a8356ee4d47eb1c486d98d6573a08de230487
+Merge: 8d3a492 65fcce5
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Nov 14 16:32:01 2022 -0700
+
+    Merge branch 'master' of https://github.com/tklone/ClueGameKlone
+
+commit 65fcce562bbc3cc5487527a7f8b382b67679dbdf
+Author: smithqd <qsmith@mines.edu>
+Date:   Mon Nov 14 16:31:49 2022 -0700
+
+    fixed known cards Panel with Caleb
+
+commit 313bad8720b27c03038d7e25401ff5eee6a2e81e
+Merge: 0ae01fd 03c3c5e
+Author: smithqd <qsmith@mines.edu>
+Date:   Mon Nov 14 15:10:19 2022 -0700
+
+    Merge branch 'main' of https://github.com/tklone/ClueGameKlone
+
+commit 8d3a4920e70eb1c03d8cc67a7e288e826fb56482
+Merge: 03c3c5e 0ae01fd
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Sat Nov 12 10:37:23 2022 -0700
+
+    Merge branch 'master' of https://github.com/tklone/ClueGameKlone
+
+commit 0ae01fd0c14057b811cb8c438cafbec7dcc4681f
+Author: smithqd <qsmith@mines.edu>
+Date:   Fri Nov 11 22:40:41 2022 -0700
+
+    moved known cards panel to right package
+
+commit 03c3c5e97d10ed033a6da91c40411e2a9c3373b2
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Fri Nov 11 17:48:15 2022 -0700
+
+    working on completing KnownCardsPanel
+
+commit 847a59da7defd65e9161f2a05c7663bd7845a629
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Fri Nov 11 17:38:53 2022 -0700
+
+    adding things to setKnownCards
+
 commit f632ca6e911b382632a26dc0f1fe85e5fa63b88f
 Author: Taylor Klone <tklone@mines.edu>
 Date:   Fri Nov 11 17:08:32 2022 -0700
