@@ -55,20 +55,38 @@ public class KnownCardsPanel extends JPanel {
 	private JPanel createPeoplePanel() {
 
 		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(0, 1)); // 1 column, 0 bc may change
+		panel.setLayout(new GridLayout(0, 1));
 		JLabel peopleInHandLabel = new JLabel("In Hand: ");
-
-		peopleInHand = new JTextField();
-		peopleInHand.setText("None");
 		panel.add(peopleInHandLabel, BorderLayout.NORTH);
-		panel.add(peopleInHand, BorderLayout.SOUTH);
 
+		//Creating an ArrayList of the weapons in the human player's hand
+		ArrayList<Card> peopleInHandList = new ArrayList<>();
+		for (Card c : humanPlayer.getHand()) {
+			if (c.getCardType().equals(CardType.PERSON)) {
+				peopleInHandList.add(c);
+			}
+		}
+
+		
+		//If there are no weapons in their hand, we want to print "none"
+		if (peopleInHandList.size() == 0) {
+			peopleInHand = new JTextField();
+			peopleInHand.setText("None");
+			panel.add(weaponsInHand, BorderLayout.SOUTH);
+		} else { //Otherwise, set the text to whatever the name of the card it
+			for (Card c : peopleInHandList) {
+				peopleInHand = new JTextField();
+				peopleInHand.setText(c.getName());
+				panel.add(peopleInHand, BorderLayout.SOUTH);
+			}
+		}
+		
 		JLabel peopleSeenLabel = new JLabel("Seen: ");
-
-		peopleSeen = new JTextField(10);
+		peopleSeen = new JTextField();
 		peopleSeen.setText("None");
 		panel.add(peopleSeenLabel, BorderLayout.NORTH);
 		panel.add(peopleSeen, BorderLayout.SOUTH);
+
 
 		return panel;
 	}
@@ -79,17 +97,31 @@ public class KnownCardsPanel extends JPanel {
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(0, 1));
 		JLabel roomsInHandLabel = new JLabel("In Hand: ");
-
-		roomsInHand = new JTextField();
-		roomsInHand.setText("None");
-		roomsInHand.setEditable(false);
-
 		panel.add(roomsInHandLabel, BorderLayout.NORTH);
-		panel.add(roomsInHand, BorderLayout.SOUTH);
 
+		//Creating an ArrayList of the weapons in the human player's hand
+		ArrayList<Card> roomsInHandList = new ArrayList<>();
+		for (Card c : humanPlayer.getHand()) {
+			if (c.getCardType().equals(CardType.ROOM)) {
+				roomsInHandList.add(c);
+			}
+		}
+
+		
+		//If there are no weapons in their hand, we want to print "none"
+		if (roomsInHandList.size() == 0) {
+			roomsInHand = new JTextField();
+			roomsInHand.setText("None");
+			panel.add(weaponsInHand, BorderLayout.SOUTH);
+		} else { //Otherwise, set the text to whatever the name of the card it
+			for (Card c : roomsInHandList) {
+				roomsInHand = new JTextField();
+				roomsInHand.setText(c.getName());
+				panel.add(roomsInHand, BorderLayout.SOUTH);
+			}
+		}
+		
 		JLabel roomsSeenLabel = new JLabel("Seen: ");
-
-		// seen
 		roomsSeen = new JTextField();
 		roomsSeen.setText("None");
 		panel.add(roomsSeenLabel, BorderLayout.NORTH);
@@ -102,12 +134,9 @@ public class KnownCardsPanel extends JPanel {
 	private JPanel createWeaponsPanel() {
 
 		JPanel panel = new JPanel();
-		
 		panel.setLayout(new GridLayout(0, 1));
 		JLabel weaponsInHandLabel = new JLabel("In Hand: ");
 		panel.add(weaponsInHandLabel, BorderLayout.NORTH);
-
-	
 
 		//Creating an ArrayList of the weapons in the human player's hand
 		ArrayList<Card> weaponsInHandList = new ArrayList<>();
@@ -120,14 +149,11 @@ public class KnownCardsPanel extends JPanel {
 		
 		//If there are no weapons in their hand, we want to print "none"
 		if (weaponsInHandList.size() == 0) {
-	
 			weaponsInHand = new JTextField();
 			weaponsInHand.setText("None");
 			panel.add(weaponsInHand, BorderLayout.SOUTH);
-			
 		} else { //Otherwise, set the text to whatever the name of the card it
 			for (Card c : weaponsInHandList) {
-
 				weaponsInHand = new JTextField();
 				weaponsInHand.setText(c.getName());
 				panel.add(weaponsInHand, BorderLayout.SOUTH);
