@@ -27,6 +27,8 @@ public class KnownCardsPanel extends JPanel {
 
 	private Player humanPlayer;
 	private Board board;
+	private Solution testSuggestion = new Solution();
+
 
 	ArrayList<Card> testSeenCardsList = new ArrayList<>();
 
@@ -34,7 +36,7 @@ public class KnownCardsPanel extends JPanel {
 		if (!testSeenCardsList.isEmpty()) {
 			testSeenCardsList.clear();
 		}
-
+		
 		Card testCard1 = new Card();
 		testCard1.setCardType(CardType.ROOM);
 		testCard1.setName("Bunkhouse");
@@ -50,6 +52,7 @@ public class KnownCardsPanel extends JPanel {
 		testSeenCardsList.add(testCard1);
 		testSeenCardsList.add(testCard2);
 		testSeenCardsList.add(testCard3);
+		
 	}
 
 	public KnownCardsPanel(Board board) {
@@ -69,6 +72,7 @@ public class KnownCardsPanel extends JPanel {
 		add(roomsPanel);
 		weaponsPanel.setBorder(new TitledBorder(new EtchedBorder(), "Weapons"));
 		add(weaponsPanel, BorderLayout.SOUTH);
+		
 	}
 
 	// create people cards in hand
@@ -241,6 +245,7 @@ public class KnownCardsPanel extends JPanel {
 	}
 
 	public static void main(String[] args) {
+		
 		JFrame frame = new JFrame(); // create the frame
 		frame.setSize(180, 750); // size the frame
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
@@ -249,7 +254,7 @@ public class KnownCardsPanel extends JPanel {
 		board.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
 		board.initialize();
 		board.dealCards();
-
+				
 		KnownCardsPanel panel = new KnownCardsPanel(board);
 		frame.add(panel, BorderLayout.CENTER);
 

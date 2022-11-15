@@ -527,6 +527,7 @@ public class Board extends JPanel{
 					disproveCards.add(disprove);
 					//We think this makes sense to have here but we aren't entirely sure??
 					accuser.updateSeen(disprove, p.getColor());
+					System.out.println("this is called");
 				}
 			} else {
 				continue;
