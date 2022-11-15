@@ -551,24 +551,25 @@ public class Board extends JPanel {
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-
+		
+		//For background, just make a rectangle
+		
+		int height = this.getHeight();
+		int width = this.getWidth();
+		int cellHeight = height / numCols;
+		int cellWidth = width / numRows;
+		
+		for (BoardCell[] cell : grid) {
+			for (BoardCell c : cell) {
+				c.drawCell(g, cellHeight, cellWidth);			
+			}
+		}
 	}
 
 	// maybe put this in paintComponent
-	public void drawBoardCell() {
-		for (BoardCell[] c : grid) {
-			for (BoardCell cell : c) {
-				if (cell.isRoom()) {
-					// color room gray
-					if (cell.isLabel()) {
-						JLabel roomLabel = new JLabel(cell.getLabel());
-						
-					}
-
-				}
-
-			}
-		}
-
-	}
+//	public void drawBoardCell() {
+//		
+//	}
+	
+	
 }
