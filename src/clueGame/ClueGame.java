@@ -5,6 +5,8 @@ import javax.swing.JPanel;
 
 public class ClueGame extends JFrame{
 
+	
+	
 	public ClueGame() {
 		// TODO Auto-generated constructor stub
 	}

@@ -1,5 +1,6 @@
 package clueGame;
 
+import java.awt.Graphics;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -11,9 +12,10 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class Board extends JPanel{
+public class Board extends JPanel {
 
 	private static BoardCell[][] grid;
 	private int numRows;
@@ -515,17 +517,16 @@ public class Board extends JPanel{
 		return accusationCheck;
 	}
 
-	
 	public Card handleSuggestion(Solution suggestion, Player accuser) {
 
 		ArrayList<Card> disproveCards = new ArrayList<>();
-		
+
 		for (Player p : players) {
 			if (!p.equals(accuser)) {
 				Card disprove = p.disproveSuggestion(suggestion);
 				if (disprove != null) {
 					disproveCards.add(disprove);
-					//We think this makes sense to have here but we aren't entirely sure??
+					// We think this makes sense to have here but we aren't entirely sure??
 					accuser.updateSeen(disprove, p.getColor());
 					System.out.println("this is called");
 				}
@@ -533,18 +534,41 @@ public class Board extends JPanel{
 				continue;
 			}
 		}
-		
+
 		if (disproveCards.size() > 0) {
 			Random rand = new Random();
 			int randInt = rand.nextInt(disproveCards.size() - 1);
 			return disproveCards.get(randInt);
 
 		}
-		
+
 		return null;
 	}
-	
+
 	public Player getHumanPlayer() {
 		return players.get(0);
+	}
+
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+
+	}
+
+	// maybe put this in paintComponent
+	public void drawBoardCell() {
+		for (BoardCell[] c : grid) {
+			for (BoardCell cell : c) {
+				if (cell.isRoom()) {
+					// color room gray
+					if (cell.isLabel()) {
+						JLabel roomLabel = new JLabel(cell.getLabel());
+						
+					}
+
+				}
+
+			}
+		}
+
 	}
 }
