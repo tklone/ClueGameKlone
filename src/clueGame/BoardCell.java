@@ -160,19 +160,24 @@ public class BoardCell {
 		int yStart = this.row * cellHeight;
 		if (this.isRoom()) {
 			// color cell GREEN
-			g.setColor(Color.GREEN);
-			g.drawRect(xStart, yStart, cellHeight, cellWidth);
+			Color green = new Color(57, 122, 64);
+			g.setColor(green);
+			g.fillRect(xStart, yStart, cellHeight, cellWidth);
 			if (this.isLabel()) {
 				//make the room label
 			}
 		}else if (this.isWalkway()) {
 			//color cell RED
-			g.setColor(Color.RED);
-			g.drawRect(xStart, yStart, cellDim, cellDim);
+			Color red = new Color(161, 57, 57);
+			g.setColor(red);
+			g.drawRect(xStart, yStart, cellWidth, cellHeight);
+			g.fillRect(xStart, yStart, cellWidth, cellHeight);
+//			g.drawRect(xStart, yStart, cellDim, cellDim);
 		} else if (this.isDoorway()) {
 			DoorDirection dd = this.getDoorDirection();
-			g.setColor(Color.RED);
-			g.drawRect(xStart, yStart, cellDim, cellDim);
+			Color red = new Color(161, 57, 57);
+			g.setColor(red);
+			g.fillRect(xStart, yStart, cellWidth, cellHeight);
 			if (dd == DoorDirection.DOWN) {
 				//make the SOUTH line thicker
 			} else if (dd == DoorDirection.UP) {

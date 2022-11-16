@@ -556,8 +556,8 @@ public class Board extends JPanel {
 		
 		int height = this.getHeight();
 		int width = this.getWidth();
-		int cellHeight = height / numCols;
-		int cellWidth = width / numRows;
+		int cellHeight = height / numRows;
+		int cellWidth = width / numCols;
 		
 		for (BoardCell[] cell : grid) {
 			for (BoardCell c : cell) {
