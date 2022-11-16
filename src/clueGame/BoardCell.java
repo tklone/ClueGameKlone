@@ -20,6 +20,7 @@ public class BoardCell {
 	public boolean isRoom = false;
 	public boolean isOccupied = false;
 	private Set<BoardCell> adjList = new HashSet<>();
+	private Boolean isSP = false;
 	
 	private int cellDim = 10;
 
@@ -81,11 +82,13 @@ public class BoardCell {
 
 	// secret passage bool and char
 	public Boolean isSecretPassage() {
+		isSP = false;
 		Character c = label.charAt(0);
-		if (label.length() != 1 && (c != '<' && c != '>' && c != '^' && c != 'v' && c != '#' && c != '*')) {
-			return true;
+		String currentLabel = this.getLabel();
+		if (currentLabel.equals("GE") || currentLabel.equals("EG") || currentLabel.equals("RS") || currentLabel.equals("SR")) {
+			isSP = true;
 		}
-		return false;
+		return isSP;
 	}
 
 	public char getSecretPassage() {
@@ -162,7 +165,7 @@ public class BoardCell {
 			// color cell GREEN
 			Color green = new Color(57, 122, 64);
 			g.setColor(green);
-			g.fillRect(xStart, yStart, cellHeight, cellWidth);
+			g.fillRect(xStart, yStart, cellWidth, cellHeight);
 			if (this.isLabel()) {
 				//make the room label
 			}
@@ -170,9 +173,9 @@ public class BoardCell {
 			//color cell RED
 			Color red = new Color(161, 57, 57);
 			g.setColor(red);
-			g.drawRect(xStart, yStart, cellWidth, cellHeight);
 			g.fillRect(xStart, yStart, cellWidth, cellHeight);
-//			g.drawRect(xStart, yStart, cellDim, cellDim);
+			g.setColor(Color.black);
+			g.drawRect(xStart, yStart, cellWidth, cellHeight);//			g.drawRect(xStart, yStart, cellDim, cellDim);
 		} else if (this.isDoorway()) {
 			DoorDirection dd = this.getDoorDirection();
 			Color red = new Color(161, 57, 57);
@@ -189,8 +192,15 @@ public class BoardCell {
 			}
 		} else if (this.getInitial() == 'X') {
 			//color cell BLACK
-		} else if (this.isSecretPassage()) {
+			g.setColor(Color.BLACK);
+			g.fillRect(xStart, yStart, cellWidth, cellHeight);
+		} 
+		if (this.isSecretPassage()) {
 			//color cell SOMETHING
+			System.out.println(this.getLabel());
+			Color blue = new Color(73, 141, 181);
+			g.setColor(blue);
+			g.fillRect(xStart, yStart, cellWidth, cellHeight);
 		}
 
 	}
