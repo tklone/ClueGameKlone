@@ -168,9 +168,6 @@ public class BoardCell {
 			Color green = new Color(57, 122, 64);
 			g.setColor(green);
 			g.fillRect(xStart, yStart, cellWidth, cellHeight);
-			if (this.isLabel()) {
-				
-			}
 		}
 		if (this.isWalkway()) {
 			//color cell RED

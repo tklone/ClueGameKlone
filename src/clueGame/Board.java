@@ -552,9 +552,7 @@ public class Board extends JPanel {
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		
-		//For background, just make a rectangle
-		
+				
 		int height = this.getHeight();
 		int width = this.getWidth();
 		int cellHeight = height / numRows;
@@ -562,17 +560,21 @@ public class Board extends JPanel {
 		
 		for (BoardCell[] cell : grid) {
 			for (BoardCell c : cell) {
-				c.drawCell(g, cellHeight, cellWidth);	
+				c.drawCell(g, cellHeight, cellWidth);
+				Room room = getRoom(c);
+				if (c.isLabel()) {
+					room.drawRoomLabel(g, cellHeight, cellWidth);
+				}
 			}
 		}
 		
 		for (Player p : players) {
 				p.drawPlayer(g, cellHeight, cellWidth);
-				
 			}
 		}
 		
 		
+	
 	}
 
 	

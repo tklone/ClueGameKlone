@@ -130,9 +130,7 @@ public abstract class Player {
 	public void drawPlayer(Graphics g, int cellHeight, int cellWidth) {
 		int xStart = this.col * cellWidth;
 		int yStart = this.row * cellHeight;
-		
-		System.out.println(this.color);
-		
+				
 		g.setColor(getColorPlayer(this.color));
 		g.fillOval(xStart + 5, yStart, cellHeight, cellHeight);
 		g.setColor(Color.BLACK);
