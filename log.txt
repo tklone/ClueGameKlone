@@ -1,3 +1,69 @@
+commit 2b5ba34dbcc9efad1c8d1314a124396ee38e2b53
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Tue Nov 15 18:48:39 2022 -0700
+
+    room labels
+
+commit 4d68d17108a8740fcab1b862ca5b38a8562b2174
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Tue Nov 15 18:46:38 2022 -0700
+
+    got the text to show up!
+
+commit 9b6c93b6cea0b58794627b8a2edc5e0c519b383f
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Tue Nov 15 18:33:30 2022 -0700
+
+    added players in their start locations
+
+commit aef37a60bfbb5f2ac8ee6b784caa66761a7c9fcd
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Tue Nov 15 18:11:55 2022 -0700
+
+    added doorways
+
+commit 17fde1be88cec0345e9e2b7b3632e87215a9d030
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Tue Nov 15 17:43:19 2022 -0700
+
+    changed layout file
+
+commit b31a6f0e8663e7bcaf9591c691b7172002202e5b
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Tue Nov 15 17:33:49 2022 -0700
+
+    added borders to walkway and added SP places
+
+commit 121b0746e64b40e64fb8a23f4574443dd28a3722
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Tue Nov 15 17:02:38 2022 -0700
+
+    made some new colors that are not obnoxious
+
+commit a960f936c27a95fc5fc04d8f89b183e7b02cf942
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Tue Nov 15 16:55:36 2022 -0700
+
+    getting the board printed and shtuff
+
+commit 7e786ef8268425aa1a0c3086a68283e9241c0f14
+Author: smithqd <qsmith@mines.edu>
+Date:   Tue Nov 15 13:38:57 2022 -0700
+
+    clueGame class
+
+commit 8e85455432a5c9a53fac7099a55b80238638b89b
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Tue Nov 15 13:17:57 2022 -0700
+
+    toyed around with some things
+
+commit fdcd45b09572dcfbf627157ae0553941afae223e
+Author: smithqd <qsmith@mines.edu>
+Date:   Tue Nov 15 12:31:47 2022 -0700
+
+    git log
+
 commit 468cd5af5b6afdfe3d5297459d489f69a4e78ef1
 Author: Taylor Klone <tklone@mines.edu>
 Date:   Mon Nov 14 17:53:07 2022 -0700
