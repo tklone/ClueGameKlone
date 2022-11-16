@@ -1,3 +1,9 @@
+commit 9cff10d87b542fbce268a858dfed0fe1c94d2091
+Author: smithqd <qsmith@mines.edu>
+Date:   Tue Nov 15 19:10:50 2022 -0700
+
+    tried to fix room text labels
+
 commit 2b5ba34dbcc9efad1c8d1314a124396ee38e2b53
 Author: Taylor Klone <tklone@mines.edu>
 Date:   Tue Nov 15 18:48:39 2022 -0700
