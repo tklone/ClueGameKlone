@@ -1,5 +1,6 @@
 package clueGame;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -422,7 +423,7 @@ public class Board extends JPanel {
 	}
 
 	public Room getRoom(Character c) {
-		Room room = new Room();
+		Room room;
 		room = roomMap.get(c);
 		return room;
 	}
@@ -561,15 +562,23 @@ public class Board extends JPanel {
 		
 		for (BoardCell[] cell : grid) {
 			for (BoardCell c : cell) {
-				c.drawCell(g, cellHeight, cellWidth);			
+				c.drawCell(g, cellHeight, cellWidth);	
 			}
 		}
+		
+//		for (BoardCell[] cell : grid) {
+//			for (BoardCell c : cell) {
+//				if (c.isLabel()) {
+//					Room room = getRoom(c);
+//					String name = room.getName();
+//					g.setColor(Color.BLACK);
+//					g.drawString(name, cellHeight, cellWidth);
+//				}
+//			}
+//		}
+		
+		
 	}
 
-	// maybe put this in paintComponent
-//	public void drawBoardCell() {
-//		
-//	}
-	
 	
 }

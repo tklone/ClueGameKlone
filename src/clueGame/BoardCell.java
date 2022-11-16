@@ -1,6 +1,7 @@
 package clueGame;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.util.HashSet;
 import java.util.Set;
@@ -156,7 +157,8 @@ public class BoardCell {
 	public boolean getOccupied() {
 		return isOccupied;
 	}
-
+	
+	
 	public void drawCell(Graphics g, int cellHeight, int cellWidth)  {
 		//Start positions
 		int xStart = this.col * cellWidth;
@@ -167,7 +169,7 @@ public class BoardCell {
 			g.setColor(green);
 			g.fillRect(xStart, yStart, cellWidth, cellHeight);
 			if (this.isLabel()) {
-				//make the room label
+				
 			}
 		}else if (this.isWalkway()) {
 			//color cell RED
@@ -176,28 +178,39 @@ public class BoardCell {
 			g.fillRect(xStart, yStart, cellWidth, cellHeight);
 			g.setColor(Color.black);
 			g.drawRect(xStart, yStart, cellWidth, cellHeight);//			g.drawRect(xStart, yStart, cellDim, cellDim);
-		} else if (this.isDoorway()) {
+		} 
+		if (this.isDoorway()) {
+			System.out.println("height " + cellHeight);
+			System.out.println("width " + cellWidth);
 			DoorDirection dd = this.getDoorDirection();
 			Color red = new Color(161, 57, 57);
 			g.setColor(red);
 			g.fillRect(xStart, yStart, cellWidth, cellHeight);
+			
+			g.setColor(Color.WHITE);
 			if (dd == DoorDirection.DOWN) {
 				//make the SOUTH line thicker
+				g.fillRect(xStart, yStart + 20, cellWidth, cellHeight - 20);
 			} else if (dd == DoorDirection.UP) {
 				//make the NORTH line thicker
+				g.fillRect(xStart, yStart, cellWidth, cellHeight - 20);
 			} else if (dd == DoorDirection.LEFT) {
 				//make the WEST line thicker
+				g.fillRect(xStart, yStart, cellWidth - 29, cellHeight);
 			} else if (dd == DoorDirection.RIGHT) {
 				//make the EAST line thicker
+				g.fillRect(xStart + 29, yStart, cellWidth, cellHeight);
 			}
-		} else if (this.getInitial() == 'X') {
+			g.setColor(Color.black);
+			g.drawRect(xStart, yStart, cellWidth, cellHeight);//	
+		} 
+		if (this.getInitial() == 'X') {
 			//color cell BLACK
 			g.setColor(Color.BLACK);
 			g.fillRect(xStart, yStart, cellWidth, cellHeight);
 		} 
 		if (this.isSecretPassage()) {
 			//color cell SOMETHING
-			System.out.println(this.getLabel());
 			Color blue = new Color(73, 141, 181);
 			g.setColor(blue);
 			g.fillRect(xStart, yStart, cellWidth, cellHeight);
