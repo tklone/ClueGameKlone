@@ -81,7 +81,7 @@ public class Room {
 		int yStart = row * cellHeight;
 				
 		g.setColor(Color.WHITE);
-		g.setFont(new Font("TimesRoman", Font.PLAIN, 12));
+		g.setFont(new Font("TimesRoman", Font.PLAIN, 15));
 		g.drawString(name, xStart + 5, yStart);
 		
 	}
