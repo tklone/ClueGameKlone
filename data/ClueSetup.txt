@@ -19,9 +19,9 @@ Weapon, Candy Cane Crossbow
 Weapon, Reindeer Antler
 Weapon, String of Lights
 //Players
-Player, Santa Claus, Red, 24, 8
-Player, Mrs. Claus, Pink, 10, 2
-Player, The Grinch, Green, 24, 16
-Player, Rudolph, Brown, 5, 26
-Player, Olive the Other Reindeer, Blue, 2, 16
-Player, Buddy the Elf, Yellow, 17, 2
+Player, Santa Claus, RED, 24, 8
+Player, Mrs. Claus, PINK, 10, 2
+Player, The Grinch, GREEN, 24, 16
+Player, Rudolph, BROWN, 5, 26
+Player, Olive the Other Reindeer, BLUE, 2, 16
+Player, Buddy the Elf, YELLOW, 17, 2

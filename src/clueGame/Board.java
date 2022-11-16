@@ -566,19 +566,14 @@ public class Board extends JPanel {
 			}
 		}
 		
-//		for (BoardCell[] cell : grid) {
-//			for (BoardCell c : cell) {
-//				if (c.isLabel()) {
-//					Room room = getRoom(c);
-//					String name = room.getName();
-//					g.setColor(Color.BLACK);
-//					g.drawString(name, cellHeight, cellWidth);
-//				}
-//			}
-//		}
+		for (Player p : players) {
+				p.drawPlayer(g, cellHeight, cellWidth);
+				
+			}
+		}
 		
 		
 	}
 
 	
-}
+

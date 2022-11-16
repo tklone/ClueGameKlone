@@ -171,7 +171,8 @@ public class BoardCell {
 			if (this.isLabel()) {
 				
 			}
-		}else if (this.isWalkway()) {
+		}
+		if (this.isWalkway()) {
 			//color cell RED
 			Color red = new Color(161, 57, 57);
 			g.setColor(red);
@@ -180,8 +181,6 @@ public class BoardCell {
 			g.drawRect(xStart, yStart, cellWidth, cellHeight);//			g.drawRect(xStart, yStart, cellDim, cellDim);
 		} 
 		if (this.isDoorway()) {
-			System.out.println("height " + cellHeight);
-			System.out.println("width " + cellWidth);
 			DoorDirection dd = this.getDoorDirection();
 			Color red = new Color(161, 57, 57);
 			g.setColor(red);
@@ -215,6 +214,7 @@ public class BoardCell {
 			g.setColor(blue);
 			g.fillRect(xStart, yStart, cellWidth, cellHeight);
 		}
+		
 
 	}
 

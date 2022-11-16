@@ -1,6 +1,7 @@
 package clueGame;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
@@ -81,6 +82,30 @@ public abstract class Player {
 	public void setColor(String color) {
 		this.color = color;
 	}
+	
+	public Color getColorPlayer(String color) {
+
+		if (color.equals("RED")) {
+			Color col = new Color(226, 30, 30);
+			return col;
+		} else if (color.equals("PINK")) {
+			Color col = new Color(250 , 50, 230);
+			return col;
+		} else if (color.equals("GREEN")) {
+			Color col = new Color(28, 196, 68);
+			return col;
+		} else if (color.equals("BROWN")) {
+			Color col = new Color(137, 91, 46);
+			return col;
+		} else if (color.equals("BLUE")) {
+			Color col = new Color(37, 170, 219);
+			return col;
+		} else if (color.equals("YELLOW")) {
+			Color col = new Color(243, 236, 16);
+			return col;
+		}
+		return 	Color.BLACK;
+	}
 
 	public String getColor() {
 		return color;
@@ -100,6 +125,19 @@ public abstract class Player {
 	
 	public Boolean equals(Player p) {
 		return p.getName().equals(this.getName());
-		
 	}
+	
+	public void drawPlayer(Graphics g, int cellHeight, int cellWidth) {
+		int xStart = this.col * cellWidth;
+		int yStart = this.row * cellHeight;
+		
+		System.out.println(this.color);
+		
+		g.setColor(getColorPlayer(this.color));
+		g.fillOval(xStart + 5, yStart, cellHeight, cellHeight);
+		g.setColor(Color.BLACK);
+		g.drawOval(xStart + 5, yStart,  cellHeight, cellHeight);
+
+	}
+	
 }
