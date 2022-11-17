@@ -2,6 +2,8 @@ package clueGame;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -24,14 +26,14 @@ public class GameControlPanel extends JPanel {
 	 * Constructor for the panel, it does 90% of the work
 	 */
 	public GameControlPanel() {
-		
-		setLayout(new GridLayout(1,1));
+
+		setLayout(new GridLayout(1, 1));
 
 		// larger panel to add smaller panels to
 		JPanel gameControlPanel = new JPanel();
 		gameControlPanel.setLayout(new GridLayout(2, 1));
-		
-		//upper half(turn, roll, and buttons)
+
+		// upper half(turn, roll, and buttons)
 		JPanel upperHalf = new JPanel();
 		upperHalf.setLayout(new GridLayout(1, 4));
 
@@ -44,25 +46,25 @@ public class GameControlPanel extends JPanel {
 		buttonsPanel.add(accusationButton, BorderLayout.WEST);
 		JPanel nextButton = createNextButton();
 		buttonsPanel.add(nextButton, BorderLayout.EAST);
-		
-		//left side of upper half
+
+		// left side of upper half
 		JPanel upperLeft = new JPanel();
-		
-		//adding turn
+
+		// adding turn
 		JPanel turnPanel = new JPanel();
 		turnPanel.setLayout(new GridLayout(1, 1));
-		//adding roll
+		// adding roll
 		JPanel rollPanel = new JPanel();
 		rollPanel.setLayout(new GridLayout(1, 1));
-		
-		//turn
+
+		// turn
 		JPanel turnTextField = createTurnTextField();
 		turnPanel.add(turnTextField, BorderLayout.SOUTH);
-		
-		//roll
+
+		// roll
 		JPanel rollTextField = createRollTextField();
 		rollPanel.add(rollTextField, BorderLayout.EAST);
-		
+
 		upperHalf.add(turnPanel, BorderLayout.WEST);
 		upperHalf.add(rollPanel, BorderLayout.WEST);
 		upperHalf.add(buttonsPanel, BorderLayout.EAST);
@@ -84,22 +86,23 @@ public class GameControlPanel extends JPanel {
 		add(gameControlPanel);
 
 	}
-	
+
 	private JPanel createTurnTextField() {
 		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(2,1));
-		
+		panel.setLayout(new GridLayout(2, 1));
+
 		JLabel label = new JLabel("Whose Turn?");
 		whoseTurn = new JTextField();
 		panel.add(label, BorderLayout.NORTH);
 		panel.add(whoseTurn, BorderLayout.SOUTH);
 		return panel;
-	
+
 	}
+
 	private JPanel createRollTextField() {
 		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(1,2));
-		
+		panel.setLayout(new GridLayout(1, 2));
+
 		JLabel label = new JLabel("Roll:");
 		roll = new JTextField(10);
 		panel.add(label, BorderLayout.WEST);
@@ -158,6 +161,45 @@ public class GameControlPanel extends JPanel {
 		panel.setGuess("I have no guess!");
 		panel.setGuessResult("So you have nothing?");
 	}
+
+	
+	// Next player button moves correctly through all computer players + human
+	class NextButtonListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// keeps track of when it is the human player turn
+		
+		
+			
+			// if is a human player
+
+				// if the humans turn is not finished and they have not received their roll
+				// roll their dice
+
+					// need to repaint if not the first turn of the human
+			
+				// if the dice is rolled but they have not chosen a target
+		
+			// if it is a computer players turn
+			// roll their dice and move player automatically
+			// wait for user to click next for the next computer player
+		
+
+				// make an accusation if the player before made an accusation that was not
+				// disproved
+				// and if the computer player does not have a card that can disprove
+
+				// if no then move player to random target in target list
+		
+				// if the location the computer moves to is a room, make a suggestion
+			
+				// go to the next player
+				// wait for user to click the next button
+		}
+			
+	}
+
 
 	// Setters to update data
 	public void setTurn(Player computerPlayer, Integer numSteps) {

@@ -36,8 +36,9 @@ public class ClueGame extends JFrame{
 						+ "murderer, room, and weapon of the crime first?", "ClueGame", splashScreen);
 		
 
-
-		//if user selects ok:
+		//When the splash screen is closed, we process the first players turn. 
+		//This typically should be the human player
+		//if(when) user selects ok:
 
 			// deal deck and display on the known cards
 			
