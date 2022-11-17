@@ -2,6 +2,8 @@ package clueGame;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -578,4 +580,30 @@ public class Board extends JPanel {
 		}
 	}
 
+	// Next player button moves correctly through all computer players + human
+		class NextButtonListener implements ActionListener {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// need to keep track of when its human player turn
+				
+				// if human player
+					// if the humans turn is not finished and they havent rolled
+					// roll dice
+				
+						//repaint if not the first turn of the human
+				
+					// if the dice is rolled but have not chosen a target
+			
+				// if it is a computer players turn
+				// roll their dice and move player automatically
+				// wait for user to click next for the next computer player?
+		
+				
+				
+					// go to the next player
+					// wait for user to click the next button
+			}
+				
+		}
 }

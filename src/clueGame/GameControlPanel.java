@@ -157,44 +157,16 @@ public class GameControlPanel extends JPanel {
 		frame.setVisible(true); // make it visible
 
 		// test filling in the data
-		panel.setTurn(new ComputerPlayer("Santa Claus", "red", 0, 0), 5);
+		panel.setTurn(new ComputerPlayer("Santa Claus", "red", 0, 0));
 		panel.setGuess("I have no guess!");
 		panel.setGuessResult("So you have nothing?");
 	}
 
-	
-	// Next player button moves correctly through all computer players + human
-	class NextButtonListener implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// need to keep track of when its human player turn
-			
-			// if human player
-				// if the humans turn is not finished and they havent rolled
-				// roll dice
-			
-					//repaint if not the first turn of the human
-			
-				// if the dice is rolled but have not chosen a target
-		
-			// if it is a computer players turn
-			// roll their dice and move player automatically
-			// wait for user to click next for the next computer player?
-	
-			
-			
-				// go to the next player
-				// wait for user to click the next button
-		}
-			
-	}
-
 
 	// Setters to update data
-	public void setTurn(Player computerPlayer, Integer numSteps) {
-		whoseTurn.setText(computerPlayer.getName());
-		roll.setText(numSteps.toString());
+	public void setTurn(Player player) { //, Integer numSteps
+		whoseTurn.setText(player.getName());
+//		roll.setText(numSteps.toString());
 	}
 
 	public void setGuess(String guess) {
