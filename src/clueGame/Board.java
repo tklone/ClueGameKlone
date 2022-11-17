@@ -552,30 +552,30 @@ public class Board extends JPanel {
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-				
+
 		int height = this.getHeight();
 		int width = this.getWidth();
 		int cellHeight = height / numRows;
 		int cellWidth = width / numCols;
-		
+
 		for (BoardCell[] cell : grid) {
 			for (BoardCell c : cell) {
 				c.drawCell(g, cellHeight, cellWidth);
+			}
+		}
+
+		for (Player p : players) {
+			p.drawPlayer(g, cellHeight, cellWidth);
+		}
+
+		for (BoardCell[] cell : grid) {
+			for (BoardCell c : cell) {
 				Room room = getRoom(c);
 				if (c.isLabel()) {
 					room.drawRoomLabel(g, cellHeight, cellWidth);
 				}
 			}
 		}
-		
-		for (Player p : players) {
-				p.drawPlayer(g, cellHeight, cellWidth);
-			}
-		}
-		
-		
-	
 	}
 
-	
-
+}
