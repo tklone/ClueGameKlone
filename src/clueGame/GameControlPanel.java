@@ -168,31 +168,21 @@ public class GameControlPanel extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// keeps track of when it is the human player turn
-		
-		
+			// need to keep track of when its human player turn
 			
-			// if is a human player
-
-				// if the humans turn is not finished and they have not received their roll
-				// roll their dice
-
-					// need to repaint if not the first turn of the human
+			// if human player
+				// if the humans turn is not finished and they havent rolled
+				// roll dice
 			
-				// if the dice is rolled but they have not chosen a target
+					//repaint if not the first turn of the human
+			
+				// if the dice is rolled but have not chosen a target
 		
 			// if it is a computer players turn
 			// roll their dice and move player automatically
-			// wait for user to click next for the next computer player
-		
-
-				// make an accusation if the player before made an accusation that was not
-				// disproved
-				// and if the computer player does not have a card that can disprove
-
-				// if no then move player to random target in target list
-		
-				// if the location the computer moves to is a room, make a suggestion
+			// wait for user to click next for the next computer player?
+	
+			
 			
 				// go to the next player
 				// wait for user to click the next button
