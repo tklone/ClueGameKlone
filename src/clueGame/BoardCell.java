@@ -20,9 +20,11 @@ public class BoardCell {
 	public Boolean doorway = false;
 	public boolean isRoom = false;
 	public boolean isOccupied = false;
+	private boolean isTarget = false;
+	private boolean isHighlighted = false;
 	private Set<BoardCell> adjList = new HashSet<>();
 	private Boolean isSP = false;
-	
+
 	private int cellDim = 10;
 
 	public BoardCell() {
@@ -86,7 +88,8 @@ public class BoardCell {
 		isSP = false;
 		Character c = label.charAt(0);
 		String currentLabel = this.getLabel();
-		if (currentLabel.equals("GE") || currentLabel.equals("EG") || currentLabel.equals("RS") || currentLabel.equals("SR")) {
+		if (currentLabel.equals("GE") || currentLabel.equals("EG") || currentLabel.equals("RS")
+				|| currentLabel.equals("SR")) {
 			isSP = true;
 		}
 		return isSP;
@@ -157,10 +160,9 @@ public class BoardCell {
 	public boolean getOccupied() {
 		return isOccupied;
 	}
-	
-	
-	public void drawCell(Graphics g, int cellHeight, int cellWidth, Set<BoardCell> isHighlighted)  {
-		//Start positions
+
+	public void drawCell(Graphics g, int cellHeight, int cellWidth, Set<BoardCell> isHighlighted) {
+		// Start positions
 		int xStart = this.col * cellWidth;
 		int yStart = this.row * cellHeight;
 		if (this.isRoom()) {
@@ -170,55 +172,82 @@ public class BoardCell {
 			g.fillRect(xStart, yStart, cellWidth, cellHeight);
 		}
 		if (this.isWalkway()) {
-			//color cell RED
+			// color cell RED
 			Color red = new Color(161, 57, 57);
 			g.setColor(red);
 			g.fillRect(xStart, yStart, cellWidth, cellHeight);
 			g.setColor(Color.black);
 			g.drawRect(xStart, yStart, cellWidth, cellHeight);
-		} 
+		}
 		if (this.isDoorway()) {
 			DoorDirection dd = this.getDoorDirection();
 			Color red = new Color(161, 57, 57);
 			g.setColor(red);
 			g.fillRect(xStart, yStart, cellWidth, cellHeight);
-			
+
 			g.setColor(Color.WHITE);
 			if (dd == DoorDirection.DOWN) {
-				//make the SOUTH line thicker
+				// make the SOUTH line thicker
 				g.fillRect(xStart, yStart + 20, cellWidth, cellHeight - 20);
 			} else if (dd == DoorDirection.UP) {
-				//make the NORTH line thicker
+				// make the NORTH line thicker
 				g.fillRect(xStart, yStart, cellWidth, cellHeight - 20);
 			} else if (dd == DoorDirection.LEFT) {
-				//make the WEST line thicker
+				// make the WEST line thicker
 				g.fillRect(xStart, yStart, cellWidth - 29, cellHeight);
 			} else if (dd == DoorDirection.RIGHT) {
-				//make the EAST line thicker
+				// make the EAST line thicker
 				g.fillRect(xStart + 29, yStart, cellWidth, cellHeight);
 			}
 			g.setColor(Color.black);
-			g.drawRect(xStart, yStart, cellWidth, cellHeight);//	
-		} 
+			g.drawRect(xStart, yStart, cellWidth, cellHeight);//
+		}
 		if (this.getInitial() == 'X') {
-			//color cell BLACK
+			// color cell BLACK
 			g.setColor(Color.BLACK);
 			g.fillRect(xStart, yStart, cellWidth, cellHeight);
-		} 
+		}
 		if (this.isSecretPassage()) {
-			//color cell SOMETHING
+			// color cell SOMETHING
 			Color blue = new Color(73, 141, 181);
 			g.setColor(blue);
 			g.fillRect(xStart, yStart, cellWidth, cellHeight);
 		}
-		if (isHighlighted.contains(this)) {  //Maybe make a getHighlightedCells method
+//		if (isHighlighted.contains(this)) {  //Maybe make a getHighlightedCells method
+
+		// add a conditional if cell currently on, then set colors
+//		if (Board.getInstance().getTargets().contains(this)) {
+//			Color cyan = new Color(52, 235, 229);
+//			g.setColor(cyan);
+//			g.fillRect(xStart, yStart, cellWidth, cellHeight);
+//			g.setColor(Color.BLACK);
+//			g.drawRect(xStart, yStart, cellWidth, cellHeight);
+//		}
+//		}
+
+	}
+	// bool isTarget to get
+	// if contains the cell we are on
+	// tell board to repaint after we get the targets
+	public boolean isTarget() {
+		if(Board.getInstance().getTargets().contains(this)) {
+			isTarget = true;
+		}
+		return isTarget;
+	}
+	
+	public void highlightCell(Graphics g, int cellHeight, int cellWidth) {
+		
+		if(isHighlighted.contains(this)) {
+			int xStart = this.col * cellWidth;
+			int yStart = this.row * cellHeight;
+			
 			Color cyan = new Color(52, 235, 229);
 			g.setColor(cyan);
 			g.fillRect(xStart, yStart, cellWidth, cellHeight);
 			g.setColor(Color.BLACK);
 			g.drawRect(xStart, yStart, cellWidth, cellHeight);
 		}
-
 	}
 
 }

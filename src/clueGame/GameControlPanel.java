@@ -175,4 +175,7 @@ public class GameControlPanel extends JPanel{
 	public void setGuessResult(String guessResult) {
 		theGuessResult.setText(guessResult);
 	}
+//	public void setRoll(Board roll) {
+//		roll.setText(roll);
+//	}
 }
