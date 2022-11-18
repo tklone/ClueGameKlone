@@ -175,7 +175,7 @@ public class BoardCell {
 			g.setColor(red);
 			g.fillRect(xStart, yStart, cellWidth, cellHeight);
 			g.setColor(Color.black);
-			g.drawRect(xStart, yStart, cellWidth, cellHeight);//			g.drawRect(xStart, yStart, cellDim, cellDim);
+			g.drawRect(xStart, yStart, cellWidth, cellHeight);
 		} 
 		if (this.isDoorway()) {
 			DoorDirection dd = this.getDoorDirection();
