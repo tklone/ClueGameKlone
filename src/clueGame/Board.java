@@ -615,28 +615,45 @@ public class Board extends JPanel {
 
 		public void mouseClicked(MouseEvent e) {
 			BoardCell clickedCell = null;
+			Solution testSuggestion = new Solution(getCard("Toy Room"), getCard("Nutcracker"), getCard("Santa Claus"));
 			JPanel panel = new JPanel();
-			
-			//is it human plaayer turn
-			//if yes (if no, error message, end)
-			//clicked on target?
-			//if yes
-			//move player
-			//in room? (if no end)
-			//if yes, handlesuggestion
-			//update result (then end)
+
+			Component click = panel.getComponentAt(e.getPoint());
 
 			// check if the click is in the board panel with valid choice
 			for (int row = 0; row < numCols; row++) {
 				for (int col = 0; col < numRows; col++) {
-					Component click = panel.getComponentAt(e.getPoint());
-//					if(grid[row][col] == panel.contains(e.getPoint())) {
-//						// if on the board, is a valid choice
-//						validClick = true;
-//						clickedCell = grid[row][col];
-//					}
+
+					if (panel.contains(e.getPoint())) {
+						// if on the board, is a valid choice
+						validClick = true;
+						clickedCell = grid[row][col];
+					}
 				}
 			}
+			
+			Player currentPlayer = players.get(0);
+			if (currentPlayer instanceof HumanPlayer) {
+				System.out.println("It's not your turn!");
+			} else if (!(currentPlayer instanceof HumanPlayer)) {
+				if (targets.contains(clickedCell)) {
+					currentPlayer.updatePosition(clickedCell);
+				} else {
+					// Clicked cell not in hand
+
+				}
+
+				if (clickedCell.isRoom()) {
+					handleSuggestion(testSuggestion, currentPlayer);
+				} else {
+					// Needs to end event
+				}
+			}
+
+			// update result (then end)
+
+		
+
 		}
 
 	}
