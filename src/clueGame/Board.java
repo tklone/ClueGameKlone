@@ -22,7 +22,7 @@ import java.util.Set;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class Board extends JPanel {
+public class Board extends JPanel implements MouseListener {
 
 	private static BoardCell[][] grid;
 	private int numRows;
@@ -33,6 +33,7 @@ public class Board extends JPanel {
 
 	private static Set<BoardCell> targets = new HashSet<BoardCell>();
 	private Set<BoardCell> visited = new HashSet<BoardCell>();
+	private Set<BoardCell> highlightedCells = new HashSet<>();
 
 	private Map<Character, Room> roomMap = new HashMap<>();
 
@@ -52,6 +53,8 @@ public class Board extends JPanel {
 	private Boolean accusationCheck = false;
 
 	private boolean validClick = false;
+
+	private int currentPlayerInt = 0;
 
 	// variable and methods used for singleton pattern
 	private static Board theInstance = new Board();
@@ -403,7 +406,7 @@ public class Board extends JPanel {
 		randomPlayer = people.get(int_radomP);
 		randomRoom = rooms.get(int_radomR);
 
-		theAnswer.setSolution(randomPlayer, randomRoom, randomWeapon);
+		theAnswer = new Solution(randomPlayer, randomRoom, randomWeapon);
 
 		for (int i = 0; i < deck.size(); i++) {
 			if (deck.get(i) != randomWeapon && deck.get(i) != randomPlayer && deck.get(i) != randomRoom) {
@@ -558,8 +561,8 @@ public class Board extends JPanel {
 		return players.get(0);
 	}
 
-	public Player getPlayer(int player) {
-		return players.get(player);
+	public Player getCurrentPlayer() {
+		return players.get(currentPlayerInt);
 	}
 
 	public void paintComponent(Graphics g) {
@@ -572,7 +575,7 @@ public class Board extends JPanel {
 
 		for (BoardCell[] cell : grid) {
 			for (BoardCell c : cell) {
-				c.drawCell(g, cellHeight, cellWidth);
+				c.drawCell(g, cellHeight, cellWidth, highlightedCells.contains(c));
 			}
 		}
 
@@ -592,70 +595,72 @@ public class Board extends JPanel {
 
 	public int rollDice() {
 		Random rand = new Random();
-		int upperBound = 6;
 		int diceRoll = rand.nextInt((6 - 1) + 1) + 1;
 		System.out.println(diceRoll);
 		return diceRoll;
 	}
 
 	// Next player button moves correctly through all computer players + human
+	public void mouseEntered(MouseEvent e) {
+	}
 
-	private class boardClicked implements MouseListener {
-		public void mouseEntered(MouseEvent e) {
-		}
+	public void mouseExited(MouseEvent e) {
+	}
 
-		public void mouseExited(MouseEvent e) {
-		}
+	public void mouseReleased(MouseEvent e) {
+	}
 
-		public void mouseReleased(MouseEvent e) {
-		}
+	public void mousePressed(MouseEvent e) {
+	}
 
-		public void mousePressed(MouseEvent e) {
-		}
+	public void mouseClicked(MouseEvent e) {
+		Solution testSuggestion = new Solution(getCard("Toy Room"), getCard("Nutcracker"), getCard("Santa Claus"));
 
-		public void mouseClicked(MouseEvent e) {
-			BoardCell clickedCell = null;
-			Solution testSuggestion = new Solution(getCard("Toy Room"), getCard("Nutcracker"), getCard("Santa Claus"));
-			JPanel panel = new JPanel();
+		int height = this.getHeight();
+		int width = this.getWidth();
+		int cellHeight = height / numRows;
+		int cellWidth = width / numCols;
 
-			Component click = panel.getComponentAt(e.getPoint());
+		int xComp = (int) e.getPoint().getX() / cellWidth;
+		int yComp = (int) e.getPoint().getY() / cellHeight;
 
-			// check if the click is in the board panel with valid choice
-			for (int row = 0; row < numCols; row++) {
-				for (int col = 0; col < numRows; col++) {
+		BoardCell clickedCell = grid[yComp][xComp];
 
-					if (panel.contains(e.getPoint())) {
-						// if on the board, is a valid choice
-						validClick = true;
-						clickedCell = grid[row][col];
-					}
-				}
+		Player currentPlayer = getCurrentPlayer();
+		if (currentPlayer instanceof HumanPlayer) {
+			System.out.println("It's not your turn!");
+		} else if (!(currentPlayer instanceof HumanPlayer)) {
+			if (targets.contains(clickedCell)) {
+				currentPlayer.updatePosition(clickedCell);
+			} else {
+				// Clicked cell not in hand
+
 			}
+
+			if (clickedCell.isRoom()) {
+				handleSuggestion(testSuggestion, currentPlayer);
+			} else {
+				// Needs to end event
+			}
+		}
+	}
+
+	public void nextTurn() {
+
+		if (currentPlayerInt < 6) {
+			currentPlayerInt++;
+		} else if (currentPlayerInt >= 6) {
+			currentPlayerInt = 0;
+		}
+
+		calcTargets(getCurrentPlayer().getLocation(), rollDice());
+		if (getCurrentPlayer() instanceof HumanPlayer) {
+			highlightedCells = getTargets();
 			
-			Player currentPlayer = players.get(0);
-			if (currentPlayer instanceof HumanPlayer) {
-				System.out.println("It's not your turn!");
-			} else if (!(currentPlayer instanceof HumanPlayer)) {
-				if (targets.contains(clickedCell)) {
-					currentPlayer.updatePosition(clickedCell);
-				} else {
-					// Clicked cell not in hand
 
-				}
-
-				if (clickedCell.isRoom()) {
-					handleSuggestion(testSuggestion, currentPlayer);
-				} else {
-					// Needs to end event
-				}
-			}
-
-			// update result (then end)
-
-		
-
+		} else {
+			highlightedCells.clear();
 		}
-
 	}
 
 }

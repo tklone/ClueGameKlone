@@ -159,7 +159,7 @@ public class BoardCell {
 	}
 	
 	
-	public void drawCell(Graphics g, int cellHeight, int cellWidth)  {
+	public void drawCell(Graphics g, int cellHeight, int cellWidth, Boolean isHighlighted)  {
 		//Start positions
 		int xStart = this.col * cellWidth;
 		int yStart = this.row * cellHeight;

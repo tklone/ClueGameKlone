@@ -12,7 +12,6 @@ import javax.swing.JPanel;
 public class ClueGame extends JFrame {
 
 	Board board;
-	private int currentPlayerInt = 0;
 	private Player currentPlayer;
 	KnownCardsPanel knownCards = new KnownCardsPanel(Board.getInstance());
 	GameControlPanel gameControl;
@@ -23,7 +22,7 @@ public class ClueGame extends JFrame {
 		super();
 		board = Board.getInstance();
 		gameControl = new GameControlPanel();
-		currentPlayer = board.getPlayer(currentPlayerInt);
+		currentPlayer = board.getCurrentPlayer();
 		gameControl.setTurn(currentPlayer);
 
 		this.setSize(1200, 900);
@@ -33,31 +32,14 @@ public class ClueGame extends JFrame {
 
 	}
 
-	
 	class NextButtonListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("NEXT PUSHED");
-			// need to keep track of when its human player turn
-			if (currentPlayer instanceof HumanPlayer) {
-//				if (!currentPlayer.isFinished()) {
-				if (currentPlayerInt < 6) {
-					currentPlayerInt++;
-				} else if (currentPlayerInt >= 6) {
-					currentPlayerInt = 0;
-				}
-				currentPlayer = board.getPlayer(currentPlayerInt);
-				diceRoll = board.rollDice();
-				startPos = currentPlayer.getLocation();
-				board.calcTargets(startPos, diceRoll);
-//				board.highlightTargets(board.getTargets());
-//					}
-			}
+			board.nextTurn();
+
 		}
-
-//		}
-
 	}
 
 	public static void main(String[] args) {
