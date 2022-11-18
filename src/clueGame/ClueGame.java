@@ -10,27 +10,21 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class ClueGame extends JFrame {
-	
+
 	Board board;
-	private int currentPlayer = 0;
+	private int currentPlayerInt = 0;
+	private Player currentPlayer;
 	KnownCardsPanel knownCards = new KnownCardsPanel(Board.getInstance());
 	GameControlPanel gameControl;
+	int diceRoll;
+	BoardCell startPos;
 
 	public ClueGame() {
 		super();
 		board = Board.getInstance();
 		gameControl = new GameControlPanel();
-		gameControl.setTurn(board.getPlayer(currentPlayer));
-		
-		//
-
-		//counter to keep track of player
-		//int player = 0;
-		
-		//current player = 0
-		// board center
-		// known cards east
-		// gc south
+		currentPlayer = board.getPlayer(currentPlayerInt);
+		gameControl.setTurn(currentPlayer);
 
 		this.setSize(1200, 900);
 		this.add(knownCards, BorderLayout.EAST);
@@ -38,31 +32,31 @@ public class ClueGame extends JFrame {
 		this.add(Board.getInstance(), BorderLayout.CENTER);
 
 	}
+
 	
 	class NextButtonListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			System.out.println("NEXT PUSHED");
 			// need to keep track of when its human player turn
-			
-			// if human player
-				// if the humans turn is not finished and they havent rolled
-				// roll dice
-			
-					//repaint if not the first turn of the human
-			
-				// if the dice is rolled but have not chosen a target
-		
-			// if it is a computer players turn
-			// roll their dice and move player automatically
-			// wait for user to click next for the next computer player?
-	
-			
-			
-				// go to the next player
-				// wait for user to click the next button
+			if (currentPlayer instanceof HumanPlayer) {
+//				if (!currentPlayer.isFinished()) {
+				if (currentPlayerInt < 6) {
+					currentPlayerInt++;
+				} else if (currentPlayerInt >= 6) {
+					currentPlayerInt = 0;
+				}
+				currentPlayer = board.getPlayer(currentPlayerInt);
+				diceRoll = board.rollDice();
+				startPos = currentPlayer.getLocation();
+				board.calcTargets(startPos, diceRoll);
+//					}
+			}
 		}
-			
+
+//		}
+
 	}
 
 	public static void main(String[] args) {
@@ -70,16 +64,15 @@ public class ClueGame extends JFrame {
 		board.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
 		board.initialize();
 		board.dealCards();
-		
+
 		ClueGame actualGame = new ClueGame();
 		actualGame.setVisible(true);
-
 
 		int splashScreen = JOptionPane.INFORMATION_MESSAGE;
 
 		JOptionPane.showMessageDialog(null, "Welcome to Clue! You are Santa Claus. Can you guess the "
 				+ "murderer, room, and weapon of the crime first?", "ClueGame", splashScreen);
-		
+
 	}
 
 }
