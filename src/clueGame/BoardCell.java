@@ -159,7 +159,7 @@ public class BoardCell {
 	}
 	
 	
-	public void drawCell(Graphics g, int cellHeight, int cellWidth, Boolean isHighlighted)  {
+	public void drawCell(Graphics g, int cellHeight, int cellWidth, Set<BoardCell> isHighlighted)  {
 		//Start positions
 		int xStart = this.col * cellWidth;
 		int yStart = this.row * cellHeight;
@@ -211,7 +211,13 @@ public class BoardCell {
 			g.setColor(blue);
 			g.fillRect(xStart, yStart, cellWidth, cellHeight);
 		}
-		
+		if (isHighlighted.contains(this)) {  //Maybe make a getHighlightedCells method
+			Color cyan = new Color(52, 235, 229);
+			g.setColor(cyan);
+			g.fillRect(xStart, yStart, cellWidth, cellHeight);
+			g.setColor(Color.BLACK);
+			g.drawRect(xStart, yStart, cellWidth, cellHeight);
+		}
 
 	}
 

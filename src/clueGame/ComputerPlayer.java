@@ -16,7 +16,7 @@ public class ComputerPlayer extends Player {
 
 	// It seems like this would be wrong because I don't know where we would call
 	// this
-	public Solution createSuggestion(Card room, Card person, Card weapon) {
+	public Solution createSuggestion(Card room, Card weapon, Card person) {
 		Solution computerGuess = new Solution();
 
 		if (!hand.contains(room) && !hand.contains(person) && !hand.contains(weapon) && !seenCards.contains(room)
@@ -28,7 +28,7 @@ public class ComputerPlayer extends Player {
 			this.suggestWeapon = weapon;
 //			computerGuess.setSolutionWeapon(weapon);
 			
-			computerGuess.setSolution(person, room, weapon);
+			computerGuess = new Solution(room, weapon, person);
 		}
 
 		return computerGuess;

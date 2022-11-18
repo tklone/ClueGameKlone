@@ -575,7 +575,7 @@ public class Board extends JPanel implements MouseListener {
 
 		for (BoardCell[] cell : grid) {
 			for (BoardCell c : cell) {
-				c.drawCell(g, cellHeight, cellWidth, highlightedCells.contains(c));
+				c.drawCell(g, cellHeight, cellWidth, highlightedCells);
 			}
 		}
 
@@ -627,9 +627,10 @@ public class Board extends JPanel implements MouseListener {
 		BoardCell clickedCell = grid[yComp][xComp];
 
 		Player currentPlayer = getCurrentPlayer();
-		if (currentPlayer instanceof HumanPlayer) {
-			System.out.println("It's not your turn!");
-		} else if (!(currentPlayer instanceof HumanPlayer)) {
+//		if (currentPlayer instanceof HumanPlayer && currentPlayerInt != 0) { //This is wrong
+//			System.out.println("It's not your turn!");
+//		} else 
+			if (!(currentPlayer instanceof HumanPlayer)) {
 			if (targets.contains(clickedCell)) {
 				currentPlayer.updatePosition(clickedCell);
 			} else {
@@ -654,10 +655,10 @@ public class Board extends JPanel implements MouseListener {
 		}
 
 		calcTargets(getCurrentPlayer().getLocation(), rollDice());
+		
 		if (getCurrentPlayer() instanceof HumanPlayer) {
 			highlightedCells = getTargets();
 			
-
 		} else {
 			highlightedCells.clear();
 		}
