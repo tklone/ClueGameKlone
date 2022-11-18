@@ -9,15 +9,23 @@ import javax.swing.JPanel;
 
 public class ClueGame extends JFrame {
 	
+	Board board;
+	private int currentPlayer = 0;
 	KnownCardsPanel knownCards = new KnownCardsPanel(Board.getInstance());
 	GameControlPanel gameControl;
 
 	public ClueGame() {
 		super();
-		
+		board = Board.getInstance();
 		gameControl = new GameControlPanel();
-		gameControl.setTurn(get);
+		gameControl.setTurn(board.getPlayer(currentPlayer));
+		
+		//
 
+		//counter to keep track of player
+		//int player = 0;
+		
+		//current player = 0
 		// board center
 		// known cards east
 		// gc south
@@ -44,7 +52,6 @@ public class ClueGame extends JFrame {
 		JOptionPane.showMessageDialog(null, "Welcome to Clue! You are Santa Claus. Can you guess the "
 				+ "murderer, room, and weapon of the crime first?", "ClueGame", splashScreen);
 		
-
 	}
 
 }

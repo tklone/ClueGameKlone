@@ -551,6 +551,10 @@ public class Board extends JPanel {
 	public Player getHumanPlayer() {
 		return players.get(0);
 	}
+	
+	public Player getPlayer(int player) {
+		return players.get(player);
+	}
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
