@@ -51,6 +51,7 @@ public class ClueGame extends JFrame {
 				diceRoll = board.rollDice();
 				startPos = currentPlayer.getLocation();
 				board.calcTargets(startPos, diceRoll);
+				board.highlightTargets(board.getTargets());
 //					}
 			}
 		}

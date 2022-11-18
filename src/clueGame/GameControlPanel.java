@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
@@ -14,7 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
-public class GameControlPanel extends JPanel implements MouseListener{
+public class GameControlPanel extends JPanel implements MouseListener {
 
 	private static JTextField theGuess;
 	private static JTextField theGuessResult;
@@ -23,10 +24,24 @@ public class GameControlPanel extends JPanel implements MouseListener{
 	public static JButton nextButton = new JButton("NEXT!");
 	public static JButton accusationButton = new JButton("Make Accusation");
 
-	
-	/**
-	 * Constructor for the panel, it does 90% of the work
-	 */
+	public void mouseEntered(MouseEvent e) {
+	}
+
+	public void mouseExited(MouseEvent e) {
+	}
+
+	public void mouseReleased(MouseEvent e) {
+	}
+
+	public void mousePressed(MouseEvent e) {
+	}
+
+	public void mouseClicked(MouseEvent e) {
+		if()
+		
+		
+	}
+
 	public GameControlPanel() {
 
 		setLayout(new GridLayout(1, 1));
@@ -143,8 +158,6 @@ public class GameControlPanel extends JPanel implements MouseListener{
 		panel.add(nextButton);
 		return panel;
 	}
-	
-
 
 	/**
 	 * Main to test the panel
@@ -166,9 +179,8 @@ public class GameControlPanel extends JPanel implements MouseListener{
 		panel.setGuessResult("So you have nothing?");
 	}
 
-
 	// Setters to update data
-	public void setTurn(Player player) { //, Integer numSteps
+	public void setTurn(Player player) { // , Integer numSteps
 		whoseTurn.setText(player.getName());
 //		roll.setText(numSteps.toString());
 	}
