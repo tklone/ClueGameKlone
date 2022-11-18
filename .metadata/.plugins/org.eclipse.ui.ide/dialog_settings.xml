@@ -6,6 +6,7 @@
 		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
 		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="C:\Users\taylo\eclipse-workspace\ClueGame\ClueGame"/>
 			<item value="C:\Users\taylo\eclipse-workspace\ClueGame"/>
 			<item value="C:\Users\taylo\eclipse-workspace\C11C-DrawPlay"/>
 			<item value="C:\Users\taylo\eclipse-workspace\DrawPlay_1\C11C-DrawPlay"/>

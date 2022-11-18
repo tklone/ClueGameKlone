@@ -1,0 +1,27 @@
+// Rooms and room cards
+Room, Cookie Room, C
+Room, Reindeer Barn, R
+Room, Elve's Workshop, E
+Room, Santa's Lair, L
+Room, Bathroom, B
+Room, Toy Room, T
+Room, Christmas Tree Factory, F
+Room, Gift Wrapping Station, G
+Room, Sleigh Storage, S
+// other spaces on board
+Space, Unused, X
+Space, Walkway, W
+//Weapons
+Weapon, Poisoned Egg Nog
+Weapon, Broken Christmas Ornaments
+Weapon, Nutcracker
+Weapon, Candy Cane Crossbow
+Weapon, Reindeer Antler
+Weapon, String of Lights
+//Players
+Player, Santa Claus, RED, 24, 8
+Player, Mrs. Claus, PINK, 10, 2
+Player, The Grinch, GREEN, 24, 16
+Player, Rudolph, BROWN, 5, 26
+Player, Olive the Other Reindeer, BLUE, 2, 16
+Player, Buddy the Elf, YELLOW, 17, 2

@@ -1,0 +1,1 @@
+We selected our test cells based on the board we made in excel. For example, in the Cookie Room, we have a door you can enter going UP, so for our test case door direction going up we have used those cell coordinates.
