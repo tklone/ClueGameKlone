@@ -10,10 +10,12 @@ public class Solution {
 		super();
 	}
 	
-//	public Solution(Card room, Card weapon, Card person) {
-//		
-//	}
-//	
+	public Solution(Card room, Card weapon, Card person) {
+		this.room = room;
+		this.weapon = weapon;
+		this.person = person;
+	}
+
 	public void setSolutionRoom(Card room) {
 		this.room = room;
 	}
@@ -38,10 +40,8 @@ public class Solution {
 		return person;
 	}
 	
-	public void setSolution(Card person, Card room, Card weapon) {
-		this.room = room;
-		this.weapon = weapon;
-		this.person = person;
-	}
+//	public void setSolution(Card person, Card room, Card weapon) {
+//	
+//	}
 	
 }

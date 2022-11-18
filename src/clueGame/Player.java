@@ -123,6 +123,11 @@ public abstract class Player {
 		return Board.getCell(this.row, this.col);
 	}
 	
+	public void updatePosition(BoardCell cell) {
+		this.row = cell.getRow();
+		this.col = cell.getCol();
+	}
+	
 	public Boolean equals(Player p) {
 		return p.getName().equals(this.getName());
 	}
