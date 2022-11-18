@@ -1,9 +1,13 @@
 package clueGame;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -46,6 +50,8 @@ public class Board extends JPanel {
 	private Boolean personCheck = false;
 	private Boolean weaponCheck = false;
 	private Boolean accusationCheck = false;
+
+	private boolean validClick = false;
 
 	// variable and methods used for singleton pattern
 	private static Board theInstance = new Board();
@@ -551,7 +557,7 @@ public class Board extends JPanel {
 	public Player getHumanPlayer() {
 		return players.get(0);
 	}
-	
+
 	public Player getPlayer(int player) {
 		return players.get(player);
 	}
@@ -593,7 +599,46 @@ public class Board extends JPanel {
 	}
 
 	// Next player button moves correctly through all computer players + human
-	
-}
 
-//Adding a comment to push
+	private class boardClicked implements MouseListener {
+		public void mouseEntered(MouseEvent e) {
+		}
+
+		public void mouseExited(MouseEvent e) {
+		}
+
+		public void mouseReleased(MouseEvent e) {
+		}
+
+		public void mousePressed(MouseEvent e) {
+		}
+
+		public void mouseClicked(MouseEvent e) {
+			BoardCell clickedCell = null;
+			JPanel panel = new JPanel();
+			
+			//is it human plaayer turn
+			//if yes (if no, error message, end)
+			//clicked on target?
+			//if yes
+			//move player
+			//in room? (if no end)
+			//if yes, handlesuggestion
+			//update result (then end)
+
+			// check if the click is in the board panel with valid choice
+			for (int row = 0; row < numCols; row++) {
+				for (int col = 0; col < numRows; col++) {
+					Component click = panel.getComponentAt(e.getPoint());
+//					if(grid[row][col] == panel.contains(e.getPoint())) {
+//						// if on the board, is a valid choice
+//						validClick = true;
+//						clickedCell = grid[row][col];
+//					}
+				}
+			}
+		}
+
+	}
+
+}
