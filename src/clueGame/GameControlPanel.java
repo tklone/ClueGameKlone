@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,7 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
-public class GameControlPanel extends JPanel {
+public class GameControlPanel extends JPanel implements MouseListener{
 
 	private static JTextField theGuess;
 	private static JTextField theGuessResult;
@@ -22,6 +23,7 @@ public class GameControlPanel extends JPanel {
 	public static JButton nextButton = new JButton("NEXT!");
 	public static JButton accusationButton = new JButton("Make Accusation");
 
+	
 	/**
 	 * Constructor for the panel, it does 90% of the work
 	 */
@@ -141,6 +143,8 @@ public class GameControlPanel extends JPanel {
 		panel.add(nextButton);
 		return panel;
 	}
+	
+
 
 	/**
 	 * Main to test the panel
