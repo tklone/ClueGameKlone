@@ -27,7 +27,7 @@ public class Board extends JPanel implements MouseListener {
 	private static BoardCell[][] grid;
 	private int numRows;
 	private int numCols;
-	private int diceRoll = 0;
+	private int diceRoll;
 
 	private String setupConfig;
 	private String layoutConfig;
@@ -601,11 +601,13 @@ public class Board extends JPanel implements MouseListener {
 		}
 	}
 
-	public int rollDice() {
+	public void rollDice() {
 		Random rand = new Random();
-		diceRoll = rand.nextInt((6 - 1) + 1) + 1;
-		System.out.println("DICE BEING ROLLED");
-		System.out.println(diceRoll);
+		int roll = rand.nextInt((6 - 1) + 1) + 1;
+		this.diceRoll = roll;
+	}
+	
+	public int getDiceRoll() {
 		return diceRoll;
 	}
 
@@ -656,17 +658,20 @@ public class Board extends JPanel implements MouseListener {
 		}
 	}
 
-	public void nextTurn() {
-
+	public void nextTurn() {	
+		
 		//Makes players move in circular motion
-		if (currentPlayerInt < 6) {
+		if (currentPlayerInt < 5) {
 			currentPlayerInt++;
-		} else if (currentPlayerInt >= 6) {
+		} else if (currentPlayerInt >= 5) {
 			currentPlayerInt = 0;
 		}
 
 		//Calculates the targets with the dice roll
-		calcTargets(getCurrentPlayer().getLocation(), rollDice());
+		rollDice();
+		calcTargets(getCurrentPlayer().getLocation(), getDiceRoll());
+
+		System.out.println("CURRENT PLAYER: " + getCurrentPlayer().getName() + "ROLL: " + getDiceRoll());
 
 		//Highlights the targets
 		if (getCurrentPlayer() instanceof HumanPlayer) {
