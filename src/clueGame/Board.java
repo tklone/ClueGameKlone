@@ -335,6 +335,7 @@ public class Board extends JPanel implements MouseListener {
 
 			if (c.isRoomCenter()) {
 				targets.add(c);
+				c.setIsHighlighted(true);
 				continue;
 			}
 
@@ -342,6 +343,7 @@ public class Board extends JPanel implements MouseListener {
 			if (numSteps == 1) {
 				if (c.getOccupied() == false) {
 					targets.add(c);
+					c.setIsHighlighted(true);
 				}
 			}
 
@@ -581,7 +583,7 @@ public class Board extends JPanel implements MouseListener {
 
 		for (BoardCell[] cell : grid) {
 			for (BoardCell c : cell) {
-				c.drawCell(g, cellHeight, cellWidth, targets.contains(c));
+				c.drawCell(g, cellHeight, cellWidth, c.getIsHighlighted());
 			}
 		}
 
@@ -602,9 +604,11 @@ public class Board extends JPanel implements MouseListener {
 	public int rollDice() {
 		Random rand = new Random();
 		diceRoll = rand.nextInt((6 - 1) + 1) + 1;
+		System.out.println("DICE BEING ROLLED");
 		System.out.println(diceRoll);
 		return diceRoll;
 	}
+
 
 	// Next player button moves correctly through all computer players + human
 	public void mouseEntered(MouseEvent e) {
@@ -654,20 +658,25 @@ public class Board extends JPanel implements MouseListener {
 
 	public void nextTurn() {
 
+		//Makes players move in circular motion
 		if (currentPlayerInt < 6) {
 			currentPlayerInt++;
 		} else if (currentPlayerInt >= 6) {
 			currentPlayerInt = 0;
 		}
 
+		//Calculates the targets with the dice roll
 		calcTargets(getCurrentPlayer().getLocation(), rollDice());
 
+		//Highlights the targets
 		if (getCurrentPlayer() instanceof HumanPlayer) {
 			highlightedCells = getTargets();
 
 		} else {
 			highlightedCells.clear();
 		}
+		
+		
 	}
 
 

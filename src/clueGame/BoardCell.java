@@ -21,7 +21,9 @@ public class BoardCell {
 	public boolean isRoom = false;
 	public boolean isOccupied = false;
 	private boolean isTarget = false;
+	
 	private boolean isHighlighted = false;
+	
 	private Set<BoardCell> adjList = new HashSet<>();
 	private Boolean isSP = false;
 
@@ -35,6 +37,15 @@ public class BoardCell {
 		adjList.add(cell);
 	}
 
+	
+	public void setIsHighlighted(boolean highlight) {
+		this.isHighlighted = highlight;
+	}
+	
+	public boolean getIsHighlighted() {
+		return isHighlighted;
+	}
+	
 	public Set<BoardCell> getAdjListCell() {
 		return adjList;
 	}
@@ -104,7 +115,6 @@ public class BoardCell {
 	// getter and setter for Initial
 	public char getInitial() {
 		return initial;
-
 	}
 
 	public void setInitial(String str) {

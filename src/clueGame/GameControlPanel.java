@@ -1,7 +1,9 @@
 package clueGame;
 
 import java.awt.BorderLayout;
+import java.awt.Desktop.Action;
 import java.awt.GridLayout;
+import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -15,14 +17,19 @@ import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
+
+
+
+
 public class GameControlPanel extends JPanel{
 
 	private static JTextField theGuess;
 	private static JTextField theGuessResult;
 	private static JTextField whoseTurn;
 	private static JTextField roll;
-	public static JButton nextButton = new JButton("NEXT!");
+	JButton nextButton = new JButton("NEXT!");
 	public static JButton accusationButton = new JButton("Make Accusation");
+
 
 
 	public GameControlPanel() {
@@ -44,8 +51,9 @@ public class GameControlPanel extends JPanel{
 		// adding "make accusation" to left and "next" to right
 		JPanel accusationButton = createAccusationButton();
 		buttonsPanel.add(accusationButton, BorderLayout.WEST);
-		JPanel nextButton = createNextButton();
+		JButton nextButton = createNextButton();
 		buttonsPanel.add(nextButton, BorderLayout.EAST);
+		nextButton.addActionListener(new NextButtonListener());
 
 		// left side of upper half
 		JPanel upperLeft = new JPanel();
@@ -85,6 +93,23 @@ public class GameControlPanel extends JPanel{
 
 		add(gameControlPanel);
 
+	}
+	
+	class NextButtonListener implements ActionListener {
+		
+		NextButtonListener() {
+			nextButton.addActionListener(this);
+		}
+		
+		
+//		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			Board board = Board.getInstance();
+			board.nextTurn();
+			System.out.println("click");
+			
+		}
 	}
 
 	private JPanel createTurnTextField() {
@@ -135,11 +160,10 @@ public class GameControlPanel extends JPanel{
 		return panel;
 	}
 
-	private JPanel createNextButton() {
-		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(1, 1));
-		panel.add(nextButton);
-		return panel;
+	private JButton createNextButton() {
+		JButton nextButton = new JButton("NEXT!");
+		nextButton.setLayout(new GridLayout(1, 1));
+		return nextButton;
 	}
 
 	/**
@@ -153,13 +177,19 @@ public class GameControlPanel extends JPanel{
 		frame.setContentPane(panel); // put the panel in the frame
 		frame.setSize(750, 180); // size the frame
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
-
+		
+		
+		
 		frame.setVisible(true); // make it visible
 
 		// test filling in the data
 		panel.setTurn(new ComputerPlayer("Santa Claus", "red", 0, 0));
 		panel.setGuess("I have no guess!");
 		panel.setGuessResult("So you have nothing?");
+		
+//		NextButtonListener nextButtonListener = new NextButtonListener();
+		
+//		nextButtonListener.actionPerformed(e);
 	}
 
 	// Setters to update data

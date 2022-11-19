@@ -33,22 +33,7 @@ public class ClueGame extends JFrame {
 
 	}
 
-	class NextButtonListener implements ActionListener {
 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			if (board.getCurrentPlayer() instanceof HumanPlayer) {
-				//Have not written turnFinished method yet
-				if (!currentPlayer.turnFinshed() && !board.diceRolled()) {
-					board.calcTargets(currentPlayer.getLocation(), board.rollDice());
-					
-				}
-			}
-			
-			board.nextTurn();
-
-		}
-	}
 
 	public static void main(String[] args) {
 		Board board = Board.getInstance();
