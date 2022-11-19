@@ -24,6 +24,7 @@ public class ClueGame extends JFrame {
 		gameControl = new GameControlPanel();
 		currentPlayer = board.getCurrentPlayer();
 		gameControl.setTurn(currentPlayer);
+		board.setDiceRoll(0);
 
 		this.setSize(1200, 900);
 		this.add(knownCards, BorderLayout.EAST);
@@ -36,7 +37,14 @@ public class ClueGame extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			System.out.println("NEXT PUSHED");
+			if (board.getCurrentPlayer() instanceof HumanPlayer) {
+				//Have not written turnFinished method yet
+				if (!currentPlayer.turnFinshed() && !board.diceRolled()) {
+					board.calcTargets(currentPlayer.getLocation(), board.rollDice());
+					
+				}
+			}
+			
 			board.nextTurn();
 
 		}

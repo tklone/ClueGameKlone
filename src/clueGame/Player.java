@@ -15,6 +15,9 @@ public abstract class Player {
 	protected Set<Card> seenCards = new HashSet<Card>();
 	private Boolean equalsBool = false;
 	private String disproverColor;
+	private Boolean turnComplete = false;
+	private int startCol;
+	private int startRow;
 	
 
 	public Player(String name, String color, int row, int col) {
@@ -124,6 +127,8 @@ public abstract class Player {
 	}
 	
 	public void updatePosition(BoardCell cell) {
+		startCol = this.col;
+		startRow = this.row;
 		this.row = cell.getRow();
 		this.col = cell.getCol();
 	}
@@ -141,6 +146,13 @@ public abstract class Player {
 		g.setColor(Color.BLACK);
 		g.drawOval(xStart + 5, yStart,  cellHeight, cellHeight);
 
+	}
+
+	public boolean turnFinshed() {
+		if (startCol != this.col && startRow != this.row) {
+			turnComplete = true;
+		}
+		return turnComplete;
 	}
 	
 }

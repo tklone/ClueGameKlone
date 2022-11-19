@@ -161,7 +161,7 @@ public class BoardCell {
 		return isOccupied;
 	}
 
-	public void drawCell(Graphics g, int cellHeight, int cellWidth, Set<BoardCell> isHighlighted) {
+	public void drawCell(Graphics g, int cellHeight, int cellWidth, boolean isHighlighted) {
 		// Start positions
 		int xStart = this.col * cellWidth;
 		int yStart = this.row * cellHeight;
@@ -216,32 +216,31 @@ public class BoardCell {
 //		if (isHighlighted.contains(this)) {  //Maybe make a getHighlightedCells method
 
 		// add a conditional if cell currently on, then set colors
-//		if (Board.getInstance().getTargets().contains(this)) {
-//			Color cyan = new Color(52, 235, 229);
-//			g.setColor(cyan);
-//			g.fillRect(xStart, yStart, cellWidth, cellHeight);
-//			g.setColor(Color.BLACK);
-//			g.drawRect(xStart, yStart, cellWidth, cellHeight);
-//		}
-//		}
-
+		if (isHighlighted) {
+			Color cyan = new Color(52, 235, 229);
+			g.setColor(cyan);
+			g.fillRect(xStart, yStart, cellWidth, cellHeight);
+			g.setColor(Color.BLACK);
+			g.drawRect(xStart, yStart, cellWidth, cellHeight);
+		}
 	}
+
 	// bool isTarget to get
 	// if contains the cell we are on
 	// tell board to repaint after we get the targets
 	public boolean isTarget() {
-		if(Board.getInstance().getTargets().contains(this)) {
+		if (Board.getInstance().getTargets().contains(this)) {
 			isTarget = true;
 		}
 		return isTarget;
 	}
-	
-	public void highlightCell(Graphics g, int cellHeight, int cellWidth) {
-		
-		if(isHighlighted.contains(this)) {
+
+	public void drawTarget(Graphics g, int cellHeight, int cellWidth, Boolean containsTarget) {
+
+		if (containsTarget) {
 			int xStart = this.col * cellWidth;
 			int yStart = this.row * cellHeight;
-			
+
 			Color cyan = new Color(52, 235, 229);
 			g.setColor(cyan);
 			g.fillRect(xStart, yStart, cellWidth, cellHeight);

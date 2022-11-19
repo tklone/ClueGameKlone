@@ -27,6 +27,7 @@ public class Board extends JPanel implements MouseListener {
 	private static BoardCell[][] grid;
 	private int numRows;
 	private int numCols;
+	private int diceRoll = 0;
 
 	private String setupConfig;
 	private String layoutConfig;
@@ -51,6 +52,7 @@ public class Board extends JPanel implements MouseListener {
 	private Boolean personCheck = false;
 	private Boolean weaponCheck = false;
 	private Boolean accusationCheck = false;
+	private Boolean diceRolled = false;
 
 	private boolean validClick = false;
 
@@ -64,6 +66,10 @@ public class Board extends JPanel implements MouseListener {
 		super();
 	}
 
+	public void setDiceRoll(int n) {
+		this.diceRoll = n;
+	}
+	
 	// this method returns the only Board
 	public static Board getInstance() {
 		return theInstance;
@@ -575,7 +581,7 @@ public class Board extends JPanel implements MouseListener {
 
 		for (BoardCell[] cell : grid) {
 			for (BoardCell c : cell) {
-				c.drawCell(g, cellHeight, cellWidth, highlightedCells);
+				c.drawCell(g, cellHeight, cellWidth, targets.contains(c));
 			}
 		}
 
@@ -595,7 +601,7 @@ public class Board extends JPanel implements MouseListener {
 
 	public int rollDice() {
 		Random rand = new Random();
-		int diceRoll = rand.nextInt((6 - 1) + 1) + 1;
+		diceRoll = rand.nextInt((6 - 1) + 1) + 1;
 		System.out.println(diceRoll);
 		return diceRoll;
 	}
@@ -630,7 +636,7 @@ public class Board extends JPanel implements MouseListener {
 //		if (currentPlayer instanceof HumanPlayer && currentPlayerInt != 0) { //This is wrong
 //			System.out.println("It's not your turn!");
 //		} else 
-			if (!(currentPlayer instanceof HumanPlayer)) {
+		if (!(currentPlayer instanceof HumanPlayer)) {
 			if (targets.contains(clickedCell)) {
 				currentPlayer.updatePosition(clickedCell);
 			} else {
@@ -655,13 +661,21 @@ public class Board extends JPanel implements MouseListener {
 		}
 
 		calcTargets(getCurrentPlayer().getLocation(), rollDice());
-		
+
 		if (getCurrentPlayer() instanceof HumanPlayer) {
 			highlightedCells = getTargets();
-			
+
 		} else {
 			highlightedCells.clear();
 		}
+	}
+
+
+	public Boolean diceRolled() {
+		if (diceRoll == 0) {
+			diceRolled = false;
+		}
+		return diceRolled;
 	}
 
 }
