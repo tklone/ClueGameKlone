@@ -155,4 +155,7 @@ public abstract class Player {
 		return turnComplete;
 	}
 	
+	public void setTurnFinished(Boolean fin) {
+		turnComplete = fin;
+	}
 }

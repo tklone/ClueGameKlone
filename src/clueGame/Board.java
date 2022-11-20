@@ -87,7 +87,6 @@ public class Board extends JPanel { //implements MouseListener
 		}
 
 		public void mousePressed(MouseEvent e) {
-			System.out.println("mouse clicked");
 			
 			int height = getHeight1();
 			int width = getWidth1();
@@ -98,22 +97,15 @@ public class Board extends JPanel { //implements MouseListener
 			int yComp = (int) e.getPoint().getY() / cellHeight;
 			
 			BoardCell clickedCell = grid[yComp][xComp];
-
-//			for (BoardCell[] cell : grid) {
-//				for (BoardCell c : cell) {
-//					if (c.contains(xComp, yComp, cellHeight, cellWidth) && targets.contains(clickedCell));
-//						
-//				}
-//			}
-			
 			Player currentPlayer = getCurrentPlayer();
 
 			if (currentPlayer instanceof HumanPlayer) {
 				if (targets.contains(clickedCell)) {
 					currentPlayer.updatePosition(clickedCell);
+					currentPlayer.setTurnFinished(true);
 					repaint();
 				} else {
-					// Clicked cell not in hand
+					currentPlayer.setTurnFinished(false);
 					JOptionPane.showMessageDialog(null, "This is not a valid move.");
 				}
 
@@ -616,7 +608,6 @@ public class Board extends JPanel { //implements MouseListener
 					disproveCards.add(disprove);
 					// We think this makes sense to have here but we aren't entirely sure??
 					accuser.updateSeen(disprove, p.getColor());
-					System.out.println("this is called");
 				}
 			} else {
 				continue;
@@ -733,13 +724,7 @@ public class Board extends JPanel { //implements MouseListener
 	}
 
 	public void nextTurn() {
-		// Makes players move in circular motion
-		if (currentPlayerInt < 5) {
-			currentPlayerInt++;
-		} else if (currentPlayerInt >= 5) {
-			currentPlayerInt = 0;
-
-		}
+	
 
 		// Calculates the targets with the dice roll
 		rollDice();
@@ -762,6 +747,14 @@ public class Board extends JPanel { //implements MouseListener
 			getCurrentPlayer().updatePosition(newLocation);
 			highlightedCells.clear();
 			repaint();
+			getCurrentPlayer().setTurnFinished(true); 
+		}
+		
+		// Makes players move in circular motion
+		if (currentPlayerInt < 5) {
+			currentPlayerInt++;
+		} else if (currentPlayerInt >= 5) {
+			currentPlayerInt = 0;
 
 		}
 

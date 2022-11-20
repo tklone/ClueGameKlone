@@ -12,16 +12,13 @@ import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
-
-
-
-
-public class GameControlPanel extends JPanel{
+public class GameControlPanel extends JPanel {
 
 	private static JTextField theGuess;
 	private static JTextField theGuessResult;
@@ -31,8 +28,6 @@ public class GameControlPanel extends JPanel{
 	private static int counter = 0;
 	JButton nextButton = new JButton("NEXT!");
 	public static JButton accusationButton = new JButton("Make Accusation");
-
-
 
 	public GameControlPanel() {
 
@@ -96,23 +91,27 @@ public class GameControlPanel extends JPanel{
 		add(gameControlPanel);
 
 	}
-	
+
 	class NextButtonListener implements ActionListener {
-		
+
 		NextButtonListener() {
 			nextButton.addActionListener(this);
 		}
-		
-		
+
 //		@Override
 		public void actionPerformed(ActionEvent e) {
-			
+
 			Board board = Board.getInstance();
 			getRollVal = board.getDiceRoll();
-			board.nextTurn();
+			if (board.getCurrentPlayer().turnFinshed()) {
+				board.nextTurn();
+			} else {
+				JOptionPane.showMessageDialog(null, "Fool, finish your turn.");
+
+			}
 			setTurn(board.getCurrentPlayer());
 			setRoll(board.getDiceRoll());
-			
+
 		}
 	}
 
@@ -181,17 +180,15 @@ public class GameControlPanel extends JPanel{
 		frame.setContentPane(panel); // put the panel in the frame
 		frame.setSize(750, 180); // size the frame
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
-		
-		
-		
+
 		frame.setVisible(true); // make it visible
 
 		// test filling in the data
-	
+
 //		panel.setRoll(board.rollDice());
-		
+
 //		NextButtonListener nextButtonListener = new NextButtonListener();
-		
+
 //		nextButtonListener.actionPerformed(e);
 	}
 
@@ -208,7 +205,7 @@ public class GameControlPanel extends JPanel{
 	public void setGuessResult(String guessResult) {
 		theGuessResult.setText(guessResult);
 	}
-	
+
 	public void setRoll(int rolledDice) {
 		String diceText = Integer.toString(rolledDice);
 		roll.setText(diceText);
