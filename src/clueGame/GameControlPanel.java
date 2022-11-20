@@ -103,12 +103,8 @@ public class GameControlPanel extends JPanel {
 
 			Board board = Board.getInstance();
 			getRollVal = board.getDiceRoll();
-			if (board.getCurrentPlayer().turnFinshed()) {
-				board.nextTurn();
-			} else {
-				JOptionPane.showMessageDialog(null, "Fool, finish your turn.");
-
-			}
+			board.nextTurn();
+			board.iterateCurrent();
 			setTurn(board.getCurrentPlayer());
 			setRoll(board.getDiceRoll());
 

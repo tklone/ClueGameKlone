@@ -48,7 +48,8 @@ public class ClueGame extends JFrame {
 		JOptionPane.showMessageDialog(null, "Welcome to Clue! You are Santa Claus. Can you guess the "
 				+ "murderer, room, and weapon of the crime first?", "ClueGame", splashScreen);
 		
-		board.nextTurn();
+		board.firstTurn();
+//		board.iterateCurrent();
 
 	}
 
