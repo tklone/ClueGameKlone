@@ -35,6 +35,8 @@ class PlayerTests {
 	//testing that the solution has one card of each (room, person, and weapon)
 	@Test
 	void testSolutionCardTypes() {
+		board.setSolution(board.getCard("The Grinch"), board.getCard("Christmas Tree Factory"),
+				board.getCard("Broken Christmas Ornaments"));
 		assertTrue(board.hasSolutionRoom());
 		assertTrue(board.hasSolutionPerson());
 		assertTrue(board.hasSolutionWeapon());
@@ -82,23 +84,23 @@ class PlayerTests {
 	void testStartingLocation() {
 		ArrayList<Player> testList = new ArrayList<>();
 		testList = board.getPlayers();
-		assertEquals(25, testList.get(0).getRow());
+		assertEquals(24, testList.get(0).getRow());
 		assertEquals(8, testList.get(0).getCol());
 
 		assertEquals(10, testList.get(1).getRow());
-		assertEquals(1, testList.get(1).getCol());
+		assertEquals(2, testList.get(1).getCol());
 
-		assertEquals(25, testList.get(2).getRow());
+		assertEquals(24, testList.get(2).getRow());
 		assertEquals(16, testList.get(2).getCol());
 
 		assertEquals(5, testList.get(3).getRow());
-		assertEquals(27, testList.get(3).getCol());
+		assertEquals(26, testList.get(3).getCol());
 
-		assertEquals(1, testList.get(4).getRow());
+		assertEquals(2, testList.get(4).getRow());
 		assertEquals(16, testList.get(4).getCol());
 
 		assertEquals(17, testList.get(5).getRow());
-		assertEquals(1, testList.get(5).getCol());
+		assertEquals(2, testList.get(5).getCol());
 
 	}
 	
@@ -107,11 +109,11 @@ class PlayerTests {
 	void testColor() {
 		ArrayList<Player> testList = new ArrayList<>();
 		testList = board.getPlayers();
-		assertEquals("Red", testList.get(0).getColor());
-		assertEquals("Pink", testList.get(1).getColor());
-		assertEquals("Green", testList.get(2).getColor());
-		assertEquals("Brown", testList.get(3).getColor());
-		assertEquals("Blue", testList.get(4).getColor());
-		assertEquals("Yellow", testList.get(5).getColor());
+		assertEquals("RED", testList.get(0).getColor());
+		assertEquals("PINK", testList.get(1).getColor());
+		assertEquals("GREEN", testList.get(2).getColor());
+		assertEquals("BROWN", testList.get(3).getColor());
+		assertEquals("BLUE", testList.get(4).getColor());
+		assertEquals("YELLOW", testList.get(5).getColor());
 	}
 }
