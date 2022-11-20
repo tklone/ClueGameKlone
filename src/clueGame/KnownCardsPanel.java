@@ -32,28 +32,6 @@ public class KnownCardsPanel extends JPanel {
 
 	ArrayList<Card> testSeenCardsList = new ArrayList<>();
 
-//	public void setTestSeen() {
-//		if (!testSeenCardsList.isEmpty()) {
-//			testSeenCardsList.clear();
-//		}
-//		
-//		Card testCard1 = new Card();
-//		testCard1.setCardType(CardType.ROOM);
-//		testCard1.setName("Bunkhouse");
-//
-//		Card testCard2 = new Card();
-//		testCard2.setCardType(CardType.WEAPON);
-//		testCard2.setName("Gun");
-//
-//		Card testCard3 = new Card();
-//		testCard3.setCardType(CardType.PERSON);
-//		testCard3.setName("Boddy");
-//
-//		testSeenCardsList.add(testCard1);
-//		testSeenCardsList.add(testCard2);
-//		testSeenCardsList.add(testCard3);
-//		
-//	}
 
 	public KnownCardsPanel(Board board) {
 		this.board = board;
@@ -175,7 +153,6 @@ public class KnownCardsPanel extends JPanel {
 			}
 		}
 
-		System.out.println(roomsInSeenList.size());
 
 		if (roomsInSeenList.size() == 0) {
 			roomsSeen = new JTextField();

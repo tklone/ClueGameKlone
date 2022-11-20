@@ -40,10 +40,10 @@ public class ClueGame extends JFrame {
 		board.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
 		board.initialize();
 		board.dealCards();
-
+		
 		ClueGame actualGame = new ClueGame();
 		actualGame.setVisible(true);
-
+		
 		int splashScreen = JOptionPane.INFORMATION_MESSAGE;
 
 		JOptionPane.showMessageDialog(null, "Welcome to Clue! You are Santa Claus. Can you guess the "

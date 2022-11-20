@@ -3,6 +3,8 @@ package clueGame;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,9 +23,9 @@ public class BoardCell {
 	public boolean isRoom = false;
 	public boolean isOccupied = false;
 	private boolean isTarget = false;
-	
-	private boolean isHighlighted = false;
-	
+
+//	private boolean isHighlighted = false;
+
 	private Set<BoardCell> adjList = new HashSet<>();
 	private Boolean isSP = false;
 
@@ -37,15 +39,14 @@ public class BoardCell {
 		adjList.add(cell);
 	}
 
-	
-	public void setIsHighlighted(boolean highlight) {
-		this.isHighlighted = highlight;
-	}
-	
-	public boolean getIsHighlighted() {
-		return isHighlighted;
-	}
-	
+//	public void setIsHighlighted(boolean highlight) {
+//		this.isHighlighted = highlight;
+//	}
+//	
+//	public boolean getIsHighlighted() {
+//		return isHighlighted;
+//	}
+
 	public Set<BoardCell> getAdjListCell() {
 		return adjList;
 	}
@@ -258,5 +259,13 @@ public class BoardCell {
 			g.drawRect(xStart, yStart, cellWidth, cellHeight);
 		}
 	}
+
+	public boolean contains(int mouseX, int mouseY, int cellHeight, int cellWidth) {
+		Rectangle cell = new Rectangle(col, row, cellWidth, cellHeight);
+		if (cell.contains(new Point(mouseX, mouseY))) {
+			return true;
+		}
+		return false;
+	} 
 
 }

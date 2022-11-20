@@ -108,14 +108,10 @@ public class GameControlPanel extends JPanel{
 		public void actionPerformed(ActionEvent e) {
 			
 			Board board = Board.getInstance();
-			
-			if (counter == 0) {
-				board.calcTargets(board.getCurrentPlayer().getLocation(), board.getDiceRoll());
-			}
-			
-			board.nextTurn();
-			counter++;
 			getRollVal = board.getDiceRoll();
+			board.nextTurn();
+			setTurn(board.getCurrentPlayer());
+			setRoll(board.getDiceRoll());
 			
 		}
 	}
@@ -191,10 +187,7 @@ public class GameControlPanel extends JPanel{
 		frame.setVisible(true); // make it visible
 
 		// test filling in the data
-		panel.setTurn(new ComputerPlayer("Santa Claus", "red", 0, 0));
-		panel.setGuess("I have no guess!");
-		panel.setGuessResult("So you have nothing?");
-		panel.setRoll(Integer.toString(getRollVal));
+	
 //		panel.setRoll(board.rollDice());
 		
 //		NextButtonListener nextButtonListener = new NextButtonListener();
@@ -216,7 +209,8 @@ public class GameControlPanel extends JPanel{
 		theGuessResult.setText(guessResult);
 	}
 	
-	public void setRoll(String rolledDice) {
-		roll.setText(rolledDice);
+	public void setRoll(int rolledDice) {
+		String diceText = Integer.toString(rolledDice);
+		roll.setText(diceText);
 	}
 }
