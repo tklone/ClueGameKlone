@@ -1,3 +1,171 @@
+commit 6f2bf7f8cd144220fbbd5083be6298eb1303ceaa
+Author: smithqd <qsmith@mines.edu>
+Date:   Sat Nov 19 22:19:54 2022 -0700
+
+    all tests pass
+
+commit 0ebe7f398f62dab28d037c1433bf062cad37156f
+Author: smithqd <qsmith@mines.edu>
+Date:   Sat Nov 19 21:27:06 2022 -0700
+
+    fixed solution tests
+
+commit 919a35ba423f05ed959dcca08d69d816a93f1f5f
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Sat Nov 19 19:11:34 2022 -0700
+
+    almost done
+
+commit 2bff05100f5d70a515a4afe402493b2053db466e
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Sat Nov 19 18:41:40 2022 -0700
+
+    working on Santa start
+
+commit 5c76c426381c13a23b07f6d93dc599f4d0e73beb
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Sat Nov 19 17:28:37 2022 -0700
+
+    THE PLAYERS FREAKING MOVE
+
+commit 9312fbddf16348d5f96be9dd220fc8338a0ca214
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Sat Nov 19 15:46:02 2022 -0700
+
+    making buttons work still
+
+commit 2d0490a609d57a18da4274efbe84b459d7388b2c
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Sat Nov 19 15:18:39 2022 -0700
+
+    FUCK YES QUINCY WE DID IT
+
+commit 0fc529c1055a65ce216b6b385204fcb51a4ef111
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Fri Nov 18 18:32:06 2022 -0700
+
+    I haven't pushed recently, have I?
+
+commit fd49a1b73d22d9691e82defaaa13cde7730db50e
+Author: smithqd <qsmith@mines.edu>
+Date:   Fri Nov 18 16:49:42 2022 -0700
+
+    trying to get target cells to highlight
+
+commit 32b1d89a00cf1d4850895bb28863309a2cbf3783
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Fri Nov 18 15:27:40 2022 -0700
+
+    changed something in BoardCell
+
+commit 405cd6400f3043462b3cc9a99d915d934f2c79a2
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Fri Nov 18 15:20:54 2022 -0700
+
+    adding somethings
+
+commit 6b5f966c32ce106bb03370164f4c85c6b8153b76
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Fri Nov 18 10:44:42 2022 -0700
+
+    got lotsa help in OH
+
+commit 2daae65b04e42a669e93ebfad5de14a887a71d18
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Fri Nov 18 10:13:37 2022 -0700
+
+    added updatePosition() to Player and changed Solution constructor
+
+commit 599072543cc2983c40addad2d143bd05deac521e
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Fri Nov 18 10:12:38 2022 -0700
+
+    working on it kinda
+
+commit 72950da7b6c4f6cfa35631f801eff23bb86a4a39
+Author: smithqd <qsmith@mines.edu>
+Date:   Thu Nov 17 21:03:32 2022 -0700
+
+    i tried to add stuff to mouseClicked but im stuck
+
+commit ce93e9d3327b591f21bd66474543f3c031673abe
+Author: smithqd <qsmith@mines.edu>
+Date:   Thu Nov 17 18:21:20 2022 -0700
+
+    mouse clicker
+
+commit 6176f356ead821581b11115c3dbb2372bd7d3b5f
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Thu Nov 17 18:12:07 2022 -0700
+
+    still don't know
+
+commit a080fed2e1ee25b17a2c162c41ac43da01029c47
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Thu Nov 17 18:10:44 2022 -0700
+
+    oh boy i have no idea what we're doing
+
+commit 945441d95a107108ee85684e6cba49aea80836e6
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Thu Nov 17 17:54:30 2022 -0700
+
+    moving nextButton
+
+commit f9abb516af578c0aeacd09c23a162690457ffa0b
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Thu Nov 17 17:52:02 2022 -0700
+
+    git
+
+commit 627b7e16f6cf4b1ef6bed8b317d52fcb1bc2afbd
+Author: smithqd <qsmith@mines.edu>
+Date:   Thu Nov 17 17:23:05 2022 -0700
+
+    adding current player to board
+
+commit f0d35d90d3f911b5d9fe630ef9a3310790932664
+Author: smithqd <qsmith@mines.edu>
+Date:   Thu Nov 17 13:50:18 2022 -0700
+
+    working on getting first player to show on panel
+
+commit b4fe78afe3729c8d38f0e32bf3571a6eb7357d53
+Author: smithqd <qsmith@mines.edu>
+Date:   Thu Nov 17 13:10:52 2022 -0700
+
+    fixed text paint
+
+commit 669fd385a864ef71f3770b9c3654a95965840685
+Author: smithqd <qsmith@mines.edu>
+Date:   Thu Nov 17 12:02:08 2022 -0700
+
+    readme
+
+commit 184d04f5ea1bc7808955015e0fd66dbedc804851
+Author: smithqd <qsmith@mines.edu>
+Date:   Thu Nov 17 12:01:26 2022 -0700
+
+    next button listener
+
+commit 7a6dc45d43550b4e5d73fa9c6d2922bed407f862
+Author: smithqd <qsmith@mines.edu>
+Date:   Thu Nov 17 12:00:59 2022 -0700
+
+    next button listener
+
+commit 8ef72ad607a9be62944574f5fedefea4c90e6d9f
+Author: smithqd <qsmith@mines.edu>
+Date:   Thu Nov 17 11:42:00 2022 -0700
+
+    added splash screen
+
+commit d63a4930a571f8f2966176401f76bc9fe0c61fcd
+Author: smithqd <qsmith@mines.edu>
+Date:   Tue Nov 15 19:15:52 2022 -0700
+
+    git log
+
 commit 9cff10d87b542fbce268a858dfed0fe1c94d2091
 Author: smithqd <qsmith@mines.edu>
 Date:   Tue Nov 15 19:10:50 2022 -0700
