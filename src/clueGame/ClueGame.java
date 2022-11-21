@@ -23,6 +23,7 @@ public class ClueGame extends JFrame {
 		board = Board.getInstance();
 		gameControl = new GameControlPanel();
 		currentPlayer = board.getCurrentPlayer();
+		board.setControl(gameControl);
 		gameControl.setTurn(currentPlayer);
 
 		this.setSize(1200, 900);

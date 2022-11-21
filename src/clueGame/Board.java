@@ -59,6 +59,12 @@ public class Board extends JPanel { //implements MouseListener
 	private boolean validClick = false;
 
 	private int currentPlayerInt = 0;
+	
+	private GameControlPanel control;
+
+	public void setControl(GameControlPanel control) {
+		this.control = control;
+	}
 
 	// variable and methods used for singleton pattern
 	private static Board theInstance = new Board();
@@ -684,6 +690,10 @@ public class Board extends JPanel { //implements MouseListener
 		calcTargets(players.get(0).getLocation(), getDiceRoll());
 		
 		highlightedCells = getTargets();
+		
+		control.setTurn(getCurrentPlayer());
+		control.setRoll(getDiceRoll());
+		
 		repaint();
 	}
 	
@@ -703,6 +713,7 @@ public class Board extends JPanel { //implements MouseListener
 
 		// Highlights the targets
 		if (getCurrentPlayer() instanceof HumanPlayer) {
+			
 			highlightedCells = getTargets();
 			repaint();
 		} else {

@@ -103,11 +103,12 @@ public class GameControlPanel extends JPanel {
 
 			Board board = Board.getInstance();
 			getRollVal = board.getDiceRoll();
-			board.nextTurn();
+
 			board.iterateCurrent();
+			
+			board.nextTurn();
 			setTurn(board.getCurrentPlayer());
 			setRoll(board.getDiceRoll());
-
 		}
 	}
 
