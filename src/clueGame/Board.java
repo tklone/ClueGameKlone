@@ -62,6 +62,8 @@ public class Board extends JPanel { //implements MouseListener
 	
 	private GameControlPanel control;
 
+	
+	//need a reference to Game Control Panel
 	public void setControl(GameControlPanel control) {
 		this.control = control;
 	}
@@ -120,7 +122,12 @@ public class Board extends JPanel { //implements MouseListener
 					currentPlayer.updatePosition(clickedCell);
 					currentPlayer.setTurnFinished(true);
 					repaint();
-				} else {
+				}
+				//TODO (this doesn't work)
+				else if(currentPlayer.getTurnFinished() == false && (currentPlayer.getLocation() == currentPlayer.getLocation()) ) {
+					JOptionPane.showMessageDialog(null, "Finish your turn first!");
+				}
+				else {
 					currentPlayer.setTurnFinished(false);
 					JOptionPane.showMessageDialog(null, "This is not a valid move.");
 				}
@@ -684,7 +691,6 @@ public class Board extends JPanel { //implements MouseListener
 		return diceRoll;
 	}
 
-
 	public void firstTurn() {
 		rollDice();
 		calcTargets(players.get(0).getLocation(), getDiceRoll());
@@ -698,12 +704,6 @@ public class Board extends JPanel { //implements MouseListener
 	}
 	
 	public void nextTurn() {
-//		if (currentPlayerInt < 5) {
-//			currentPlayerInt++;
-//		} else if (currentPlayerInt >= 5) {
-//			currentPlayerInt = 0;
-//		}
-		
 		
 		// Calculates the targets with the dice roll
 		rollDice();
