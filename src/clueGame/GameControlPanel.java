@@ -109,7 +109,7 @@ public class GameControlPanel extends JPanel {
 			
 			if (board.getCurrentPlayer().getStartRow() == board.getCurrentPlayer().getRow() && board.getCurrentPlayer().getStartCol() == board.getCurrentPlayer().getCol()) {
 				JOptionPane.showMessageDialog(null, "Finish your turn first");
-				
+				//Do somthin
 			} else {
 				board.nextTurn();
 				setTurn(board.getCurrentPlayer());
