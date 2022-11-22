@@ -709,6 +709,8 @@ public class Board extends JPanel { // implements MouseListener
 				repaint();
 			}
 		} else {
+			rollDice();
+			calcTargets(getCurrentPlayer().getLocation(), getDiceRoll());
 			Random rand = new Random();
 			int upperBound = targets.size() - 1;
 			int randLoc = rand.nextInt(upperBound);
