@@ -23,6 +23,8 @@ public abstract class Player {
 	public Player(String name, String color, int row, int col) {
 		this.name = name;
 		this.color = color;
+		startRow = row;
+		startCol = col;
 		this.row = row;
 		this.col = col;
 	}
@@ -160,5 +162,13 @@ public abstract class Player {
 	}
 	public boolean getTurnFinished() {
 		return turnComplete;
+	}
+	
+	public int getStartRow() {
+		return startRow;
+	}
+	
+	public int getStartCol() {
+		return startCol;
 	}
 }

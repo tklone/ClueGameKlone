@@ -23,7 +23,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class Board extends JPanel { //implements MouseListener 
+public class Board extends JPanel { // implements MouseListener
 
 	private static BoardCell[][] grid;
 	private int numRows;
@@ -59,11 +59,10 @@ public class Board extends JPanel { //implements MouseListener
 	private boolean validClick = false;
 
 	private int currentPlayerInt = 0;
-	
+
 	private GameControlPanel control;
 
-	
-	//need a reference to Game Control Panel
+	// need a reference to Game Control Panel
 	public void setControl(GameControlPanel control) {
 		this.control = control;
 	}
@@ -75,15 +74,15 @@ public class Board extends JPanel { //implements MouseListener
 	private Board() {
 		super();
 	}
-	
+
 	public int getHeight1() {
 		return this.getHeight();
 	}
-	
+
 	public int getWidth1() {
 		return this.getWidth();
 	}
-	
+
 	public void iterateCurrent() {
 		if (currentPlayerInt < 5) {
 			currentPlayerInt++;
@@ -92,7 +91,7 @@ public class Board extends JPanel { //implements MouseListener
 		}
 //		currentPlayer = players.get(currentPlayerInt);
 	}
-	
+
 	class boardMouseListener implements MouseListener {
 		public void mouseEntered(MouseEvent e) {
 		}
@@ -104,44 +103,37 @@ public class Board extends JPanel { //implements MouseListener
 		}
 
 		public void mousePressed(MouseEvent e) {
-			
+
 			int height = getHeight1();
 			int width = getWidth1();
 			int cellHeight = height / numRows;
 			int cellWidth = width / numCols;
 
+			BoardCell clickedCell = null;
+
 			int xComp = (int) e.getPoint().getX() / cellWidth;
 			int yComp = (int) e.getPoint().getY() / cellHeight;
-			
-			BoardCell clickedCell = grid[yComp][xComp];
+
+			clickedCell = grid[yComp][xComp];
+
 			Player currentPlayer = getCurrentPlayer();
 
-			
 			if (currentPlayer instanceof HumanPlayer) {
 				if (targets.contains(clickedCell)) {
 					currentPlayer.updatePosition(clickedCell);
 					currentPlayer.setTurnFinished(true);
 					repaint();
-				}
-				//TODO (this doesn't work)
-				else if(currentPlayer.getTurnFinished() == false && (currentPlayer.getLocation() == currentPlayer.getLocation()) ) {
-					JOptionPane.showMessageDialog(null, "Finish your turn first!");
-				}
-				else {
-					currentPlayer.setTurnFinished(false);
-					JOptionPane.showMessageDialog(null, "This is not a valid move.");
-				}
-
-				if (clickedCell.isRoom()) {
-//					handleSuggestion(testSuggestion, currentPlayer);
-				} else {
-					// Needs to end event
+					if (clickedCell.isRoom()) {
+//						handleSuggestion(testSuggestion, currentPlayer);
+					}
+				} else if (!targets.contains(clickedCell)) {
+					JOptionPane.showMessageDialog(null, "This is not a valid move");
 				}
 			}
 		}
 
 		@Override
-		public void mouseClicked(MouseEvent e) {			
+		public void mouseClicked(MouseEvent e) {
 		}
 	}
 
@@ -694,17 +686,17 @@ public class Board extends JPanel { //implements MouseListener
 	public void firstTurn() {
 		rollDice();
 		calcTargets(players.get(0).getLocation(), getDiceRoll());
-		
+
 		highlightedCells = getTargets();
-		
+
 		control.setTurn(getCurrentPlayer());
 		control.setRoll(getDiceRoll());
-		
+
 		repaint();
 	}
-	
+
 	public void nextTurn() {
-		
+
 		// Calculates the targets with the dice roll
 		rollDice();
 		calcTargets(getCurrentPlayer().getLocation(), getDiceRoll());
@@ -713,7 +705,7 @@ public class Board extends JPanel { //implements MouseListener
 
 		// Highlights the targets
 		if (getCurrentPlayer() instanceof HumanPlayer) {
-			
+
 			highlightedCells = getTargets();
 			repaint();
 		} else {
@@ -727,9 +719,9 @@ public class Board extends JPanel { //implements MouseListener
 			getCurrentPlayer().updatePosition(newLocation);
 			highlightedCells.clear();
 			repaint();
-			getCurrentPlayer().setTurnFinished(true); 
+			getCurrentPlayer().setTurnFinished(true);
 		}
-		
+
 	}
 
 	public Boolean diceRolled() {
