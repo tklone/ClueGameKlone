@@ -101,23 +101,15 @@ public class GameControlPanel extends JPanel {
 //		@Override
 		public void actionPerformed(ActionEvent e) {
 
-			
 			Board board = Board.getInstance();
 			getRollVal = board.getDiceRoll();
 
 			board.iterateCurrent();
-			
-			if (board.getCurrentPlayer().getStartRow() == board.getCurrentPlayer().getRow() && board.getCurrentPlayer().getStartCol() == board.getCurrentPlayer().getCol()) {
-				JOptionPane.showMessageDialog(null, "Finish your turn first");
-				//Do somthin
-			} else {
-				board.nextTurn();
-				setTurn(board.getCurrentPlayer());
-				setRoll(board.getDiceRoll());
-			}
-			
-		
-			
+
+			board.nextTurn();
+			setTurn(board.getCurrentPlayer());
+			setRoll(board.getDiceRoll());
+
 		}
 	}
 

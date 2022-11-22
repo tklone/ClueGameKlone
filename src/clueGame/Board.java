@@ -102,6 +102,7 @@ public class Board extends JPanel { // implements MouseListener
 		public void mouseReleased(MouseEvent e) {
 		}
 
+		
 		public void mousePressed(MouseEvent e) {
 
 			int height = getHeight1();
@@ -117,7 +118,8 @@ public class Board extends JPanel { // implements MouseListener
 			clickedCell = grid[yComp][xComp];
 
 			Player currentPlayer = getCurrentPlayer();
-
+			currentPlayer.setTurnFinished(false);
+			
 			if (currentPlayer instanceof HumanPlayer) {
 				if (targets.contains(clickedCell)) {
 					currentPlayer.updatePosition(clickedCell);
@@ -128,6 +130,7 @@ public class Board extends JPanel { // implements MouseListener
 					}
 				} else if (!targets.contains(clickedCell)) {
 					JOptionPane.showMessageDialog(null, "This is not a valid move");
+					currentPlayer.setTurnFinished(false);
 				}
 			}
 		}
@@ -696,18 +699,15 @@ public class Board extends JPanel { // implements MouseListener
 	}
 
 	public void nextTurn() {
-
-		// Calculates the targets with the dice roll
-		rollDice();
-		calcTargets(getCurrentPlayer().getLocation(), getDiceRoll());
-
-//		System.out.println("CURRENT PLAYER: " + getCurrentPlayer().getName() + " ROLL: " + getDiceRoll());
-
-		// Highlights the targets
 		if (getCurrentPlayer() instanceof HumanPlayer) {
-
-			highlightedCells = getTargets();
-			repaint();
+			if (!getCurrentPlayer().getTurnFinished()) {
+				JOptionPane.showMessageDialog(null, "Finish your turn first!");
+			} else {
+				rollDice();
+				calcTargets(getCurrentPlayer().getLocation(), getDiceRoll());
+				highlightedCells = getTargets();
+				repaint();
+			}
 		} else {
 			Random rand = new Random();
 			int upperBound = targets.size() - 1;
