@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -110,6 +111,25 @@ public class GameControlPanel extends JPanel {
 			setTurn(board.getCurrentPlayer());
 			setRoll(board.getDiceRoll());
 
+		}
+	}
+	
+	class MakeAccusationButtonListener implements ActionListener {
+		MakeAccusationButtonListener() {
+			accusationButton.addActionListener(this);
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			Board board = Board.getInstance();
+			//String weapon needs to get weapon from a menu
+			//Player player needs to get a player from a menu
+			String weapon;
+			Player player;
+			
+			Card[] weaponOptions = board.getWeaponsCards().toArray();
+//			board.handleSuggestion(board.getCurrentPlayer(), weapon, player);
+			JComboBox<Card> jComboBox = new JComboBox<>(weaponOptions);
 		}
 	}
 

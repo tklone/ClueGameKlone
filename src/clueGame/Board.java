@@ -379,6 +379,10 @@ public class Board extends JPanel { // implements MouseListener
 		return theCell.getAdjListCell();
 	}
 
+	public ArrayList<Card> getWeapons() {
+		return weapons;
+	}
+
 	public static Set<BoardCell> getTargets() {
 		return targets;
 	}
@@ -612,27 +616,27 @@ public class Board extends JPanel { // implements MouseListener
 		return accusationCheck;
 	}
 
-	public Card handleSuggestion(String weapon, Player accuser, Player playerGuess) {
+	public Card handleSuggestion(Player accuser, String weapon, Player playerGuess) {
 
 		ArrayList<Card> disproveCards = new ArrayList<>();
 
 		if (!getCurrentPlayer().getLocation().isRoom()) {
 			JOptionPane.showMessageDialog(null, "You must be in a room to make a suggestion");
 		} else {
-			//Updates the player who is being guessed to be in the same room where the suggestion is being made
+			// Updates the player who is being guessed to be in the same room where the
+			// suggestion is being made
 			playerGuess.updatePosition(getCurrentPlayer().getLocation());
 			repaint();
 		}
-		
+
 		char roomInitial = accuser.getLocation().getInitial();
 		Room room = getRoom(roomInitial);
-		
+
 		Card roomCard = getCard(room.getName());
 		Card weaponCard = getCard(weapon);
 		Card personCard = getCard(playerGuess.getName());
 		Solution suggestion = new Solution(roomCard, weaponCard, personCard);
 
-		
 		for (Player p : players) {
 			if (!p.equals(accuser)) {
 				Card disprove = p.disproveSuggestion(suggestion);
