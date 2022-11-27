@@ -102,7 +102,6 @@ public class Board extends JPanel { // implements MouseListener
 		public void mouseReleased(MouseEvent e) {
 		}
 
-		
 		public void mousePressed(MouseEvent e) {
 
 			int height = getHeight1();
@@ -119,7 +118,7 @@ public class Board extends JPanel { // implements MouseListener
 
 			Player currentPlayer = getCurrentPlayer();
 			currentPlayer.setTurnFinished(false);
-			
+
 			if (currentPlayer instanceof HumanPlayer) {
 				if (targets.contains(clickedCell)) {
 					currentPlayer.updatePosition(clickedCell);
@@ -613,10 +612,27 @@ public class Board extends JPanel { // implements MouseListener
 		return accusationCheck;
 	}
 
-	public Card handleSuggestion(Solution suggestion, Player accuser) {
+	public Card handleSuggestion(String weapon, Player accuser, Player playerGuess) {
 
 		ArrayList<Card> disproveCards = new ArrayList<>();
 
+		if (!getCurrentPlayer().getLocation().isRoom()) {
+			JOptionPane.showMessageDialog(null, "You must be in a room to make a suggestion");
+		} else {
+			//Updates the player who is being guessed to be in the same room where the suggestion is being made
+			playerGuess.updatePosition(getCurrentPlayer().getLocation());
+			repaint();
+		}
+		
+		char roomInitial = accuser.getLocation().getInitial();
+		Room room = getRoom(roomInitial);
+		
+		Card roomCard = getCard(room.getName());
+		Card weaponCard = getCard(weapon);
+		Card personCard = getCard(playerGuess.getName());
+		Solution suggestion = new Solution(roomCard, weaponCard, personCard);
+
+		
 		for (Player p : players) {
 			if (!p.equals(accuser)) {
 				Card disprove = p.disproveSuggestion(suggestion);
@@ -699,13 +715,17 @@ public class Board extends JPanel { // implements MouseListener
 	}
 
 	public void nextTurn() {
+
 		if (getCurrentPlayer() instanceof HumanPlayer) {
 			if (!getCurrentPlayer().getTurnFinished()) {
+				System.out.println("gets here");
 				JOptionPane.showMessageDialog(null, "Finish your turn first!");
-			} else {
+			}
+			if (getCurrentPlayer().getTurnFinished()) {
 				rollDice();
 				calcTargets(getCurrentPlayer().getLocation(), getDiceRoll());
 				highlightedCells = getTargets();
+				getCurrentPlayer().setTurnFinished(true);
 				repaint();
 			}
 		} else {
@@ -723,7 +743,6 @@ public class Board extends JPanel { // implements MouseListener
 			repaint();
 			getCurrentPlayer().setTurnFinished(true);
 		}
-
 	}
 
 	public Boolean diceRolled() {
@@ -732,5 +751,10 @@ public class Board extends JPanel { // implements MouseListener
 		}
 		return diceRolled;
 	}
+
+//	public void handleSuggestion(Player playerGuess, String weapon) {
+//		// room will be current player's location
+//		
+//	}
 
 }
