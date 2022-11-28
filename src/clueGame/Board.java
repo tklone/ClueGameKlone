@@ -89,7 +89,7 @@ public class Board extends JPanel { // implements MouseListener
 		} else if (currentPlayerInt >= 5) {
 			currentPlayerInt = 0;
 		}
-//		currentPlayer = players.get(currentPlayerInt);
+		//		currentPlayer = players.get(currentPlayerInt);
 	}
 
 	class boardMouseListener implements MouseListener {
@@ -125,8 +125,9 @@ public class Board extends JPanel { // implements MouseListener
 					currentPlayer.setTurnFinished(true);
 					repaint();
 					if (clickedCell.isRoom()) {
-//						handleSuggestion(testSuggestion, currentPlayer);
+						//						handleSuggestion(testSuggestion, currentPlayer);
 					}
+					getCurrentPlayer().setTurnFinished(true);
 				} else if (!targets.contains(clickedCell)) {
 					JOptionPane.showMessageDialog(null, "This is not a valid move");
 					currentPlayer.setTurnFinished(false);
@@ -172,7 +173,7 @@ public class Board extends JPanel { // implements MouseListener
 
 	// initialize the board(since we are using singleton pattern
 	public void initialize() {
-//		boardListener = new boardClicked();
+		//		boardListener = new boardClicked();
 		try {
 			loadSetupConfig();
 			loadLayoutConfig();
@@ -414,7 +415,7 @@ public class Board extends JPanel { // implements MouseListener
 
 			if (c.isRoomCenter()) {
 				targets.add(c);
-//				c.setIsHighlighted(true);
+				//				c.setIsHighlighted(true);
 				continue;
 			}
 
@@ -422,7 +423,7 @@ public class Board extends JPanel { // implements MouseListener
 			if (numSteps == 1) {
 				if (c.getOccupied() == false) {
 					targets.add(c);
-//					c.setIsHighlighted(true);
+					//					c.setIsHighlighted(true);
 				}
 			}
 
@@ -722,18 +723,22 @@ public class Board extends JPanel { // implements MouseListener
 
 		if (getCurrentPlayer() instanceof HumanPlayer) {
 			if (!getCurrentPlayer().getTurnFinished()) {
-				System.out.println("gets here");
 				JOptionPane.showMessageDialog(null, "Finish your turn first!");
-			}
-			if (getCurrentPlayer().getTurnFinished()) {
-				rollDice();
-				calcTargets(getCurrentPlayer().getLocation(), getDiceRoll());
-				highlightedCells = getTargets();
-				getCurrentPlayer().setTurnFinished(true);
-				repaint();
-			}
+				return;
+			} 
+		}
+		rollDice();
+		iterateCurrent();
+		control.setTurn(getCurrentPlayer());
+		control.setRoll(getDiceRoll());
+		if ((getCurrentPlayer() instanceof HumanPlayer) && getCurrentPlayer().getTurnFinished()) {
+			getCurrentPlayer().setTurnFinished(false);
+
+			calcTargets(getCurrentPlayer().getLocation(), getDiceRoll());
+			highlightedCells = getTargets();
+			repaint();
+
 		} else {
-			rollDice();
 			calcTargets(getCurrentPlayer().getLocation(), getDiceRoll());
 			Random rand = new Random();
 			int upperBound = targets.size() - 1;
@@ -756,9 +761,9 @@ public class Board extends JPanel { // implements MouseListener
 		return diceRolled;
 	}
 
-//	public void handleSuggestion(Player playerGuess, String weapon) {
-//		// room will be current player's location
-//		
-//	}
+	//	public void handleSuggestion(Player playerGuess, String weapon) {
+	//		// room will be current player's location
+	//		
+	//	}
 
 }

@@ -51,6 +51,8 @@ public class GameControlPanel extends JPanel {
 		JButton accusationButton = createAccusationButton();
 		buttonsPanel.add(accusationButton, BorderLayout.WEST);
 		accusationButton.addActionListener(new MakeAccusationButtonListener());
+		
+		
 		//Next Button
 		JButton nextButton = createNextButton();
 		buttonsPanel.add(nextButton, BorderLayout.EAST);
@@ -104,16 +106,8 @@ public class GameControlPanel extends JPanel {
 
 //		@Override
 		public void actionPerformed(ActionEvent e) {
-
 			Board board = Board.getInstance();
-			getRollVal = board.getDiceRoll();
-
-			board.iterateCurrent();
-
 			board.nextTurn();
-			setTurn(board.getCurrentPlayer());
-			setRoll(board.getDiceRoll());
-
 		}
 	}
 	
@@ -124,31 +118,12 @@ public class GameControlPanel extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			Board board = Board.getInstance();
-			//String weapon needs to get weapon from a menu
-			//Player player needs to get a player from a menu
-			String weapon;
-			Player player;
-			
-			//This also feels wrong...
-			createDropDownMenu();
-			
+			AccusationPanel accusationPanel = new AccusationPanel();
+			accusationPanel.setVisible(true);
 		}
 	}
 
-	
-	//This all feels wrong
-	private JFrame createDropDownMenu() {
-		JFrame frame = new JFrame();
-		//This feels wrong
-		Board board = Board.getInstance();
-		ArrayList<Card> weaponsCards = new ArrayList<Card>(board.getWeaponsCards());
-		Card[] weaponOptions = weaponsCards.toArray(new Card[0]);
-		JComboBox<Card> jComboBox = new JComboBox<>(weaponOptions);
-		frame.add(jComboBox);
-		return frame;
-	}
-	
+
 	private JPanel createTurnTextField() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(2, 1));
