@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -47,8 +48,10 @@ public class GameControlPanel extends JPanel {
 		buttonsPanel.setLayout(new GridLayout(1, 2));
 
 		// adding "make accusation" to left and "next" to right
-		JPanel accusationButton = createAccusationButton();
+		JButton accusationButton = createAccusationButton();
 		buttonsPanel.add(accusationButton, BorderLayout.WEST);
+		accusationButton.addActionListener(new MakeAccusationButtonListener());
+		//Next Button
 		JButton nextButton = createNextButton();
 		buttonsPanel.add(nextButton, BorderLayout.EAST);
 		nextButton.addActionListener(new NextButtonListener());
@@ -127,12 +130,25 @@ public class GameControlPanel extends JPanel {
 			String weapon;
 			Player player;
 			
-			Card[] weaponOptions = board.getWeaponsCards().toArray();
-//			board.handleSuggestion(board.getCurrentPlayer(), weapon, player);
-			JComboBox<Card> jComboBox = new JComboBox<>(weaponOptions);
+			//This also feels wrong...
+			createDropDownMenu();
+			
 		}
 	}
 
+	
+	//This all feels wrong
+	private JFrame createDropDownMenu() {
+		JFrame frame = new JFrame();
+		//This feels wrong
+		Board board = Board.getInstance();
+		ArrayList<Card> weaponsCards = new ArrayList<Card>(board.getWeaponsCards());
+		Card[] weaponOptions = weaponsCards.toArray(new Card[0]);
+		JComboBox<Card> jComboBox = new JComboBox<>(weaponOptions);
+		frame.add(jComboBox);
+		return frame;
+	}
+	
 	private JPanel createTurnTextField() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(2, 1));
@@ -174,11 +190,11 @@ public class GameControlPanel extends JPanel {
 		return panel;
 	}
 
-	private JPanel createAccusationButton() {
-		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(1, 1));
-		panel.add(accusationButton);
-		return panel;
+	private JButton createAccusationButton() {
+		JButton button = new JButton();
+		button.setLayout(new GridLayout(1, 1));
+		button.add(accusationButton);
+		return button;
 	}
 
 	private JButton createNextButton() {
