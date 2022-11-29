@@ -37,8 +37,9 @@ public abstract class Player {
 		return seenCards;
 	}
 
-	public void updateSeen(Card seenCard, String color) {
+	public void updateSeen(String seenCardName) {
 		this.disproverColor = color;
+		Card seenCard = Board.getCard(seenCardName);
 		seenCards.add(seenCard);
 	}
 	

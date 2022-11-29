@@ -26,36 +26,25 @@ public class KnownCardsPanel extends JPanel {
 	private JPanel roomsPanel;
 	private JPanel weaponsPanel;
 
-	private Player humanPlayer;
-	private Board board;
+	private Player player;
 	private Solution testSuggestion = new Solution();
 
+	Board board = Board.getInstance();
 
+	
 	ArrayList<Card> testSeenCardsList = new ArrayList<>();
 
 
-	public KnownCardsPanel(Board board) {
-		this.board = board;
-		humanPlayer = board.getHumanPlayer();
-
-		// JPanel 3 rows, 1 column
+	public KnownCardsPanel() {
+		player = board.getCurrentPlayer();
+		setSize(300, 700);
 		setLayout(new GridLayout(3, 1));
 		setBorder(new TitledBorder(new EtchedBorder(), "Known Cards"));
-
-		updatePanels();
-		peoplePanel.setBorder(new TitledBorder(new EtchedBorder(), "People"));
-		add(peoplePanel);
-
-		// rooms
-		roomsPanel.setBorder(new TitledBorder(new EtchedBorder(), "Rooms"));
-		add(roomsPanel);
-		weaponsPanel.setBorder(new TitledBorder(new EtchedBorder(), "Weapons"));
-		add(weaponsPanel, BorderLayout.SOUTH);
-		
+		updatePanels(null);
 	}
 
 	// create people cards in hand
-	private JPanel createPeoplePanel() {
+	private JPanel createPeoplePanel(Color color) {
 //		setTestSeen();
 
 		JPanel panel = new JPanel();
@@ -65,7 +54,7 @@ public class KnownCardsPanel extends JPanel {
 
 		// Creating an ArrayList of the weapons in the human player's hand
 		ArrayList<Card> peopleInHandList = new ArrayList<>();
-		for (Card c : humanPlayer.getHand()) {
+		for (Card c : player.getHand()) {
 			if (c.getCardType().equals(CardType.PERSON)) {
 				peopleInHandList.add(c);
 			}
@@ -89,13 +78,12 @@ public class KnownCardsPanel extends JPanel {
 		panel.add(peopleSeenLabel);
 
 		ArrayList<Card> peopleInSeenList = new ArrayList<>();
-		for (Card c : humanPlayer.getSeenCards()) {
-//		for (Card c : testSeenCardsList) {
+		for (Card c : player.getSeenCards()) {
 			if (c.getCardType().equals(CardType.PERSON)) {
 				peopleInSeenList.add(c);
 			}
 		}
-
+		
 		if (peopleInSeenList.size() == 0) {
 			peopleSeen = new JTextField();
 			peopleSeen.setText("None");
@@ -105,6 +93,7 @@ public class KnownCardsPanel extends JPanel {
 			for (Card c : peopleInSeenList) {
 				peopleSeen = new JTextField();
 				peopleSeen.setText(c.getName());
+				peopleSeen.setBackground(color);
 				peopleSeen.setEditable(false);
 				panel.add(peopleSeen, BorderLayout.SOUTH);
 			}
@@ -113,7 +102,7 @@ public class KnownCardsPanel extends JPanel {
 	}
 
 	// creates room cards in hand
-	private JPanel createRoomsPanel() {
+	private JPanel createRoomsPanel(Color color) {
 
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(0, 1));
@@ -122,7 +111,7 @@ public class KnownCardsPanel extends JPanel {
 
 		// Creating an ArrayList of the weapons in the human player's hand
 		ArrayList<Card> roomsInHandList = new ArrayList<>();
-		for (Card c : humanPlayer.getHand()) {
+		for (Card c : player.getHand()) {
 			if (c.getCardType().equals(CardType.ROOM)) {
 				roomsInHandList.add(c);
 			}
@@ -146,8 +135,7 @@ public class KnownCardsPanel extends JPanel {
 		panel.add(roomsSeenLabel);
 
 		ArrayList<Card> roomsInSeenList = new ArrayList<>();
-		for (Card c : humanPlayer.getSeenCards()) {
-//		for (Card c : testSeenCardsList) {
+		for (Card c : player.getSeenCards()) {
 			if (c.getCardType().equals(CardType.ROOM)) {
 				roomsInSeenList.add(c);
 			}
@@ -163,6 +151,7 @@ public class KnownCardsPanel extends JPanel {
 			for (Card c : roomsInSeenList) {
 				roomsSeen = new JTextField();
 				roomsSeen.setText(c.getName());
+				roomsSeen.setBackground(color);
 				roomsSeen.setEditable(false);
 				panel.add(roomsSeen, BorderLayout.SOUTH);
 			}
@@ -172,7 +161,7 @@ public class KnownCardsPanel extends JPanel {
 	}
 
 	// creates weapon cards in hand
-	private JPanel createWeaponsPanel() {
+	private JPanel createWeaponsPanel(Color color) {
 //		setTestSeen();
 
 		JPanel panel = new JPanel();
@@ -182,7 +171,7 @@ public class KnownCardsPanel extends JPanel {
 
 		// Creating an ArrayList of the weapons in the human player's hand
 		ArrayList<Card> weaponsInHandList = new ArrayList<>();
-		for (Card c : humanPlayer.getHand()) {
+		for (Card c : player.getHand()) {
 			if (c.getCardType().equals(CardType.WEAPON)) {
 				weaponsInHandList.add(c);
 			}
@@ -207,13 +196,13 @@ public class KnownCardsPanel extends JPanel {
 		panel.add(weaponsSeenLabel);
 
 		ArrayList<Card> weaponsInSeenList = new ArrayList<>();
-		for (Card c : humanPlayer.getSeenCards()) {
+		for (Card c : player.getSeenCards()) {
 //		for (Card c : testSeenCardsList) {
 			if (c.getCardType().equals(CardType.WEAPON)) {
 				weaponsInSeenList.add(c);
 			}
 		}
-
+		
 		if (weaponsInSeenList.size() == 0) {
 			weaponsSeen = new JTextField();
 			weaponsSeen.setText("None");
@@ -223,6 +212,7 @@ public class KnownCardsPanel extends JPanel {
 			for (Card c : weaponsInSeenList) {
 				weaponsSeen = new JTextField();
 				weaponsSeen.setText(c.getName());
+				weaponsSeen.setBackground(color);
 				weaponsSeen.setEditable(false);
 				panel.add(weaponsSeen, BorderLayout.SOUTH);
 			}
@@ -243,20 +233,36 @@ public class KnownCardsPanel extends JPanel {
 		board.initialize();
 		board.dealCards();
 				
-		KnownCardsPanel panel = new KnownCardsPanel(board);
+		KnownCardsPanel panel = new KnownCardsPanel();
 		frame.add(panel, BorderLayout.CENTER);
 
 		frame.setVisible(true); // make it visible
 
 	}
 
-	public void updatePanels() {
-		peoplePanel = createPeoplePanel();
-		roomsPanel = createRoomsPanel();
-		weaponsPanel = createWeaponsPanel();
-	}
+	public void updatePanels(Color color) {
+	
+		
+		
+		peoplePanel = createPeoplePanel(color);
+		roomsPanel = createRoomsPanel(color);
+		weaponsPanel = createWeaponsPanel(color);
+		
+		this.removeAll();
 
-	public void addSeenCard(Card disprove, Color currentPlayerColor) {
+		
+		//people
+		peoplePanel.setBorder(new TitledBorder(new EtchedBorder(), "People"));
+		this.add(peoplePanel);
+
+		// rooms
+		roomsPanel.setBorder(new TitledBorder(new EtchedBorder(), "Rooms"));
+		this.add(roomsPanel);
+		
+		//weapons
+		weaponsPanel.setBorder(new TitledBorder(new EtchedBorder(), "Weapons"));
+		this.add(weaponsPanel, BorderLayout.SOUTH);
 		
 	}
+
 }

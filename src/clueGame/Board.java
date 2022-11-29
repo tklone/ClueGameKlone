@@ -677,7 +677,7 @@ public class Board extends JPanel { // implements MouseListener
 		return accusationCheck;
 	}
 
-	public Card handleSuggestion() { // Player accuser, String weapon, Player playerGuess
+	public void handleSuggestion() { // Player accuser, String weapon, Player playerGuess
 
 		if (suggestionPanel.getPlayerChoice() != null && suggestionPanel.getWeaponChoice() != null) {
 			control.setGuess(suggestionPanel.getPlayerChoice() + " with the "
@@ -707,14 +707,16 @@ public class Board extends JPanel { // implements MouseListener
 
 		Solution suggestion = new Solution(roomCard, weaponCard, personCard);
 
-		String disproverColor = "";
+		Color disproverColor = null;
+		String colorString = "";
 		
 		for (Player p : players) {
 			if (!p.equals(accuser)) {
 				Card disprove = p.disproveSuggestion(suggestion);
 				if (disprove != null) {
 					disproveCards.add(disprove);
-					disproverColor = p.getColor();
+					colorString = p.getColor();
+					disproverColor = p.getColorPlayer(p.getColor());
 				}
 			} else {
 				continue;
@@ -723,21 +725,20 @@ public class Board extends JPanel { // implements MouseListener
 		}
 
 		if (disproveCards.size() == 1) {
-			control.setGuessResult("It was not " + disproveCards.get(0).getName() + " becasue " + disproverColor + " showed a card.");
-			accuser.updateSeen(disproveCards.get(0), disproverColor);
-			return disproveCards.get(0);
-		}
-
-		if (disproveCards.size() > 0) {
+			control.setGuessResult("It was not " + disproveCards.get(0).getName() + " becasue " + colorString + " showed a card.");
+			accuser.updateSeen(disproveCards.get(0).getName());
+		} else if (disproveCards.size() > 0) {
 			Random rand = new Random();
 			int randInt = rand.nextInt(disproveCards.size() - 1);
-			accuser.updateSeen(disproveCards.get(randInt), disproverColor);
-			control.setGuessResult("It was not " + disproveCards.get(randInt).getName() + " becasue " + disproverColor + " showed a card.");
-			return disproveCards.get(randInt);
-
+			accuser.updateSeen(disproveCards.get(randInt).getName());
+			control.setGuessResult("It was not " + disproveCards.get(randInt).getName() + " becasue " + colorString + " showed a card.");
 		}
-	
-		return null;
+		
+		
+		
+		knownCardsPanel.updatePanels(disproverColor);
+		repaint();
+		revalidate();
 	}
 
 	public Player getHumanPlayer() {
@@ -879,5 +880,9 @@ public class Board extends JPanel { // implements MouseListener
 		String colorS = getCurrentPlayer().getColor();
 		Color color = getCurrentPlayer().getColorPlayer(colorS);
 		return color;
+	}
+
+	public void setKnownCards(KnownCardsPanel knownCardsPanel) {
+		this.knownCardsPanel = knownCardsPanel;
 	}
 }

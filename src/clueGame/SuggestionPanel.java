@@ -27,6 +27,8 @@ public class SuggestionPanel extends JDialog {
 
 	public SuggestionPanel() {
 //		Board board = Board.getInstance();
+		this.setSize(600, 250);
+
 		setLayout(new GridLayout(4, 2));
 
 		JLabel roomLabel = new JLabel("ROOM:");

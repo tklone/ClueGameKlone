@@ -17,6 +17,7 @@ public class ClueGame extends JFrame {
 	GameControlPanel gameControl;
 	SuggestionPanel suggestionPanel;
 	AccusationPanel accusationPanel;
+	KnownCardsPanel knownCardsPanel;
 	int diceRoll;
 	BoardCell startPos;
 
@@ -27,17 +28,13 @@ public class ClueGame extends JFrame {
 		suggestionPanel = new SuggestionPanel();
 		accusationPanel = new AccusationPanel();
 		currentPlayer = board.getCurrentPlayer();
-		knownCards = new KnownCardsPanel(Board.getInstance());
+		knownCardsPanel = new KnownCardsPanel();
+		knownCards = new KnownCardsPanel();
+		board.setKnownCards(knownCards);
 		board.setControl(gameControl);
 		board.setAccusation(accusationPanel);
 		gameControl.setTurn(currentPlayer);
-//		board.setSuggestion(suggestionPanel);
-//		if (suggestionPanel.getPlayerChoice() != null && suggestionPanel.getWeaponChoice() != null) {
-//			gameControl.setGuess(suggestionPanel.getPlayerChoice() + " with the "
-//					+ suggestionPanel.getWeaponChoice() + " in the " + suggestionPanel.getRoom() + ".");
-//			
-//		}
-		
+
 		
 		this.setSize(1200, 900);
 		this.add(knownCards, BorderLayout.EAST);
