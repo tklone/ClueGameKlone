@@ -21,6 +21,8 @@ public class SuggestionPanel extends JDialog {
 	JButton submitButton = new JButton("Submit");
 	JButton cancelButton = new JButton("Cancel");
 	Board board = Board.getInstance();
+	private String weaponChoice;
+	private String playerChoice;
 
 	public SuggestionPanel() {
 //		Board board = Board.getInstance();
@@ -57,10 +59,12 @@ public class SuggestionPanel extends JDialog {
 
 		add(cancelButton);
 		add(submitButton);
+	
 	}
 
 	private JComboBox<String> createPeopleCombo() {
 		JComboBox<String> players = new JComboBox<String>();
+		players.addItem("");
 		for (Card c : board.getPeopleCards()) {
 			String name = c.getName();
 			players.addItem(name);
@@ -71,6 +75,7 @@ public class SuggestionPanel extends JDialog {
 
 	private JComboBox<String> createWeaponsCombo() {
 		JComboBox<String> weapons = new JComboBox<String>();
+		weapons.addItem("");
 		for (Card c : board.getWeaponsCards()) {
 			String name = c.getName();
 			weapons.addItem(name);
@@ -85,9 +90,13 @@ public class SuggestionPanel extends JDialog {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == weaponsMenu) {
-				weaponsMenu.getSelectedItem().toString();
-			} else {
-				playersMenu.getSelectedItem().toString();
+				setWeaponChoice(weaponsMenu.getSelectedItem().toString());
+				System.out.println("SuggestionPanel Line 94" + getWeaponChoice());
+			} 
+			
+			if (e.getSource() == playersMenu){
+				setPlayerChoice(playersMenu.getSelectedItem().toString());
+				System.out.println("SuggestionPanel Line 97" + getPlayerChoice());
 			}
 
 		}
@@ -101,7 +110,6 @@ public class SuggestionPanel extends JDialog {
 		}
 
 		public void actionPerformed(ActionEvent e) {
-			board.handleSuggestion();
 			dispose();
 		}
 	}
@@ -117,13 +125,19 @@ public class SuggestionPanel extends JDialog {
 		}
 	}
 
+	public void setWeaponChoice(String weaponChoice) {
+		this.weaponChoice = weaponChoice;
+	}
+	
+	public void setPlayerChoice(String playerChoice) {
+		this.playerChoice = playerChoice;
+	}
+	
 	public String getWeaponChoice() {
-		String weapon = weaponsMenu.getSelectedItem().toString();
-		return weapon;
+		return weaponChoice;
 	}
 
 	public String getPlayerChoice() {
-		String player = playersMenu.getSelectedItem().toString();
-		return player;
+		return playerChoice;
 	}
 }

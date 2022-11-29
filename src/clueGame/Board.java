@@ -76,7 +76,7 @@ public class Board extends JPanel { // implements MouseListener
 	}
 
 	public void setAccusationPlayer(String player) {
-		accusationPlayer = player;
+		this.accusationPlayer = player;
 	}
 
 	public String getAccusationPlayer() {
@@ -165,6 +165,18 @@ public class Board extends JPanel { // implements MouseListener
 					if (clickedCell.isRoom()) {
 						SuggestionPanel suggestionPanel = new SuggestionPanel();
 						suggestionPanel.setVisible(true);
+						
+						Player player = getCurrentPlayer();
+						BoardCell location = player.getLocation();
+
+						setAccusationRoom(getRoom(location).getName());
+						setAccusationPlayer(suggestion.getPlayerChoice());						
+						setAccusationWeapon(suggestion.getWeaponChoice());
+						
+						System.out.println("Board 176 " + suggestion.getPlayerChoice());
+						System.out.println("Board 177 " + suggestion.getWeaponChoice());
+
+//						handleSuggestion();
 					}
 				} else if (!targets.contains(clickedCell)) {
 					JOptionPane.showMessageDialog(null, "This is not a valid move");
@@ -637,6 +649,7 @@ public class Board extends JPanel { // implements MouseListener
 	public Player getPlayer(String player) {
 		for (Player p : players) {
 			if (p.getName().equals(player)) {
+//				System.out.println("Board 640" + p.getName());
 				return p;
 			}
 		}
@@ -665,13 +678,7 @@ public class Board extends JPanel { // implements MouseListener
 	}
 
 	public Card handleSuggestion() { // Player accuser, String weapon, Player playerGuess
-
-		Player player = getCurrentPlayer();
-		BoardCell location = player.getLocation();
-
-		setAccusationRoom(getRoom(location).getName());
-		setAccusationPlayer(suggestion.getPlayerChoice());
-		setAccusationWeapon(suggestion.getPlayerChoice());
+	
 
 		String weaponS = getAccusationWeapon();
 		String playerS = getAccusationPlayer();
@@ -682,12 +689,9 @@ public class Board extends JPanel { // implements MouseListener
 
 		ArrayList<Card> disproveCards = new ArrayList<>();
 
-		if (!getCurrentPlayer().getLocation().isRoom()) {
-			JOptionPane.showMessageDialog(null, "You must be in a room to make a suggestion");
-		} else {
-			accusationPlayer.updatePosition(getCurrentPlayer().getLocation());
-			repaint();
-		}
+		//This isn't happening...
+//		accusationPlayer.updatePosition(accuser.getLocation());
+		repaint();
 
 		char roomInitial = accuser.getLocation().getInitial();
 		Room room = getRoom(roomInitial);
@@ -711,9 +715,9 @@ public class Board extends JPanel { // implements MouseListener
 			getCurrentPlayer().setTurnFinished(true);
 		}
 
-		for (Card c : accuser.getSeenCards()) {
-			System.out.println(c.getName());
-		}
+//		for (Card c : accuser.getSeenCards()) {
+//			System.out.println(c.getName());
+//		}
 
 		if (disproveCards.size() == 1) {
 			return disproveCards.get(0);
