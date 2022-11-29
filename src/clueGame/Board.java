@@ -63,7 +63,7 @@ public class Board extends JPanel { // implements MouseListener
 	private int currentPlayerInt = 0;
 
 	private GameControlPanel control;
-	private SuggestionPanel suggestion;
+	private SuggestionPanel suggestionPanel;
 	private AccusationPanel accusation;
 	private KnownCardsPanel knownCardsPanel;
 
@@ -97,7 +97,7 @@ public class Board extends JPanel { // implements MouseListener
 	}
 
 	public void setSuggestion(SuggestionPanel suggestion) {
-		this.suggestion = suggestion;
+		this.suggestionPanel = suggestion;
 	}
 
 	public void setAccusation(AccusationPanel accusation) {
@@ -154,7 +154,6 @@ public class Board extends JPanel { // implements MouseListener
 			clickedCell = grid[yComp][xComp];
 
 			Player currentPlayer = getCurrentPlayer();
-//			currentPlayer.setTurnFinished(false);
 
 			if (currentPlayer instanceof HumanPlayer) {
 				if (targets.contains(clickedCell)) {
@@ -163,20 +162,21 @@ public class Board extends JPanel { // implements MouseListener
 					targets.clear();
 					repaint();
 					if (clickedCell.isRoom()) {
-						SuggestionPanel suggestionPanel = new SuggestionPanel();
-						suggestionPanel.setVisible(true);
-						
+						suggestionPanel = new SuggestionPanel();
+						setSuggestion(suggestionPanel);
+
 						Player player = getCurrentPlayer();
 						BoardCell location = player.getLocation();
 
 						setAccusationRoom(getRoom(location).getName());
-						setAccusationPlayer(suggestion.getPlayerChoice());						
-						setAccusationWeapon(suggestion.getWeaponChoice());
-						
-						System.out.println("Board 176 " + suggestion.getPlayerChoice());
-						System.out.println("Board 177 " + suggestion.getWeaponChoice());
+						suggestionPanel.setRoom(getRoom(location).getName());
+					
+						suggestionPanel.setVisible(true);
 
-//						handleSuggestion();
+						setAccusationPlayer(suggestionPanel.getPlayerChoice());
+						setAccusationWeapon(suggestionPanel.getWeaponChoice());
+
+						handleSuggestion();
 					}
 				} else if (!targets.contains(clickedCell)) {
 					JOptionPane.showMessageDialog(null, "This is not a valid move");
@@ -678,8 +678,13 @@ public class Board extends JPanel { // implements MouseListener
 	}
 
 	public Card handleSuggestion() { // Player accuser, String weapon, Player playerGuess
-	
 
+		if (suggestionPanel.getPlayerChoice() != null && suggestionPanel.getWeaponChoice() != null) {
+			control.setGuess(suggestionPanel.getPlayerChoice() + " with the "
+					+ suggestionPanel.getWeaponChoice() + " in the " + suggestionPanel.getRoom() + ".");
+
+		}
+		
 		String weaponS = getAccusationWeapon();
 		String playerS = getAccusationPlayer();
 		String roomS = getAccusationRoom();
@@ -689,8 +694,8 @@ public class Board extends JPanel { // implements MouseListener
 
 		ArrayList<Card> disproveCards = new ArrayList<>();
 
-		//This isn't happening...
-//		accusationPlayer.updatePosition(accuser.getLocation());
+		// This isn't happening...
+		accusationPlayer.updatePosition(accuser.getLocation());
 		repaint();
 
 		char roomInitial = accuser.getLocation().getInitial();
@@ -729,6 +734,7 @@ public class Board extends JPanel { // implements MouseListener
 			return disproveCards.get(randInt);
 
 		}
+	
 		return null;
 	}
 

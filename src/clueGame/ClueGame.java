@@ -29,10 +29,16 @@ public class ClueGame extends JFrame {
 		currentPlayer = board.getCurrentPlayer();
 		knownCards = new KnownCardsPanel(Board.getInstance());
 		board.setControl(gameControl);
-		board.setSuggestion(suggestionPanel);
 		board.setAccusation(accusationPanel);
 		gameControl.setTurn(currentPlayer);
-
+//		board.setSuggestion(suggestionPanel);
+//		if (suggestionPanel.getPlayerChoice() != null && suggestionPanel.getWeaponChoice() != null) {
+//			gameControl.setGuess(suggestionPanel.getPlayerChoice() + " with the "
+//					+ suggestionPanel.getWeaponChoice() + " in the " + suggestionPanel.getRoom() + ".");
+//			
+//		}
+		
+		
 		this.setSize(1200, 900);
 		this.add(knownCards, BorderLayout.EAST);
 		this.add(gameControl, BorderLayout.SOUTH);

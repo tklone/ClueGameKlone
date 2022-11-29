@@ -23,6 +23,7 @@ public class SuggestionPanel extends JDialog {
 	Board board = Board.getInstance();
 	private String weaponChoice;
 	private String playerChoice;
+	private String currentRoom;
 
 	public SuggestionPanel() {
 //		Board board = Board.getInstance();
@@ -41,7 +42,7 @@ public class SuggestionPanel extends JDialog {
 		currentRoom.setEditable(false);
 		add(roomLabel);
 		add(currentRoom);
-
+		
 		playersMenu = createPeopleCombo();
 		add(peopleLabel);
 		add(playersMenu);
@@ -91,12 +92,10 @@ public class SuggestionPanel extends JDialog {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == weaponsMenu) {
 				setWeaponChoice(weaponsMenu.getSelectedItem().toString());
-				System.out.println("SuggestionPanel Line 94" + getWeaponChoice());
 			} 
 			
 			if (e.getSource() == playersMenu){
 				setPlayerChoice(playersMenu.getSelectedItem().toString());
-				System.out.println("SuggestionPanel Line 97" + getPlayerChoice());
 			}
 
 		}
@@ -139,5 +138,13 @@ public class SuggestionPanel extends JDialog {
 
 	public String getPlayerChoice() {
 		return playerChoice;
+	}
+
+	public void setRoom(String name) {
+		currentRoom = name;
+	}
+	
+	public String getRoom() {
+		return currentRoom;
 	}
 }

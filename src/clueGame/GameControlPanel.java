@@ -183,11 +183,6 @@ public class GameControlPanel extends JPanel {
 		return nextButton;
 	}
 
-	/**
-	 * Main to test the panel
-	 * 
-	 * @param args
-	 */
 	public static void main(String[] args) {
 		GameControlPanel panel = new GameControlPanel(); // create the panel
 		JFrame frame = new JFrame(); // create the frame
@@ -196,14 +191,6 @@ public class GameControlPanel extends JPanel {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
 
 		frame.setVisible(true); // make it visible
-
-		// test filling in the data
-
-//		panel.setRoll(board.rollDice());
-
-//		NextButtonListener nextButtonListener = new NextButtonListener();
-
-//		nextButtonListener.actionPerformed(e);
 	}
 
 	// Setters to update data
