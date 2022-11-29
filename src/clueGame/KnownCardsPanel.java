@@ -254,7 +254,6 @@ public class KnownCardsPanel extends JPanel {
 		peoplePanel = createPeoplePanel();
 		roomsPanel = createRoomsPanel();
 		weaponsPanel = createWeaponsPanel();
-
 	}
 
 	public void addSeenCard(Card disprove, Color currentPlayerColor) {

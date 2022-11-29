@@ -28,7 +28,7 @@ public class AccusationPanel extends JDialog {
 		JLabel roomLabel = new JLabel("ROOM:");
 		JLabel weaponsLabel = new JLabel("WEAPON:");
 		JLabel peopleLabel = new JLabel("PERSON:");
-		 setModal(true);
+		setModal(true);
 
 		roomsMenu = createRoomCombo();
 		add(roomLabel);
@@ -80,7 +80,6 @@ public class AccusationPanel extends JDialog {
 		}
 		weapons.setVisible(true);
 		return weapons;
-
 	}
 
 	private class ComboListener implements ActionListener {
@@ -92,9 +91,7 @@ public class AccusationPanel extends JDialog {
 			} else {
 				playersMenu.getSelectedItem().toString();
 			}
-
 		}
-
 	}
 
 	class SubmitButtonListener implements ActionListener {

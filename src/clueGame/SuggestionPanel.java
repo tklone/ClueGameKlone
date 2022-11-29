@@ -16,6 +16,7 @@ import javax.swing.border.TitledBorder;
 
 public class SuggestionPanel extends JDialog {
 
+	
 	private JComboBox<String> weaponsMenu, playersMenu;
 	JButton submitButton = new JButton("Submit");
 	JButton cancelButton = new JButton("Cancel");

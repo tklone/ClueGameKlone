@@ -120,16 +120,11 @@ public class GameControlPanel extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			Board board = Board.getInstance();
 			if (board.getCurrentPlayer() instanceof HumanPlayer) {
-				if (!board.getCurrentPlayer().getLocation().isRoom()) {
-					AccusationPanel accusationPanel = new AccusationPanel();
-					accusationPanel.setVisible(true);
-				} else {
-					SuggestionPanel suggestionPanel = new SuggestionPanel();
-					suggestionPanel.setVisible(true);
-				}
+				AccusationPanel accusationPanel = new AccusationPanel();
+				accusationPanel.setVisible(true);
 			}
-
 		}
+
 	}
 
 	private JPanel createTurnTextField() {

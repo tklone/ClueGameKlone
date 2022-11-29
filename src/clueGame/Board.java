@@ -141,6 +141,7 @@ public class Board extends JPanel { // implements MouseListener
 
 		public void mousePressed(MouseEvent e) {
 
+			
 			int height = getHeight1();
 			int width = getWidth1();
 			int cellHeight = height / numRows;
@@ -152,16 +153,22 @@ public class Board extends JPanel { // implements MouseListener
 			int yComp = (int) e.getPoint().getY() / cellHeight;
 
 			clickedCell = grid[yComp][xComp];
+			getCurrentPlayer().setTurnFinished(true);
+
 
 			Player currentPlayer = getCurrentPlayer();
-			currentPlayer.setTurnFinished(false);
-
+//			currentPlayer.setTurnFinished(false);
+			
 			if (currentPlayer instanceof HumanPlayer) {
 				if (targets.contains(clickedCell)) {
 					currentPlayer.updatePosition(clickedCell);
 					currentPlayer.setTurnFinished(true);
 					repaint();
 					getCurrentPlayer().setTurnFinished(true);
+					if (clickedCell.isRoom()) {
+						SuggestionPanel suggestionPanel = new SuggestionPanel();
+						suggestionPanel.setVisible(true);
+					}
 				} else if (!targets.contains(clickedCell)) {
 					JOptionPane.showMessageDialog(null, "This is not a valid move");
 					currentPlayer.setTurnFinished(false);
@@ -662,15 +669,13 @@ public class Board extends JPanel { // implements MouseListener
 
 	public Card handleSuggestion() { //Player accuser, String weapon, Player playerGuess
 		
-		knownCardsPanel = new KnownCardsPanel(this);
 		
-		setAccusationPlayer(suggestion.getPlayerChoice());
-		setAccusationWeapon(suggestion.getPlayerChoice());
-
 		Player player = getCurrentPlayer();
 		BoardCell location = player.getLocation();
 
 		setAccusationRoom(getRoom(location).getName());
+		setAccusationPlayer(suggestion.getPlayerChoice());
+		setAccusationWeapon(suggestion.getPlayerChoice());
 		
 		String weaponS = getAccusationWeapon();
 		String playerS = getAccusationPlayer();
@@ -703,15 +708,12 @@ public class Board extends JPanel { // implements MouseListener
 				Card disprove = p.disproveSuggestion(suggestion);
 				if (disprove != null) {
 					disproveCards.add(disprove);
-					// We think this makes sense to have here but we aren't entirely sure??
 					accuser.updateSeen(disprove, p.getColor());
-//					knownCardsPanel.repaint();
 				}
 			} else {
 				continue;
 			}
 			getCurrentPlayer().setTurnFinished(true);
-			repaint();
 		}
 		
 		for (Card c : accuser.getSeenCards()) {
@@ -841,11 +843,11 @@ public class Board extends JPanel { // implements MouseListener
 		return diceRolled;
 	}
 
-	public void makeSuggestion() {
-	
-	}
-
 	public void makeAccusation() {
+		if (getCurrentPlayer().getTurnFinished()) {
+			JOptionPane.showMessageDialog(null, "You can't do that");
+		} else {
+		
 		setAccusationPlayer(accusation.getPlayerChoice());
 		setAccusationWeapon(accusation.getWeaponChoice());
 
@@ -869,6 +871,7 @@ public class Board extends JPanel { // implements MouseListener
 		}
 		JOptionPane.showMessageDialog(null, "GAME OVER");
 		setGameOver(true);
+		}
 	}
 
 	public Color currentPlayerColor() {
