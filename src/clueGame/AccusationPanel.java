@@ -9,16 +9,19 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
 
 public class AccusationPanel extends JDialog {
 
 	private JComboBox<String> weaponsMenu, playersMenu;
 
 	public AccusationPanel() {
+		setLayout(new GridLayout(2, 4));
+		
 		JLabel weaponsLabel = new JLabel("Select a WEAPON");
 		JLabel peopleLabel = new JLabel("Select a PERSON");
 		// setModal(true);
-		setLayout(new GridLayout(2, 2));
 		add(weaponsLabel);
 		add(peopleLabel);
 
@@ -31,7 +34,6 @@ public class AccusationPanel extends JDialog {
 		ComboListener listener = new ComboListener();
 		weaponsMenu.addActionListener(listener);
 		playersMenu.addActionListener(listener);
-		
 		
 		
 	}
@@ -70,4 +72,10 @@ public class AccusationPanel extends JDialog {
 		}
 		
 	}
+	
+	public static void main(String[] args) {
+		AccusationPanel gui = new AccusationPanel();
+		gui.setVisible(true);
+	}
+
 }
