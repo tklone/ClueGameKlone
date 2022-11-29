@@ -1,6 +1,7 @@
 package clueGame;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 
@@ -88,8 +89,8 @@ public class KnownCardsPanel extends JPanel {
 		panel.add(peopleSeenLabel);
 
 		ArrayList<Card> peopleInSeenList = new ArrayList<>();
-//		for (Card c : humanPlayer.getSeenCards()) {
-		for (Card c : testSeenCardsList) {
+		for (Card c : humanPlayer.getSeenCards()) {
+//		for (Card c : testSeenCardsList) {
 			if (c.getCardType().equals(CardType.PERSON)) {
 				peopleInSeenList.add(c);
 			}
@@ -113,7 +114,6 @@ public class KnownCardsPanel extends JPanel {
 
 	// creates room cards in hand
 	private JPanel createRoomsPanel() {
-//		setTestSeen();
 
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(0, 1));
@@ -146,8 +146,8 @@ public class KnownCardsPanel extends JPanel {
 		panel.add(roomsSeenLabel);
 
 		ArrayList<Card> roomsInSeenList = new ArrayList<>();
-//		for (Card c : humanPlayer.getSeenCards()) {
-		for (Card c : testSeenCardsList) {
+		for (Card c : humanPlayer.getSeenCards()) {
+//		for (Card c : testSeenCardsList) {
 			if (c.getCardType().equals(CardType.ROOM)) {
 				roomsInSeenList.add(c);
 			}
@@ -207,8 +207,8 @@ public class KnownCardsPanel extends JPanel {
 		panel.add(weaponsSeenLabel);
 
 		ArrayList<Card> weaponsInSeenList = new ArrayList<>();
-//		for (Card c : humanPlayer.getSeenCards()) {
-		for (Card c : testSeenCardsList) {
+		for (Card c : humanPlayer.getSeenCards()) {
+//		for (Card c : testSeenCardsList) {
 			if (c.getCardType().equals(CardType.WEAPON)) {
 				weaponsInSeenList.add(c);
 			}
@@ -255,5 +255,9 @@ public class KnownCardsPanel extends JPanel {
 		roomsPanel = createRoomsPanel();
 		weaponsPanel = createWeaponsPanel();
 
+	}
+
+	public void addSeenCard(Card disprove, Color currentPlayerColor) {
+		
 	}
 }

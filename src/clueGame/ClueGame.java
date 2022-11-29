@@ -13,7 +13,7 @@ public class ClueGame extends JFrame {
 
 	Board board;
 	private Player currentPlayer;
-	KnownCardsPanel knownCards = new KnownCardsPanel(Board.getInstance());
+	KnownCardsPanel knownCards;
 	GameControlPanel gameControl;
 	SuggestionPanel suggestionPanel;
 	AccusationPanel accusationPanel;
@@ -27,6 +27,7 @@ public class ClueGame extends JFrame {
 		suggestionPanel = new SuggestionPanel();
 		accusationPanel = new AccusationPanel();
 		currentPlayer = board.getCurrentPlayer();
+		knownCards = new KnownCardsPanel(Board.getInstance());
 		board.setControl(gameControl);
 		board.setSuggestion(suggestionPanel);
 		board.setAccusation(accusationPanel);

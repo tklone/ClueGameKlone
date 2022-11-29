@@ -20,16 +20,17 @@ public class SuggestionPanel extends JDialog {
 	JButton submitButton = new JButton("Submit");
 	JButton cancelButton = new JButton("Cancel");
 	Board board = Board.getInstance();
-	
 
 	public SuggestionPanel() {
 //		Board board = Board.getInstance();
 		setLayout(new GridLayout(4, 2));
-	
+
 		JLabel roomLabel = new JLabel("ROOM:");
 		JLabel weaponsLabel = new JLabel("WEAPON:");
 		JLabel peopleLabel = new JLabel("PERSON:");
-		// setModal(true);
+		
+		setModal(true);
+		 
 		BoardCell cell = board.getCurrentPlayer().getLocation();
 		Room room = board.getRoom(cell);
 		String roomS = room.getName();
@@ -38,31 +39,27 @@ public class SuggestionPanel extends JDialog {
 		add(roomLabel);
 		add(currentRoom);
 
-
 		playersMenu = createPeopleCombo();
 		add(peopleLabel);
 		add(playersMenu);
-		
-		
+
 		weaponsMenu = createWeaponsCombo();
 		add(weaponsLabel);
 		add(weaponsMenu);
 
-
 		ComboListener listener = new ComboListener();
 		weaponsMenu.addActionListener(listener);
 		playersMenu.addActionListener(listener);
-		
+
 		submitButton.addActionListener(new SubmitButtonListener());
 		cancelButton.addActionListener(new CancelButtonListener());
-		
+
 		add(cancelButton);
 		add(submitButton);
 	}
 
 	private JComboBox<String> createPeopleCombo() {
 		JComboBox<String> players = new JComboBox<String>();
-//		Board board = Board.getInstance();
 		for (Card c : board.getPeopleCards()) {
 			String name = c.getName();
 			players.addItem(name);
@@ -73,7 +70,6 @@ public class SuggestionPanel extends JDialog {
 
 	private JComboBox<String> createWeaponsCombo() {
 		JComboBox<String> weapons = new JComboBox<String>();
-//		Board board = Board.getInstance();
 		for (Card c : board.getWeaponsCards()) {
 			String name = c.getName();
 			weapons.addItem(name);
@@ -92,20 +88,19 @@ public class SuggestionPanel extends JDialog {
 			} else {
 				playersMenu.getSelectedItem().toString();
 			}
-			
+
 		}
-		
+
 	}
-	
 
 	class SubmitButtonListener implements ActionListener {
 
 		SubmitButtonListener() {
 			submitButton.addActionListener(this);
 		}
+
 		public void actionPerformed(ActionEvent e) {
-//			Board board = Board.getInstance();
-			board.makeSuggestion();
+			board.handleSuggestion();
 			dispose();
 		}
 	}
@@ -115,16 +110,17 @@ public class SuggestionPanel extends JDialog {
 		CancelButtonListener() {
 			cancelButton.addActionListener(this);
 		}
+
 		public void actionPerformed(ActionEvent e) {
 			dispose();
 		}
 	}
-	
+
 	public String getWeaponChoice() {
 		String weapon = weaponsMenu.getSelectedItem().toString();
 		return weapon;
 	}
-	
+
 	public String getPlayerChoice() {
 		String player = playersMenu.getSelectedItem().toString();
 		return player;

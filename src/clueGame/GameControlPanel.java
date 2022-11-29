@@ -1,6 +1,7 @@
 package clueGame;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Desktop.Action;
 import java.awt.GridLayout;
 import java.awt.Panel;
@@ -28,6 +29,7 @@ public class GameControlPanel extends JPanel {
 	private static JTextField roll;
 	private static int getRollVal;
 	private static int counter = 0;
+	Board board = Board.getInstance();
 	JButton nextButton = new JButton("NEXT!");
 	public static JButton accusationButton = new JButton("Make Accusation");
 
@@ -105,7 +107,6 @@ public class GameControlPanel extends JPanel {
 
 //		@Override
 		public void actionPerformed(ActionEvent e) {
-			Board board = Board.getInstance();
 			board.nextTurn();
 		}
 	}
@@ -225,5 +226,10 @@ public class GameControlPanel extends JPanel {
 	public void setRoll(int rolledDice) {
 		String diceText = Integer.toString(rolledDice);
 		roll.setText(diceText);
+	}
+
+	public void setWhoseTurnColor(Color currentPlayerColor) {
+		whoseTurn.setBackground(currentPlayerColor);
+
 	}
 }

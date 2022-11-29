@@ -21,37 +21,34 @@ public class AccusationPanel extends JDialog {
 	JButton submitButton = new JButton("Submit");
 	JButton cancelButton = new JButton("Cancel");
 	Board board = Board.getInstance();
-	
 
 	public AccusationPanel() {
 		setLayout(new GridLayout(4, 2));
-	
+
 		JLabel roomLabel = new JLabel("ROOM:");
 		JLabel weaponsLabel = new JLabel("WEAPON:");
 		JLabel peopleLabel = new JLabel("PERSON:");
-		// setModal(true);
+		 setModal(true);
 
 		roomsMenu = createRoomCombo();
 		add(roomLabel);
 		add(roomsMenu);
-		
+
 		playersMenu = createPeopleCombo();
 		add(peopleLabel);
 		add(playersMenu);
-		
-		
+
 		weaponsMenu = createWeaponsCombo();
 		add(weaponsLabel);
 		add(weaponsMenu);
 
-
 		ComboListener listener = new ComboListener();
 		weaponsMenu.addActionListener(listener);
 		playersMenu.addActionListener(listener);
-		
+
 		submitButton.addActionListener(new SubmitButtonListener());
 		cancelButton.addActionListener(new CancelButtonListener());
-		
+
 		add(cancelButton);
 		add(submitButton);
 	}
@@ -95,17 +92,17 @@ public class AccusationPanel extends JDialog {
 			} else {
 				playersMenu.getSelectedItem().toString();
 			}
-			
+
 		}
-		
+
 	}
-	
 
 	class SubmitButtonListener implements ActionListener {
 
 		SubmitButtonListener() {
 			submitButton.addActionListener(this);
 		}
+
 		public void actionPerformed(ActionEvent e) {
 			board.makeAccusation();
 			dispose();
@@ -117,16 +114,17 @@ public class AccusationPanel extends JDialog {
 		CancelButtonListener() {
 			cancelButton.addActionListener(this);
 		}
+
 		public void actionPerformed(ActionEvent e) {
 			dispose();
 		}
 	}
-	
+
 	public String getWeaponChoice() {
 		String weapon = weaponsMenu.getSelectedItem().toString();
 		return weapon;
 	}
-	
+
 	public String getPlayerChoice() {
 		String player = playersMenu.getSelectedItem().toString();
 		return player;
