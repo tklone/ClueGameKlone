@@ -66,7 +66,9 @@ public class AccusationPanel extends JDialog {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == weaponsMenu) {
-				
+				weaponsMenu.getSelectedItem().toString();
+			} else {
+				playersMenu.getSelectedItem().toString();
 			}
 			
 		}
