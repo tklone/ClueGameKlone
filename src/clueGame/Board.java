@@ -66,7 +66,7 @@ public class Board extends JPanel { // implements MouseListener
 	private SuggestionPanel suggestion;
 	private AccusationPanel accusation;
 	private KnownCardsPanel knownCardsPanel;
-	
+
 	public void setAccusationWeapon(String weapon) {
 		accusationWeapon = weapon;
 	}
@@ -141,7 +141,6 @@ public class Board extends JPanel { // implements MouseListener
 
 		public void mousePressed(MouseEvent e) {
 
-			
 			int height = getHeight1();
 			int width = getWidth1();
 			int cellHeight = height / numRows;
@@ -153,18 +152,16 @@ public class Board extends JPanel { // implements MouseListener
 			int yComp = (int) e.getPoint().getY() / cellHeight;
 
 			clickedCell = grid[yComp][xComp];
-			getCurrentPlayer().setTurnFinished(true);
-
 
 			Player currentPlayer = getCurrentPlayer();
 //			currentPlayer.setTurnFinished(false);
-			
+
 			if (currentPlayer instanceof HumanPlayer) {
 				if (targets.contains(clickedCell)) {
 					currentPlayer.updatePosition(clickedCell);
 					currentPlayer.setTurnFinished(true);
+					targets.clear();
 					repaint();
-					getCurrentPlayer().setTurnFinished(true);
 					if (clickedCell.isRoom()) {
 						SuggestionPanel suggestionPanel = new SuggestionPanel();
 						suggestionPanel.setVisible(true);
@@ -636,7 +633,7 @@ public class Board extends JPanel { // implements MouseListener
 		}
 		return personCheck;
 	}
-	
+
 	public Player getPlayer(String player) {
 		for (Player p : players) {
 			if (p.getName().equals(player)) {
@@ -667,24 +664,22 @@ public class Board extends JPanel { // implements MouseListener
 		return accusationCheck;
 	}
 
-	public Card handleSuggestion() { //Player accuser, String weapon, Player playerGuess
-		
-		
+	public Card handleSuggestion() { // Player accuser, String weapon, Player playerGuess
+
 		Player player = getCurrentPlayer();
 		BoardCell location = player.getLocation();
 
 		setAccusationRoom(getRoom(location).getName());
 		setAccusationPlayer(suggestion.getPlayerChoice());
 		setAccusationWeapon(suggestion.getPlayerChoice());
-		
+
 		String weaponS = getAccusationWeapon();
 		String playerS = getAccusationPlayer();
 		String roomS = getAccusationRoom();
-		
+
 		Player accusationPlayer = getPlayer(playerS);
 		Player accuser = getCurrentPlayer();
 
-		
 		ArrayList<Card> disproveCards = new ArrayList<>();
 
 		if (!getCurrentPlayer().getLocation().isRoom()) {
@@ -700,7 +695,7 @@ public class Board extends JPanel { // implements MouseListener
 		Card roomCard = getCard(roomS);
 		Card weaponCard = getCard(weaponS);
 		Card personCard = getCard(playerS);
-		
+
 		Solution suggestion = new Solution(roomCard, weaponCard, personCard);
 
 		for (Player p : players) {
@@ -715,15 +710,15 @@ public class Board extends JPanel { // implements MouseListener
 			}
 			getCurrentPlayer().setTurnFinished(true);
 		}
-		
+
 		for (Card c : accuser.getSeenCards()) {
 			System.out.println(c.getName());
 		}
-		
+
 		if (disproveCards.size() == 1) {
 			return disproveCards.get(0);
 		}
-		
+
 		if (disproveCards.size() > 0) {
 			Random rand = new Random();
 			int randInt = rand.nextInt(disproveCards.size() - 1);
@@ -844,10 +839,6 @@ public class Board extends JPanel { // implements MouseListener
 	}
 
 	public void makeAccusation() {
-		if (getCurrentPlayer().getTurnFinished()) {
-			JOptionPane.showMessageDialog(null, "You can't do that");
-		} else {
-		
 		setAccusationPlayer(accusation.getPlayerChoice());
 		setAccusationWeapon(accusation.getWeaponChoice());
 
@@ -861,8 +852,7 @@ public class Board extends JPanel { // implements MouseListener
 		String correctWeapon = theAnswer.getSolutionWeapon().getName();
 		String correctPlayer = theAnswer.getSolutionPerson().getName();
 
-		
-		//These messages are getting printed twice, which we don't want...
+		// These messages are getting printed twice, which we don't want...
 		if (!correctRoom.equals(getAccusationRoom()) && !correctWeapon.equals(getAccusationWeapon())
 				&& !correctPlayer.equals(getAccusationPlayer())) {
 			JOptionPane.showMessageDialog(null, "Guess is incorrect, you lose.");
@@ -871,7 +861,6 @@ public class Board extends JPanel { // implements MouseListener
 		}
 		JOptionPane.showMessageDialog(null, "GAME OVER");
 		setGameOver(true);
-		}
 	}
 
 	public Color currentPlayerColor() {

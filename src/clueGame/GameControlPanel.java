@@ -119,9 +119,11 @@ public class GameControlPanel extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Board board = Board.getInstance();
-			if (board.getCurrentPlayer() instanceof HumanPlayer) {
+			if (board.getCurrentPlayer() instanceof HumanPlayer && !board.getCurrentPlayer().getTurnFinished()) {
 				AccusationPanel accusationPanel = new AccusationPanel();
 				accusationPanel.setVisible(true);
+			} else {
+				JOptionPane.showMessageDialog(null, "You can't do that!");
 			}
 		}
 
