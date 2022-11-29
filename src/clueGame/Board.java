@@ -32,6 +32,8 @@ public class Board extends JPanel { // implements MouseListener
 
 	private String setupConfig;
 	private String layoutConfig;
+	private String accusationWeapon, accusationPlayer, accusationRoom;
+	
 
 	private static Set<BoardCell> targets = new HashSet<BoardCell>();
 	private Set<BoardCell> visited = new HashSet<BoardCell>();
@@ -62,6 +64,30 @@ public class Board extends JPanel { // implements MouseListener
 
 	private GameControlPanel control;
 
+	public void setAccusationWeapon(String weapon) {
+		accusationWeapon = weapon;
+	}
+	
+	public String getAccusationWeapon() {
+		return accusationWeapon;
+	}
+	
+	public void setAccusationPlayer(String player) {
+		accusationPlayer = player;
+	}
+	
+	public String getAccuusationPlayer() {
+		return accusationPlayer;
+	}
+	
+	public void setAccusationRoom(String room) {
+		accusationRoom = room;
+	}
+	
+	public String getAccusationRoom() {
+		return accusationRoom;
+	}
+	
 	// need a reference to Game Control Panel
 	public void setControl(GameControlPanel control) {
 		this.control = control;

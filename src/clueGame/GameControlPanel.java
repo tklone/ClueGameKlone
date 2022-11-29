@@ -51,9 +51,8 @@ public class GameControlPanel extends JPanel {
 		JButton accusationButton = createAccusationButton();
 		buttonsPanel.add(accusationButton, BorderLayout.WEST);
 		accusationButton.addActionListener(new MakeAccusationButtonListener());
-		
-		
-		//Next Button
+
+		// Next Button
 		JButton nextButton = createNextButton();
 		buttonsPanel.add(nextButton, BorderLayout.EAST);
 		nextButton.addActionListener(new NextButtonListener());
@@ -110,7 +109,7 @@ public class GameControlPanel extends JPanel {
 			board.nextTurn();
 		}
 	}
-	
+
 	class MakeAccusationButtonListener implements ActionListener {
 		MakeAccusationButtonListener() {
 			accusationButton.addActionListener(this);
@@ -118,11 +117,19 @@ public class GameControlPanel extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			AccusationPanel accusationPanel = new AccusationPanel();
-			accusationPanel.setVisible(true);
+			Board board = Board.getInstance();
+			if (board.getCurrentPlayer() instanceof HumanPlayer) {
+				if (!board.getCurrentPlayer().getLocation().isRoom()) {
+					AccusationPanel accusationPanel = new AccusationPanel();
+					accusationPanel.setVisible(true);
+				} else {
+					SuggestionPanel suggestionPanel = new SuggestionPanel();
+					suggestionPanel.setVisible(true);
+				}
+			}
+
 		}
 	}
-
 
 	private JPanel createTurnTextField() {
 		JPanel panel = new JPanel();

@@ -9,20 +9,19 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
-public class AccusationPanel extends JDialog {
+public class SuggestionPanel extends JDialog {
 
-	private JComboBox<String> roomsMenu, weaponsMenu, playersMenu;
+	private JComboBox<String> weaponsMenu, playersMenu;
 	JButton submitButton = new JButton("Submit");
 	JButton cancelButton = new JButton("Cancel");
 	
 
-	public AccusationPanel() {
+	public SuggestionPanel() {
 		Board board = Board.getInstance();
 		setLayout(new GridLayout(4, 2));
 	
@@ -30,11 +29,15 @@ public class AccusationPanel extends JDialog {
 		JLabel weaponsLabel = new JLabel("WEAPON:");
 		JLabel peopleLabel = new JLabel("PERSON:");
 		// setModal(true);
-
-		roomsMenu = createRoomCombo();
+		BoardCell cell = board.getCurrentPlayer().getLocation();
+		Room room = board.getRoom(cell);
+		String roomS = room.getName();
+		JTextField currentRoom = new JTextField(roomS);
+		currentRoom.setEditable(false);
 		add(roomLabel);
-		add(roomsMenu);
-		
+		add(currentRoom);
+
+
 		playersMenu = createPeopleCombo();
 		add(peopleLabel);
 		add(playersMenu);
@@ -54,16 +57,6 @@ public class AccusationPanel extends JDialog {
 		
 		add(cancelButton);
 		add(submitButton);
-	}
-
-	private JComboBox<String> createRoomCombo() {
-		JComboBox<String> rooms = new JComboBox<String>();
-		Board board = Board.getInstance();
-		for (Card c : board.getRoomCards()) {
-			String name = c.getName();
-			rooms.addItem(name);
-		}
-		return rooms;
 	}
 
 	private JComboBox<String> createPeopleCombo() {
@@ -119,16 +112,6 @@ public class AccusationPanel extends JDialog {
 			String room = board.getRoom(location).getName();
 			
 			board.setAccusationRoom(room);
-			Solution theAnswer = board.getTheAnswer();
-			String correctRoom = theAnswer.getSolutionRoom().getName();
-			String correctWeapon = theAnswer.getSolutionWeapon().getName();
-			String correctPlayer = theAnswer.getSolutionPerson().getName();
-			
-			if (!correctRoom.equals(board.getAccusationRoom()) && !correctWeapon.equals(board.getAccusationWeapon()) && !correctPlayer.equals(board.getAccuusationPlayer())) {
-				JOptionPane.showMessageDialog(null, "YOU LOSE");
-			} else {
-				JOptionPane.showMessageDialog(null, "YOU WIN");
-			}
 			
 			dispose();
 		}
