@@ -707,12 +707,14 @@ public class Board extends JPanel { // implements MouseListener
 
 		Solution suggestion = new Solution(roomCard, weaponCard, personCard);
 
+		String disproverColor = "";
+		
 		for (Player p : players) {
 			if (!p.equals(accuser)) {
 				Card disprove = p.disproveSuggestion(suggestion);
 				if (disprove != null) {
 					disproveCards.add(disprove);
-					accuser.updateSeen(disprove, p.getColor());
+					disproverColor = p.getColor();
 				}
 			} else {
 				continue;
@@ -720,17 +722,17 @@ public class Board extends JPanel { // implements MouseListener
 			getCurrentPlayer().setTurnFinished(true);
 		}
 
-//		for (Card c : accuser.getSeenCards()) {
-//			System.out.println(c.getName());
-//		}
-
 		if (disproveCards.size() == 1) {
+			control.setGuessResult("It was not " + disproveCards.get(0).getName() + " becasue " + disproverColor + " showed a card.");
+			accuser.updateSeen(disproveCards.get(0), disproverColor);
 			return disproveCards.get(0);
 		}
 
 		if (disproveCards.size() > 0) {
 			Random rand = new Random();
 			int randInt = rand.nextInt(disproveCards.size() - 1);
+			accuser.updateSeen(disproveCards.get(randInt), disproverColor);
+			control.setGuessResult("It was not " + disproveCards.get(randInt).getName() + " becasue " + disproverColor + " showed a card.");
 			return disproveCards.get(randInt);
 
 		}
