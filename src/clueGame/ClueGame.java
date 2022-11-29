@@ -15,6 +15,8 @@ public class ClueGame extends JFrame {
 	private Player currentPlayer;
 	KnownCardsPanel knownCards = new KnownCardsPanel(Board.getInstance());
 	GameControlPanel gameControl;
+	SuggestionPanel suggestionPanel;
+	AccusationPanel accusationPanel;
 	int diceRoll;
 	BoardCell startPos;
 
@@ -22,8 +24,12 @@ public class ClueGame extends JFrame {
 		super();
 		board = Board.getInstance();
 		gameControl = new GameControlPanel();
+		suggestionPanel = new SuggestionPanel();
+		accusationPanel = new AccusationPanel();
 		currentPlayer = board.getCurrentPlayer();
 		board.setControl(gameControl);
+		board.setSuggestion(suggestionPanel);
+		board.setAccusation(accusationPanel);
 		gameControl.setTurn(currentPlayer);
 
 		this.setSize(1200, 900);

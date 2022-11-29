@@ -19,10 +19,11 @@ public class SuggestionPanel extends JDialog {
 	private JComboBox<String> weaponsMenu, playersMenu;
 	JButton submitButton = new JButton("Submit");
 	JButton cancelButton = new JButton("Cancel");
+	Board board = Board.getInstance();
 	
 
 	public SuggestionPanel() {
-		Board board = Board.getInstance();
+//		Board board = Board.getInstance();
 		setLayout(new GridLayout(4, 2));
 	
 		JLabel roomLabel = new JLabel("ROOM:");
@@ -61,7 +62,7 @@ public class SuggestionPanel extends JDialog {
 
 	private JComboBox<String> createPeopleCombo() {
 		JComboBox<String> players = new JComboBox<String>();
-		Board board = Board.getInstance();
+//		Board board = Board.getInstance();
 		for (Card c : board.getPeopleCards()) {
 			String name = c.getName();
 			players.addItem(name);
@@ -72,7 +73,7 @@ public class SuggestionPanel extends JDialog {
 
 	private JComboBox<String> createWeaponsCombo() {
 		JComboBox<String> weapons = new JComboBox<String>();
-		Board board = Board.getInstance();
+//		Board board = Board.getInstance();
 		for (Card c : board.getWeaponsCards()) {
 			String name = c.getName();
 			weapons.addItem(name);
@@ -103,16 +104,8 @@ public class SuggestionPanel extends JDialog {
 			submitButton.addActionListener(this);
 		}
 		public void actionPerformed(ActionEvent e) {
-			Board board = Board.getInstance();
-			board.setAccusationPlayer(getPlayerChoice());
-			board.setAccusationWeapon(getWeaponChoice());
-			
-			Player player = board.getCurrentPlayer();
-			BoardCell location = player.getLocation();
-			String room = board.getRoom(location).getName();
-			
-			board.setAccusationRoom(room);
-			
+//			Board board = Board.getInstance();
+			board.makeSuggestion();
 			dispose();
 		}
 	}

@@ -33,7 +33,6 @@ public class Board extends JPanel { // implements MouseListener
 	private String setupConfig;
 	private String layoutConfig;
 	private String accusationWeapon, accusationPlayer, accusationRoom;
-	
 
 	private static Set<BoardCell> targets = new HashSet<BoardCell>();
 	private Set<BoardCell> visited = new HashSet<BoardCell>();
@@ -57,40 +56,51 @@ public class Board extends JPanel { // implements MouseListener
 	private Boolean accusationCheck = false;
 	private Boolean diceRolled = false;
 	private Boolean isFirstTurn = true;
+	private Boolean gameOver = false;
 
 	private boolean validClick = false;
 
 	private int currentPlayerInt = 0;
 
 	private GameControlPanel control;
+	private SuggestionPanel suggestion;
+	private AccusationPanel accusation;
 
 	public void setAccusationWeapon(String weapon) {
 		accusationWeapon = weapon;
 	}
-	
+
 	public String getAccusationWeapon() {
 		return accusationWeapon;
 	}
-	
+
 	public void setAccusationPlayer(String player) {
 		accusationPlayer = player;
 	}
-	
+
 	public String getAccuusationPlayer() {
 		return accusationPlayer;
 	}
-	
+
 	public void setAccusationRoom(String room) {
 		accusationRoom = room;
 	}
-	
+
 	public String getAccusationRoom() {
 		return accusationRoom;
 	}
-	
+
 	// need a reference to Game Control Panel
 	public void setControl(GameControlPanel control) {
 		this.control = control;
+	}
+
+	public void setSuggestion(SuggestionPanel suggestion) {
+		this.suggestion = suggestion;
+	}
+
+	public void setAccusation(AccusationPanel accusation) {
+		this.accusation = accusation;
 	}
 
 	// variable and methods used for singleton pattern
@@ -115,7 +125,7 @@ public class Board extends JPanel { // implements MouseListener
 		} else if (currentPlayerInt >= 5) {
 			currentPlayerInt = 0;
 		}
-		//		currentPlayer = players.get(currentPlayerInt);
+		// currentPlayer = players.get(currentPlayerInt);
 	}
 
 	class boardMouseListener implements MouseListener {
@@ -150,9 +160,6 @@ public class Board extends JPanel { // implements MouseListener
 					currentPlayer.updatePosition(clickedCell);
 					currentPlayer.setTurnFinished(true);
 					repaint();
-					if (clickedCell.isRoom()) {
-						//						handleSuggestion(testSuggestion, currentPlayer);
-					}
 					getCurrentPlayer().setTurnFinished(true);
 				} else if (!targets.contains(clickedCell)) {
 					JOptionPane.showMessageDialog(null, "This is not a valid move");
@@ -199,7 +206,7 @@ public class Board extends JPanel { // implements MouseListener
 
 	// initialize the board(since we are using singleton pattern
 	public void initialize() {
-		//		boardListener = new boardClicked();
+		// boardListener = new boardClicked();
 		try {
 			loadSetupConfig();
 			loadLayoutConfig();
@@ -441,7 +448,7 @@ public class Board extends JPanel { // implements MouseListener
 
 			if (c.isRoomCenter()) {
 				targets.add(c);
-				//				c.setIsHighlighted(true);
+				// c.setIsHighlighted(true);
 				continue;
 			}
 
@@ -449,7 +456,7 @@ public class Board extends JPanel { // implements MouseListener
 			if (numSteps == 1) {
 				if (c.getOccupied() == false) {
 					targets.add(c);
-					//					c.setIsHighlighted(true);
+					// c.setIsHighlighted(true);
 				}
 			}
 
@@ -733,6 +740,14 @@ public class Board extends JPanel { // implements MouseListener
 		return diceRoll;
 	}
 
+	public void setGameOver(Boolean gameOver) {
+		this.gameOver = gameOver;
+	}
+
+	public Boolean getGameOver() {
+		return gameOver;
+	}
+
 	public void firstTurn() {
 		rollDice();
 		calcTargets(players.get(0).getLocation(), getDiceRoll());
@@ -751,7 +766,7 @@ public class Board extends JPanel { // implements MouseListener
 			if (!getCurrentPlayer().getTurnFinished()) {
 				JOptionPane.showMessageDialog(null, "Finish your turn first!");
 				return;
-			} 
+			}
 		}
 		rollDice();
 		iterateCurrent();
@@ -787,9 +802,38 @@ public class Board extends JPanel { // implements MouseListener
 		return diceRolled;
 	}
 
-	//	public void handleSuggestion(Player playerGuess, String weapon) {
-	//		// room will be current player's location
-	//		
-	//	}
+	public void makeSuggestion() {
+		setAccusationPlayer(suggestion.getPlayerChoice());
+		setAccusationWeapon(suggestion.getPlayerChoice());
 
+		Player player = getCurrentPlayer();
+		BoardCell location = player.getLocation();
+		String room = getRoom(location).getName();
+
+		setAccusationRoom(room);
+	}
+
+	public void makeAccusation() {
+		setAccusationPlayer(accusation.getPlayerChoice());
+		setAccusationWeapon(accusation.getWeaponChoice());
+
+		Player player = getCurrentPlayer();
+		BoardCell location = player.getLocation();
+		String room = getRoom(location).getName();
+
+		setAccusationRoom(room);
+		Solution theAnswer = getTheAnswer();
+		String correctRoom = theAnswer.getSolutionRoom().getName();
+		String correctWeapon = theAnswer.getSolutionWeapon().getName();
+		String correctPlayer = theAnswer.getSolutionPerson().getName();
+
+		if (!correctRoom.equals(getAccusationRoom()) && !correctWeapon.equals(getAccusationWeapon())
+				&& !correctPlayer.equals(getAccuusationPlayer())) {
+			JOptionPane.showMessageDialog(null, "Guess is incorrect, you lose.");
+		} else {
+			JOptionPane.showMessageDialog(null, "Guess is correct, YOU WIN!");
+		}
+		JOptionPane.showMessageDialog(null, "GAME OVER");
+		setGameOver(true);
+	}
 }
