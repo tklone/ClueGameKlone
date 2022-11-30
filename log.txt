@@ -1,3 +1,172 @@
+commit 6ac633ff55e8b601f1b15bf3887e8c018b92122c
+Author: smithqd <qsmith@mines.edu>
+Date:   Wed Nov 30 14:17:37 2022 -0700
+
+    all tests pass
+
+commit 49bc0fee1e1a584578ef5042dc4f98e0b526e321
+Merge: 9199c6d 08054b7
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Wed Nov 30 13:47:16 2022 -0700
+
+    Merge branch 'master' of https://github.com/tklone/ClueGameKlone
+
+commit 9199c6db116fa6ec63eec521f21729a8819ba2d1
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Wed Nov 30 13:47:08 2022 -0700
+
+    okay i think it's done NOW
+
+commit 08054b7442361497277a15db5543096495fe19fe
+Author: smithqd <qsmith@mines.edu>
+Date:   Wed Nov 30 13:24:01 2022 -0700
+
+    all tests still pass. need to fix solution tests
+
+commit 3e2b7ef479414a28e7c8772be8d29739f16513b2
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Wed Nov 30 13:14:21 2022 -0700
+
+    I think we're done?
+
+commit 4751f2f173c959814a6db41174ca36edb5225602
+Author: smithqd <qsmith@mines.edu>
+Date:   Tue Nov 29 17:15:40 2022 -0700
+
+    added stubs for if game over and some comments. accusation panel still small
+
+commit 6d6273db8a1da672d124026ae962f1b60177f47a
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Tue Nov 29 16:51:10 2022 -0700
+
+    GOT IT TO WORK YAY
+
+commit 4ed258bd946dfe3a8ce909cbab19d05d151ed4ab
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Tue Nov 29 15:35:42 2022 -0700
+
+    working on seen cards
+
+commit 109fdf7486ba4de8e44c9c7618cfbd1ec62de4e5
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Tue Nov 29 15:25:24 2022 -0700
+
+    moves the guessed player into the room
+
+commit 5f7201760920322f936c06016768685a4da1b4dd
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Tue Nov 29 14:43:47 2022 -0700
+
+    I'm breaking things to fix them
+
+commit 0ce7e86719c2150ab365f56defd6c037708c1fc3
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Tue Nov 29 13:46:59 2022 -0700
+
+    working on suggestion vs accusation
+
+commit e0789e2011ee543e2fc6a2511cf8ce83b50736de
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Tue Nov 29 13:36:51 2022 -0700
+
+    pushing again
+
+commit c228a3b659604944bc84cdc333bba97b8ffa6377
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Tue Nov 29 13:00:31 2022 -0700
+
+    things are coming together
+
+commit a46e2696d662afb5d9620d3269d8466cf2898643
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Tue Nov 29 09:48:49 2022 -0700
+
+    moved things from the panel things to board
+
+commit ede6643e51e318ec77bfd5353cd5e6ddf3cd855d
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Nov 28 18:22:26 2022 -0700
+
+    got drop down menus
+
+commit d8db7e161d59b5ee4f9c89cff237ed10e26f5ad5
+Author: smithqd <qsmith@mines.edu>
+Date:   Mon Nov 28 17:15:12 2022 -0700
+
+    help
+
+commit 5ae3721349cb0f2aa359809d62ec3b9daeb5d47a
+Author: smithqd <qsmith@mines.edu>
+Date:   Mon Nov 28 17:09:36 2022 -0700
+
+    kind of got basics of panel
+
+commit f20d96c4bbe59e8da4882fbaf6be61849c207ef8
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Nov 28 15:59:12 2022 -0700
+
+    adding drop down menu
+
+commit 12445a69caea78f9d1342a37b376b53888c36194
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Mon Nov 28 14:37:39 2022 -0700
+
+    working on drop down menu
+
+commit 9e7f9d485107c35c47dadebd1ee5d64e71a73064
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Sun Nov 27 09:12:04 2022 -0700
+
+    working on handleSuggestion and trying to make the drop down boxes.  broken tho :/
+
+commit e97122cbda3c0da6442c65f8f74ceeab2b671243
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Sun Nov 27 08:51:21 2022 -0700
+
+    working on handleSuggestion
+
+commit 3b7c801a17b8f635ac4df87bfbd64cf0b86a0d0a
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Tue Nov 22 13:27:38 2022 -0700
+
+    vacation mode activated
+
+commit 50b4dd1fe230fc2b3b3c7f147dddae2f051bc21d
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Tue Nov 22 13:18:24 2022 -0700
+
+    working on error messages
+
+commit bc038c0b664030b9c6fc34eba84c0acd314b4e7e
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Tue Nov 22 13:06:50 2022 -0700
+
+    working on errors
+
+commit 8bbca12aeb9b31f74ad6f75d7317cbab9e021a4e
+Author: Taylor Klone <tklone@mines.edu>
+Date:   Tue Nov 22 13:06:01 2022 -0700
+
+    working on error messages
+
+commit f29433deb04d4e30d09c4702fdb0bd60fa7de0f3
+Author: smithqd <qsmith@mines.edu>
+Date:   Mon Nov 21 15:43:00 2022 -0700
+
+    trying to get error message to show up if human player hasn't moved
+
+commit 92b3a9839ac6a96d255f3733420493a761d5c1a5
+Author: smithqd <qsmith@mines.edu>
+Date:   Mon Nov 21 15:24:27 2022 -0700
+
+    fixed human player bug
+
+commit 7c3783ad41000529ff3a413da2b9264db2763be3
+Author: smithqd <qsmith@mines.edu>
+Date:   Mon Nov 21 14:53:15 2022 -0700
+
+    commiting updated .txt files
+
 commit 6f2bf7f8cd144220fbbd5083be6298eb1303ceaa
 Author: smithqd <qsmith@mines.edu>
 Date:   Sat Nov 19 22:19:54 2022 -0700
