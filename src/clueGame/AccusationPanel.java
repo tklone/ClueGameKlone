@@ -23,6 +23,8 @@ public class AccusationPanel extends JDialog {
 	Board board = Board.getInstance();
 
 	public AccusationPanel() {
+		this.setSize(600, 250);
+
 		setLayout(new GridLayout(4, 2));
 
 		JLabel roomLabel = new JLabel("ROOM:");
@@ -103,6 +105,9 @@ public class AccusationPanel extends JDialog {
 		public void actionPerformed(ActionEvent e) {
 			board.makeAccusation();
 			dispose();
+			String correctAnswer = "Correct Answer: " + board.getTheAnswer().getSolutionPerson().getName() + " with the "+ board.getTheAnswer().getSolutionWeapon().getName() + " in the " + board.getTheAnswer().getSolutionRoom().getName();
+			JOptionPane.showMessageDialog(null, "GAME OVER!\n" + correctAnswer);
+			System.exit(0);
 		}
 	}
 
@@ -125,5 +130,10 @@ public class AccusationPanel extends JDialog {
 	public String getPlayerChoice() {
 		String player = playersMenu.getSelectedItem().toString();
 		return player;
+	}
+	
+	public String getRoomChoice() {
+		String room = roomsMenu.getSelectedItem().toString();
+		return room;
 	}
 }

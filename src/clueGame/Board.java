@@ -32,6 +32,7 @@ public class Board extends JPanel { // implements MouseListener
 
 	private String setupConfig;
 	private String layoutConfig;
+	private String suggestionWeapon, suggestionPlayer, suggestionRoom;
 	private String accusationWeapon, accusationPlayer, accusationRoom;
 
 	private static Set<BoardCell> targets = new HashSet<BoardCell>();
@@ -67,6 +68,30 @@ public class Board extends JPanel { // implements MouseListener
 	private AccusationPanel accusation;
 	private KnownCardsPanel knownCardsPanel;
 
+	public void setSuggestionWeapon(String weapon) {
+		suggestionWeapon = weapon;
+	}
+
+	public String getSuggestionWeapon() {
+		return suggestionWeapon;
+	}
+
+	public void setSuggestionPlayer(String player) {
+		this.suggestionPlayer = player;
+	}
+
+	public String getSuggestionPlayer() {
+		return suggestionPlayer;
+	}
+
+	public void setSuggestionRoom(String room) {
+		this.suggestionRoom = room;
+	}
+
+	public String getSuggestionRoom() {
+		return suggestionRoom;
+	}
+
 	public void setAccusationWeapon(String weapon) {
 		accusationWeapon = weapon;
 	}
@@ -84,7 +109,7 @@ public class Board extends JPanel { // implements MouseListener
 	}
 
 	public void setAccusationRoom(String room) {
-		accusationRoom = room;
+		this.accusationRoom = room;
 	}
 
 	public String getAccusationRoom() {
@@ -168,13 +193,11 @@ public class Board extends JPanel { // implements MouseListener
 						Player player = getCurrentPlayer();
 						BoardCell location = player.getLocation();
 
-						setAccusationRoom(getRoom(location).getName());
+						setSuggestionRoom(getRoom(location).getName());
 						suggestionPanel.setRoom(getRoom(location).getName());
-					
 						suggestionPanel.setVisible(true);
-
-						setAccusationPlayer(suggestionPanel.getPlayerChoice());
-						setAccusationWeapon(suggestionPanel.getWeaponChoice());
+						setSuggestionPlayer(suggestionPanel.getPlayerChoice());
+						setSuggestionWeapon(suggestionPanel.getWeaponChoice());
 
 						handleSuggestion();
 					}
@@ -544,7 +567,7 @@ public class Board extends JPanel { // implements MouseListener
 		randomPlayer = people.get(int_radomP);
 		randomRoom = rooms.get(int_radomR);
 
-		theAnswer = new Solution(randomPlayer, randomRoom, randomWeapon);
+		theAnswer = new Solution(randomRoom, randomWeapon, randomPlayer);
 
 		for (int i = 0; i < deck.size(); i++) {
 			if (deck.get(i) != randomWeapon && deck.get(i) != randomPlayer && deck.get(i) != randomRoom) {
@@ -679,22 +702,15 @@ public class Board extends JPanel { // implements MouseListener
 
 	public void handleSuggestion() { // Player accuser, String weapon, Player playerGuess
 
-		if (suggestionPanel.getPlayerChoice() != null && suggestionPanel.getWeaponChoice() != null) {
-			control.setGuess(suggestionPanel.getPlayerChoice() + " with the "
-					+ suggestionPanel.getWeaponChoice() + " in the " + suggestionPanel.getRoom() + ".");
-
-		}
-		
-		String weaponS = getAccusationWeapon();
-		String playerS = getAccusationPlayer();
-		String roomS = getAccusationRoom();
+		String weaponS = getSuggestionWeapon();
+		String playerS = getSuggestionPlayer();
+		String roomS = getSuggestionRoom();
 
 		Player accusationPlayer = getPlayer(playerS);
 		Player accuser = getCurrentPlayer();
 
 		ArrayList<Card> disproveCards = new ArrayList<>();
 
-		// This isn't happening...
 		accusationPlayer.updatePosition(accuser.getLocation());
 		repaint();
 
@@ -709,7 +725,7 @@ public class Board extends JPanel { // implements MouseListener
 
 		Color disproverColor = null;
 		String colorString = "";
-		
+
 		for (Player p : players) {
 			if (!p.equals(accuser)) {
 				Card disprove = p.disproveSuggestion(suggestion);
@@ -724,19 +740,29 @@ public class Board extends JPanel { // implements MouseListener
 			getCurrentPlayer().setTurnFinished(true);
 		}
 
+		if (disproveCards.size() == 0) {
+			control.setGuessResult("No new Clue");
+		}
+
 		if (disproveCards.size() == 1) {
-			control.setGuessResult("It was not " + disproveCards.get(0).getName() + " becasue " + colorString + " showed a card.");
+			control.setGuessResult("Suggestion Disproved");
 			accuser.updateSeen(disproveCards.get(0).getName());
 		} else if (disproveCards.size() > 0) {
 			Random rand = new Random();
 			int randInt = rand.nextInt(disproveCards.size() - 1);
 			accuser.updateSeen(disproveCards.get(randInt).getName());
-			control.setGuessResult("It was not " + disproveCards.get(randInt).getName() + " becasue " + colorString + " showed a card.");
+			control.setGuessResult("Suggestion Disproved");
 		}
-		
-		
-		
+
 		knownCardsPanel.updatePanels(disproverColor);
+
+		System.out.println("Board 760 " + getSuggestionPlayer());
+		System.out.println("Board 761 " + getSuggestionWeapon());
+		if (getSuggestionPlayer() != null && getSuggestionWeapon() != null) {
+			control.setGuess(getSuggestionPlayer() + " with the " + getSuggestionWeapon() + " in the "
+					+ getSuggestionRoom() + ".");
+		}
+
 		repaint();
 		revalidate();
 	}
@@ -775,6 +801,7 @@ public class Board extends JPanel { // implements MouseListener
 				}
 			}
 		}
+
 	}
 
 	public void rollDice() {
@@ -816,6 +843,7 @@ public class Board extends JPanel { // implements MouseListener
 				return;
 			}
 		}
+
 		rollDice();
 		iterateCurrent();
 		control.setWhoseTurnColor(currentPlayerColor());
@@ -828,7 +856,9 @@ public class Board extends JPanel { // implements MouseListener
 			highlightedCells = getTargets();
 			repaint();
 
-		} else {
+		}
+
+		if (getCurrentPlayer() instanceof ComputerPlayer) {
 			calcTargets(getCurrentPlayer().getLocation(), getDiceRoll());
 			Random rand = new Random();
 			int upperBound = targets.size() - 1;
@@ -841,7 +871,101 @@ public class Board extends JPanel { // implements MouseListener
 			highlightedCells.clear();
 			repaint();
 			getCurrentPlayer().setTurnFinished(true);
+
+			if (getCurrentPlayer().getLocation().isRoom()) {
+				System.out.println("Board 874");
+				setSuggestionRoom(getRoom(getCurrentPlayer().getLocation()).getName());
+
+				ArrayList<Card> weaponsNotInHand = new ArrayList<>();
+				ArrayList<Card> playersNotInHand = new ArrayList<>();
+				ArrayList<Card> roomsNotInHand = new ArrayList<>();
+
+				roomsNotInHand = rooms;
+				for (Card c : getCurrentPlayer().getHand()) {
+					if (c.getCardType() == CardType.ROOM) {
+						roomsNotInHand.remove(c);
+					}
+				}
+
+				for (Card c : getCurrentPlayer().getSeenCards()) {
+					if (c.getCardType() == CardType.ROOM) {
+						roomsNotInHand.remove(c);
+					}
+				}
+
+				weaponsNotInHand = weapons;
+				for (Card c : getCurrentPlayer().getHand()) {
+					if (c.getCardType() == CardType.WEAPON) {
+						weaponsNotInHand.remove(c);
+					}
+				}
+
+				for (Card c : getCurrentPlayer().getSeenCards()) {
+					if (c.getCardType() == CardType.WEAPON) {
+						weaponsNotInHand.remove(c);
+					}
+				}
+
+				playersNotInHand = people;
+				for (Card c : getCurrentPlayer().getHand()) {
+					if (c.getCardType() == CardType.PERSON) {
+						playersNotInHand.remove(c);
+					}
+				}
+
+				for (Card c : getCurrentPlayer().getSeenCards()) {
+					if (c.getCardType() == CardType.PERSON) {
+						playersNotInHand.remove(c);
+					}
+				}
+
+				System.out.println(weaponsNotInHand.size() + " 920");
+				System.out.println(playersNotInHand.size() + "881");
+				System.out.println(roomsNotInHand.size() + "882");
+
+				if (weaponsNotInHand.size() != 1) {
+					Random randW = new Random();
+					int upperBoundWeapons = weaponsNotInHand.size() - 1;
+					int randomW = randW.nextInt(upperBoundWeapons);
+
+					setSuggestionWeapon(weaponsNotInHand.get(randomW).getName());
+					System.out.println("Board 930 " + getSuggestionWeapon());
+				}
+
+				if (playersNotInHand.size() != 1) {
+					Random randP = new Random();
+					int upperBoundPeople = weaponsNotInHand.size() - 1;
+					int randomP = randP.nextInt(upperBoundPeople);
+
+					setSuggestionPlayer(playersNotInHand.get(randomP).getName());
+					System.out.println("Board 939 " + getSuggestionPlayer());
+				}
+
+				if (playersNotInHand.size() != 1 && weaponsNotInHand.size() != 1 && roomsNotInHand.size() != 1) {
+					handleSuggestion();
+				} else if (playersNotInHand.size() == 1 && weaponsNotInHand.size() == 1 && roomsNotInHand.size() == 1) {
+					setAccusationPlayer(playersNotInHand.get(0).getName());
+					setAccusationWeapon(weaponsNotInHand.get(0).getName());
+					setAccusationRoom(roomsNotInHand.get(0).getName());
+					computerPlayerAccusation();
+				}
+			}
 		}
+	}
+
+	private void computerPlayerAccusation() {
+		Solution theAnswer = getTheAnswer();
+		String correctRoom = theAnswer.getSolutionRoom().getName();
+		String correctWeapon = theAnswer.getSolutionWeapon().getName();
+		String correctPlayer = theAnswer.getSolutionPerson().getName();
+
+		if (!correctRoom.equals(getSuggestionRoom()) && !correctWeapon.equals(getSuggestionWeapon())
+				&& !correctPlayer.equals(getSuggestionPlayer())) {
+			JOptionPane.showMessageDialog(null, "Guess is incorrect, you lose.");
+		} else {
+			JOptionPane.showMessageDialog(null, "Guess is correct, YOU WIN!");
+		}
+		setGameOver(true);
 	}
 
 	public Boolean diceRolled() {
@@ -854,26 +978,20 @@ public class Board extends JPanel { // implements MouseListener
 	public void makeAccusation() {
 		setAccusationPlayer(accusation.getPlayerChoice());
 		setAccusationWeapon(accusation.getWeaponChoice());
+		setAccusationRoom(accusation.getRoomChoice());
 
-		Player player = getCurrentPlayer();
-		BoardCell location = player.getLocation();
-		String room = getRoom(location).getName();
-
-		setAccusationRoom(room);
 		Solution theAnswer = getTheAnswer();
 		String correctRoom = theAnswer.getSolutionRoom().getName();
 		String correctWeapon = theAnswer.getSolutionWeapon().getName();
 		String correctPlayer = theAnswer.getSolutionPerson().getName();
 
 		// These messages are getting printed twice, which we don't want...
-		if (!correctRoom.equals(getAccusationRoom()) && !correctWeapon.equals(getAccusationWeapon())
-				&& !correctPlayer.equals(getAccusationPlayer())) {
+		if (!correctRoom.equals(getSuggestionRoom()) && !correctWeapon.equals(getSuggestionWeapon())
+				&& !correctPlayer.equals(getSuggestionPlayer())) {
 			JOptionPane.showMessageDialog(null, "Guess is incorrect, you lose.");
 		} else {
 			JOptionPane.showMessageDialog(null, "Guess is correct, YOU WIN!");
 		}
-		JOptionPane.showMessageDialog(null, "GAME OVER");
-		setGameOver(true);
 	}
 
 	public Color currentPlayerColor() {
