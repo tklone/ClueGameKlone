@@ -61,6 +61,13 @@ public class ClueGame extends JFrame {
 		
 		board.firstTurn();
 //		board.iterateCurrent();
+		
+		
+		
+		//accusation panel is still small window??
+		if(board.getGameOver()) {
+			//do something
+		}
 
 	}
 
