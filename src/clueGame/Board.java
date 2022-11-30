@@ -582,6 +582,7 @@ public class Board extends JPanel { // implements MouseListener
 				i = 0;
 			}
 			players.get(i).updateHand(deckNoSolution.get(0));
+			deckNoSolution.get(0).setCardOwner(players.get(i).getColor());
 			deckNoSolution.remove(0);
 			i++;
 		}
@@ -754,10 +755,8 @@ public class Board extends JPanel { // implements MouseListener
 			control.setGuessResult("Suggestion Disproved");
 		}
 
-		knownCardsPanel.updatePanels(disproverColor);
+		knownCardsPanel.updatePanels();
 
-		System.out.println("Board 760 " + getSuggestionPlayer());
-		System.out.println("Board 761 " + getSuggestionWeapon());
 		if (getSuggestionPlayer() != null && getSuggestionWeapon() != null) {
 			control.setGuess(getSuggestionPlayer() + " with the " + getSuggestionWeapon() + " in the "
 					+ getSuggestionRoom() + ".");
@@ -860,10 +859,21 @@ public class Board extends JPanel { // implements MouseListener
 
 		if (getCurrentPlayer() instanceof ComputerPlayer) {
 			calcTargets(getCurrentPlayer().getLocation(), getDiceRoll());
-			Random rand = new Random();
-			int upperBound = targets.size() - 1;
-			int randLoc = rand.nextInt(upperBound);
+			
+			int randLoc;
+			int upperBound;
 
+			if (targets.size() <= 1) {
+				upperBound = 0;
+			} else {
+				upperBound = targets.size() - 1;
+			}
+			
+			Random rand = new Random();
+			upperBound = targets.size() - 1;
+			randLoc = rand.nextInt(upperBound);
+
+			
 			ArrayList<BoardCell> targetsList = new ArrayList<>(targets);
 			BoardCell newLocation = targetsList.get(randLoc);
 
@@ -873,7 +883,6 @@ public class Board extends JPanel { // implements MouseListener
 			getCurrentPlayer().setTurnFinished(true);
 
 			if (getCurrentPlayer().getLocation().isRoom()) {
-				System.out.println("Board 874");
 				setSuggestionRoom(getRoom(getCurrentPlayer().getLocation()).getName());
 
 				ArrayList<Card> weaponsNotInHand = new ArrayList<>();
@@ -919,9 +928,6 @@ public class Board extends JPanel { // implements MouseListener
 					}
 				}
 
-				System.out.println(weaponsNotInHand.size() + " 920");
-				System.out.println(playersNotInHand.size() + "881");
-				System.out.println(roomsNotInHand.size() + "882");
 
 				if (weaponsNotInHand.size() != 1) {
 					Random randW = new Random();
@@ -929,7 +935,6 @@ public class Board extends JPanel { // implements MouseListener
 					int randomW = randW.nextInt(upperBoundWeapons);
 
 					setSuggestionWeapon(weaponsNotInHand.get(randomW).getName());
-					System.out.println("Board 930 " + getSuggestionWeapon());
 				}
 
 				if (playersNotInHand.size() != 1) {
@@ -938,7 +943,6 @@ public class Board extends JPanel { // implements MouseListener
 					int randomP = randP.nextInt(upperBoundPeople);
 
 					setSuggestionPlayer(playersNotInHand.get(randomP).getName());
-					System.out.println("Board 939 " + getSuggestionPlayer());
 				}
 
 				if (playersNotInHand.size() != 1 && weaponsNotInHand.size() != 1 && roomsNotInHand.size() != 1) {

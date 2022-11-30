@@ -40,11 +40,11 @@ public class KnownCardsPanel extends JPanel {
 		setSize(300, 700);
 		setLayout(new GridLayout(3, 1));
 		setBorder(new TitledBorder(new EtchedBorder(), "Known Cards"));
-		updatePanels(null);
+		updatePanels();
 	}
 
 	// create people cards in hand
-	private JPanel createPeoplePanel(Color color) {
+	private JPanel createPeoplePanel() {
 //		setTestSeen();
 
 		JPanel panel = new JPanel();
@@ -84,6 +84,7 @@ public class KnownCardsPanel extends JPanel {
 			}
 		}
 		
+		Color color = null;
 		if (peopleInSeenList.size() == 0) {
 			peopleSeen = new JTextField();
 			peopleSeen.setText("None");
@@ -91,6 +92,7 @@ public class KnownCardsPanel extends JPanel {
 			panel.add(peopleSeen, BorderLayout.SOUTH);
 		} else {
 			for (Card c : peopleInSeenList) {
+				color = c.getCardOwner();
 				peopleSeen = new JTextField();
 				peopleSeen.setText(c.getName());
 				peopleSeen.setBackground(color);
@@ -102,7 +104,7 @@ public class KnownCardsPanel extends JPanel {
 	}
 
 	// creates room cards in hand
-	private JPanel createRoomsPanel(Color color) {
+	private JPanel createRoomsPanel() {
 
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(0, 1));
@@ -141,7 +143,7 @@ public class KnownCardsPanel extends JPanel {
 			}
 		}
 
-
+		Color color = null;
 		if (roomsInSeenList.size() == 0) {
 			roomsSeen = new JTextField();
 			roomsSeen.setText("None");
@@ -149,6 +151,7 @@ public class KnownCardsPanel extends JPanel {
 			panel.add(roomsSeen, BorderLayout.SOUTH);
 		} else { // Otherwise, set the text to whatever the name of the card it
 			for (Card c : roomsInSeenList) {
+				color = c.getCardOwner();
 				roomsSeen = new JTextField();
 				roomsSeen.setText(c.getName());
 				roomsSeen.setBackground(color);
@@ -161,7 +164,7 @@ public class KnownCardsPanel extends JPanel {
 	}
 
 	// creates weapon cards in hand
-	private JPanel createWeaponsPanel(Color color) {
+	private JPanel createWeaponsPanel() {
 //		setTestSeen();
 
 		JPanel panel = new JPanel();
@@ -203,6 +206,7 @@ public class KnownCardsPanel extends JPanel {
 			}
 		}
 		
+		Color color = null;
 		if (weaponsInSeenList.size() == 0) {
 			weaponsSeen = new JTextField();
 			weaponsSeen.setText("None");
@@ -210,6 +214,7 @@ public class KnownCardsPanel extends JPanel {
 			panel.add(weaponsSeen, BorderLayout.SOUTH);
 		} else { // Otherwise, set the text to whatever the name of the card it
 			for (Card c : weaponsInSeenList) {
+				color = c.getCardOwner();
 				weaponsSeen = new JTextField();
 				weaponsSeen.setText(c.getName());
 				weaponsSeen.setBackground(color);
@@ -240,13 +245,11 @@ public class KnownCardsPanel extends JPanel {
 
 	}
 
-	public void updatePanels(Color color) {
-	
+	public void updatePanels() {
 		
-		
-		peoplePanel = createPeoplePanel(color);
-		roomsPanel = createRoomsPanel(color);
-		weaponsPanel = createWeaponsPanel(color);
+		peoplePanel = createPeoplePanel();
+		roomsPanel = createRoomsPanel();
+		weaponsPanel = createWeaponsPanel();
 		
 		this.removeAll();
 
