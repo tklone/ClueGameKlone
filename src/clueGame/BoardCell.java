@@ -177,23 +177,23 @@ public class BoardCell {
 		int xStart = this.col * cellWidth;
 		int yStart = this.row * cellHeight;
 		if (this.isRoom()) {
-			// color cell GREEN
-			Color green = new Color(57, 122, 64);
-			g.setColor(green);
+			// color cell TAN
+			Color tan = new Color(194, 167, 128);
+			g.setColor(tan);
 			g.fillRect(xStart, yStart, cellWidth, cellHeight);
 		}
 		if (this.isWalkway()) {
-			// color cell RED
-			Color red = new Color(161, 57, 57);
-			g.setColor(red);
+			// color cell GRAY
+			Color gray = new Color(112, 111, 108);
+			g.setColor(gray);
 			g.fillRect(xStart, yStart, cellWidth, cellHeight);
 			g.setColor(Color.black);
 			g.drawRect(xStart, yStart, cellWidth, cellHeight);
 		}
 		if (this.isDoorway()) {
 			DoorDirection dd = this.getDoorDirection();
-			Color red = new Color(161, 57, 57);
-			g.setColor(red);
+			Color gray = new Color(112, 111, 108);
+			g.setColor(gray);
 			g.fillRect(xStart, yStart, cellWidth, cellHeight);
 
 			g.setColor(Color.WHITE);
@@ -219,9 +219,9 @@ public class BoardCell {
 			g.fillRect(xStart, yStart, cellWidth, cellHeight);
 		}
 		if (this.isSecretPassage()) {
-			// color cell SOMETHING
-			Color blue = new Color(73, 141, 181);
-			g.setColor(blue);
+			// color cell RED
+			Color red = new Color(143, 63, 63);
+			g.setColor(red);
 			g.fillRect(xStart, yStart, cellWidth, cellHeight);
 		}
 //		if (isHighlighted.contains(this)) {  //Maybe make a getHighlightedCells method

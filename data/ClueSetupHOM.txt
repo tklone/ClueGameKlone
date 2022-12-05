@@ -1,0 +1,27 @@
+// Rooms and room cards
+Room, Philadelphia (yellow fever), P
+Room, London (black plague), L
+Room, Sioux City (polio), S
+Room, Boston (smallpox), B
+Room, Haiti (cholera), H
+Room, Wuhan (covid), W
+Room, South Africa (HIV/AIDS), A
+Room, Guinea (ebola), G
+Room, Brazil (zika), B
+// other spaces on board
+Space, Unused, X
+Space, Walkway, W
+//Weapons
+Weapon, Hatchet
+Weapon, Expensive hospital bills
+Weapon, Organ removal for “Science”
+Weapon, Hospital Pillow Smoother
+Weapon, “Accidental” slip of the tool
+Weapon, Forced Cocaine Overdose
+//Players
+Player, William Harvey, RED, 24, 8
+Player, William Halsted, PINK, 10, 2
+Player, Ben Carson, GREEN, 24, 16
+Player, Christiaan Barnard, BROWN, 5, 26
+Player, Joseph Lister, BLUE, 2, 16
+Player, John Hunter, YELLOW, 17, 2

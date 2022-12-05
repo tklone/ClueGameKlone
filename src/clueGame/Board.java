@@ -304,7 +304,7 @@ public class Board extends JPanel { // implements MouseListener
 
 						// To make it so it's not hard coding, maybe do a
 						// if (a number == 0) meaning like that's the first iteration maybe?
-						if (typeName.equals("Santa Claus")) {
+						if (typeName.equals("William Harvey")) {
 							Player human = new HumanPlayer(name, color, row, col);
 							players.add(human);
 						} else {

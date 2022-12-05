@@ -47,7 +47,7 @@ public class ClueGame extends JFrame {
 
 	public static void main(String[] args) {
 		Board board = Board.getInstance();
-		board.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
+		board.setConfigFiles("ClueLayout.csv", "ClueSetupHOM");
 		board.initialize();
 		board.dealCards();
 		
@@ -56,7 +56,7 @@ public class ClueGame extends JFrame {
 		
 		int splashScreen = JOptionPane.INFORMATION_MESSAGE;
 
-		JOptionPane.showMessageDialog(null, "Welcome to Clue! You are Santa Claus. Can you guess the "
+		JOptionPane.showMessageDialog(null, "Welcome to Clue! You are William Harvey. Can you guess the "
 				+ "murderer, room, and weapon of the crime first?", "ClueGame", splashScreen);
 		
 		board.firstTurn();
