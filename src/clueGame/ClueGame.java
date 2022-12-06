@@ -60,14 +60,6 @@ public class ClueGame extends JFrame {
 				+ "murderer, room, and weapon of the crime first?", "ClueGame", splashScreen);
 		
 		board.firstTurn();
-//		board.iterateCurrent();
-		
-		
-		
-		//accusation panel is still small window??
-		if(board.getGameOver()) {
-			//do something
-		}
 
 	}
 

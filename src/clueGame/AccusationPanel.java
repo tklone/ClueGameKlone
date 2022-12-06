@@ -105,7 +105,7 @@ public class AccusationPanel extends JDialog {
 		public void actionPerformed(ActionEvent e) {
 			board.makeAccusation();
 			dispose();
-			String correctAnswer = "Correct Answer: " + board.getTheAnswer().getSolutionPerson().getName() + " with the "+ board.getTheAnswer().getSolutionWeapon().getName() + " in the " + board.getTheAnswer().getSolutionRoom().getName();
+			String correctAnswer = "Correct Answer: " + board.getTheAnswer().getSolutionPerson().getName() + " with the "+ board.getTheAnswer().getSolutionWeapon().getName() + " in " + board.getTheAnswer().getSolutionRoom().getName();
 			JOptionPane.showMessageDialog(null, "GAME OVER!\n" + correctAnswer);
 			System.exit(0);
 		}

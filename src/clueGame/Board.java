@@ -859,7 +859,7 @@ public class Board extends JPanel { // implements MouseListener
 
 		if (getCurrentPlayer() instanceof ComputerPlayer) {
 			calcTargets(getCurrentPlayer().getLocation(), getDiceRoll());
-			
+
 			int randLoc;
 			int upperBound;
 
@@ -868,12 +868,11 @@ public class Board extends JPanel { // implements MouseListener
 			} else {
 				upperBound = targets.size() - 1;
 			}
-			
+
 			Random rand = new Random();
 			upperBound = targets.size() - 1;
 			randLoc = rand.nextInt(upperBound);
 
-			
 			ArrayList<BoardCell> targetsList = new ArrayList<>(targets);
 			BoardCell newLocation = targetsList.get(randLoc);
 
@@ -927,7 +926,6 @@ public class Board extends JPanel { // implements MouseListener
 						playersNotInHand.remove(c);
 					}
 				}
-
 
 				if (weaponsNotInHand.size() != 1) {
 					Random randW = new Random();
@@ -989,12 +987,16 @@ public class Board extends JPanel { // implements MouseListener
 		String correctWeapon = theAnswer.getSolutionWeapon().getName();
 		String correctPlayer = theAnswer.getSolutionPerson().getName();
 
+		System.out.println(correctRoom + " " + correctWeapon + " " + correctPlayer);
+		
+		System.out.println(getSuggestionRoom() + " " + getSuggestionWeapon() + " " + getSuggestionPlayer());
+		
 		// These messages are getting printed twice, which we don't want...
-		if (!correctRoom.equals(getSuggestionRoom()) && !correctWeapon.equals(getSuggestionWeapon())
-				&& !correctPlayer.equals(getSuggestionPlayer())) {
-			JOptionPane.showMessageDialog(null, "Guess is incorrect, you lose.");
-		} else {
+		if (correctRoom.equals(getSuggestionRoom()) && correctWeapon.equals(getSuggestionWeapon()) && correctPlayer.equals(getSuggestionPlayer())){
 			JOptionPane.showMessageDialog(null, "Guess is correct, YOU WIN!");
+		} else {
+			JOptionPane.showMessageDialog(null, "Guess is incorrect, you lose.");
+
 		}
 	}
 
