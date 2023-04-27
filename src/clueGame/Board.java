@@ -567,8 +567,12 @@ public class Board extends JPanel { // implements MouseListener
 		randomPlayer = people.get(int_radomP);
 		randomRoom = rooms.get(int_radomR);
 
-		theAnswer = new Solution(randomRoom, randomWeapon, randomPlayer);
 
+		theAnswer = new Solution(randomRoom, randomWeapon, randomPlayer);
+		System.out.println(theAnswer.getSolutionRoom().getName() + ", " +
+				theAnswer.getSolutionPerson().getName() + ", "
+					+ theAnswer.getSolutionWeapon().getName());
+		
 		for (int i = 0; i < deck.size(); i++) {
 			if (deck.get(i) != randomWeapon && deck.get(i) != randomPlayer && deck.get(i) != randomRoom) {
 				deckNoSolution.add(deck.get(i));
@@ -706,10 +710,10 @@ public class Board extends JPanel { // implements MouseListener
 		String weaponS = getSuggestionWeapon();
 		String playerS = getSuggestionPlayer();
 		String roomS = getSuggestionRoom();
-
+		
 		Player accusationPlayer = getPlayer(playerS);
 		Player accuser = getCurrentPlayer();
-
+		
 		ArrayList<Card> disproveCards = new ArrayList<>();
 
 		accusationPlayer.updatePosition(accuser.getLocation());
@@ -721,7 +725,6 @@ public class Board extends JPanel { // implements MouseListener
 		Card roomCard = getCard(roomS);
 		Card weaponCard = getCard(weaponS);
 		Card personCard = getCard(playerS);
-
 		Solution suggestion = new Solution(roomCard, weaponCard, personCard);
 
 		Color disproverColor = null;
@@ -978,25 +981,22 @@ public class Board extends JPanel { // implements MouseListener
 	}
 
 	public void makeAccusation() {
-		setAccusationPlayer(accusation.getPlayerChoice());
-		setAccusationWeapon(accusation.getWeaponChoice());
-		setAccusationRoom(accusation.getRoomChoice());
-
+		
 		Solution theAnswer = getTheAnswer();
 		String correctRoom = theAnswer.getSolutionRoom().getName();
 		String correctWeapon = theAnswer.getSolutionWeapon().getName();
-		String correctPlayer = theAnswer.getSolutionPerson().getName();
-
-		System.out.println(correctRoom + " " + correctWeapon + " " + correctPlayer);
+		String correctPlayer = theAnswer.getSolutionPerson().getName();		
 		
-		System.out.println(getSuggestionRoom() + " " + getSuggestionWeapon() + " " + getSuggestionPlayer());
+		String suggestionRoom = getAccusationRoom();
+		String suggestionWeapon = getAccusationWeapon();
+		String suggestionPerson = getAccusationPlayer();
 		
-		// These messages are getting printed twice, which we don't want...
-		if (correctRoom.equals(getSuggestionRoom()) && correctWeapon.equals(getSuggestionWeapon()) && correctPlayer.equals(getSuggestionPlayer())){
+		if (correctRoom.equals(suggestionRoom) &&
+				correctWeapon.equals(suggestionWeapon) &&
+					correctPlayer.equals(suggestionPerson)) {
 			JOptionPane.showMessageDialog(null, "Guess is correct, YOU WIN!");
 		} else {
 			JOptionPane.showMessageDialog(null, "Guess is incorrect, you lose.");
-
 		}
 	}
 
