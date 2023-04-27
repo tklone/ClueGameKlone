@@ -21,6 +21,10 @@ public class AccusationPanel extends JDialog {
 	JButton submitButton = new JButton("Submit");
 	JButton cancelButton = new JButton("Cancel");
 	Board board = Board.getInstance();
+	
+	String accusationPerson;
+	String accusationRoom;
+	String accusationWeapon;
 
 	public AccusationPanel() {
 		this.setSize(600, 250);
@@ -45,6 +49,7 @@ public class AccusationPanel extends JDialog {
 		add(weaponsMenu);
 
 		ComboListener listener = new ComboListener();
+		roomsMenu.addActionListener(listener);
 		weaponsMenu.addActionListener(listener);
 		playersMenu.addActionListener(listener);
 
@@ -57,6 +62,7 @@ public class AccusationPanel extends JDialog {
 
 	private JComboBox<String> createRoomCombo() {
 		JComboBox<String> rooms = new JComboBox<String>();
+		rooms.addItem(" ");
 		for (Card c : board.getRoomCards()) {
 			String name = c.getName();
 			rooms.addItem(name);
@@ -66,6 +72,7 @@ public class AccusationPanel extends JDialog {
 
 	private JComboBox<String> createPeopleCombo() {
 		JComboBox<String> players = new JComboBox<String>();
+		players.addItem(" ");
 		for (Card c : board.getPeopleCards()) {
 			String name = c.getName();
 			players.addItem(name);
@@ -76,6 +83,7 @@ public class AccusationPanel extends JDialog {
 
 	private JComboBox<String> createWeaponsCombo() {
 		JComboBox<String> weapons = new JComboBox<String>();
+		weapons.addItem(" ");
 		for (Card c : board.getWeaponsCards()) {
 			String name = c.getName();
 			weapons.addItem(name);
@@ -90,8 +98,14 @@ public class AccusationPanel extends JDialog {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == weaponsMenu) {
 				weaponsMenu.getSelectedItem().toString();
-			} else {
+				setWeaponChoice(weaponsMenu.getSelectedItem().toString());
+				
+				roomsMenu.getSelectedItem().toString();
+				setRoomChoice(roomsMenu.getSelectedItem().toString());
+				
 				playersMenu.getSelectedItem().toString();
+				setPlayerChoice(playersMenu.getSelectedItem().toString());
+				
 			}
 		}
 	}
@@ -103,6 +117,10 @@ public class AccusationPanel extends JDialog {
 		}
 
 		public void actionPerformed(ActionEvent e) {
+			board.setAccusationPlayer(getPlayerChoice());
+			board.setAccusationWeapon(getWeaponChoice());
+			board.setAccusationRoom(getRoomChoice());			
+			
 			board.makeAccusation();
 			dispose();
 			String correctAnswer = "Correct Answer: " + board.getTheAnswer().getSolutionPerson().getName() + " with the "+ board.getTheAnswer().getSolutionWeapon().getName() + " in the " + board.getTheAnswer().getSolutionRoom().getName();
@@ -123,17 +141,26 @@ public class AccusationPanel extends JDialog {
 	}
 
 	public String getWeaponChoice() {
-		String weapon = weaponsMenu.getSelectedItem().toString();
-		return weapon;
+		return accusationWeapon;
 	}
 
 	public String getPlayerChoice() {
-		String player = playersMenu.getSelectedItem().toString();
-		return player;
+		return accusationPerson;
 	}
 	
 	public String getRoomChoice() {
-		String room = roomsMenu.getSelectedItem().toString();
-		return room;
+		return accusationRoom;
+	}
+	
+	public void setWeaponChoice(String weapon) {
+		this.accusationWeapon = weaponsMenu.getSelectedItem().toString();
+	}
+
+	public void setPlayerChoice(String player) {
+		this.accusationPerson = playersMenu.getSelectedItem().toString();
+	}
+	
+	public void setRoomChoice(String room) {
+		this.accusationRoom = roomsMenu.getSelectedItem().toString();
 	}
 }
